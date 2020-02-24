@@ -9,7 +9,7 @@ float series_estimate(float x, float eps)
 
     while (fabsf(series_part) > eps)
     {
-        series_part *= ((n * pow(x, 2 * n + 1)) / n);
+        series_part *= (n * pow(x,n + 2) / ((n + 2) * m));
         series_sum += series_part;
         m += 2;
         n += 2;
