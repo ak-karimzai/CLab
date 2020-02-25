@@ -16,7 +16,7 @@ float series_estimate(float x, float eps)
     }
     return series_sum;
 }
-int main()
+int main(void)
 {
     float sum_s,eps;
     float x;
@@ -26,8 +26,10 @@ int main()
     if(x > 1 || x < -1)
     {
         printf("Epsilon error or x value invalid");
-        return;
     }
-    sum_s = series_estimate(x,eps);
-    printf("%f",sum_s);
+    else
+    {
+    	sum_s = series_estimate(x,eps);
+    	printf("%f",sum_s);
+    }
 }
