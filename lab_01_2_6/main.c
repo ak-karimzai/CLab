@@ -5,7 +5,7 @@
 int main()
 {
     float x1,y1,x2,y2,x3,y3,ab,ac,bc,p,xp,yp,sab,sac,sbc;
-    float s = 0, sum_s = 0;
+    float s = 0, sum_s = 0,sum_all;
     printf("Enter first point's\n");
     scanf("%f%f",&x1,&y1);
     printf("Enter second point's\n");
@@ -21,12 +21,12 @@ int main()
     printf("Enter coordinate of point's\n");
     scanf("%f%f",&xp,&yp);
 
-    sab = (x1 * (y2 - yp) + x2 * (yp - y1) + xp * (y1 - y2))/2;
-    sbc = (xp * (y2 - y3) + x2 * (y3 - yp) + x3 * (yp - y2))/2;
-    sac = (x1 * (yp - y3) + xp * (y3 - y1) + x3 * (y1 - yp))/2;
+    sab = (x1 * (y2 - yp) + x2 * (yp - y1) + xp * (y1 - y2))/2.0;
+    sbc = (xp * (y2 - y3) + x2 * (y3 - yp) + x3 * (yp - y2))/2.0;
+    sac = (x1 * (yp - y3) + xp * (y3 - y1) + x3 * (y1 - yp))/2.0;
 
-    
+    sum_all = abs((abs(sab) + abs(sbc) + abs(sac)) - s);
 
-    if(abs((abs(sab) + abs(sbc) + abs(sac)) - s) < (1e-1)) printf("point in triangle.\n");
+    if(sum_all < (1e-1)) printf("point in triangle.\n");
     else printf("point is'nt triangle\n");
 }
