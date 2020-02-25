@@ -5,7 +5,7 @@
 int main()
 {
     float x1,y1,x2,y2,x3,y3,ab,ac,bc,p,xp,yp,sab,sac,sbc;
-    float s = 0, sum_s = 0,sum_all;
+    float s = 0,sum_all;
     printf("Enter first point's\n");
     scanf("%f%f",&x1,&y1);
     printf("Enter second point's\n");
