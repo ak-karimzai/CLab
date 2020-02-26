@@ -25,7 +25,7 @@ int main()
     sbc = (xp * (y2 - y3) + x2 * (y3 - yp) + x3 * (yp - y2)) / 2.0;
     sac = (x1 * (yp - y3) + xp * (y3 - y1) + x3 * (y1 - yp)) / 2.0;
 
-    sum_all = abs((abs(sab) + abs(sbc) + abs(sac)) - s);
+    sum_all = fabsf((fabsf(sab) + fabsf(sbc) + fabsf(sac)) - s);
 
     if(sum_all < (1e-1)) printf("point in triangle.\n");
     else printf("point is'nt triangle\n");
