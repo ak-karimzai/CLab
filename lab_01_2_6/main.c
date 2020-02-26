@@ -27,6 +27,6 @@ int main()
 
     sum_all = abs((abs(sab) + abs(sbc) + abs(sac)) - s);
 
-    if(sum_all < (1e - 1)) printf("point in triangle.\n");
+    if(sum_all < (1e-1)) printf("point in triangle.\n");
     else printf("point is'nt triangle\n");
 }
