@@ -9,8 +9,8 @@ int fib(int n)
 
 int main()
 {
-    int n,m;
-    scanf("%d",&n);
+    int n, m;
+    scanf("%d", &n);
     m = fib(n);
-    printf("%d\n",m);
+    printf("%d\n", m);
 }
