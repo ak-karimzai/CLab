@@ -13,5 +13,5 @@ int main()
 {
     float x, y;
     x, y = sum_temperator();
-    printf("%.4f%.4f", y, x);
+    printf("%.4f  %.4f", y, x);
 }
