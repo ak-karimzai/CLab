@@ -4,14 +4,15 @@
 int fib(int n)
 {
     if(n <= 2) return n;
-    else if(n < 0) return 0;
     return fib(n - 2) + fib(n - 1);
 }
 
 int main()
 {
     int n, m;
+    printf("Enter the number\n");
     scanf("%d", &n);
     m = fib(n);
+    printf("Answer\n");
     printf("%d\n", m);
 }
