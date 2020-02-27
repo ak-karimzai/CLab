@@ -8,7 +8,6 @@ void find_floor()
     e = (x - 1) / 36 + 1;
     f = ((x - (e - 1) * 36) - 1) / 4 + 1;
     printf("%d %d", e, f);
-    
 }
 
 int main()
