@@ -9,7 +9,6 @@ void sum_temperator()
     t = ((t1 * v1) + (t2 * v2)) / v;
     printf("%.4f  %.4f", v, t);
 }
-}
 int main()
 {
     sum_temperator();
