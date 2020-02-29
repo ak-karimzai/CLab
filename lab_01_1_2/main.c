@@ -1,8 +1,18 @@
 #include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
 
-int main(void)
+float surface_trapezoid()
 {
-    int s;
-    s = 56;
-    printf("Year has %d weeks", s);
+    float d1,d2,s;
+    double a;
+    scanf("%f%f%lf",&d1,&d2,&a);
+    s = ((d1 * d2 / 2) * (sin(a)));
+    return s;
+}
+int main()
+{
+    float x;
+    x = surface_trapezoid();
+    printf("%.4f",x);
 }
