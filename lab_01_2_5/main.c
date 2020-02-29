@@ -18,10 +18,20 @@ int fib(int n)
 }
 int main()
 {
-    int n, m;
+    int n, m, r;
     printf("Enter the number\n");
-    scanf("%d", &n);
-    m = fib(n);
-    printf("Answer\n");
-    printf("%d\n", m);
+    r = scanf("%d", &n);
+    if(r)
+    {
+        m = fib(n);
+        printf("Answer\n");
+        printf("%d\n", m);
+        return 0;
+    }
+    else
+    {
+        printf("input error");
+        return 1;
+    }
+    
 }
