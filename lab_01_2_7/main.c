@@ -25,12 +25,12 @@ int main(void)
     r = scanf("%f%f", &x, &eps);
     if (r == 2)
     {
-        if (eps > 1 || eps <= 0)
+        if (eps >= 1 || eps <= 0)
         {
             printf("epsilon error");
             return 2;
         }
-        else if (x > 1 || x < -1)
+        else if (x >= 1 || x < -1)
         {
             printf("vlaue error");
             return 3;
@@ -38,9 +38,10 @@ int main(void)
         else
         {
             sum_s = estimate(x, eps);
-            f_x = asinf(x);
+            f_x = asin(x);
             abs_err = fabs(f_x - sum_s);
             rel_err = fabsf((f_x - sum_s) / f_x);
+
             printf("%f %f %f %f", sum_s, f_x, abs_err, rel_err);
             return 0;
         }
@@ -50,4 +51,5 @@ int main(void)
         printf("input error");
         return 1;
     }
+    
 }
