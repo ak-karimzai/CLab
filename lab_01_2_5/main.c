@@ -8,7 +8,7 @@ int fib(int n)
     {
         return n;
     }
-    for(i = 2; i <= n; i++)
+    for (i = 2; i <= n; i++)
     {
         s = t0 + t1;
         t0 = t1;
