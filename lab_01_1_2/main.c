@@ -5,7 +5,8 @@ float surface_trapezoid()
 {
     float d1, d2, s, a;
     scanf("%f%f%f", &d1, &d2, &a);
-    s = (((d1 + d2) / 2 * (sin(a) / cos(a) * (d2 - d1) / 2)));
+    a = a * 3.14 / 180;
+    s = ((d1 * d1 - d2 * d2) / 4 * tan(a));
     return s;
 }
 int main()
