@@ -1,18 +1,17 @@
 #include<stdio.h>
-#include<stdlib.h>
 #include<math.h>
 
 int main()
 {
     float x1, y1, x2, y2, x3, y3, ab, ac, bc, p, xp, yp, sab, sac, sbc;
     float s = 0, sum_all;
-    printf("Enter coordinate of point's\n");
+    printf("Enter coordinate of point's");
     scanf("%f%f", &xp, &yp);
-    printf("Enter first point's\n");
+    printf("Enter first point's");
     scanf("%f%f", &x1, &y1);
-    printf("Enter second point's\n");
+    printf("Enter second point's");
     scanf("%f%f", &x2, &y2);
-    printf("Enter third point's\n");
+    printf("Enter third point's");
     scanf("%f%f", &x3, &y3);
     ab = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
     ac = sqrt(pow(x3 - x1, 2) + pow(y3 - y1, 2));
