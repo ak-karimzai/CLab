@@ -21,12 +21,12 @@ int main()
     int n, m;
     printf("Enter the number\n");
     scanf("%d", &n);
-    if (n)
+    if (n >= 2)
     {
         m = fib(n);
         printf("Answer\n");
         printf("%d\n", m);
     }
-    else 
+    else
         printf("incorect input.");
 }
