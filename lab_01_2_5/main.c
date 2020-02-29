@@ -23,10 +23,20 @@ int main()
     r = scanf("%d", &n);
     if(r)
     {
-        m = fib(n);
-        printf("Answer\n");
-        printf("%d\n", m);
-        return 0;
+        if (n > 1)
+        {
+            m = fib(n);
+            printf("Answer\n");
+            printf("%d\n", m);
+            return 0;
+        }
+        else
+        {
+            m = fib(n);
+            printf("Answer\n");
+            return 1;
+        }
+        
     }
     else
     {
