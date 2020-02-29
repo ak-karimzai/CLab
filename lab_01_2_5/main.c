@@ -23,26 +23,14 @@ int main()
     r = scanf("%d", &n);
     if (r)
     {
-        if (n > 1)
-        {
-            m = fib(n);
-            printf("Answer\n");
-            printf("%d\n", m);
-            return 0;
-        }
-        else
-        {
-            m = fib(n);
-            printf("Answer\n");
-            printf("%d\n", m);
-            return 1;
-        }
-        
+        m = fib(n);
+        printf("Answer\n");
+        printf("%d\n", m);
+        return 0;
     }
     else
     {
         printf("input error");
         return 1;
     }
-    
 }
