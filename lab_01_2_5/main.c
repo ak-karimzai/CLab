@@ -21,7 +21,7 @@ int main()
     int n, m, r;
     printf("Enter the number\n");
     r = scanf("%d", &n);
-    if(r)
+    if (r)
     {
         if (n > 1)
         {
@@ -34,6 +34,7 @@ int main()
         {
             m = fib(n);
             printf("Answer\n");
+            printf("%d\n", m);
             return 1;
         }
         
