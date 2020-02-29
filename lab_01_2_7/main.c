@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<math.h>
 
-float series_estimate(float x, float eps)
+float estimate(float x, float eps)
 {
     float series_part = x;
     float series_sum = x;
@@ -23,13 +23,13 @@ int main(void)
 
     printf("enter x and eps\n");
     scanf("%f%f", &x, &eps);
-    if(x > 1 || x < -1)
+    if (x > 1 || x < -1)
     {
         printf("Epsilon error or x value invalid");
     }
     else
     {
-    	sum_s = series_estimate(x, eps);
+        sum_s = estimate(x, eps);
     	printf("%f", sum_s);
     }
 }
