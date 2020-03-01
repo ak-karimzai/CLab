@@ -26,9 +26,9 @@ int main()
         printf("input error");
         return 1;
     }
-    else if (n < 2)
+    else if (n == 0)
     {
-        printf("%d", n);
+        printf("incorrect input");
         return 3;
     }
     else if (r)
@@ -38,7 +38,7 @@ int main()
         printf("%d\n", m);
         return 0;
     }
-    else
+    else if(r == 0)
     {
         printf("input error");
         return 2;
