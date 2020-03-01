@@ -26,6 +26,11 @@ int main()
         printf("input error");
         return 1;
     }
+    else if (n < 2)
+    {
+        printf("%d", n);
+        return 3;
+    }
     else if (r)
     {
         m = fib(n);
