@@ -21,24 +21,28 @@ int main()
         printf("not triangle");
         return 4;
     }
-    else if (r == 8)
+    else 
     {
-        if ((xp == x1 && yp == y1) || (xp == x2 && yp == y2) || (xp == x3 && yp == y3))
+        if (r == 8)
         {
-            printf("1");
+            if ((xp == x1 && yp == y1) || (xp == x2 && yp == y2) || (xp == x3 && yp == y3))
+            {
+                printf("1");
+            }
+            else if (sum_all < (1e-1))
+            {
+                printf("0");
+            }
+            else 
+            {
+                printf("2");
+            }
         }
-        else if (sum_all < (1e-1))
+        else
         {
-            printf("0");
-        }
-        else 
-        {
-            printf("2");
+            printf("input error");
+            return 3;
         }
     }
-    else
-    {
-        printf("input error");
-        return 3;
-    }
+    
 }
