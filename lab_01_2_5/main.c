@@ -17,8 +17,7 @@ int fib(int n)
 }
 int main()
 {
-    int n, r;
-    int m;
+    int n, r, m;
     printf("Enter the number\n");
     r = scanf("%d", &n);
     
@@ -31,7 +30,7 @@ int main()
     {
         m = fib(n);
         printf("Answer\n");
-        printf("%lu\n", m);
+        printf("%d\n", m);
         return 0;
     } 
     else
