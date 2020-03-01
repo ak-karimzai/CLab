@@ -16,7 +16,12 @@ int main()
     sbc = (xp * (y2 - y3) + x2 * (y3 - yp) + x3 * (yp - y2)) / 2.0;
     sac = (x1 * (yp - y3) + xp * (y3 - y1) + x3 * (y1 - yp)) / 2.0;
     sum_all = fabsf((fabsf(sab) + fabsf(sbc) + fabsf(sac)) - s);
-    if (r == 8)
+    if (s == 0)
+    {
+        printf("not triangle");
+        return 4;
+    }
+    else if (r == 8)
     {
         if ((xp == x1 && yp == y1) || (xp == x2 && yp == y2) || (xp == x3 && yp == y3))
         {
