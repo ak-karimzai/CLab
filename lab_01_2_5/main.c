@@ -21,7 +21,7 @@ int main()
     printf("Enter the number\n");
     r = scanf("%d", &n);
     
-    if (n <= 0)
+    if (n < 0)
     {
         printf("input error");
         return 1;
