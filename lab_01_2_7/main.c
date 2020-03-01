@@ -29,7 +29,7 @@ int main(void)
             printf("epsilon error");
             return 2;
         }
-        else if (x >= 1 || x < -1)
+        else if (x >= 1 || x <= -1)
         {
             printf("vlaue error");
             return 3;
