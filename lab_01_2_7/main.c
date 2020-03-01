@@ -1,10 +1,15 @@
-#include<stdio.h>
-#include<math.h>
 
-float estimate(float x, float eps)
+#include <stdio.h>
+#include <math.h>
+
+#define OK 0
+#define IN_ERR 1
+#define LOGIC_ERR 2
+
+float series_estimate(float x, float eps)
 {
     float series_part = x;
-    float series_sum = series_part;
+    float series_sum = x;
     int n = 1;
 
     while (fabsf(series_part) > eps)
@@ -13,21 +18,25 @@ float estimate(float x, float eps)
         series_sum += series_part;
         n += 2;
     }
+
     return series_sum;
 }
-int main(void)
-{
-    float sum_s, f_x, eps, r, abs_err, rel_err;
-    float x;
 
-    printf("enter x and eps\n");
-    r = scanf("%f%f", &x, &eps);
-    if (r == 2)
+int main()
+{
+    int rc;
+    float x, eps;
+    float s_x, f_x, abs_err, rel_err;
+
+    rc = scanf("%f%f", &x, &eps);
+
+    if (rc == 2)
     {
-        if (eps >= 1 || eps <= 0)
+        if (eps > 1 || eps <= 0)
         {
-            printf("epsilon error");
-            return 2;
+            printf("Epsilon error");
+
+            return LOGIC_ERR;
         }
         else if (fabsf(x) >= 1)
         {
@@ -36,18 +45,20 @@ int main(void)
         }
         else
         {
-            sum_s = estimate(x, eps);
+            s_x = series_estimate(x, eps);
             f_x = asinf(x);
-            abs_err = fabs(f_x - sum_s);
-            rel_err = fabsf((f_x - sum_s) / f_x);
+            abs_err = fabsf(f_x - s_x);
+            rel_err = fabsf((f_x - s_x) / f_x);
 
-            printf("%f %f %f %f", sum_s, f_x, abs_err, rel_err);
-            return 0;
+            printf("%f %f %f %f", s_x, f_x, abs_err, rel_err);
+
+            return OK;
         }
     }
     else
     {
-        printf("input error");
-        return 1;
+        printf("Input error");
+
+        return IN_ERR;
     }
 }
