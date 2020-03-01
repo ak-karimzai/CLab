@@ -25,18 +25,15 @@ int main()
     {
         if ((xp == x1 && yp == y1) || (xp == x2 && yp == y2) || (xp == x3 && yp == y3))
         {
-            printf("point in coordinates");
-            return 1;
+            printf("1");
         }
         else if (sum_all < (1e-1))
         {
-            printf("point in triangle.");
-            return 0;
+            printf("0");
         }
         else 
         {
-            printf("point not in triangle.");
-            return 2;
+            printf("2");
         }
     }
     else
