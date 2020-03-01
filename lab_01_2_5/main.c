@@ -27,10 +27,13 @@ int main()
         printf("input error");
         return 1;
     }
+    else if (n > 150)
+    {
+        printf("incorect input");
+        return 3;
+    }
     if (r == 1)
     {
-        if (n == 0)
-            return 3;
         m = fib(n);
         printf("Answer\n");
         printf("%lu\n", m);
