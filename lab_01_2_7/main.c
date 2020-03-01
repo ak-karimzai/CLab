@@ -37,7 +37,7 @@ int main(void)
         else
         {
             sum_s = estimate(x, eps);
-            f_x = asin(x);
+            f_x = asinf(x);
             abs_err = fabs(f_x - sum_s);
             rel_err = fabsf((f_x - sum_s) / f_x);
 
