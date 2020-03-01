@@ -3,17 +3,17 @@
 
 float estimate(float x, float eps)
 {
-    float series_part = x;
-    float series_sum = series_part;
+    float s_part = x;
+    float s_sum = s_part;
     int n = 3;
 
-    while (fabsf(series_part) > eps)
+    while (fabsf(s_part) > eps)
     {
-        series_part *= -(x * x) / (n);
-        series_sum += series_part;
+        s_part *= -1 * x * x / n;
+        s_sum += s_part;
         n += 2;
     }
-    return series_sum;
+    return s_sum;
 }
 int main(void)
 {
@@ -40,8 +40,8 @@ int main(void)
             f_x = atanf(x);
             abs_err = fabs(f_x - sum_s);
             rel_err = fabsf((f_x - sum_s) / f_x);
-
             printf("%f %f %f %f", sum_s, f_x, abs_err, rel_err);
+            
             return 0;
         }
     }
