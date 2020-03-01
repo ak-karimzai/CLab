@@ -5,11 +5,11 @@ float estimate(float x, float eps)
 {
     float series_part = x;
     float series_sum = series_part;
-    int n = 1;
+    int n = 3;
 
     while (fabsf(series_part) > eps)
     {
-        series_part *= (((x * x) * n) / ((n + 1) * (n + 2)));
+        series_part *= -(x * x) / (n);
         series_sum += series_part;
         n += 2;
     }
@@ -29,7 +29,7 @@ int main(void)
             printf("epsilon error");
             return 2;
         }
-        else if (fabsf(x) >= 1)
+        else if (fabsf(x) > 1)
         {
             printf("vlaue error");
             return 3;
@@ -37,7 +37,7 @@ int main(void)
         else
         {
             sum_s = estimate(x, eps);
-            f_x = asinf(x);
+            f_x = atanf(x);
             abs_err = fabs(f_x - sum_s);
             rel_err = fabsf((f_x - sum_s) / f_x);
 
