@@ -3,9 +3,9 @@
 
 int main()
 {
-    float R1, R2, R3, R;
-    scanf("%f%f%f", &R1, &R2, &R3);
-    R = (R1 * R2 * R3) / (R1 * R2 + R2 * R3 + R3 * R1);
+    float r1, r2, r3, r;
+    scanf("%f%f%f", &r1, &r2, &r3);
+    r = (r1 * r2 * r3) / (r1 * r2 + r2 * r3 + r3 * r1);
     printf("%f", R);
     return 0;
 }
