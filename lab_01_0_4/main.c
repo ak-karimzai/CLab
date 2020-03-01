@@ -4,10 +4,10 @@
 int main()
 {
    int a, b;
-   printf("number of coins\n");
+   printf("number of coins: ");
    scanf("%d", &a);
-   b = (a - 20) / 25;
-   printf("number of bootles\n");
+   b = ((a - 20) / 25);
+   printf("number of bootles: ");
    printf("%d", b);
    return 0;
 }
