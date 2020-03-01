@@ -1,35 +1,28 @@
 #include<stdio.h>
 
-int Pow(int m, int n)
-{
-   int i, s = 1;
-   if (n == 0)
-   {
-      return 1;
-   }
-   for (i = 0; i < n; i++)
-   {
-      s *= m;
-   }
-   return s;
-}
 int main()
 {
-   int a, n, r;
-   r = scanf("%d%d", &a, &n);
-   if (n < 0)
+   int a,d,r,q, rc;
+   printf("Enter the values\n");
+   rc = scanf("%d%d", &a, &d);
+   r = a, q = 0;
+   if (a < 0 || b < 0)
    {
-   printf("incorect input");
-   return 2;
+      printf("incorrext input");
+      return 2;
    }
-   if (r == 2)
-   {
-   printf("%d", Pow(a, n));
-   return 0;
-   }
+   if (rc == 2)
+      while(!(r < d))
+      {
+         r = r - d;
+         q++;
+      }
+      printf("%d", q);
+      printf("%d", r);
+      return 0;
    else
    {
-   printf("input error");
-   return 1;
+      printf("incorrect input");
+      return 1;
    }
 }
