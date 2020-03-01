@@ -25,24 +25,19 @@ int main()
     {
         if (r == 8)
         {
-            if ((xp == x1 && yp == y1) || (xp == x2 && yp == y2) || (xp == x3 && yp == y3))
-            {
+            if ((xp == x1 && yp == y1) || (xp == x2 && yp == y2) || (xp == x3 && yp == y3) && sum_all < (1e-1))
                 printf("1");
-            }
+            else if((xp < x1 && yp == y1 || xp == x1 && yp < y1) || (xp < x2 && yp == y2 || xp == x2 && yp < y2) || (xp < x3 && yp == y3 || xp == x3 && yp < y3))
+                printf("1");
             else if (sum_all < (1e-1))
-            {
                 printf("0");
-            }
-            else 
-            {
+            else
                 printf("2");
-            }
         }
         else
         {
             printf("input error");
             return 3;
         }
-    }
-    
+    }   
 }
