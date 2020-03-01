@@ -37,6 +37,6 @@ int main()
     else
     {
         printf("input error");
-        return -1;
+        return 3;
     }
 }
