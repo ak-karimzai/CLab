@@ -4,14 +4,13 @@
 float estimate(float x, float eps)
 {
     float series_part = x;
-    float series_sum = x;
-    int n = 1, m = 2;
+    float series_sum = series_part;
+    int n = 1;
 
     while (fabsf(series_part) > eps)
     {
-        series_part *= (n * pow(x, n + 2) / ((n + 2) * m));
+        series_part *= ((x * x) * (2 * n - 1) * (2 * n - 1)) / ((2 * n) * (2 * n + 1));
         series_sum += series_part;
-        m += 2;
         n += 2;
     }
     return series_sum;
@@ -51,5 +50,4 @@ int main(void)
         printf("input error");
         return 1;
     }
-    
 }
