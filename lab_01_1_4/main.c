@@ -1,16 +1,13 @@
 #include<stdio.h>
 #include<math.h>
 
-void find_floor()
-{
-    int x, e, f;
-    scanf("%d", &x);
-    e = (x - 1) / 36 + 1;
-    f = ((x - (e - 1) * 36) - 1) / 4 + 1;
-    printf("%d %d", e, f);
-}
-
 int main()
 {
-    find_floor();
+   int a, b;
+   printf("number of coins\n");
+   scanf("%d", &a);
+   b = (a - 20) / 25;
+   printf("number of bootles\n");
+   printf("%d", b);
+   return 0;
 }
