@@ -7,15 +7,15 @@
 
 float series_estimate(float x, float eps)
 {
-    float s_part = 1;
-    float s_sum = 0;
-    int n = 0;
+    float s_part = x;
+    float s_sum = x;
+    int n = 3;
 
     while (fabsf(s_part) > eps)
     {
-        s_part *= (pow(-1, n) * pow(x, 2 * n + 1)) / (2 * n + 1);
+        s_part *= -1 * x * x / n;
         s_sum += s_part;
-        n += 1;
+        n += 2;
     }
     return s_sum;
 }
