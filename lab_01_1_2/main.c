@@ -4,8 +4,6 @@
 #define PI 3.14159265
 #define PI_DEG 180
 
-#define OK 0
-
 int main()
 {
     double a, b, alpha;
@@ -21,5 +19,5 @@ int main()
 
     printf("Total square of shape: S = %-12.5f", square);
 
-    return OK;
+    return 0;
 }
