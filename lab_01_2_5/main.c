@@ -1,8 +1,8 @@
 #include<stdio.h>
 
-int fib(int n)
+long int fib(int n)
 {
-    int t0 = 0, t1 = 1, s = 0, i;
+    long int t0 = 0, t1 = 1, s = 0, i;
     if (n < 2)
     {
         return n;
@@ -17,7 +17,8 @@ int fib(int n)
 }
 int main()
 {
-    int n, m, r;
+    int n, r;
+    long int m;
     printf("Enter the number\n");
     r = scanf("%d", &n);
     
@@ -26,14 +27,16 @@ int main()
         printf("input error");
         return 1;
     }
-    else if (r == 1)
+    if (r == 1)
     {
+        if (n == 0)
+            return 3;
         m = fib(n);
         printf("Answer\n");
-        printf("%d\n", m);
+        printf("%lu\n", m);
         return 0;
-    }
-    else if(r == 0)
+    } 
+    else
     {
         printf("input error");
         return 2;
