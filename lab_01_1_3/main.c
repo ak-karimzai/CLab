@@ -1,15 +1,18 @@
 #include<stdio.h>
 #include<math.h>
 
-void sum_temperator()
-{
-    float v1, t1, v2, t2, v, t;
-    scanf("%f%f%f%f", &v1, &t1, &v2, &t2);
-    v = v1 + v2;
-    t = ((t1 * v1) + (t2 * v2)) / v;
-    printf("%.4f  %.4f", v, t);
-}
 int main()
 {
-    sum_temperator();
+   //h height in cm t, t circle diameter m wight in kg find weight in 
+   //
+   float h, t, m, weight, mass;
+   scanf("%f%f%f", &h, &t, &m);
+   weight = h * t / 240;
+   printf("normal weight:");
+   printf("%f\n", weight);
+   h = h / 100;
+   mass = m / (h * h);
+   printf("mass: ");
+   printf("%f\n", mass);
+   return 0;
 }
