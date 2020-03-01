@@ -1,30 +1,48 @@
-#include<stdio.h>
+#include <stdio.h>
+
+int div_num(int a, int d)
+{
+    int div_part = 0;
+    while (a >= d)
+    {
+        a -= d;
+        div_part += 1;
+    }
+    return div_part;
+}
+
+int mod_num(int a, int d)
+{
+    int div_part = 0;
+    while (a >= d)
+    {
+        a -= d;
+        div_part += 1;
+    }
+    return a;
+}
 
 int main()
 {
-    int a,d,r,q, rc;
-    printf("Enter the values\n");
+    int a, d, rc;
+
     rc = scanf("%d%d", &a, &d);
-    r = a, q = 0;
-    if (a < 0 || d < 0)
-    {
-        printf("incorrext input");
-        return 2;   
-    }
     if (rc == 2)
     {
-        while(!(r < d))
+        if (a > 0 && d > 0)
         {
-            r = r - d;
-            q++;
+            printf("%d %d", div_num(a, d), mod_num(a, d));
+            return 0;
         }
-        printf("%d", q);
-        printf("%d", r);
-        return 0;
+        else
+        {
+            printf("Logic error");
+            return 2;
+        }
     }
     else
     {
-        printf("incorrect input");
+        printf("Input error");
         return 1;
     }
 }
