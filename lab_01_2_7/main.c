@@ -9,7 +9,7 @@ float estimate(float x, float eps)
 
     while (fabsf(series_part) > eps)
     {
-        series_part *= ((x * x) * (2 * n - 1) * (2 * n - 1)) / ((2 * n) * (2 * n + 1));
+        series_part *= (((x * x) * n) / ((n + 1) * (n + 2)));
         series_sum += series_part;
         n += 2;
     }
@@ -29,7 +29,7 @@ int main(void)
             printf("epsilon error");
             return 2;
         }
-        else if (fabsf(x) >= 1)
+        else if (fabsf(x) > 1)
         {
             printf("vlaue error");
             return 3;
