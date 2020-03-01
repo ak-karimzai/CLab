@@ -1,57 +1,53 @@
-#include <stdio.h>
-#include <math.h>
+#include<stdio.h>
+#include<math.h>
 
-#define OK 0
-#define IN_ERR 1
-#define LOGIC_ERR 2
-
-float series_estimate(float x, float eps)
+float estimate(float x, float eps)
 {
     float s_part = x;
-    float s_sum = x;
-    int n = 3;
+    float s_sum = 0;
+    int n = 1;
 
     while (fabsf(s_part) > eps)
     {
-        s_part *= -1 * x * x / n;
         s_sum += s_part;
-        n += 2;
+        s_part = pow(-1, n) * pow(x, 2 * n + 1) / (2 * n + 1);
+        n += 1;
     }
     return s_sum;
 }
-
-int main()
+int main(void)
 {
-    int rc;
-    float x, eps;
-    float s_x, f_x, abs_err, rel_err;
+    float sum_s, f_x, eps, r, abs_err, rel_err;
+    float x;
 
-    rc = scanf("%f%f", &x, &eps);
-
-    if (rc == 2)
+    printf("enter x and eps\n");
+    r = scanf("%f%f", &x, &eps);
+    if (r == 2)
     {
-        if (eps > 1 || eps <= 0)
+        if (eps >= 1 || eps <= 0)
         {
-            printf("Epsilon error");
-
-            return LOGIC_ERR;
+            printf("epsilon error");
+            return 2;
+        }
+        else if (fabsf(x) > 1)
+        {
+            printf("vlaue error");
+            return 3;
         }
         else
         {
-            s_x = series_estimate(x, eps);
+            sum_s = estimate(x, eps);
             f_x = atanf(x);
-            abs_err = fabsf(f_x - s_x);
-            rel_err = fabsf((f_x - s_x) / f_x);
+            abs_err = fabs(f_x - sum_s);
+            rel_err = fabsf((f_x - sum_s) / f_x);
+            printf("%f %f %f %f", sum_s, f_x, abs_err, rel_err);
 
-            printf("%f %f %f %f", s_x, f_x, abs_err, rel_err);
-
-            return OK;
+            return 0;
         }
     }
     else
     {
-        printf("Input error");
-
-        return IN_ERR;
+        printf("input error");
+        return 1;
     }
 }
