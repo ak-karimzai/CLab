@@ -1,6 +1,5 @@
 #include<stdio.h>
 
-
 int fib(int n)
 {
     int t0 = 0, t1 = 1, s = 0, i;
@@ -21,17 +20,18 @@ int main()
     int n, m, r;
     printf("Enter the number\n");
     r = scanf("%d", &n);
-    if (r)
+    
+    if (n < 0)
+    {
+        printf("input error");
+        return 1;
+    }
+    else if (r)
     {
         m = fib(n);
         printf("Answer\n");
         printf("%d\n", m);
         return 0;
-    }
-    else if (n < 0)
-    {
-        printf("input error");
-        return 1;
     }
     else
     {
