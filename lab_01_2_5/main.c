@@ -28,9 +28,14 @@ int main()
         printf("%d\n", m);
         return 0;
     }
-    else
+    else if (n < 0)
     {
         printf("input error");
         return 1;
+    }
+    else
+    {
+        printf("input error");
+        return 2;
     }
 }
