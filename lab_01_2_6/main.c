@@ -2,7 +2,7 @@
 #include <math.h>
 
 
-int string_hello(char string , float *x_point, float *y_point)
+int string_hello(char string, float *x_point, float *y_point)
 {
     printf("Input triangle coordinates(x, y) point %c: ", string);
     if (scanf("%f %f", x_point, y_point) == 2)
@@ -90,8 +90,7 @@ int find_point(float x_1, float y_1, float x_2, float y_2)
         return 0;
     }
 }
-int give_information(float x1, float y1, float x2, float y2,
-                      float x3, float y3, float xp, float yp)
+int give_information(float x1, float y1, float x2, float y2, float x3, float y3, float xp, float yp)
 {
     int s1, s2, s3, flag;
     s1 = find_point(x2 - x1, y2 - y1, xp - x1, yp - y1);
