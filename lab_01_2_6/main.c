@@ -1,11 +1,6 @@
 #include <stdio.h>
 #include <math.h>
-#define OK 0
-#define ERROR 1
-#define IN 2
-#define ON 3
-#define OUT 4
-#define EPS 0.00001
+
 
 int string_hello(char string , float *x_point, float *y_point)
 {
@@ -74,7 +69,7 @@ int main(void)
 
 int if_tri(float x_1, float y_1, float x_2, float y_2)
 {
-    if ((fabs(x_1*y_2 - x_2*y_1)) <= EPS)
+    if ((fabs(x_1*y_2 - x_2*y_1)) <= 0.00001)
         return 1;
     else
         return 0;
