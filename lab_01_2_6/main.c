@@ -21,8 +21,7 @@ int print_error(char string)
 }
 int if_tri(float x_1, float y_1, float x_2, float y_2);
 
-int give_information(float x1, float y1, float x2, float y2,
-                      float x3, float y3, float xp, float yp);
+int give_information(float x1, float y1, float x2, float y2, float x3, float y3, float xp, float yp);
 int main(void)
 {
     int rc = 0, flag;
@@ -67,7 +66,7 @@ int main(void)
 
 int if_tri(float x_1, float y_1, float x_2, float y_2)
 {
-    if ((fabs(x_1*y_2 - x_2*y_1)) <= 0.00001)
+    if ((fabs(x_1 * y_2 - x_2 * y_1)) <= 0.00001)
     {
         return 1;
     }
@@ -78,11 +77,11 @@ int if_tri(float x_1, float y_1, float x_2, float y_2)
 }
 int find_point(float x_1, float y_1, float x_2, float y_2)
 {
-    if ((x_1*y_2 - x_2*y_1) > 0)
+    if ((x_1 * y_2 - x_2 * y_1) > 0)
     {
         return 1;
     }
-    else if ((x_1*y_2 - x_2*y_1) < 0)
+    else if ((x_1 * y_2 - x_2 * y_1) < 0)
     {
         return -1;
     }
