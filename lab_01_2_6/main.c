@@ -1,35 +1,109 @@
-#include<stdio.h>
-#include<math.h>
+#include <stdio.h>
+#include <math.h>
+#define OK 0
+#define ERROR 1
+#define IN 2
+#define ON 3
+#define OUT 4
+#define EPS 0.00001
 
-int main()
+int string_hello(char string , float *x_point, float *y_point)
 {
-    float x1, y1, x2, y2, x3, y3, xp, yp, r, a, b, c, s;
-    printf("Enter coordinate of point's and then coordinates of triangle: ");
-    r = scanf("%f%f%f%f%f%f%f%f", &x1, &y1, &x2, &y2, &x3, &y3, &xp, &yp);
-    a = (x1 - xp) * (y2 - y1) - (x2 - x1) * (y1 - yp);
-    b = (x2 - xp) * (y3 - y2) - (x3 - x2) * (y2 - yp);
-    c = (x3 - xp) * (y1 - y3) - (x1 - x3) * (y3 - yp);
-    s = (x1 * y2 + x2 * y3 + x3 * y1) / 2 - (x2 * y1 + x3 * y2 + x1 * y3);
-    if (s <= 0)
+    printf("Input triangle coordinates(x, y) point %c: ", string);
+    if (scanf("%f %f", x_point, y_point) == 2)
+        return 0;
+    else
+        return 1;
+}
+int print_error(char string)
+{
+    printf("\nError input point %c!", string);
+    return 1;
+}
+
+int if_tri(float x_1, float y_1, float x_2, float y_2);
+
+int give_information(float x1, float y1, float x2, float y2,
+                      float x3, float y3, float xp, float yp);
+
+int main(void)
+{
+    int rc = 0, flag;
+    float x1, y1, x2, y2, x3, y3;
+    float xp, yp;
+
+    rc = string_hello('A', &x1, &y1);
+    if (rc)
+        return print_error('A');
+
+    rc = string_hello('B', &x2, &y2);
+    if (rc)
+        return print_error('B');
+
+    rc = string_hello('C', &x3, &y3);
+    if (rc)
+        return print_error('C');
+
+    if (!(if_tri(x2 - x1, y2 - y1, x1 - x3, y1 - y3)))
     {
-        printf("not triangle");
-        return 3;
-    }
-    if (r == 8)
-    {
-        if ((a >= 0 && b >= 0 && c >= 0) || (a <= 0 && b <= 0 && c <= 0))
-        {
-            if(a==0 || b==0 || c==0)
-                printf("0");
-            else
-                printf("1");
-        }
+        printf("Input coordinates(x, y) point O: ");
+        if (scanf("%f %f", &xp, &yp) == 2)
+            flag = give_information(x1, y1, x2, y2, x3, y3, xp, yp);
         else
-            printf("2");
+            return print_error('O');
     }
     else
     {
-        printf("input error");
-        return 3;
-    } 
+        printf("Error triagle!");
+        return 1;
+    }
+
+    switch (flag) {
+    case 2:
+        printf("0");
+        break;
+    case 3:
+        printf("1");
+        break;
+    default:
+        printf("2");
+    }
+
+    return 0;
+}
+
+int if_tri(float x_1, float y_1, float x_2, float y_2)
+{
+    if ((fabs(x_1*y_2 - x_2*y_1)) <= EPS)
+        return 1;
+    else
+        return 0;
+}
+
+int find_point(float x_1, float y_1, float x_2, float y_2)
+{
+    if ((x_1*y_2 - x_2*y_1) > 0)
+        return 1;
+    else if ((x_1*y_2 - x_2*y_1) < 0)
+        return -1;
+    else
+        return 0;
+}
+
+int give_information(float x1, float y1, float x2, float y2,
+                      float x3, float y3, float xp, float yp)
+{
+    int s1, s2, s3, flag;
+    s1 = find_point(x2 - x1, y2 - y1, xp - x1, yp - y1);
+    s2 = find_point(x3 - x2, y3 - y2, xp - x2, yp - y2);
+    s3 = find_point(x1 - x3, y1 - y3, xp - x3, yp - y3);
+
+    if ((s1 < 0 && s2 < 0 && s3 < 0) ||
+            (s1 > 0 && s2 > 0 && s3 > 0))
+        flag = 2;
+    else if (s1 == 0 || s2 == 0 || s3 == 0)
+        flag = 3;
+    else
+        flag = 4;
+    return flag;
 }
