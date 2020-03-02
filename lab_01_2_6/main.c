@@ -96,8 +96,7 @@ int give_information(float x1, float y1, float x2, float y2, float x3, float y3,
     s1 = find_point(x2 - x1, y2 - y1, xp - x1, yp - y1);
     s2 = find_point(x3 - x2, y3 - y2, xp - x2, yp - y2);
     s3 = find_point(x1 - x3, y1 - y3, xp - x3, yp - y3);
-    if ((s1 < 0 && s2 < 0 && s3 < 0) ||
-            (s1 > 0 && s2 > 0 && s3 > 0))
+    if ((s1 < 0 && s2 < 0 && s3 < 0) || (s1 > 0 && s2 > 0 && s3 > 0))
     {
         flag = 2;
     }
