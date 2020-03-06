@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int div_num(int a, int d)
+void mod_num(int a, int d, int *div_n, int *mod_n)
 {
     int div_part = 0;
     while (a >= d)
@@ -8,30 +8,22 @@ int div_num(int a, int d)
         a -= d;
         div_part += 1;
     }
-    return div_part;
-}
-
-int mod_num(int a, int d)
-{
-    int div_part = 0;
-    while (a >= d)
-    {
-        a -= d;
-        div_part += 1;
-    }
-    return a;
+    *mod_n = a;
+    *div_n = div_part;
 }
 
 int main()
 {
     int a, d, rc;
+    int div_n, mod_n;
 
     rc = scanf("%d%d", &a, &d);
     if (rc == 2)
     {
         if (a > 0 && d > 0)
         {
-            printf("%d %d", div_num(a, d), mod_num(a, d));
+            mod_num(a, d, &div_n, &mod_n);
+            printf("%d %d", div_n, mod_n);
             return 0;
         }
         else
