@@ -49,6 +49,7 @@ int main(void)
     {
         printf("Error triagle!");
         return 1;
+    }
     if (flag == 2)
     {
         printf("0");
