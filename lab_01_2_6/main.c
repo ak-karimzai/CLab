@@ -53,14 +53,20 @@ int main(void)
     switch (flag)
     {
     case 2:
+    {
         printf("0");
         break;
+    }
     case 3:
+    {
         printf("1");
         break;
+    }
     default:
+    {
         printf("2");
         break;
+    }
     }
 }
 
