@@ -50,17 +50,17 @@ int main(void)
         printf("Error triagle!");
         return 1;
     }
-    if (flag == 2)
+    switch (flag)
     {
+    case 2:
         printf("0");
-    }
-    else if (flag == 3)
-    {
+        break;
+    case 3:
         printf("1");
-    }
-    else
-    {
+        break;
+    default:
         printf("2");
+        break;
     }
 }
 
