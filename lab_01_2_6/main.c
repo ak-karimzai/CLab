@@ -49,16 +49,16 @@ int main(void)
     {
         printf("Error triagle!");
         return 1;
-    }
-    switch (flag)
+    if (flag == 2)
     {
-    case 2:
         printf("0");
-        break;
-    case 3:
+    }
+    else if (flag == 3)
+    {
         printf("1");
-        break;
-    default:
+    }
+    else
+    {
         printf("2");
     }
 }
