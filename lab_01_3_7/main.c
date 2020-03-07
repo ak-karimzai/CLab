@@ -38,7 +38,7 @@ int main(void)
         {
             sum_s = estimate(x, eps);
             f_x = atanf(x);
-            abs_err = fabs(f_x - sum_s);
+            abs_err = fabsf(f_x - sum_s);
             rel_err = fabsf((f_x - sum_s) / f_x);
             printf("%f %f %f %f", sum_s, f_x, abs_err, rel_err);
 
