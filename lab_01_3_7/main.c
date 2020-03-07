@@ -10,7 +10,7 @@ float estimate(float x, float eps)
     while (fabsf(s_part) > eps)
     {
         s_sum += s_part;
-        s_part = pow(-1, n) * pow(x, 2 * n + 1) / (2 * n + 1);
+        s_part = powf(-1, n) * powf(x, 2 * n + 1) / (2 * n + 1);
         n += 1;
     }
     return s_sum;
@@ -22,7 +22,7 @@ int main(void)
 
     printf("enter x and eps\n");
     r = scanf("%f%f", &x, &eps);
-    if (r == 2)
+    if ((r - 2) < 0.001)
     {
         if (eps >= 1 || eps <= 0)
         {
