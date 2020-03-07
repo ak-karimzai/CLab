@@ -1,3 +1,4 @@
+
 #include<stdio.h>
 #include<math.h>
 
@@ -5,13 +6,13 @@ float estimate(float x, float eps)
 {
     float s_part = x;
     float s_sum = 0;
-    int n = 1;
+    int n = 3;
 
     while (fabsf(s_part) > eps)
     {
         s_sum += s_part;
-        s_part = powf(-1, n) * powf(x, 2 * n + 1) / (2 * n + 1);
-        n += 1;
+        s_part *= (-1 * x * x) / n;
+        n += 2;
     }
     return s_sum;
 }
@@ -52,3 +53,4 @@ int main(void)
         return 1;
     }
 }
+
