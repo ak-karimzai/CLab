@@ -8,9 +8,9 @@ double estimate(double x, double eps)
     double res = t;
     while (fabs(t) > eps)
     {
-    	i += 2;
-    	t *= (2 - i) * x * x / i;
-    	res += t;
+        i += 2;
+        t *= (2 - i) * x * x / i;
+        res += t;
     }
     return res;
 }
