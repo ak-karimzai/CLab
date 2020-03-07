@@ -3,16 +3,16 @@
 
 double estimate(double x, double eps)
 {
-	long long i = 1;
-	double t = x;
-	double res = t;
-	while (fabs(t) > eps)
-	{
-		i += 2;
-		t *= (2 - i) * x * x / i;
-		res += t;
-	}
-	return res;
+    long long i = 1;
+    double t = x;
+    double res = t;
+    while (fabs(t) > eps)
+    {
+    	i += 2;
+    	t *= (2 - i) * x * x / i;
+    	res += t;
+    }
+    return res;
 }
 int main(void)
 {
@@ -41,7 +41,6 @@ int main(void)
             abs_err = fabs(f_x - sum_s);
             rel_err = fabs((f_x - sum_s) / f_x);
             printf("%lf %lf %lf %lf", sum_s, f_x, abs_err, rel_err);
-
             return 0;
         }
     }
