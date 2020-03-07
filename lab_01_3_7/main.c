@@ -17,12 +17,13 @@ float estimate(float x, float eps)
 }
 int main(void)
 {
-    float sum_s, f_x, eps, r, abs_err, rel_err;
+    float sum_s, f_x, eps, abs_err, rel_err;
     float x;
+    int r;
 
     printf("enter x and eps\n");
     r = scanf("%f%f", &x, &eps);
-    if ((r - 2) < 0.001)
+    if (r == 2)
     {
         if (eps >= 1 || eps <= 0)
         {
