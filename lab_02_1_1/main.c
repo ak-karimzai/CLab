@@ -2,31 +2,37 @@
 #include <math.h>
 #define N 100
 
-int append(int A[], int i, int n)
+int append(int a[], int i, int n)
 {
     if (n)
     {
-        A[i] = n;
+        a[i] = n;
 	return 0;
     }
     return -1;
 }
 int main()
 {
-    int A[N] = {0}, geo_mean = 1.0, x;
-    int i, n;
+    int a[N] = {0}, geo_mean = 1.0, x;
+    int i, n, rc = 0;
     printf("Enter the size of array.\n");
     scanf("%d", &n);
     for (i = 0; i < n; i++)
     {
-        scanf("%d", &x);
-        append(A, i, x);
+        rc = scanf("%d", &x);
+        if (rc)
+            append(a, i, x);
+        else
+        {
+            printf("inPut Error!\n");
+            return -1;
+        }
     }
     for (i = 0; i < n; i++)
     {
-        if (A[i] % 2 != 0)
+        if (a[i] % 2 != 0)
         {
-            geo_mean *= A[i];
+            geo_mean *= a[i];
         }
     }
     printf("geometrical mean is equal: \n");
