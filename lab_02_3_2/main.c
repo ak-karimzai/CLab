@@ -1,127 +1,148 @@
 #include <stdio.h>
 #include <math.h>
+
+#define OK 0
+#define SIZE_INPUT_ERR -1
+#define CLEAR_INPUT_ERR -2
+#define ELEMENT_INPUT_ERR -3
+#define ARG_COUNT_ERR -4
+#define LOGIC_ERR -5
+#define INPUT_ERR -6
+
+#define IS_ARMSTRONG 1
+#define IS_NOT_ARMSTRONG 0
+
 #define N 10
-#define SIZE_ERROR -1
-#define ELEMENT_ERROR -2
-#define ARRAY_N_FULL -3
-#define INCORRECT_S_INPUT -4
-#define INPUT_ERROR -5
-#define LOG_ERROR -6
 
 int read_array(int *const a, int *n)
 {
-    int rc, array_i;
-    int count = 0;
+    int rc, array_el;
+    int arg_count = 0;
+
     rc = scanf("%d", n);
+
     if (rc == 1)
     {
-        if (*n > N || * n < 1)
+        if (*n > N || *n < 1)
         {
-            printf("invlaid Input for size");
-            return SIZE_ERROR;
+            printf("Array size input error");
+
+            return SIZE_INPUT_ERR;
         }
         else
         {
-            for (int i = 0; i < *n; i++)
+            for (int i = 0; i < *n; ++i)
             {
-                rc = scanf("%d", &array_i);
+                rc = scanf("%d", &array_el);
                 if (rc == 1)
                 {
-                    a[i] = array_i;
-                    count++;
+                    a[i] = array_el;
+                    arg_count++;
                 }
                 else
                 {
-                    printf("Invalid element input");
-                    return ELEMENT_ERROR;
+                    printf("Array element input error");
+
+                    return ELEMENT_INPUT_ERR;
                 }
             }
-            if (count != *n)
+
+            if (arg_count != *n)
             {
-                printf("array not full");
-                return ARRAY_N_FULL;
+                printf("Arguments' count error");
+
+                return ARG_COUNT_ERR;
             }
             else
-            {
-                return 0;
-            }
+                return OK;
         }
     }
     else
     {
-        printf("incorrect input Size");
-        return INCORRECT_S_INPUT;
+        printf("Input clearance error");
+
+        return CLEAR_INPUT_ERR;
     }
 }
-int add_arm(const int *const a, int *b, const int n);
-int if_arm(int x);
 
-void display(const int *const a, const int n)
+void print_array(const int *const a, const int n)
 {
     for (int i = 0; i < n; ++i)
         printf("%d ", a[i]);
 }
 
-int main()
+int is_armstrong_digit(int n)
 {
-    int a[N], b[N], n;
-    printf("Enter the number of element's: \n");
-    if (read_array(a, &n))
-    {
-        return INPUT_ERROR;
-    }
-    else
-    {
-        if (add_arm(a, b, n))
-            return LOG_ERROR;
-        else
-            return 0;
-    }
-}
-int if_arm(int num)
-{
-    int copy_of_num, sum = 0, rem;
+    int current_dig, digits_sum = 0, digits_count = 0;
+    int m = n;
+    int k = n;
 
-    copy_of_num = num;
-    while (num != 0)
+    while (m > 0)
     {
-        rem = num % 10;
-        sum = sum + (rem * rem * rem);
-        num = num / 10;
+        digits_count++;
+        m /= 10;
     }
-    if (copy_of_num == sum)
-        return 1;
-    return 0;
+
+    while (n > 0)
+    {
+        current_dig = n % 10;
+        digits_sum += pow(current_dig, digits_count);
+        n /= 10;
+    }
+
+    if (digits_sum == k)
+        return IS_ARMSTRONG;
+    else
+        return IS_NOT_ARMSTRONG;
 }
-int add_arm(const int *const a, int *b, const int n)
+
+int form_armstrong_array(const int *const a, int *b, const int n)
 {
     int m = 0;
 
-    for (int i = 0; i < n; i++)
+    for (int i = 0; i < n; ++i)
     {
-        if (a[i] > 0 && if_arm(a[i]))
+        if (a[i] > 0 && is_armstrong_digit(a[i]))
         {
             b[m] = a[i];
             m++;
         }
     }
+
     if (m == 0)
     {
-        printf("Array without armstrong numbers");
-        return LOG_ERROR;
+        printf("No Armstrong digits in array");
+
+        return LOGIC_ERR;
     }
     else
     {
         if (m == n)
         {
-            printf("All Elements are armstrong");
-            return LOG_ERROR;
+            printf("All digits are Armstrong digits");
+
+            return LOGIC_ERR;
         }
         else
         {
-            display(b, m);
-            return 0;
+            print_array(b, m);
+
+            return OK;
         }
     }
-    return 0;
+}
+
+int main()
+{
+    int a[N] = { 0 }, b[N] = { 0 }, n = 0;
+
+    if (read_array(a, &n) != OK)
+        return INPUT_ERR;
+    else
+    {
+        if (form_armstrong_array(a, b, n) != OK)
+            return LOGIC_ERR;
+        else
+            return OK;
+    }
 }
