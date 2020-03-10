@@ -1,6 +1,6 @@
-
 #include <stdio.h>
 #include <math.h>
+
 #define N 10
 #define SIZE_ERROR -1
 #define ELEMENT_ERROR -2
@@ -65,7 +65,7 @@ void display(const int *const a, const int n)
 
 int main()
 {
-    int a[N] = { 0 }, b[N] = {0}, n;
+    int a[N] = { 0 }, b[N] = { 0 }, n;
     printf("Enter the number of element's: \n");
     if (read_array(a, &n))
     {
@@ -79,20 +79,29 @@ int main()
             return 0;
     }
 }
-int if_arm(int num)
+int if_arm(int n)
 {
-    int copy_of_num, sum = 0, rem;
+    int current_dig, digits_sum = 0, digits_count = 0;
+    int m = n;
+    int k = n;
 
-    copy_of_num = num;
-    while (num != 0)
+    while (m > 0)
     {
-        rem = num % 10;
-        sum = sum + (rem * rem * rem);
-        num = num / 10;
+        digits_count++;
+        m /= 10;
     }
-    if (copy_of_num == sum)
+
+    while (n > 0)
+    {
+        current_dig = n % 10;
+        digits_sum += pow(current_dig, digits_count);
+        n /= 10;
+    }
+
+    if (digits_sum == k)
         return 1;
-    return 0;
+    else
+        return 0;
 }
 int add_arm(const int *const a, int *b, const int n)
 {
@@ -102,8 +111,7 @@ int add_arm(const int *const a, int *b, const int n)
     {
         if (a[i] > 0 && if_arm(a[i]))
         {
-            b[m] = a[i];
-            m++;
+            b[m++] = a[i];
         }
     }
     if (m == 0)
