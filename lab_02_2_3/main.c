@@ -79,7 +79,7 @@ int is_perfect_square(int number)
  
     float_vat = sqrt((double) number);
     int_var = float_vat;
-    if(int_var == float_vat)
+    if (int_var == float_vat)
         return 1;
     else
         return 0;
