@@ -95,7 +95,8 @@ int add_arm(const int *const a, int *b, const int n)
     {
         if (a[i] > 0 && if_arm(a[i]))
         {
-            b[m++] = a[i];
+            b[m] = a[i];
+            m++;
         }
     }
     if (m == 0)
@@ -115,7 +116,6 @@ int add_arm(const int *const a, int *b, const int n)
             for (int i = 0; i < m; i++)
             {
                 printf("%d ", b[i]);
-                return 0;
             }
         }
     }
