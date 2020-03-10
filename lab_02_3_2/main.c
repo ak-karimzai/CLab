@@ -71,7 +71,6 @@ int main()
         else
             return 0;
     }
-    
 }
 int if_arm(int num)
 {
@@ -119,7 +118,6 @@ int add_arm(const int *const a, int *b, const int n)
                 return 0;
             }
         }
-        
     }
-    
+    return 0;
 }
