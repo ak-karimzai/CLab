@@ -1,24 +1,24 @@
 #include <stdio.h>
 #include <math.h>
 #define N 10
-#define size_error -1
-#define element_error -2
-#define array_nfull -3
-#define incorect_sinput -4
-#define input_error -5
-#define log_error -6
+#define SIZE_ERROR -1
+#define ELEMENT_ERROR -2
+#define ARRAY_N_FULL -3
+#define INCORRECT_S_INPUT -4
+#define INPUT_ERROR -5
+#define LOG_ERROR -6
 
 int read_array(int *const a, int *n)
 {
     int rc, array_i;
     int count = 0;
     rc = scanf("%d", n);
-    if(rc == 1)
+    if (rc == 1)
     {
         if (*n > N || * n < 1)
         {
             printf("invlaid Input for size");
-            return size_error;
+            return SIZE_ERROR;
         }
         else
         {
@@ -33,13 +33,13 @@ int read_array(int *const a, int *n)
                 else
                 {
                     printf("Invalid element input");
-                    return element_error;
+                    return ELEMENT_ERROR;
                 }
             }
             if (count != *n)
             {
                 printf("Array not full");
-                return array_nfull;
+                return ARRAY_N_FULL;
             }
             else
             {
@@ -50,7 +50,7 @@ int read_array(int *const a, int *n)
     else
     {
         printf("incorrect input Size");
-        return incorect_sinput;
+        return INCORRECT_S_INPUT;
     }
 }
 int geo_averge(const int *const a, const int n)
@@ -65,29 +65,29 @@ int geo_averge(const int *const a, const int n)
             geo_av *= a[i];
         }
     }
-    if(even_counter == 0)
+    if (even_counter == 0)
     {
         printf("Array without event numbers");
         geo_av = 0;
-        return log_error;
+        return LOG_ERROR;
     }
     return geo_av;
 }
 int main()
 {
-    int a[N] = {0}, n = 0;
+    int a[N] = { 0 }, n = 0;
 
     if (read_array(a, &n))
     {
-        return input_error;
+        return INPUT_ERROR;
     }
     else
     {
         const float geo_avr = geo_averge(a, n);
 
-        if (geo_avr == log_error)
+        if (geo_avr == LOG_ERROR)
         {
-            return log_error;
+            return LOG_ERROR;
         }
         else
         {
