@@ -24,7 +24,7 @@ int read_array(int *const a, int *n)
         }
         else
         {
-            for(int i = 0; i < *n; i++)
+            for (int i = 0; i < *n; i++)
             {
                 rc = scanf("%d", &array_i);
                 if (rc == 1)
@@ -79,7 +79,6 @@ int is_perfect_square(int number)
  
     float_vat = sqrt((double) number);
     int_var = float_vat;
- 
     if(int_var == float_vat)
         return 1;
     else
