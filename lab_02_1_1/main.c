@@ -32,7 +32,7 @@ int read_array(int *const a, int *n)
                 }
                 else
                 {
-                    printf("Invalid element input")
+                    printf("Invalid element input");
                     return element_error;
                 }
             }
@@ -50,7 +50,7 @@ int read_array(int *const a, int *n)
     else
     {
         printf("incorrect input Size");
-        return incorrect_sinput;
+        return incorect_sinput;
     }
 }
 int geo_averge(const int *const a, const int n)
