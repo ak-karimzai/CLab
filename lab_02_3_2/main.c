@@ -56,6 +56,12 @@ int read_array(int *const a, int *n)
 int add_arm(const int *const a, int *b, const int n);
 int if_arm(int x);
 
+void display(const int *const a, const int n)
+{
+    for (int i = 0; i < n; ++i)
+        printf("%d ", a[i]);
+}
+
 int main()
 {
     int a[N], b[N], n;
@@ -113,10 +119,8 @@ int add_arm(const int *const a, int *b, const int n)
         }
         else
         {
-            for (int i = 0; i < m; i++)
-            {
-                printf("%d ", b[i]);
-            }
+            display(b, m);
+            return 0;
         }
     }
     return 0;
