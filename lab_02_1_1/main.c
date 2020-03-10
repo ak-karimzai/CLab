@@ -7,11 +7,9 @@ int append(int A[], int i, int n)
     if (n)
     {
         A[i] = n;
+	return 0;
     }
-    else
-    {
-        return -1;
-    }
+    return -1;
 }
 int main()
 {
