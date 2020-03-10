@@ -95,16 +95,8 @@ int main()
     }
     else
     {
-        flag = bouble_sort(a, n);
-        if (flag)
-        {
-            display(a, n);
-            return 0;
-        }
-        else
-        {
-            printf("Array is already sorted!");
-            return LOG_ERROR;
-        }   
+        bouble_sort(a, n);
+        display(a, n);
+        return 0;
     }
 }
