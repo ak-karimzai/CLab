@@ -86,7 +86,7 @@ void display(int *a, int n)
 }
 int main()
 {
-    int a[N] = { 0 }, flag;
+    int a[N] = { 0 };
     int n;
     printf("Enter the size of array.\n");
     if (read_array(a, &n))
