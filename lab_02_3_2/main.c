@@ -53,38 +53,29 @@ int read_array(int *const a, int *n)
         return INCORRECT_S_INPUT;
     }
 }
-int add_arm(int a[], int x, int j);
+int add_arm(const int *const a, int *b, const int n);
 int if_arm(int x);
+
 int main()
 {
-    int a[N], b[N], n, count = 0, i, j = 0;
+    int a[N], b[N], n;
     printf("Enter the number of element's: \n");
-    read_array(a, &n);
-    for (i = 0; i < n; i++)
+    if (read_array(a, &n))
     {
-        if (if_arm(a[i]))
-        {
-            count++;
-            j = add_arm(b, a[i], j);
-        }
-    }
-    if (count)
-    {
-        for (i = 0; i < count; i++)
-        {
-            printf("%d ", b[i]);
-        }
+        return INPUT_ERROR;
     }
     else
     {
-        printf("not finded arm number");
-        return 2;
+        if (add_arm(a, b, n))
+            return LOG_ERROR;
+        else
+            return 0;
     }
-    return 0;
+    
 }
 int if_arm(int num)
 {
-    int copy_of_num, sum=0, rem;
+    int copy_of_num, sum = 0, rem;
 
     copy_of_num = num;
     while (num != 0)
@@ -97,8 +88,38 @@ int if_arm(int num)
         return 1;
     return 0;
 }
-int add_arm(int a[], int x, int j)
+int add_arm(const int *const a, int *b, const int n)
 {
-    a[j++] = x;
-    return j;
+    int m = 0;
+
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] > 0 && if_arm(a[i]))
+        {
+            b[m++] = a[i];
+        }
+    }
+    if (m == 0)
+    {
+        printf("Array without armstrong numbers");
+        return LOG_ERROR;
+    }
+    else
+    {
+        if (m == n)
+        {
+            printf("All Elements are armstrong");
+            return LOG_ERROR;
+        }
+        else
+        {
+            for (int i = 0; i < m; i++)
+            {
+                printf("%d ", b[i]);
+                return 0;
+            }
+        }
+        
+    }
+    
 }
