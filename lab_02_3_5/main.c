@@ -55,10 +55,13 @@ int read_array(int *const a, int *n)
 }
 void fib_array(int *begin, int *end)
 {
+    int min = (*begin * *begin++);
     for (int *i = ++begin; i != end; i++)
     {
-        printf("%d ", *(i - 1) * *i);
+        if ((*(i - 1) * *i) < min)
+            min = (*(i - 1) * *i);
     }
+    printf("%d", min);
 }
 int main()
 {
