@@ -53,12 +53,11 @@ int read_array(int *const a, int *n)
         return INCORRECT_S_INPUT;
     }
 }
-void fib_array(int *a, int n)
+void fib_array(int *begin, int *end)
 {
-    int i = 0;
-    for (i = 0; i < n - 1; i++)
+    for (int *i = ++begin; i != end; i++)
     {
-        printf("%d ", a[i] * a[i + 1]);
+        printf("%d ", *(i - 1) * *i);
     }
 }
 int main()
@@ -70,7 +69,12 @@ int main()
     }
     else
     {
-        fib_array(a, n);
+        if (n == 1)
+        {
+            printf("array only with one element");
+            return INPUT_ERROR;
+        }
+        fib_array(a, (a + n));
         return 0;
     }
 }
