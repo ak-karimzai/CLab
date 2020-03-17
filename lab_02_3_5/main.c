@@ -55,7 +55,8 @@ int read_array(int *const a, int *n)
 }
 void fib_array(int *begin, int *end)
 {
-    int min = (*begin * *begin++);
+    int *m = ++begin;
+    int min = (*(m - 1) * *m);
     for (int *i = ++begin; i != end; i++)
     {
         if ((*(i - 1) * *i) < min)
