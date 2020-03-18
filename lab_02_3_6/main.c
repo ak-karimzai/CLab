@@ -107,20 +107,20 @@ int main()
             process_2(a, n);
         gettimeofday(&stop, NULL);
         work = (stop.tv_sec - start.tv_sec) * 1000000LL + (stop.tv_usec - start.tv_usec);
-        printf("pointer: %" PRId64 " µs\n", work);
+        printf("by index: %" PRId64 " µs\n", work);
         
         gettimeofday(&start, NULL);
         for (int i = 0; i < num; i++)
             process_1(a, (a + n));
         gettimeofday(&stop, NULL);
         work = (stop.tv_sec - start.tv_sec) * 1000000LL + (stop.tv_usec - start.tv_usec);
-        printf("by index: %" PRId64 " µs\n", work);
+        printf("by pointer: %" PRId64 " µs\n", work);
 
         gettimeofday(&start, NULL);
         for (int i = 0; i < num; i++)
             process_3(a, n);
         gettimeofday(&stop, NULL);
         work = (stop.tv_sec - start.tv_sec) * 1000000LL + (stop.tv_usec - start.tv_usec);
-        printf("pointer: %" PRId64 " µs\n", work);
+        printf("*(i + 1): %" PRId64 " µs\n", work);
     }
 }
