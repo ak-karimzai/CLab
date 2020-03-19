@@ -74,7 +74,7 @@ void process_2(int a[], int n)
             min = (a[i] * a[i + 1]);
     }
 }
-int process_3(int *a, int n)
+void process_3(int *a, int n)
 {
     int min = a[0] * a[1];
     for (int i = 0; i < n - 1; i++)
@@ -88,7 +88,7 @@ int process_3(int *a, int n)
 int main()
 {
     int a[N], n;
-    long num = 1000000;
+    long num = 5000000;
     struct timeval start, stop;
     int64_t work;
     if (read_array(a, &n))
@@ -106,21 +106,21 @@ int main()
         for (int i = 0; i < num; i++)
             process_2(a, n);
         gettimeofday(&stop, NULL);
-        work = (stop.tv_sec - start.tv_sec) * 1000000LL + (stop.tv_usec - start.tv_usec);
+        work = (stop.tv_sec - start.tv_sec) * 5000000LL + (stop.tv_usec - start.tv_usec);
         printf("by index: %" PRId64 " µs\n", work);
         
         gettimeofday(&start, NULL);
         for (int i = 0; i < num; i++)
             process_1(a, (a + n));
         gettimeofday(&stop, NULL);
-        work = (stop.tv_sec - start.tv_sec) * 1000000LL + (stop.tv_usec - start.tv_usec);
+        work = (stop.tv_sec - start.tv_sec) * 5000000LL + (stop.tv_usec - start.tv_usec);
         printf("by pointer: %" PRId64 " µs\n", work);
 
         gettimeofday(&start, NULL);
         for (int i = 0; i < num; i++)
             process_3(a, n);
         gettimeofday(&stop, NULL);
-        work = (stop.tv_sec - start.tv_sec) * 1000000LL + (stop.tv_usec - start.tv_usec);
+        work = (stop.tv_sec - start.tv_sec) * 5000000LL + (stop.tv_usec - start.tv_usec);
         printf("*(i + 1): %" PRId64 " µs\n", work);
     }
 }
