@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <math.h>
-
 #define N 10
 #define SIZE_ERROR -1
 #define ELEMENT_ERROR -2
@@ -56,7 +55,7 @@ int read_array(int *const a, int *n)
 }
 int geo_averge(const int *const a, const int n)
 {
-    int geo_av = 1;
+    float geo_av = 1;
     int even_counter = 0;
     for (int i = 0; i < n; i++)
     {
@@ -68,7 +67,7 @@ int geo_averge(const int *const a, const int n)
     }
     if (even_counter == 0)
     {
-        printf("Array without even numbers");
+        printf("Array without event numbers");
         geo_av = 0;
         return LOG_ERROR;
     }
@@ -86,7 +85,7 @@ int main()
     {
         const float geo_avr = geo_averge(a, n);
 
-        if (geo_avr < 0)
+        if (geo_avr == LOG_ERROR)
         {
             return LOG_ERROR;
         }
