@@ -74,23 +74,10 @@ void display(int *a, int n)
 }
 int is_perfect_square(int number)
 {
-    int int_var;
-    float float_vat;
- 
-    float_vat = sqrt((double) number);
-    int_var = float_vat;
-    if (int_var == float_vat)
-        return 1;
-    else
-        return 0;
-}
-int pul_kvadrat(int x)
-{
-    float sr = sqrt((double) x);
-    int sr_1 = sr;
-    if (sr == sr_1)
+    for (int i = 0; i <= number; i++)
     {
-        return 1;
+        if (number == i * i)
+            return 1;
     }
     return 0;
 }

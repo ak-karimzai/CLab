@@ -81,7 +81,7 @@ int main()
 }
 int if_arm(int n)
 {
-    int current_dig, digits_sum = 0, digits_count = 0;
+    float current_dig, digits_sum = 0, digits_count = 0;
     int m = n;
     int k = n;
 
@@ -94,14 +94,13 @@ int if_arm(int n)
     while (n > 0)
     {
         current_dig = n % 10;
-        digits_sum += pow(current_dig, digits_count);
+        digits_sum += powf(current_dig, digits_count);
         n /= 10;
     }
-
-    if (digits_sum == k)
-        return 1;
-    else
+    if ((digits_sum - k) > 0 || (digits_sum - k) < 0)
         return 0;
+    else
+        return 1;
 }
 int add_arm(const int *const a, int *b, const int n)
 {
