@@ -1,5 +1,0 @@
-input 10 20 30
-output 5.454545
-
-input -2qwe 20 wqe
-output Input error

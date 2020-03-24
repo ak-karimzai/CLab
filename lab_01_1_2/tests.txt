@@ -1,5 +1,0 @@
-Input a, b, alpha: 1 2 10
-Total square of shape: S = 0.13225
-
-Input a, b, alpha: we 213 qwe
-Total square of shape: S = 0.00000

@@ -1,5 +1,0 @@
-number of coins: 350
-number of bootles: 13
-
-number of coins: ewwe
-number of bootles: 0
