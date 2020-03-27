@@ -51,7 +51,6 @@ int read_mat(int a[N][N], int *const m, int *const n)
                 return FINISHED;
             }
         }
-        
     }
     else
     {
@@ -80,7 +79,7 @@ void is_monotone(int a[N][N], int *const b, int m, int n)
         monton = 0;
         for (int j = 0; j < n - 1; j++)
         {
-            if (a[i][j] >= a[i][j + 1])
+            if (a[i][j] >= a[i][j + 1] || a[i][j] <= a[i][j + 1])
                 monton++;
         }
         if (monton == n - 1)
