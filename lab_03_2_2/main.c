@@ -63,7 +63,7 @@ int read_mat(int a[N][N], int *const m, int *const n)
         return INPUT_ERROR;
     }
 }
-int display(int a[N][N], int m, int n)
+void display(int a[N][N], int m, int n)
 {
     printf("\n");
     for (int i = 0; i < m;i++)
@@ -86,7 +86,7 @@ int odd_or_even(int a[N][N], int m, int n)
             if ((a[i][j] + a[i][j + 1]) % 2 != 0)
                 flag = 1;
         }
-        if (flag = 1)
+        if (flag == 1)
         {
             for (int j = 0; j < n; j++)
             {
