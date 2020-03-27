@@ -69,28 +69,37 @@ void display(int a[N][N], int m, int n)
         printf("\n");
     }
 }
-void is_monotone(int a[N][N], int *const b, int m, int n)
+int is_monotone(int a[N][N], int *const b, int m, int n)
 {
-    int monton;
-    for (int i = 0; i < m; i++)
-        b[i] = 0;
-    for (int i = 0; i < m; i++)
+    int is_ordered_up, is_ordered_down;
+
+    if (m == 1)
     {
-        monton = 0;
-        for (int j = 0; j < n - 1; j++)
-        {
-            if (a[i][j] >= a[i][j + 1] || a[i][j] <= a[i][j + 1])
-                monton++;
-        }
-        if (monton == n - 1)
-        {
-            b[i] = 1;
-        }
-        else
-        {
+        for (int i = 0; i < m; ++i)
             b[i] = 0;
+    }
+    else
+    {
+        for (int i = 0; i < m; ++i)
+        {
+            is_ordered_up = 1;
+            is_ordered_down = 1;
+
+            for (int j = 0; j < n - 1; ++j)
+                if (a[i][j] <= a[i][j + 1])
+                    is_ordered_up++;
+
+            for (int j = 0; j < n - 1; ++j)
+                if (a[i][j] >= a[i][j + 1])
+                    is_ordered_down++;
+
+            if (is_ordered_up == n || is_ordered_down == n)
+                b[i] = 1;
+            else
+                b[i] = 0;
         }
     }
+    return FINISHED;
 }
 void display_1(int *const a, int n)
 {
