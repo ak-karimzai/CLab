@@ -7,9 +7,6 @@
 #define ARG_C_ERROR -4
 #define INPUT_ERROR -5
 
-#define DEFINED 1
-#define NOT_DEFINED 0
-
 #define N 10
 
 int read_mat(int a[N][N], int *const m, int *const n)
@@ -107,7 +104,12 @@ int main()
 {
     int a[N][N], m, n;
     int b[N];
-    read_mat(a, &m, &n);
-    is_monotone(a, b, m, n);
-    display_1(b, m);
+    if (read_mat(a, &m, &n))
+        return INPUT_ERROR;
+    else
+    {
+        is_monotone(a, b, m, n);
+        display_1(b, m);
+        return FINISHED;
+    }
 } 
