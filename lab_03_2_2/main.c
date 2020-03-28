@@ -112,7 +112,6 @@ void display(int a[N][N], int m, int n)
 int main()
 {
     int a[N][N], m, n;
-    int b[N];
 
     if (read_matrix(a, &m, &n))
         return INPUT_ERR;
