@@ -29,7 +29,7 @@ int read_matrix(int a[N][N], int *const n, int *const m)
                 for (int j = 0; j < *n; j++)
                 {
                     rc = scanf("%d", &matrix_el);
-                    if (rc == 1)
+                    if (rc)
                     {
                         a[i][j] = matrix_el;
                         count++;
@@ -104,12 +104,12 @@ int main()
     int a[N][N], m, n;
     int b[N];
 
-    if (read_matrix(a, &m, &n) != OK)
-        return INPUT_ERR;
+    if (read_matrix(a, &m, &n))
+        return INPUT_ERROR;
     else
     {
         is_monotone(a, b, m, n);
-        print_array(b, m);
+        display(b, m);
         return FINISHED;
     }
 }
