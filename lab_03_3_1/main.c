@@ -1,123 +1,125 @@
 #include <stdio.h>
 
-#define FINISHED 0
-#define SIZE_I_ERROR -1
-#define CLEAR_I_ERROR -2
-#define ELEM_I_ERROR -3
-#define ARG_C_ERROR -4
-#define INPUT_ERROR -5
+#define OK 0
+#define SIZE_INPUT_ERR -1
+#define CLEAR_INPUT_ERR -2
+#define ELEMENT_INPUT_ERR -3
+#define ARG_COUNT_ERR -4
+#define INPUT_ERR -5
+
+#define ORDERED 1
+#define NOT_ORDERED 0
 
 #define N 10
 
-int read_mat(int a[N][N], int *const m, int *const n)
+int read_matrix(int a[N][N], int *const n, int *const m)
 {
-    int rc, matrix_i;
-    int count = 0;
-    printf("Enter Dimensions:\n");
-    rc = scanf("%d%d", m, n);
+    int rc, matrix_el;
+    int arg_count = 0;
+
+    printf("Enter dimensions':\n");
+    rc = scanf("%d%d", n, m);
+
     if (rc == 2)
     {
         if (*n > N || *n < 1 || *m > N || *m < 1)
         {
-            printf("size input error!\n");
-            return SIZE_I_ERROR;
+            printf("Matrix size input error");
+
+            return SIZE_INPUT_ERR;
         }
         else
         {
-            for (int i = 0; i < *m; i++)
+            for (int i = 0; i < *n; ++i)
             {
-                for (int j = 0; j < *n; j++)
+                for (int j = 0; j < *m; j++)
                 {
-                    rc = scanf("%d", &matrix_i);
-                    if (rc)
+                    rc = scanf("%d", &matrix_el);
+                    if (rc == 1)
                     {
-                        a[i][j] = matrix_i;
-                        count++;
+                        a[i][j] = matrix_el;
+                        arg_count++;
                     }
                     else
                     {
-                        printf("incorrect element input!\n");
-                        return ELEM_I_ERROR;
+                        printf("Array element input error");
+
+                        return ELEMENT_INPUT_ERR;
                     }
                 }
             }
-            if (count != (*m) * (*n))
+
+            if (arg_count != (*n) * (*m))
             {
-                printf("argument's vount error\n");
-                return ARG_C_ERROR;
+                printf("Arguments' count error");
+
+                return ARG_COUNT_ERR;
             }
             else
-            {
-                return FINISHED;
-            }
+                return OK;
         }
     }
     else
     {
-        printf("invalid size input\n");
-        return INPUT_ERROR;
+        printf("Input clearance error");
+
+        return CLEAR_INPUT_ERR;
     }
 }
-void display(int a[N][N], int m, int n)
+
+void display(const int *const a, const int n)
 {
-    for (int i = 0; i < m;i++)
+    for (int i = 0; i < n; ++i)
     {
-        for (int j = 0; j < n; j++)
-        {
-            printf("%d ", a[i][j]);
-        }
-        printf("\n");
+        printf("%d ", a[i]);
     }
 }
-int is_monotone(int a[N][N], int *const b, int m, int n)
+
+int array_from_matrix(int a[N][N], int *const b, const int n, const int m)
 {
     int is_ordered_up, is_ordered_down;
 
     if (m == 1)
     {
-        for (int i = 0; i < m; ++i)
-            b[i] = 0;
+        for (int i = 0; i < n; ++i)
+            b[i] = NOT_ORDERED;
     }
     else
     {
-        for (int i = 0; i < m; ++i)
+        for (int i = 0; i < n; ++i)
         {
             is_ordered_up = 1;
             is_ordered_down = 1;
 
-            for (int j = 0; j < n - 1; ++j)
+            for (int j = 0; j < m - 1; ++j)
                 if (a[i][j] <= a[i][j + 1])
                     is_ordered_up++;
 
-            for (int j = 0; j < n - 1; ++j)
+            for (int j = 0; j < m - 1; ++j)
                 if (a[i][j] >= a[i][j + 1])
                     is_ordered_down++;
 
-            if (is_ordered_up == n || is_ordered_down == n)
-                b[i] = 1;
+            if (is_ordered_up == m || is_ordered_down == m)
+                b[i] = ORDERED;
             else
-                b[i] = 0;
+                b[i] = NOT_ORDERED;
         }
     }
-    return FINISHED;
+
+    return OK;
 }
-void display_1(int *const a, int n)
-{
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d ", a[i]);
-    }
-}
+
 int main()
 {
-    int a[N][N], m, n;
+    int a[N][N], n, m;
     int b[N];
-    if (read_mat(a, &m, &n))
-        return INPUT_ERROR;
+
+    if (read_matrix(a, &n, &m))
+        return INPUT_ERR;
     else
     {
-        is_monotone(a, b, m, n);
-        display_1(b, m);
-        return FINISHED;
+        array_from_matrix(a, b, n, m);
+        display(b, n);
+        return OK;
     }
-} 
+}
