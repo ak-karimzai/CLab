@@ -7,13 +7,14 @@
 #define ARG_C_ERROR -4
 #define INPUT_ERROR -5
 
+#define N 10
+
 int read_matrix(int a[N][N], int *const n, int *const m)
 {
     int rc, matrix_el;
     int count = 0;
 
     rc = scanf("%d%d", m, n);
-
     if (rc == 2)
     {
         if (*n > N || *n < 1 || *m > N || *m < 1)
