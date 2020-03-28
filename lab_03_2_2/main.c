@@ -118,7 +118,7 @@ int main()
         return INPUT_ERR;
     else
     {
-        if_even(a, m ,n);
+        if_even(a, m, n);
         display(a, m, n);
         return OK;
     }
