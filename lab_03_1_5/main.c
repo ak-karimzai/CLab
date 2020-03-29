@@ -132,7 +132,7 @@ void if_even(struct matrix *matr)
         }
         for (int i = 0; i < matr->m; i++)
         {
-            for  (int j = 0; j < matr->n; j++)
+            for (int j = 0; j < matr->n; j++)
             {
                 matr->a[i][j] = a[km++];
             }
