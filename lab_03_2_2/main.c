@@ -107,9 +107,9 @@ void if_even(struct matrix *matr)
         {
             sum = 0;
             elem = matr->a[i][j];
-            while (elem)
+            while (elem != 0)
             {
-                sum = elem % 10;
+                sum += elem % 10;
                 elem /= 10;
             }
             if (sum % 2 != 0)
