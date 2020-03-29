@@ -109,7 +109,7 @@ void swap_matr(struct matrix *mtr)
             mn--;
             start++;
             stop--;
-        } while(start != (mtr->n / 2) + 1);
+        } while (start != (mtr->n / 2) + 1);
     }
     else
     {
