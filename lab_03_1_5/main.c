@@ -74,30 +74,9 @@ int read_matrix(struct matrix *matr)
     }
 }
 
-void append_1(struct matrix *mat, int k)
+int if_even(struct matrix *matr)
 {
-    for (int i = mat->m; i > k; i--)
-    {
-        for (int j = 0; j < mat->n; j++)
-            mat->a[i][j] = mat->a[i - 1][j];
-    }
-    for (int i = 0; i < mat->m; i++)
-    {
-        for (int j = 0; j < mat->n; j++)
-        {
-            if (i == k)
-            {
-                mat->a[i][j] = -1;
-            }
-        }
-    }
-    mat->m++;
-}
-
-
-void if_even(struct matrix *matr)
-{
-    int sum, elem, k = 0, km = 0;
+    int sum, elem, k = 0, km = 0, flag = 0;
     static int a[N * N];
 
     for (int i = 0; i < matr->m; i++)
@@ -112,7 +91,10 @@ void if_even(struct matrix *matr)
                 elem /= 10;
             }
             if (sum > 10)
+            {
                 a[k++] = matr->a[i][j];
+                flag = 1;
+            }
             else
                 a[k++] = 0;
         }
@@ -138,6 +120,7 @@ void if_even(struct matrix *matr)
             }
         }
     }
+    return flag;
 }
 
 void display(struct matrix matr)
@@ -160,8 +143,14 @@ int main()
         return INPUT_ERR;
     else
     {
-        if_even(&matr);
-        display(matr);
-        return OK;
+        if (if_even(&matr))
+        {
+            display(matr);
+            return OK;
+        }
+        else
+        {
+            return ARG_COUNT_ERR;
+        }
     }
 }
