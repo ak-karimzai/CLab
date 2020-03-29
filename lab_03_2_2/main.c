@@ -95,11 +95,11 @@ void append_1(struct matrix *mat, int k)
 }
 
 
-int if_even(struct matrix *matr)
+void if_even(struct matrix *matr)
 {
     int flag;
     int sum, elem;
-    static int b[N];
+
     for (int i = 0; i < matr->m; i++)
     {
         flag = 0;
@@ -138,6 +138,7 @@ void display(struct matrix matr)
 int main()
 {
     struct matrix matr;
+
     if (read_matrix(&matr))
         return INPUT_ERR;
     else
