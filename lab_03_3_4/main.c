@@ -95,18 +95,37 @@ void swap_matr(struct matrix *mtr)
 {
     int m = 0, mn = mtr->n - 1;
     int temp[N], start = 0, stop = mtr->n;
-    while (m != mn)
+    if (mtr->n % 2 == 0)
     {
-        for (int i = start; i < stop; i++)
+        do
         {
-            temp[i] = mtr->a[m][i];
-            mtr->a[m][i] = mtr->a[mn][i];
-            mtr->a[mn][i] = temp[i];
-        }
-        m++;
-        mn--;
-        start++;
-        stop--;
+            for (int i = start; i < stop; i++)
+            {
+                temp[i] = mtr->a[m][i];
+                mtr->a[m][i] = mtr->a[mn][i];
+                mtr->a[mn][i] = temp[i];
+            }
+            m++;
+            mn--;
+            start++;
+            stop--;
+        } while(start != (mtr->n / 2) + 1);
+    }
+    else
+    {
+        do
+        {
+            for (int i = start; i < stop; i++)
+            {
+                temp[i] = mtr->a[m][i];
+                mtr->a[m][i] = mtr->a[mn][i];
+                mtr->a[mn][i] = temp[i];
+            }
+            m++;
+            mn--;
+            start++;
+            stop--;
+        } while (m != mn);
     }
 }
 
