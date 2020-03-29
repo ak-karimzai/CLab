@@ -17,8 +17,8 @@
 struct matrix 
 {
     int a[N][N];
-    int n;
     int m;
+    int n;
 };
 
 int read_matrix(struct matrix *mtr)
@@ -27,7 +27,7 @@ int read_matrix(struct matrix *mtr)
     int arg_count = 0;
 
     printf("Enter dimension:\n");
-    rc = scanf("%d%d", &mtr->n, &mtr->m);
+    rc = scanf("%d%d", &mtr->m, &mtr->n);
 
     if (rc == 2)
     {
@@ -80,6 +80,7 @@ void transp(struct matrix *mtr)
 {
     struct matrix matr;
     matr.n = mtr->n;
+    matr.m = mtr->m;
     for (int i = 0; i < mtr->n; i++)
     {
         for (int j = 0; j < mtr->m; j++)
