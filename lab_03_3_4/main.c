@@ -18,6 +18,7 @@ struct matrix
 {
     int a[N][N];
     int n;
+    int m;
 };
 
 int read_matrix(struct matrix *mtr)
@@ -26,11 +27,11 @@ int read_matrix(struct matrix *mtr)
     int arg_count = 0;
 
     printf("Enter dimension:\n");
-    rc = scanf("%d", &mtr->n);
+    rc = scanf("%d%d", &mtr->n, &mtr->m);
 
-    if (rc == 1)
+    if (rc == 2)
     {
-        if (mtr->n > N || mtr->n < 1)
+        if (mtr->n > N || mtr->n < 1 || mtr->n != mtr->m)
         {
             printf("Matrix size input error");
 
@@ -40,7 +41,7 @@ int read_matrix(struct matrix *mtr)
         {
             for (int i = 0; i < mtr->n; ++i)
             {
-                for (int j = 0; j < mtr->n; j++)
+                for (int j = 0; j < mtr->m; j++)
                 {
                     rc = scanf("%d", &matrix_el);
                     if (rc == 1)
@@ -57,7 +58,7 @@ int read_matrix(struct matrix *mtr)
                 }
             }
 
-            if (arg_count != (mtr->n) * (mtr->n))
+            if (arg_count != (mtr->n) * (mtr->m))
             {
                 printf("Arguments' count error");
 
@@ -81,7 +82,7 @@ void transp(struct matrix *mtr)
     matr.n = mtr->n;
     for (int i = 0; i < mtr->n; i++)
     {
-        for (int j = 0; j < mtr->n; j++)
+        for (int j = 0; j < mtr->m; j++)
         {
             matr.a[i][j] = mtr->a[j][i];
         }
@@ -112,7 +113,7 @@ void display(struct matrix mtr)
 {
     for (int i = 0; i < mtr.n; i++)
     {
-        for (int j = 0; j < mtr.n; j++)
+        for (int j = 0; j < mtr.m; j++)
         {
             printf("%d ", mtr.a[i][j]);
         }
