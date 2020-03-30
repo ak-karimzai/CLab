@@ -1,0 +1,48 @@
+Test format:
+Input
+---
+Output
+
+3 a
+---
+Input error
+
+a 4
+---
+Input error
+
+11 10
+---
+Input error
+
+4 12
+---
+Input error
+
+3 3
+1 2 a
+---
+Input error
+
+3 3
+1 2 3
+1 2 3
+1 2 3
+---
+Unsoccessful
+
+2 3
+92 93 1
+65 77 55
+---
+65 77 0
+92 93 0
+
+3 3
+99 88 1
+33 23 99
+77 3 77
+---
+77 0 77
+99 88 0
+0 0 99
