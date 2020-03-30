@@ -74,7 +74,7 @@ void swap(int *x, int *y)
     *y = temp;
 }
 
-void sort_matrix(int a[N + 1][N + 1], int m, int n)
+void sort_matrix(int a[N][N], int m, int n)
 {
     static int b[N];
     int sum;
