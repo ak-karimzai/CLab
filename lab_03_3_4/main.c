@@ -57,7 +57,6 @@ int read_matrix(struct matrix *mtr)
                     }
                 }
             }
-
             if (arg_count != (mtr->n) * (mtr->m))
             {
                 printf("Arguments' count error");
@@ -95,7 +94,7 @@ void swap_matr(struct matrix *mtr)
 {
     int m = 0, mn = mtr->n - 1;
     int temp[N], start = 0, stop = mtr->n;
-    if (mtr->n % 2 == 0)
+    if ((mtr->n % 2 == 0) || mtr->n == 1)
     {
         do
         {
@@ -153,6 +152,7 @@ int main()
         swap_matr(&mtr);
         transp(&mtr);
         display(mtr);
+        //printf("success\n");
         return OK;
     }
 }
