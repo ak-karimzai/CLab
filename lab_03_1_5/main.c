@@ -99,7 +99,7 @@ int if_even(struct matrix *matr)
                 a[k++] = 0;
         }
     }
-    if (k)
+    if (flag == 1)
     {
         int i = 3;
         while (i != 0)
@@ -150,6 +150,7 @@ int main()
         }
         else
         {
+            printf("Unsoccessful\n");
             return ARG_COUNT_ERR;
         }
     }
