@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 #define OK 0
 #define SIZE_INPUT_ERR -1
@@ -81,9 +82,23 @@ int read_matrix(struct matrix *matr)
     }
 }
 
+int prime_number(int n)
+{
+    int i, flag = 1; 
+
+    for (i = 2; i <= sqrt(n); i++)
+    { 
+        if (n % i == 0)
+        {
+            flag = 0;  
+        }
+    }
+    return flag;
+}
+
 int if_even(struct matrix *matr)
 {
-    int sum, elem, k = 0, km = 0, flag = 0;
+    int sum, elem, k = 0, km = 0, flag = 0, flag_1 = 0;
     struct element ele[N * N];
 
     for (int i = 0; i < matr->m; i++)
@@ -97,17 +112,22 @@ int if_even(struct matrix *matr)
                 sum += elem % 10;
                 elem /= 10;
             }
-            if (sum > 10)
+            if (prime_number(matr->a[i][j]))
+            {
+                flag = 1;
+            }
+            else if (sum > 10)
             {
                 ele[k].i = i;
                 ele[k].j = j;
                 ele[k].x = matr->a[i][j];
                 k++;
-                flag = 1;
+                flag_1 = 1;
             }
+            
         }
     }
-    if (flag == 1)
+    if (flag_1)
     {
         int i = 3;
         while (i != 0)
