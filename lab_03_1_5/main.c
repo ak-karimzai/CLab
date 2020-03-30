@@ -85,7 +85,6 @@ int if_even(struct matrix *matr)
 {
     int sum, elem, k = 0, km = 0, flag = 0;
     static int a[N * N];
-    struct element ele[N * N];
 
     for (int i = 0; i < matr->m; i++)
     {
