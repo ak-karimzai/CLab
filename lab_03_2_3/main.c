@@ -48,6 +48,7 @@ int read_matrix(int a[N][N], int *const n, int *const m)
                     }
                 }
             }
+
             if (arg_count != (*n) * (*m))
             {
                 printf("Arguments' count error");
@@ -73,33 +74,6 @@ void swap(int *x, int *y)
     *y = temp;
 }
 
-void selectionSort(int arr[],int a[N][N], int n, int m) 
-{
-    int i, j, min_idx; 
-    n = sizeof(arr) / sizeof(arr[0]); 
-
-    for (i = 0; i < n-1; i++) 
-    {
-        min_idx = i; 
-        for (j = i+1; j < n; j++) 
-          if (arr[j] < arr[min_idx]) 
-            min_idx = j;
-        for (int j = 0; j < m; j++)
-            swap(&a[min_idx][j], &a[i][j]); 
-    }
-}
-
-void bubbleSort(int arr[],int a[N][N] ,int n ,int m) 
-{ 
-   int i, j; 
-   for (i = 0; i < n-1; i++)       
-  
-       // Last i elements are already in place    
-       for (j = 0; j < n-i-1; j++)  
-           if (arr[j] > arr[j+1]) 
-              swap(&a[j], &a[j+1]); 
-} 
-
 void sort_matrix(int a[N][N], int m, int n)
 {
     static int b[N];
@@ -113,8 +87,20 @@ void sort_matrix(int a[N][N], int m, int n)
         }
         b[i] = sum;
     }
-    selectionSort(b, a, m, n);
-    bubbleSort(b, a, m, n);
+    for (int i = 0; i < m - 1; i++)
+    {
+        for (int j = 0; j < m - i - 1; j++)
+        {
+            if (b[j] > b[j + 1])
+            {
+                swap(&b[j], &b[j + 1]);
+                for (int k = 0; k < n; k++)
+                {
+                    swap(&a[j][k], &a[j + 1][k]);
+                }
+            }
+        }
+    }
 }
 
 void display(int a[N][N], int m, int n)
