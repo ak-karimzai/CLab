@@ -124,7 +124,6 @@ int if_even(struct matrix *matr)
                 k++;
                 flag_1 = 1;
             }
-            
         }
     }
     if (flag_1)
@@ -174,7 +173,7 @@ int main()
         return INPUT_ERR;
     else
     {
-        if (if_even(&matr))
+        if (!if_even(&matr))
         {
             display(matr);
             return OK;
