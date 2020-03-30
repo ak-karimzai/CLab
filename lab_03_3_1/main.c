@@ -48,6 +48,14 @@ int read_matrix(int a[N][N], int *const n, int *const m)
                     }
                 }
             }
+            if (arg_count != (*n) * (*m))
+            {
+                printf("Arguments' count error");
+
+                return ARG_COUNT_ERR;
+            }
+            else
+                return OK;
         }
     }
     else
