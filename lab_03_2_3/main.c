@@ -12,7 +12,7 @@
 
 #define N 10
 
-int read_matrix(int a[N + 1][N + 1], int *const n, int *const m)
+int read_matrix(int a[N][N], int *const n, int *const m)
 {
     int rc, matrix_el;
     int arg_count = 0;
@@ -102,7 +102,7 @@ void sort_matrix(int a[N + 1][N + 1], int m, int n)
     }
 }
 
-void display(int a[N + 1][N + 1], int m, int n)
+void display(int a[N][N], int m, int n)
 {
     for (int i = 0; i < m; i++)
     {
@@ -116,7 +116,7 @@ void display(int a[N + 1][N + 1], int m, int n)
 
 int main()
 {
-    int a[N + 1][N + 1], m, n;
+    int a[N][N], m, n;
 
     if (read_matrix(a, &m, &n))
         return INPUT_ERR;
