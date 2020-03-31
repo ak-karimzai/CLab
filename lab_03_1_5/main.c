@@ -108,24 +108,27 @@ int if_even(struct matrix *matr)
             }
         }
     }
-    int i = 3;
-    while (i != 0)
+    if (flag)
     {
-        int first = ele[k - 1].x;
-        for (int j = k; j > 0; j--)
+        int i = 3;
+        while (i != 0)
         {
-            ele[j].x = ele[j - 1].x;
-        }
-        ele[0].x = first;
-        i--;
-    }
-    for (int i = 0; i < matr->m; i++)
-    {
-        for (int j = 0; j < matr->n; j++)
-        {
-            if (i == ele[km].i && j == ele[km].j)
+            int first = ele[k - 1].x;
+            for (int j = k; j > 0; j--)
             {
-                matr->a[i][j] = ele[km++].x;
+                ele[j].x = ele[j - 1].x;
+            }
+            ele[0].x = first;
+            i--;
+        }
+        for (int i = 0; i < matr->m; i++)
+        {
+            for (int j = 0; j < matr->n; j++)
+            {
+                if (i == ele[km].i && j == ele[km].j)
+                {
+                    matr->a[i][j] = ele[km++].x;
+                }
             }
         }
     }
@@ -154,6 +157,7 @@ int main()
     {
         if (if_even(&matr) == 0)
         {
+            display(matr);
             return INPUT_ERR;
         }
     }
