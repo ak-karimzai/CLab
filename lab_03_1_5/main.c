@@ -107,28 +107,25 @@ int if_even(struct matrix *mtr)
             }
         }
     }
-    if (flag)
+    int i = 3;
+    while (i != 0)
     {
-        int i = 3;
-        while (i != 0)
+        int first = ele[0].x;
+        for (int j = 0; j < k - 1; j++)
         {
-            int first = ele[0].x;
-            for (int j = 0; j < k - 1; j++)
-            {
-                ele[j].x = ele[j + 1].x;
-            }
-            ele[k - 1].x = first;
-            i--;
+            ele[j].x = ele[j + 1].x;
         }
-        k = 0;
-        for (int i = 0; i < mtr->m; i++)
+        ele[k - 1].x = first;
+        i--;
+    }
+    k = 0;
+    for (int i = 0; i < mtr->m; i++)
+    {
+        for (int j = 0; j < mtr->n; j++)
         {
-            for (int j = 0; j < mtr->n; j++)
+            if (i == ele[k].i && j == ele[k].j)
             {
-                if (i == ele[k].i && j == ele[k].j)
-                {
-                    mtr->a[i][j] = ele[k++].x;
-                }
+                mtr->a[i][j] = ele[k++].x;
             }
         }
     }
