@@ -37,7 +37,7 @@ int read_matrix(struct matrix *matr)
 
     if (rc == 2)
     {
-        if (matr->m > N || matr->m < 1 || matr->n > N || matr->n < 1)
+        if (matr->m > N || matr->m < 1 || matr->n > N || matr->n < 1 || matr->m != matr->n)
         {
             printf("Matrix size input error");
 
