@@ -152,7 +152,7 @@ int main()
         return INPUT_ERR;
     else
     {
-        if (!if_even(&matr))
+        if (if_even(&matr) == 0)
         {
             return INPUT_ERR;
         }
