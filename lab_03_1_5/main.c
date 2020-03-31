@@ -93,9 +93,9 @@ int if_even(struct matrix *mtr)
         {
             sum = 0;
             elem = mtr->a[i][j];
-            while (elem)
+            while (elem != 0)
             {
-                sum = elem % 10;
+                sum += elem % 10;
                 elem /= 10;
             }
             if (sum > 10)
@@ -113,11 +113,12 @@ int if_even(struct matrix *mtr)
         while (i != 0)
         {
             int first = ele[0].x;
-            for (int j = 0; j < k; j++)
+            for (int j = 0; j < k - 1; j++)
             {
                 ele[j].x = ele[j + 1].x;
             }
             ele[k - 1].x = first;
+            i--;
         }
         k = 0;
         for (int i = 0; i < mtr->m; i++)
@@ -154,7 +155,9 @@ int main()
         return INPUT_ERR;
     else
     {
-        if (if_even(&matr))
+        if_even(&matr);
+        display(matr);
+        /*if (if_even(&matr))
         {
             display(matr);
             return OK;
@@ -162,6 +165,6 @@ int main()
         else
         {
             return ARG_COUNT_ERR;
-        }
+        }*/
     }
 }
