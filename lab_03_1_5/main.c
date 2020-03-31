@@ -160,5 +160,6 @@ int main()
             display(matr);
             return OK;
         }
+        return ARG_COUNT_ERR;
     }
 }
