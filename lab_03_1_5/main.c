@@ -82,20 +82,6 @@ int read_matrix(struct matrix *matr)
     }
 }
 
-int prime_number(int n)
-{
-    int i, flag = 1; 
-
-    for (i = 2; i <= sqrt(n); i++)
-    { 
-        if (n % i == 0)
-        {
-            flag = 0;  
-        }
-    }
-    return flag;
-}
-
 int if_even(struct matrix *matr)
 {
     int sum, elem, k = 0, km = 0, flag = 0, flag_1 = 0;
@@ -112,41 +98,34 @@ int if_even(struct matrix *matr)
                 sum += elem % 10;
                 elem /= 10;
             }
-            if (prime_number(matr->a[i][j]))
-            {
-                flag = 1;
-            }
-            else if (sum > 10)
+            if (sum > 10)
             {
                 ele[k].i = i;
                 ele[k].j = j;
                 ele[k].x = matr->a[i][j];
                 k++;
-                flag_1 = 1;
+                flag = 1;
             }
         }
     }
-    if (flag_1)
+    int i = 3;
+    while (i != 0)
     {
-        int i = 3;
-        while (i != 0)
+        int first = ele[k - 1].x;
+        for (int j = k; j > 0; j--)
         {
-            int first = ele[k - 1].x;
-            for (int j = k; j > 0; j--)
-            {
-                ele[j].x = ele[j - 1].x;
-            }
-            ele[0].x = first;
-            i--;
+            ele[j].x = ele[j - 1].x;
         }
-        for (int i = 0; i < matr->m; i++)
+        ele[0].x = first;
+        i--;
+    }
+    for (int i = 0; i < matr->m; i++)
+    {
+        for (int j = 0; j < matr->n; j++)
         {
-            for (int j = 0; j < matr->n; j++)
+            if (i == ele[km].i && j == ele[km].j)
             {
-                if (i == ele[km].i && j == ele[km].j)
-                {
-                    matr->a[i][j] = ele[km++].x;
-                }
+                matr->a[i][j] = ele[km++].x;
             }
         }
     }
@@ -173,14 +152,14 @@ int main()
         return INPUT_ERR;
     else
     {
-        if (!if_even(&matr))
+        if (if_even(&matr))
         {
             display(matr);
             return OK;
         }
         else
         {
-            printf("Unsoccessful\n");
+            printf("Unsuccessful\n");
             return ARG_COUNT_ERR;
         }
     }
