@@ -155,11 +155,6 @@ int main()
         return INPUT_ERR;
     else
     {
-        if (if_even(&matr))
-        {
-            display(matr);
-            return OK;
-        }
-        return OK;
+        return ARG_COUNT_ERR;
     }
 }
