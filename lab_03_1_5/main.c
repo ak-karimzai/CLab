@@ -84,7 +84,7 @@ int read_matrix(struct matrix *matr)
 
 int if_even(struct matrix *matr)
 {
-    int sum, elem, k = 0, km = 0, flag = 0, flag_1 = 0;
+    int sum, elem, k = 0, km = 0, flag = 0;
     struct element ele[N * N];
 
     for (int i = 0; i < matr->m; i++)
