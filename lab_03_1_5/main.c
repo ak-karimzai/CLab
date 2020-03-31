@@ -155,10 +155,11 @@ int main()
         return INPUT_ERR;
     else
     {
-        if (if_even(&matr) == 0)
+        if (if_even(&matr))
         {
             display(matr);
-            return INPUT_ERR;
+            return OK;
         }
+        return INPUT_ERR;
     }
 }
