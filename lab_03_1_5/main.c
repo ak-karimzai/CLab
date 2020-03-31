@@ -114,7 +114,7 @@ int if_even(struct matrix *matr)
         while (i != 0)
         {
             int first = ele[0].x;
-            for (int j = 0; j < k; j++)
+            for (int j = 0; j < k - 1; j++)
             {
                 ele[j].x = ele[j + 1].x;
             }
@@ -155,9 +155,11 @@ int main()
         return INPUT_ERR;
     else
     {
-        if (!if_even(&matr))
+        if (if_even(&matr))
         {
-            return ARG_COUNT_ERR;
+            display(matr);
+            return OK;
         }
+        return ARG_COUNT_ERR;
     }
 }
