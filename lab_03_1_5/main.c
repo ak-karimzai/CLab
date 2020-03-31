@@ -37,7 +37,7 @@ int read_matrix(struct matrix *matr)
 
     if (rc == 2)
     {
-        if (matr->m > N || matr->m < 1 || matr->n > N || matr->n < 1 || matr->m != matr->n)
+        if (matr->m > N || matr->m < 1 || matr->n > N || matr->n < 1)
         {
             printf("Matrix size input error");
 
@@ -113,12 +113,12 @@ int if_even(struct matrix *matr)
         int i = 3;
         while (i != 0)
         {
-            int first = ele[k - 1].x;
-            for (int j = k; j > 0; j--)
+            int first = ele[0].x;
+            for (int j = 0; j < k; j++)
             {
-                ele[j].x = ele[j - 1].x;
+                ele[j].x = ele[j + 1].x;
             }
-            ele[0].x = first;
+            ele[k - 1].x = first;
             i--;
         }
         for (int i = 0; i < matr->m; i++)
