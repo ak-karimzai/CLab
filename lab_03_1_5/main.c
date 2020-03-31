@@ -157,7 +157,7 @@ int main()
     {
         if (!if_even(&matr))
         {
-            return OK;
+            return ARG_COUNT_ERR;
         }
     }
 }
