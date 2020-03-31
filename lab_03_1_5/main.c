@@ -102,7 +102,7 @@ int if_even(struct matrix *mtr)
             {
                 ele[k].i = i;
                 ele[k].j = j;
-                ele[k++].x = a[i][j];
+                ele[k++].x = mtr->a[i][j];
                 flag = 1;
             }
         }
@@ -115,7 +115,7 @@ int if_even(struct matrix *mtr)
             int first = ele[0].x;
             for (int j = 0; j < k; j++)
             {
-                ele[j].x = ele[j + 1];
+                ele[j].x = ele[j + 1].x;
             }
             ele[k - 1].x = first;
         }
@@ -126,7 +126,7 @@ int if_even(struct matrix *mtr)
             {
                 if (i == ele[k].i && j == ele[k].j)
                 {
-                    mtr->a[i][j] = ele[k++].x
+                    mtr->a[i][j] = ele[k++].x;
                 }
             }
         }
@@ -161,7 +161,7 @@ int main()
         }
         else
         {
-            return ARG_COUNT_ERR
+            return ARG_COUNT_ERR;
         }
     }
 }
