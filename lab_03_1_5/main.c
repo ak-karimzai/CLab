@@ -160,6 +160,6 @@ int main()
             display(matr);
             return OK;
         }
-        return INPUT_ERR;
+        return ARG_COUNT_ERR;
     }
 }
