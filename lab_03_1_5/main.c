@@ -152,15 +152,8 @@ int main()
         return INPUT_ERR;
     else
     {
-        if (!if_even(&matr))
-        {
-            display(matr);
-            return OK;
-        }
-        else
-        {
-            printf("Unsuccessful\n");
-            return ARG_COUNT_ERR;
-        }
+        if_even(&matr);
+        display(matr);
+        return OK;
     }
 }
