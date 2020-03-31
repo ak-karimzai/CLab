@@ -155,7 +155,12 @@ int main()
         return INPUT_ERR;
     else
     {
-        display(matr);
-        return OK;
+        if (if_even(&matr))
+        {
+            display(matr);
+            return OK;
+        }
+        printf("3");
+        return ARG_COUNT_ERR;
     }
 }
