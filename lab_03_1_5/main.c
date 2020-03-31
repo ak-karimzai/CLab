@@ -98,7 +98,7 @@ int if_even(struct matrix *matr)
                 sum += elem % 10;
                 elem /= 10;
             }
-            if (sum >= 10)
+            if (sum > 10)
             {
                 ele[k].i = i;
                 ele[k].j = j;
@@ -152,7 +152,7 @@ int main()
         return INPUT_ERR;
     else
     {
-        if (if_even(&matr))
+        if (!if_even(&matr))
         {
             display(matr);
             return OK;
