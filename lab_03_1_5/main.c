@@ -82,28 +82,27 @@ int read_matrix(struct matrix *matr)
     }
 }
 
-int if_even(struct matrix *matr)
+int if_even(struct matrix *mtr)
 {
-    int sum, elem, k = 0, km = 0, flag = 0;
+    int flag = 0, k = 0, elem, sum;
     struct element ele[N * N];
 
-    for (int i = 0; i < matr->m; i++)
+    for (int i = 0; i < mtr->m; i++)
     {
-        for (int j = 0; j < matr->n; j++)
+        for (int j = 0; j < mtr->n; j++)
         {
             sum = 0;
-            elem = matr->a[i][j];
-            while (elem != 0)
+            elem = mtr->a[i][j];
+            while (elem)
             {
-                sum += elem % 10;
+                sum = elem % 10;
                 elem /= 10;
             }
             if (sum > 10)
             {
                 ele[k].i = i;
                 ele[k].j = j;
-                ele[k].x = matr->a[i][j];
-                k++;
+                ele[k++].x = a[i][j];
                 flag = 1;
             }
         }
@@ -114,20 +113,20 @@ int if_even(struct matrix *matr)
         while (i != 0)
         {
             int first = ele[0].x;
-            for (int j = 0; j < k - 1; j++)
+            for (int j = 0; j < k; j++)
             {
-                ele[j].x = ele[j + 1].x;
+                ele[j].x = ele[j + 1];
             }
             ele[k - 1].x = first;
-            i--;
         }
-        for (int i = 0; i < matr->m; i++)
+        k = 0;
+        for (int i = 0; i < mtr->m; i++)
         {
-            for (int j = 0; j < matr->n; j++)
+            for (int j = 0; j < mtr->n; j++)
             {
-                if (i == ele[km].i && j == ele[km].j)
+                if (i == ele[k].i && j == ele[k].j)
                 {
-                    matr->a[i][j] = ele[km++].x;
+                    mtr->a[i][j] = ele[k++].x
                 }
             }
         }
@@ -155,6 +154,14 @@ int main()
         return INPUT_ERR;
     else
     {
-        return ARG_COUNT_ERR;
+        if (if_even(&matr))
+        {
+            display(matr);
+            return OK;
+        }
+        else
+        {
+            return ARG_COUNT_ERR
+        }
     }
 }
