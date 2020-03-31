@@ -160,7 +160,6 @@ int main()
             display(matr);
             return OK;
         }
-        printf("3");
-        return ARG_COUNT_ERR;
+        return OK;
     }
 }
