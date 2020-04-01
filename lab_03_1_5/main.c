@@ -96,13 +96,11 @@ int if_even(struct matrix *mtr)
         {
             if (sum_element(mtr->a[i][j]) > 10)
             {
-                printf("%d \n", sum_element(mtr->a[i][j]));
                 ele[k++] = mtr->a[i][j];
                 flag = 1;
             }
         }
     }
-    //for (int i = 0; i < k; i++) printf("%d \n", ele[i]);
     int i = 3;
     while (i != 0)
     {
