@@ -8,9 +8,6 @@
 #define ARG_COUNT_ERR -4
 #define INPUT_ERR -5
 
-#define ORDERED 1
-#define NOT_ORDERED 0
-
 #define N 10
 
 struct matrix
@@ -18,13 +15,6 @@ struct matrix
     int a[N][N];
     int m;
     int n;
-};
-
-struct element
-{
-    int i;
-    int j;
-    int x;
 };
 
 int read_matrix(struct matrix *matr)
@@ -82,40 +72,46 @@ int read_matrix(struct matrix *matr)
     }
 }
 
+int sum_element(int n)
+{
+    if (n < 0)
+        n = n * (-1);
+    int sum = 0;
+    while (n != 0)
+    {
+        sum += (n % 10);
+        n /= 10;
+    }
+    return sum;
+}
+
 int if_even(struct matrix *mtr)
 {
-    int flag = 0, k = 0, elem, sum;
-    struct element ele[N * N];
+    int flag = 0, k = 0, sum = 0;
+    int ele[N * N];
 
     for (int i = 0; i < mtr->m; i++)
     {
         for (int j = 0; j < mtr->n; j++)
         {
-            sum = 0;
-            elem = mtr->a[i][j];
-            while (elem != 0)
+            if (sum_element(mtr->a[i][j]) > 10)
             {
-                sum += elem % 10;
-                elem /= 10;
-            }
-            if (sum > 10)
-            {
-                ele[k].i = i;
-                ele[k].j = j;
-                ele[k++].x = mtr->a[i][j];
+                printf("%d \n", sum_element(mtr->a[i][j]));
+                ele[k++] = mtr->a[i][j];
                 flag = 1;
             }
         }
     }
+    //for (int i = 0; i < k; i++) printf("%d \n", ele[i]);
     int i = 3;
     while (i != 0)
     {
-        int first = ele[0].x;
+        int first = ele[0];
         for (int j = 0; j < k - 1; j++)
         {
-            ele[j].x = ele[j + 1].x;
+            ele[j] = ele[j + 1];
         }
-        ele[k - 1].x = first;
+        ele[k - 1] = first;
         i--;
     }
     k = 0;
@@ -123,9 +119,9 @@ int if_even(struct matrix *mtr)
     {
         for (int j = 0; j < mtr->n; j++)
         {
-            if (i == ele[k].i && j == ele[k].j)
+            if (sum_element(mtr->a[i][j]) > 10)
             {
-                mtr->a[i][j] = ele[k++].x;
+                mtr->a[i][j] = ele[k++];
             }
         }
     }
