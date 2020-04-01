@@ -87,7 +87,7 @@ int sum_element(int n)
 
 int if_even(struct matrix *mtr)
 {
-    int flag = 0, k = 0, sum = 0;
+    int flag = 0, k = 0;
     int ele[N * N];
 
     for (int i = 0; i < mtr->m; i++)
