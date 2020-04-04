@@ -14,7 +14,7 @@ enum error_type
 
 int result = ok;
 
-int read_matrix(int a[N][N], int *const m, int *const n)
+void read_matrix(int a[N][N], int *const m, int *const n)
 {
     int rc, matrix_el;
     int arg_count = 0;
@@ -26,7 +26,7 @@ int read_matrix(int a[N][N], int *const m, int *const n)
     {
         if (*n > N || *n < 1 || *m > N || *m < 1)
         {
-            return size_input_err;
+            result = size_input_err;
             printf("input error");
         }
         else
@@ -43,14 +43,14 @@ int read_matrix(int a[N][N], int *const m, int *const n)
                     }
                     else
                     {
-                        return elemnt_input_err;
+                        result = elemnt_input_err;
                         printf("input error");
                     }
                 }
             }
             if (arg_count != (*n) * (*m))
             {
-                return arg_count_err;
+                result = arg_count_err;
                 printf("input error");
             }
             else
@@ -59,7 +59,7 @@ int read_matrix(int a[N][N], int *const m, int *const n)
     }
     else
     {
-        return clear_input_err;
+        result = clear_input_err;
         printf("input error");
     }
 }
@@ -79,7 +79,7 @@ int array_from_matrix(int a[N][N], int *const b, const int m, const int n)
     if (m == 1)
     {
         for (int i = 0; i < m; ++i)
-            b[i] = NOT_ORDERED;
+            b[i] = 0;
     }
     else
     {
@@ -103,7 +103,7 @@ int array_from_matrix(int a[N][N], int *const b, const int m, const int n)
         }
     }
 
-    return OK;
+    return 0;
 }
 
 int main()
@@ -111,7 +111,7 @@ int main()
     int a[N][N], m, n;
     int b[N];
 
-    result(a, &m, &n);
+    read_matrix(a, &m, &n);
     if (result)
         return result;
     else

@@ -14,7 +14,7 @@ enum error_type
 
 int result = ok;
 
-int read_matrix(int a[N][N], int *const m, int *const n)
+void read_matrix(int a[N][N], int *const m, int *const n)
 {
     int rc, matrix_el;
     int arg_count = 0;
@@ -26,7 +26,7 @@ int read_matrix(int a[N][N], int *const m, int *const n)
     {
         if (*n > N || *n < 1 || *m > N || *m < 1)
         {
-            return size_input_err;
+            result = size_input_err;
             printf("input error");
         }
         else
@@ -43,14 +43,14 @@ int read_matrix(int a[N][N], int *const m, int *const n)
                     }
                     else
                     {
-                        return elemnt_input_err;
+                        result = elemnt_input_err;
                         printf("input error");
                     }
                 }
             }
             if (arg_count != (*n) * (*m))
             {
-                return arg_count_err;
+                result = arg_count_err;
                 printf("input error");
             }
             else
@@ -59,7 +59,7 @@ int read_matrix(int a[N][N], int *const m, int *const n)
     }
     else
     {
-        return clear_input_err;
+        result = clear_input_err;
         printf("input error");
     }
 }

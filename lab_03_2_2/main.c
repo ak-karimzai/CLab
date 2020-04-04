@@ -14,43 +14,51 @@ enum error_type
 
 int result = ok;
 
-int read_matrix(int a[N][N], int *const m, int *const n)
+struct matrix
+{
+    int a[N][N];
+    int m;
+    int n;
+};
+
+void read_matrix(struct matrix *matr)
 {
     int rc, matrix_el;
     int arg_count = 0;
 
     printf("Enter dimensions':\n");
-    rc = scanf("%d%d", m, n);
+    rc = scanf("%d%d", &matr->m, &matr->n);
 
     if (rc == 2)
     {
-        if (*n > N || *n < 1 || *m > N || *m < 1)
+        if (matr->m > N || matr->m < 1 || matr->n > N || matr->n < 1)
         {
-            return size_input_err;
+            result = size_input_err;
             printf("input error");
         }
         else
         {
-            for (int i = 0; i < *m; ++i)
+            for (int i = 0; i < matr->m; ++i)
             {
-                for (int j = 0; j < *n; j++)
+                for (int j = 0; j < matr->n; j++)
                 {
                     rc = scanf("%d", &matrix_el);
                     if (rc == 1)
                     {
-                        a[i][j] = matrix_el;
+                        matr->a[i][j] = matrix_el;
                         arg_count++;
                     }
                     else
                     {
-                        return elemnt_input_err;
+                        result = elemnt_input_err;
                         printf("input error");
                     }
                 }
             }
-            if (arg_count != (*n) * (*m))
+
+            if (arg_count != matr->m * matr->n)
             {
-                return arg_count_err;
+                result = arg_count_err;
                 printf("input error");
             }
             else
@@ -59,7 +67,7 @@ int read_matrix(int a[N][N], int *const m, int *const n)
     }
     else
     {
-        return clear_input_err;
+        result = clear_input_err;
         printf("input error");
     }
 }
