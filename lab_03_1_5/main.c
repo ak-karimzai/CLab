@@ -1,14 +1,19 @@
 #include <stdio.h>
 #include <math.h>
 
-#define OK 0
-#define SIZE_INPUT_ERR -1
-#define CLEAR_INPUT_ERR -2
-#define ELEMENT_INPUT_ERR -3
-#define ARG_COUNT_ERR -4
-#define INPUT_ERR -5
-
 #define N 10
+
+enum error_type
+{
+    ok,
+    size_input_err,
+    clear_input_err,
+    elemnt_input_err,
+    arg_count_err,
+    input_err
+};
+
+int result = ok;
 
 struct matrix
 {
@@ -17,7 +22,7 @@ struct matrix
     int n;
 };
 
-int read_matrix(struct matrix *matr)
+void read_matrix(struct matrix *matr)
 {
     int rc, matrix_el;
     int arg_count = 0;
@@ -29,9 +34,8 @@ int read_matrix(struct matrix *matr)
     {
         if (matr->m > N || matr->m < 1 || matr->n > N || matr->n < 1)
         {
-            printf("Matrix size input error");
-
-            return SIZE_INPUT_ERR;
+            result = size_input_err;
+            printf("input error");
         }
         else
         {
@@ -47,28 +51,25 @@ int read_matrix(struct matrix *matr)
                     }
                     else
                     {
-                        printf("Array element input error");
-
-                        return ELEMENT_INPUT_ERR;
+                        result = elemnt_input_err;
+                        printf("input error");
                     }
                 }
             }
 
             if (arg_count != matr->m * matr->n)
             {
-                printf("Arguments' count error");
-
-                return ARG_COUNT_ERR;
+                result = arg_count_err;
+                printf("input error");
             }
             else
-                return OK;
+                result = ok;
         }
     }
     else
     {
-        printf("Input clearance error");
-
-        return CLEAR_INPUT_ERR;
+        result = clear_input_err;
+        printf("input error");
     }
 }
 
@@ -142,18 +143,19 @@ int main()
 {
     struct matrix matr;
 
-    if (read_matrix(&matr))
-        return INPUT_ERR;
+    read_matrix(&matr);
+    if (result)
+        return input_err;
     else
     {
         if (if_even(&matr))
         {
             display(matr);
-            return OK;
+            return result;
         }
         else
         {
-            return ARG_COUNT_ERR;
+            return arg_count_err;
         }
     }
 }
