@@ -21,7 +21,7 @@ struct matrix
     int n;
 };
 
-int read_matrix(struct matrix *mtr)
+void read_matrix(struct matrix *mtr)
 {
     int rc, matrix_el;
     int arg_count = 0;
