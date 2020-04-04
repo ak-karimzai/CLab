@@ -1,38 +1,39 @@
 #include <stdio.h>
 
-#define OK 0
-#define SIZE_INPUT_ERR -1
-#define CLEAR_INPUT_ERR -2
-#define ELEMENT_INPUT_ERR -3
-#define ARG_COUNT_ERR -4
-#define INPUT_ERR -5
-
-#define ORDERED 1
-#define NOT_ORDERED 0
-
 #define N 10
 
-int read_matrix(int a[N][N], int *const n, int *const m)
+enum error_type
+{
+    ok,
+    size_input_err,
+    clear_input_err,
+    elemnt_input_err,
+    arg_count_err,
+    input_err
+};
+
+int result = ok;
+
+int read_matrix(int a[N][N], int *const m, int *const n)
 {
     int rc, matrix_el;
     int arg_count = 0;
 
     printf("Enter dimensions':\n");
-    rc = scanf("%d%d", n, m);
+    rc = scanf("%d%d", m, n);
 
     if (rc == 2)
     {
         if (*n > N || *n < 1 || *m > N || *m < 1)
         {
-            printf("Matrix size input error");
-
-            return SIZE_INPUT_ERR;
+            return size_input_err;
+            printf("input error");
         }
         else
         {
-            for (int i = 0; i < *n; ++i)
+            for (int i = 0; i < *m; ++i)
             {
-                for (int j = 0; j < *m; j++)
+                for (int j = 0; j < *n; j++)
                 {
                     rc = scanf("%d", &matrix_el);
                     if (rc == 1)
@@ -42,66 +43,63 @@ int read_matrix(int a[N][N], int *const n, int *const m)
                     }
                     else
                     {
-                        printf("Array element input error");
-
-                        return ELEMENT_INPUT_ERR;
+                        return elemnt_input_err;
+                        printf("input error");
                     }
                 }
             }
             if (arg_count != (*n) * (*m))
             {
-                printf("Arguments' count error");
-
-                return ARG_COUNT_ERR;
+                return arg_count_err;
+                printf("input error");
             }
             else
-                return OK;
+                result = ok;
         }
     }
     else
     {
-        printf("Input clearance error");
-
-        return CLEAR_INPUT_ERR;
+        return clear_input_err;
+        printf("input error");
     }
 }
 
-void display(const int *const a, const int n)
+void display(const int *const a, const int m)
 {
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < m; ++i)
     {
         printf("%d ", a[i]);
     }
 }
 
-int array_from_matrix(int a[N][N], int *const b, const int n, const int m)
+int array_from_matrix(int a[N][N], int *const b, const int m, const int n)
 {
     int is_ordered_up, is_ordered_down;
 
     if (m == 1)
     {
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < m; ++i)
             b[i] = NOT_ORDERED;
     }
     else
     {
-        for (int i = 0; i < n; ++i)
+        for (int i = 0; i < m; ++i)
         {
             is_ordered_up = 1;
             is_ordered_down = 1;
 
-            for (int j = 0; j < m - 1; ++j)
+            for (int j = 0; j < n - 1; ++j)
                 if (a[i][j] <= a[i][j + 1])
                     is_ordered_up++;
 
-            for (int j = 0; j < m - 1; ++j)
+            for (int j = 0; j < n - 1; ++j)
                 if (a[i][j] >= a[i][j + 1])
                     is_ordered_down++;
 
-            if (is_ordered_up == m || is_ordered_down == m)
-                b[i] = ORDERED;
+            if (is_ordered_up == n || is_ordered_down == n)
+                b[i] = 1;
             else
-                b[i] = NOT_ORDERED;
+                b[i] = 0;
         }
     }
 
@@ -110,15 +108,16 @@ int array_from_matrix(int a[N][N], int *const b, const int n, const int m)
 
 int main()
 {
-    int a[N][N], n, m;
+    int a[N][N], m, n;
     int b[N];
 
-    if (read_matrix(a, &n, &m))
-        return INPUT_ERR;
+    result(a, &m, &n);
+    if (result)
+        return result;
     else
     {
-        array_from_matrix(a, b, n, m);
-        display(b, n);
-        return OK;
+        array_from_matrix(a, b, m, n);
+        display(b, m);
+        return result;
     }
 }

@@ -1,76 +1,66 @@
 #include <stdio.h>
 
-#define OK 0
-#define SIZE_INPUT_ERR -1
-#define CLEAR_INPUT_ERR -2
-#define ELEMENT_INPUT_ERR -3
-#define ARG_COUNT_ERR -4
-#define INPUT_ERR -5
-
-#define ORDERED 1
-#define NOT_ORDERED 0
-
 #define N 10
 
-struct matrix
+enum error_type
 {
-    int a[N][N];
-    int m;
-    int n;
+    ok,
+    size_input_err,
+    clear_input_err,
+    elemnt_input_err,
+    arg_count_err,
+    input_err
 };
 
-int read_matrix(struct matrix *matr)
+int result = ok;
+
+int read_matrix(int a[N][N], int *const m, int *const n)
 {
     int rc, matrix_el;
     int arg_count = 0;
 
     printf("Enter dimensions':\n");
-    rc = scanf("%d%d", &matr->m, &matr->n);
+    rc = scanf("%d%d", m, n);
 
     if (rc == 2)
     {
-        if (matr->m > N || matr->m < 1 || matr->n > N || matr->n < 1)
+        if (*n > N || *n < 1 || *m > N || *m < 1)
         {
-            printf("Matrix size input error");
-
-            return SIZE_INPUT_ERR;
+            return size_input_err;
+            printf("input error");
         }
         else
         {
-            for (int i = 0; i < matr->m; ++i)
+            for (int i = 0; i < *m; ++i)
             {
-                for (int j = 0; j < matr->n; j++)
+                for (int j = 0; j < *n; j++)
                 {
                     rc = scanf("%d", &matrix_el);
                     if (rc == 1)
                     {
-                        matr->a[i][j] = matrix_el;
+                        a[i][j] = matrix_el;
                         arg_count++;
                     }
                     else
                     {
-                        printf("Array element input error");
-
-                        return ELEMENT_INPUT_ERR;
+                        return elemnt_input_err;
+                        printf("input error");
                     }
                 }
             }
-
-            if (arg_count != matr->m * matr->n)
+            if (arg_count != (*n) * (*m))
             {
-                printf("Arguments' count error");
-
-                return ARG_COUNT_ERR;
+                return arg_count_err;
+                printf("input error");
             }
             else
-                return OK;
+                result = ok;
         }
     }
     else
     {
-        printf("Input clearance error");
-
-        return CLEAR_INPUT_ERR;
+        return clear_input_err;
+        printf("input error");
     }
 }
 
@@ -139,12 +129,13 @@ int main()
 {
     struct matrix matr;
 
-    if (read_matrix(&matr))
-        return INPUT_ERR;
+    read_matrix(&matr);
+    if (result)
+        return result;
     else
     {
         if_even(&matr);
         display(matr);
-        return OK;
+        return result;
     }
 }

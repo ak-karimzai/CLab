@@ -1,38 +1,39 @@
 #include <stdio.h>
 
-#define OK 0
-#define SIZE_INPUT_ERR -1
-#define CLEAR_INPUT_ERR -2
-#define ELEMENT_INPUT_ERR -3
-#define ARG_COUNT_ERR -4
-#define INPUT_ERR -5
-
-#define ORDERED 1
-#define NOT_ORDERED 0
-
 #define N 10
 
-int read_matrix(int a[N][N], int *const n, int *const m)
+enum error_type
+{
+    ok,
+    size_input_err,
+    clear_input_err,
+    elemnt_input_err,
+    arg_count_err,
+    input_err
+};
+
+int result = ok;
+
+int read_matrix(int a[N][N], int *const m, int *const n)
 {
     int rc, matrix_el;
     int arg_count = 0;
 
-    printf("Enter dimension's:\n");
-    rc = scanf("%d%d", n, m);
+    printf("Enter dimensions':\n");
+    rc = scanf("%d%d", m, n);
 
     if (rc == 2)
     {
         if (*n > N || *n < 1 || *m > N || *m < 1)
         {
-            printf("Matrix size input error");
-
-            return SIZE_INPUT_ERR;
+            return size_input_err;
+            printf("input error");
         }
         else
         {
-            for (int i = 0; i < *n; ++i)
+            for (int i = 0; i < *m; ++i)
             {
-                for (int j = 0; j < *m; j++)
+                for (int j = 0; j < *n; j++)
                 {
                     rc = scanf("%d", &matrix_el);
                     if (rc == 1)
@@ -42,28 +43,24 @@ int read_matrix(int a[N][N], int *const n, int *const m)
                     }
                     else
                     {
-                        printf("Array element input error");
-
-                        return ELEMENT_INPUT_ERR;
+                        return elemnt_input_err;
+                        printf("input error");
                     }
                 }
             }
-
             if (arg_count != (*n) * (*m))
             {
-                printf("Arguments' count error");
-
-                return ARG_COUNT_ERR;
+                return arg_count_err;
+                printf("input error");
             }
             else
-                return OK;
+                result = ok;
         }
     }
     else
     {
-        printf("Input clearance error");
-
-        return CLEAR_INPUT_ERR;
+        return clear_input_err;
+        printf("input error");
     }
 }
 
@@ -119,12 +116,13 @@ int main()
 {
     int a[N][N], m, n;
 
-    if (read_matrix(a, &m, &n))
-        return INPUT_ERR;
+    read_matrix(a, &m, &n);
+    if (result)
+        return result;
     else
     {
         sort_matrix(a, m, n);
         display(a, m, n);
-        return OK;
+        return result;
     }
 }
