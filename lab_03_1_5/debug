@@ -28,4 +28,4 @@ percentage=`gcov main.c | grep -E -o "[0-9]+\.[0-9]+"`
 echo "Code executed: ${percentage}%"
 
 # clean up everything
-rm -f *.exe *gcov *.gcno *.gcda
+#rm -f *.exe *gcov *.gcno *.gcda
