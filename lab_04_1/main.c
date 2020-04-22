@@ -68,7 +68,7 @@ size_t usr_strcspn(const char *str_1, const char *str_2)
     if (!str_1 || !str_2)
         return ok;
 
-    size_t i = 0, j =0;
+    size_t i = 0, j = 0;
     
     while (str_1[i])
     {
