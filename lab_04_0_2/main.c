@@ -47,7 +47,7 @@ void input_string(char *const str)
     str[i] = '\0';
 }
 
-int split(const char *const str, char matr[MAX_WORD_LENGTH][MAX_STRING_LENGTH], const char *const puncts)
+int split(const char *const str, char matr[MAX_STRING_LENGTH][MAX_WORD_LENGTH], const char *const puncts)
 {
     int row = 0, col = 0, k = 0, j = 0;
     int punct_found = TRUE;
@@ -78,7 +78,7 @@ int split(const char *const str, char matr[MAX_WORD_LENGTH][MAX_STRING_LENGTH], 
     return ++row;
 }
 
-void delete(char f_str_words_matrix[][MAX_STRING_LENGTH], int *f_str_words_count, int i)
+void delete(char f_str_words_matrix[][MAX_WORD_LENGTH], int *f_str_words_count, int i)
 {
     for (; i < *f_str_words_count - 1; i++)
     {
@@ -88,7 +88,7 @@ void delete(char f_str_words_matrix[][MAX_STRING_LENGTH], int *f_str_words_count
     *f_str_words_count = *f_str_words_count - 1;
 }
 
-void check_if_rep(char matr[][MAX_STRING_LENGTH], char matr_1[][MAX_STRING_LENGTH], int m, int *n, int *array)
+void check_if_rep(char matr[][MAX_WORD_LENGTH], char matr_1[][MAX_WORD_LENGTH], int m, int *n, int *array)
 {
     for (int i = 0; i < m; i++)
     {
@@ -105,7 +105,7 @@ void check_if_rep(char matr[][MAX_STRING_LENGTH], char matr_1[][MAX_STRING_LENGT
     }
 }
 
-void number_of_word(char str_matrix[][MAX_STRING_LENGTH], int *array, int *n)
+void number_of_word(char str_matrix[][MAX_WORD_LENGTH], int *array, int *n)
 {
     for (int i = 0; i < *n - 1; i++)
     {   
@@ -122,7 +122,7 @@ void number_of_word(char str_matrix[][MAX_STRING_LENGTH], int *array, int *n)
     }
 }
 
-void number_of_word_in_2nd(char str_matrix[][MAX_STRING_LENGTH], char str_matrix_1[][MAX_STRING_LENGTH], int *array, int m, int *n)
+void number_of_word_in_2nd(char str_matrix[][MAX_WORD_LENGTH], char str_matrix_1[][MAX_WORD_LENGTH], int *array, int m, int *n)
 {
     for (int i = 0; i < m; i++)
     {   
@@ -142,8 +142,8 @@ void number_of_word_in_2nd(char str_matrix[][MAX_STRING_LENGTH], char str_matrix
 int main()
 {
     char f_str[MAX_STRING_LENGTH] = { 0 }, s_str[MAX_STRING_LENGTH] = { 0 };
-    char f_str_words_matrix[MAX_WORD_LENGTH][MAX_STRING_LENGTH] = { 0 };
-    char s_str_words_matrix[MAX_WORD_LENGTH][MAX_STRING_LENGTH] = { 0 };
+    char f_str_words_matrix[MAX_STRING_LENGTH][MAX_WORD_LENGTH] = { 0 };
+    char s_str_words_matrix[MAX_STRING_LENGTH][MAX_WORD_LENGTH] = { 0 };
     int array[MAX_WORD_LENGTH] = { 0 }, array_1[MAX_WORD_LENGTH] = { 0 };
 
     char puncts[] = " ,;:-.!?";
