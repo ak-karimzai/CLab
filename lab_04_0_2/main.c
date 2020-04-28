@@ -122,6 +122,20 @@ void number_of_word(char str_matrix[][MAX_WORD_LENGTH], int *array, int *n)
     }
 }
 
+int check_num_of_word(char matrix[MAX_STRING_LENGTH][MAX_WORD_LENGTH], const int words_numb)
+{
+    for (int i = 0; i < words_numb; i++)
+    {
+        int k = 0;
+        while (matrix[i][k])
+            k++;
+
+        if (matrix[i][k] != '\0' || k > MAX_WORD_LENGTH)
+            return word_len_err;
+    }
+    return ok;
+}
+
 void number_of_word_in_2nd(char str_matrix[][MAX_WORD_LENGTH], char str_matrix_1[][MAX_WORD_LENGTH], int *array, int m, int *n)
 {
     for (int i = 0; i < m; i++)
@@ -154,6 +168,7 @@ int main()
     input_string(s_str);
     if (result)
     {
+        printf("job faild!\n");
         return result;
     }
 
@@ -164,7 +179,13 @@ int main()
     number_of_word_in_2nd(f_str_words_matrix, s_str_words_matrix, array, f_str_words_count, &s_str_words_count);
     number_of_word(s_str_words_matrix, array_1, &s_str_words_count);
 
-    check_if_rep(f_str_words_matrix, s_str_words_matrix, f_str_words_count, &s_str_words_count, array);
+    //check_if_rep(f_str_words_matrix, s_str_words_matrix, f_str_words_count, &s_str_words_count, array);
+
+    if (check_num_of_word(f_str_words_matrix, f_str_words_count) != ok || check_num_of_word(s_str_words_matrix, s_str_words_count) != ok)
+    {
+        printf("word len err\n");
+        return word_len_err;
+    }
 
     printf("Result:\n");
     //delete(f_str_words_matrix, &f_str_words_count);
