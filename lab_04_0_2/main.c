@@ -90,11 +90,11 @@ void lexem_repeat_search_search(char matr_1[][N], int *len_matr1)
 
         if (line_entry)
         {
-            printf("%s %d ", matr_1[i], ++line_entry);
+            printf("%s %d\n", matr_1[i], ++line_entry);
         }
         else
         {
-            printf("%s %d ", matr_1[i], ++line_entry);
+            printf("%s %d\n", matr_1[i], ++line_entry);
         }
     }
 }
@@ -200,7 +200,7 @@ int main()
     char first_matr[N][N] = { 0 };
     char second_matr[N][N] = { 0 };
     
-    if (read_string(str_1) || read_string(str_2))
+    if (read_string(str_1))
     {
         puts("incorrect input string");
         return input_err;
@@ -222,8 +222,8 @@ int main()
     }
     puts("Result:");
     lexem_repeat_search_search(first_matr, &len_str1);
-    printf("\n");
-    lexem_repeat_search_search(second_matr, &len_str2);
+    //printf("\n");
+    //lexem_repeat_search_search(second_matr, &len_str2);
 
     return ok;
 }
