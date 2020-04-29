@@ -77,7 +77,7 @@ void lexem_repeat_search_search(char matr_1[][N], int *len_matr1)
         //if (check_dublicate(matr_1, len_matr1, matr_1[i], i))
         int j = i + 1;
         int line_entry = FALSE;
-        while (!line_entry && j < *len_matr1)
+        while (j < *len_matr1)
         {
             if (my_strcmp(matr_1[i], matr_1[j]))
             {
@@ -117,7 +117,7 @@ int split(const char *const str, char matrix_split[][N], int *const count_lexem)
 {
     int i = 0, k = 0;
 
-    while (str[i +1])
+    while (str[i + 1])
     {
         if (!punctions(str[i]))
         {
