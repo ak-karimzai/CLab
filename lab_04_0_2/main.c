@@ -75,7 +75,6 @@ void lexem_repeat_search_search(char matr_1[][N], int *len_matr1)
     for (int i = 0; i < *len_matr1; i++)
     {
         //if (check_dublicate(matr_1, len_matr1, matr_1[i], i))
-        
         int j = i + 1;
         int line_entry = FALSE;
         while (!line_entry && j < *len_matr1)
@@ -91,11 +90,11 @@ void lexem_repeat_search_search(char matr_1[][N], int *len_matr1)
 
         if (line_entry)
         {
-            printf("%s %d \n", matr_1[i], ++line_entry);
+            printf("%s %d ", matr_1[i], ++line_entry);
         }
         else
         {
-            printf("%s %d \n", matr_1[i], ++line_entry);
+            printf("%s %d ", matr_1[i], ++line_entry);
         }
     }
 }
@@ -223,6 +222,7 @@ int main()
     }
     puts("Result:");
     lexem_repeat_search_search(first_matr, &len_str1);
+    printf("\n");
     lexem_repeat_search_search(second_matr, &len_str2);
 
     return ok;
