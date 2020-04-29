@@ -1,206 +1,229 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-#include <stddef.h>
 
-#define FALSE 0
-#define TRUE 1
-#define GOT_ARG 1
-#define MAX_STRING_LENGTH 256
-#define MAX_WORD_LENGTH 16
-
-enum type_error
+enum error_type
 {
     ok,
     input_err,
-    string_len_err,
-    empty_string_err,
-    word_len_err
+    size_err,
+    no_words,
+    empty_string,
+    err_word_size
 };
 
-int result = ok;
+#define OK 0
+#define TRUE 1
+#define FALSE 0
+#define OK_COUNT 1
+#define MAX_WORD_LEN 16
+#define N 256
 
-void input_string(char *const str)
+int my_strcmp(const char *const str_1, const char *const str_2)
 {
     int i = 0;
 
-    scanf("%c", &str[i]);
-    while (str[i] != '\n' && i < MAX_STRING_LENGTH)
+    while (str_1[i])
     {
-        i++;
-        if (scanf("%c", &str[i]) != GOT_ARG)
+        if (str_1[i] != str_2[i])
         {
-            result = input_err;
-            printf("input err");
+            return FALSE;
         }
+        ++i;
     }
-    if (!i)
+
+    if (str_2[i] != '\0')
     {
-        result = empty_string_err;
-        printf("input err");
+        return FALSE;
     }
-    if (str[i] != '\n')
-    {
-        result = string_len_err;
-        printf("input err");
-    }
-    str[i] = '\0';
+
+    return TRUE;
 }
 
-int split(const char *const str, char matr[MAX_STRING_LENGTH][MAX_WORD_LENGTH], const char *const puncts)
+int check_dublicate(char matrix[][N], const int len, const char *const str, const int index)
 {
-    int row = 0, col = 0, k = 0, j = 0;
-    int punct_found = TRUE;
-    while (str[k])
+    for (int i = 0; i < len; i++)
     {
-        while (puncts[j])
+        if (my_strcmp(str, matrix[i]))
         {
-            if (str[k] == puncts[j])
+            if (index == i)
             {
-                punct_found = FALSE;
-                break;
+                return TRUE;
             }
-            j++;
+            else
+            {
+                return FALSE;
+            }
         }
-        if (punct_found)
-            matr[row][col++] = str[k];
+    }
+    return TRUE;
+}
+
+void delete(char matrix[][N], int *n, int i)
+{
+    for (; i < *n - 1; i++)
+    {
+        strcpy(matrix[i], matrix[i + 1]);
+    }
+    *n = *n - 1;
+}
+
+
+void lexem_repeat_search_search(char matr_1[][N], const int *len_matr1)
+{
+    //puts("Result: ");
+
+    for (int i = 0; i < *len_matr1; i++)
+    {
+        //if (check_dublicate(matr_1, len_matr1, matr_1[i], i))
+        
+        int j = i + 1;
+        int line_entry = FALSE;
+        while (!line_entry && j < *len_matr1)
+        {
+            if (my_strcmp(matr_1[i], matr_1[j]))
+            {
+                delete(matr_1, len_matr1, j);
+                line_entry++;
+                j--;
+            }
+            ++j;
+        }
+
+        if (line_entry)
+        {
+            printf("%s %d \n", matr_1[i], ++line_entry);
+        }
         else
         {
-            matr[row++][col] = '\0';
-            col = 0;    
+            printf("%s %d \n", matr_1[i], ++line_entry);
         }
-        k++;
-        j = 0;
-        punct_found = TRUE;
     }
-    matr[row][col] = '\0';
-
-    return ++row;
 }
 
-void delete(char f_str_words_matrix[][MAX_WORD_LENGTH], int *f_str_words_count, int i)
+int punctions(const char symbol)
 {
-    for (; i < *f_str_words_count - 1; i++)
+    char separators[8] = { ' ', ',', ';', ':', '.', '-', '!', '?' };
+    for (int i = 0; i < 8; i++)
     {
-        strcpy(f_str_words_matrix[i], f_str_words_matrix[i + 1]);
-        //printf("%s %d\n", f_str_words_matrix[i], array[i]);
-    }
-    *f_str_words_count = *f_str_words_count - 1;
-}
-
-void check_if_rep(char matr[][MAX_WORD_LENGTH], char matr_1[][MAX_WORD_LENGTH], int m, int *n, int *array)
-{
-    for (int i = 0; i < m; i++)
-    {
-        for (int j = 0; j < *n; j++)
+        if (symbol == separators[i])
         {
-            if (strcmp(matr[i], matr_1[j]) == 0)
-            {
-                //printf("N%s\n", matr_1[j]);
-                delete(matr_1, n, j);
-                array[i]++;
-                j--;
-            }
+            return TRUE;
         }
     }
+
+    return FALSE;
 }
 
-void number_of_word(char str_matrix[][MAX_WORD_LENGTH], int *array, int *n)
+int split(const char *const str, char matrix_split[][N], int *const count_lexem)
 {
-    for (int i = 0; i < *n - 1; i++)
-    {   
-        for (int j = i + 1; j < *n; j++)
-        {
-            if (strcmp(str_matrix[i], str_matrix[j]) == 0)
-            {
-                //printf("All%s", str_matrix[j]);
-                delete(str_matrix, n, j);
-                array[i]++;
-                j--;
-            }
-        }
-    }
-}
+    int i = 0, k = 0;
 
-int check_num_of_word(char matrix[MAX_STRING_LENGTH][MAX_WORD_LENGTH], const int words_numb)
-{
-    for (int i = 0; i < words_numb; i++)
+    while (str[i +1])
     {
-        int k = 0;
-        while (matrix[i][k])
+        if (!punctions(str[i]))
+        {
+            if (k >= MAX_WORD_LEN)
+            {
+                return err_word_size;
+            }
+            matrix_split[*count_lexem][k] = str[i];
             k++;
-
-        if (matrix[i][k] != '\0' || k > MAX_WORD_LENGTH)
-            return word_len_err;
+        }
+        else
+        {
+            if (!punctions(str[i + 1]))
+            {
+                if (k != 0)
+                {
+                    ++(*count_lexem);
+                    matrix_split[*count_lexem][k + 1] = '\0';
+                }
+                k = 0;
+            }
+        }
+        ++i;
     }
+
+    if (!punctions(str[i]))
+    {
+        matrix_split[*count_lexem][k] = str[i];
+        matrix_split[*count_lexem][++k] = '\0';
+        if (k > MAX_WORD_LEN)
+        {
+            return err_word_size;
+        }
+    }
+
+    if (*count_lexem != 0 || k > 0)
+    {
+        ++(*count_lexem);
+    }
+
     return ok;
 }
 
-void number_of_word_in_2nd(char str_matrix[][MAX_WORD_LENGTH], char str_matrix_1[][MAX_WORD_LENGTH], int *array, int m, int *n)
+int read_string(char *const arr)
 {
-    for (int i = 0; i < m; i++)
-    {   
-        for (int j = 0; j < *n; j++)
+    int i = 0;
+    puts("Enter string: ");
+
+    do
+    {
+        if (scanf("%c", &arr[i]) != OK_COUNT)
         {
-            if (strcmp(str_matrix[i], str_matrix_1[j]) == 0)
-            {
-                //printf("All%s", str_matrix[j]);
-                delete(str_matrix_1, n, j);
-                array[i]++;
-                j--;
-            }
+            return input_err;
         }
+        ++i;
+    } while (arr[i - 1] != '\n' && i <= N);
+
+    if (arr[i - 1] != '\n')
+    {
+        return size_err;
     }
+    if (i == 1)
+    {
+        return empty_string;
+    }
+    arr[i - 1] = '\0';
+
+    return ok;
 }
 
 int main()
 {
-    char f_str[MAX_STRING_LENGTH] = { 0 }, s_str[MAX_STRING_LENGTH] = { 0 };
-    char f_str_words_matrix[MAX_STRING_LENGTH][MAX_WORD_LENGTH] = { 0 };
-    char s_str_words_matrix[MAX_STRING_LENGTH][MAX_WORD_LENGTH] = { 0 };
-    int array[MAX_WORD_LENGTH] = { 0 }, array_1[MAX_WORD_LENGTH] = { 0 };
+    setbuf(stdout, NULL);
+    char str_1[N] = { 0 };
+    char str_2[N] = { 0 };
+    int len_str1 = 0;
+    int len_str2 = 0;
+    int *pointer_len = &len_str1;
 
-    char puncts[] = " ,;:-.!?";
-
-    int f_str_words_count = 0, s_str_words_count = 0;
-
-    input_string(f_str);
-    input_string(s_str);
-    if (result)
+    char first_matr[N][N] = { 0 };
+    char second_matr[N][N] = { 0 };
+    
+    if (read_string(str_1) || read_string(str_2))
     {
-        printf("job faild!\n");
-        return result;
+        puts("incorrect input string");
+        return input_err;
     }
 
-    f_str_words_count = split(f_str, f_str_words_matrix, puncts);
-    s_str_words_count = split(s_str, s_str_words_matrix, puncts);
+    const int len_words_check1 = split(str_1, first_matr, pointer_len);
+    pointer_len = &len_str2;
+    const int len_words_check2 = split(str_2, second_matr, pointer_len);
 
-    number_of_word(f_str_words_matrix, array, &f_str_words_count);
-    number_of_word_in_2nd(f_str_words_matrix, s_str_words_matrix, array, f_str_words_count, &s_str_words_count);
-    number_of_word(s_str_words_matrix, array_1, &s_str_words_count);
-
-    //check_if_rep(f_str_words_matrix, s_str_words_matrix, f_str_words_count, &s_str_words_count, array);
-
-    if (check_num_of_word(f_str_words_matrix, f_str_words_count) != ok || check_num_of_word(s_str_words_matrix, s_str_words_count) != ok)
+    if (len_words_check1 || len_words_check2)
     {
-        printf("word len err\n");
-        return word_len_err;
+        puts("words length error.");
+        return err_word_size;
     }
-
-    printf("Result:\n");
-    //delete(f_str_words_matrix, &f_str_words_count);
-    //printf("F%d\n", f_str_words_count);
-    for (int i = 0; i < f_str_words_count; i++)
+    if (0 == len_str1 || 0 == len_str2)
     {
-        //strcpy (f_str_words_matrix[i], f_str_words_matrix[i + 1]);
-        printf("%s %d\n", f_str_words_matrix[i], array[i] + 1);
+        puts("one of strijngs have no words.");
+        return no_words;
     }
-    //printf("F%d\n", s_str_words_count);
-    for (int i = 0; i < s_str_words_count; i++)
-    {
-        //strcpy (f_str_words_matrix[i], f_str_words_matrix[i + 1]);
-        printf("%s %d\n", s_str_words_matrix[i], array_1[i] + 1);
-    }
+    puts("Result:");
+    lexem_repeat_search_search(first_matr, &len_str1);
+    lexem_repeat_search_search(second_matr, &len_str2);
 
-    return result;
+    return ok;
 }
