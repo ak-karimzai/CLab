@@ -68,7 +68,7 @@ void delete(char matrix[][N], int *n, int i)
 }
 
 
-void lexem_repeat_search_search(char matr_1[][N], const int *len_matr1)
+void lexem_repeat_search_search(char matr_1[][N], int *len_matr1)
 {
     //puts("Result: ");
 
