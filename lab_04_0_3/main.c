@@ -2,10 +2,10 @@
 #include <string.h>
 #include <ctype.h>
 
-#define N 256
+#define N 257
 #define TRUE 1
 #define FALSE 0
-#define MAX_WORD_LEN 16
+#define MAX_WORD_LEN 17
 
 enum error_type
 {
@@ -98,7 +98,6 @@ void main_algo(char *buf)
         {
             if (!first) 
                 first = toupper(*p);
-        
             else if (toupper(*p) == first)
             {
                 memmove(p, p + 1, strlen(p));
