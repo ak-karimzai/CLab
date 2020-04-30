@@ -150,12 +150,16 @@ int read_string(char *const arr)
         {
             arr[i++] = ch;
         }
+        else
+        {
+            return size_err;
+        }
     }
-    if (i > N - 1)
+    if (i > N)
     {
         return size_err;
     }
-    if (i == 1)
+    if (i == 0)
     {
         return empty_string;
     }
