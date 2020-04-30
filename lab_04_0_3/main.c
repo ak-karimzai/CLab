@@ -136,13 +136,16 @@ void delete(char matrix[][N], int *count, int i)
     *count = *count - 1;
 }
 
-void set_string(char matrix[][N], int *count)
+void set_string(char matrix[][N], int count)
 {
-    for (int i = 0; i < *count; i++)
+    for (int i = 0; i < count; i++)
     {
         main_algo(matrix[i]);
     }
+}
 
+void set_string_1(char matrix[][N], int *count)
+{
     for (int i = 0; i < *count - 1; i++)
     {
         if (strcmp(matrix[*count - 1], matrix[i]) == 0)
@@ -154,8 +157,9 @@ void set_string(char matrix[][N], int *count)
 int main()
 {
     char str[N] = { 0 };
-    char str_1[N][N] = { 0 };  
-    int len_str = 0;
+    char str_1[N][N] = { 0 }; 
+    char str_2[N][N]; 
+    int len_str = 0, flag = 0;
 
     if (read_string(str))
     {
@@ -166,8 +170,24 @@ int main()
     {
         return input_err;
     }
-
-    set_string(str_1, &len_str);
+    for (int i = 0; i < len_str; i++)
+    {
+        strcpy(str_2[i], str_1[i]);
+    }
+    set_string(str_1, len_str);
+    for (int i = 0; i < len_str; i++)
+    {
+        //printf("%d\n", strcmp(str_2[i], str_1[i]));
+        if (strcmp(str_2[i], str_1[i]))
+        {
+            flag = 1;
+        }
+    }
+    if (flag == 0)
+    {
+        return input_err;
+    }
+    set_string_1(str_1, &len_str);
     printf("Result: ");
     for (int i = len_str - 2; i >= 0; i--)
     {
