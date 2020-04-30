@@ -143,27 +143,17 @@ int split(const char *const str, char matrix_split[][N], int *const count_lexem)
 
 int read_string(char *const arr)
 {
-    int i = 0;
+    int ch, i = 0;
     puts("Enter string: ");
 
-    do
+    while ((ch = getchar()) != '\n' && ch != EOF)
     {
-        if (scanf("%c", &arr[i]) != OK_COUNT)
+        if (i < N - 1)
         {
-            return input_err;
+            arr[i++] = ch;
         }
-        ++i;
-    } while (arr[i - 1] != '\n' && i <= N);
-
-    if (arr[i - 1] != '\n')
-    {
-        return size_err;
     }
-    if (i == 1)
-    {
-        return empty_string;
-    }
-    arr[i - 1] = '\0';
+    arr[i] = '\0';
 
     return ok;
 }
