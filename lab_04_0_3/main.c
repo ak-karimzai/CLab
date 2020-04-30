@@ -153,8 +153,8 @@ void set_string(char matrix[][N], int *count)
 }
 int main()
 {
-    char str[N] = { 0 };
-    char str_1[N][N] = { 0 };  
+    char str[N];
+    char str_1[N][N];  
     int len_str = 0;
 
     if (read_string(str))
@@ -166,7 +166,18 @@ int main()
     {
         return input_err;
     }
-
+    int flag = 0;
+    for (int i = 0; i < len_str - 1; i++)
+    {
+        if (!strcmp(str_1[i], str_1[i + 1]))
+        {
+            flag = 1;
+        }
+    }
+    if (flag)
+    {
+        return input_err;
+    }
     set_string(str_1, &len_str);
     printf("Result: ");
     for (int i = len_str - 2; i >= 0; i--)
