@@ -4,7 +4,6 @@
 
 #define N 256
 #define TRUE 1
-#define OK_COUNT 1
 #define FALSE 0
 #define MAX_WORD_LEN 16
 
