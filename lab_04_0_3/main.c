@@ -18,13 +18,31 @@ enum error_type
     size_err
 };
 
-int read_string(char *arr)
+int read_string(char *array)
 {
-    gets(arr);
-    if (strlen(arr) > N)
-        return word_size_err;
-    if (strlen(arr) == 0)
+    int i = 0;
+    puts("Enter string: ");
+
+    do
+    {
+        if (scanf("%c", &array[i]) != TRUE)
+        {
+            return input_err;
+        }
+        ++i;
+    } while (array[i - 1] != '\n' && i <= N);
+    
+    if (array[i - 1] != '\n')
+    {
+        return size_err;
+    }
+
+    if (i == 1)
+    {
         return empty_string;
+    }
+    array[i - 1] = '\0';
+
     return ok;
 }
 
