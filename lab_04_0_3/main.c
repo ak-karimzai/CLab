@@ -147,12 +147,11 @@ int main()
     {
         main_algo(str_1[i]);
     }
-    
-    printf("Result: ");
     if (len_str == 1)
     {
-        printf("%s", str_1[0]);
+        return input_err;
     }
+    printf("Result: ");
     for (int i = len_str - 2; i >= 0; i--)
     {
         printf("%s ", str_1[i]);
