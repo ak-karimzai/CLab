@@ -25,7 +25,7 @@ int main()
     }
     if (0 == len_str1)
     {
-        puts("one of strijngs have no words.");
+        puts("one of strings have no words.");
         return no_words;
     }
     puts("Result:");
