@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 
 #define N 256
 #define TRUE 1
@@ -125,7 +126,7 @@ int main()
     {
         return input_err;
     }
-    
+
     for (int i = 0; i < len_str; i++)
     {
         main_algo(str_1[i]);
