@@ -50,8 +50,6 @@ void delete(char matrix[][N], int *n, int i)
 
 void lexem_repeat_search_search(char matr_1[][N], int *len_matr1)
 {
-    puts("Result: ");
-
     for (int i = 0; i < *len_matr1; i++)
     {
         //if (check_dublicate(matr_1, len_matr1, matr_1[i], i))
@@ -153,7 +151,7 @@ int read_string(char *const arr)
             arr[i++] = ch;
         }
     }
-    if (arr[i] != '\n')
+    if (i > N - 1)
     {
         return size_err;
     }
