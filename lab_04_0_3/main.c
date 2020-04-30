@@ -117,7 +117,6 @@ int main()
 
     if (read_string(str))
     {
-        printf("Error\n");
         return input_err;
     }
     
