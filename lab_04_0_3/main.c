@@ -148,6 +148,7 @@ int main()
         main_algo(str_1[i]);
     }
     
+    printf("Result: ");
     for (int i = len_str - 2; i >= 0; i--)
     {
         printf("%s ", str_1[i]);
