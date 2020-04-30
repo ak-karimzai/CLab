@@ -178,7 +178,7 @@ int main()
 {
     char str[N] = { 0 };
     char str_1[N][N] = { 0 }; 
-    int len_str = 0;
+    int len_str = 0, flag = 0;
 
     if (read_string(str))
     {
@@ -189,11 +189,22 @@ int main()
     {
         return input_err;
     }
-    set_string(str_1, len_str);
-
-    if (check_if_like_original(str, str_1, len_str))
+    if (len_str == 1)
+    {
         return input_err;
-
+    }
+    set_string(str_1, len_str);
+    //if (check_if_like_original(str, str_1, len_str))
+    //    return input_err;
+    for (int i = 1; i < len_str; i++)
+    {
+        if (strcmp(str_1[1], str_1[i]) != 0)
+            flag = 1;
+    }
+    if (!flag)
+    {
+        return input_err;
+    }
     set_string_1(str_1, &len_str);
     printf("Result: ");
     for (int i = len_str - 2; i >= 0; i--)
