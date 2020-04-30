@@ -4,7 +4,6 @@
 
 int main()
 {
-    setbuf(stdout, NULL);
     char str[N] = { 0 };
     int len_str1 = 0;
     int *pointer_len = &len_str1;
