@@ -127,6 +127,30 @@ void main_algo(char *buf)
     }
 }
 
+void delete(char matrix[][N], int *count, int i)
+{
+    for (; i < *count - 1; i++)
+    {
+        strcpy(matrix[i], matrix[i + 1]);
+    }
+    *count = *count - 1;
+}
+
+void set_string(char matrix[][N], int *count)
+{
+    for (int i = 0; i < *count; i++)
+    {
+        main_algo(matrix[i]);
+    }
+
+    for (int i = 0; i < *count - 1; i++)
+    {
+        if (strcmp(matrix[*count - 1], matrix[i]) == 0)
+        {
+            delete(matrix, count, i);
+        }
+    }
+}
 int main()
 {
     char str[N] = { 0 };
@@ -143,14 +167,7 @@ int main()
         return input_err;
     }
 
-    for (int i = 0; i < len_str; i++)
-    {
-        main_algo(str_1[i]);
-    }
-    if (len_str == 1)
-    {
-        return input_err;
-    }
+    set_string(str_1, &len_str);
     printf("Result: ");
     for (int i = len_str - 2; i >= 0; i--)
     {
