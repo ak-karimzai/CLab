@@ -166,6 +166,7 @@ int main()
     {
         return input_err;
     }
+    
     set_string(str_1, &len_str);
     printf("Result: ");
     for (int i = len_str - 2; i >= 0; i--)
