@@ -154,12 +154,31 @@ void set_string_1(char matrix[][N], int *count)
         }
     }
 }
+
+int check_if_like_original(char *org_str, char str_1[][N], int len_str)
+{
+    int k = 0;
+    char str_2[N];
+    for (int i = 0; i < len_str; i++)
+    {
+        int len = strlen(str_1[i]);
+        for (int j = 0; j < len; j++)
+        {
+            str_2[k++] = str_1[i][j];
+        }
+        if (i < len_str - 1)
+            str_2[k++] = ' ';
+    }
+    str_2[k] = '\0';
+    if (strcmp(org_str, str_2) == 0)
+        return TRUE;
+    return FALSE;
+}
 int main()
 {
     char str[N] = { 0 };
     char str_1[N][N] = { 0 }; 
-    char str_2[N][N]; 
-    int len_str = 0, flag = 0;
+    int len_str = 0;
 
     if (read_string(str))
     {
@@ -170,23 +189,11 @@ int main()
     {
         return input_err;
     }
-    for (int i = 0; i < len_str; i++)
-    {
-        strcpy(str_2[i], str_1[i]);
-    }
     set_string(str_1, len_str);
-    for (int i = 0; i < len_str; i++)
-    {
-        //printf("%d\n", strcmp(str_2[i], str_1[i]));
-        if (strcmp(str_2[i], str_1[i]))
-        {
-            flag = 1;
-        }
-    }
-    if (flag == 0)
-    {
+
+    if (check_if_like_original(str, str_1, len_str))
         return input_err;
-    }
+
     set_string_1(str_1, &len_str);
     printf("Result: ");
     for (int i = len_str - 2; i >= 0; i--)
