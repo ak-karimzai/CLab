@@ -153,6 +153,14 @@ int read_string(char *const arr)
             arr[i++] = ch;
         }
     }
+    if (arr[i] != '\n')
+    {
+        return size_err;
+    }
+    if (i == 1)
+    {
+        return empty_string;
+    }
     arr[i] = '\0';
 
     return ok;
