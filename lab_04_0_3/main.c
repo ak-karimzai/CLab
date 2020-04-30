@@ -89,10 +89,10 @@ int split(const char *const string, char matrix[][N], int *const count)
 
 void main_algo(char *buf)
 {
-    char * p = buf, first = 0;
+    char *p = buf, first = 0;
     while (*p) 
     {
-        if ( isspace(*p) )
+        if (isspace(*p))
             first = 0;
         else
         {
