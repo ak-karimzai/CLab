@@ -153,8 +153,8 @@ void set_string(char matrix[][N], int *count)
 }
 int main()
 {
-    char str[N];
-    char str_1[N][N];  
+    char str[N] = { 0 };
+    char str_1[N][N] = { 0 };  
     int len_str = 0;
 
     if (read_string(str))
