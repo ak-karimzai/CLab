@@ -1,0 +1,7 @@
+Result:
+ahmad 3
+fayaz 1
+khan 2
+shokorzai 1
+musad 1
+mahmmod 1
