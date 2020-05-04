@@ -77,12 +77,12 @@ void lexem_repeat_search_search(char matr_1[][N], int *len_matr1)
     }
 }
 
-int punctions(const char symbol)
+int punctuation(const char sym)
 {
     char separators[8] = { ' ', ',', ';', ':', '.', '-', '!', '?' };
     for (int i = 0; i < 8; i++)
     {
-        if (symbol == separators[i])
+        if (sym == separators[i])
         {
             return TRUE;
         }
@@ -97,7 +97,7 @@ int split(const char *const str, char matrix_split[][N], int *const count_lexem)
 
     while (str[i + 1])
     {
-        if (!punctions(str[i]))
+        if (!punctuation(str[i]))
         {
             if (k >= MAX_WORD_LEN)
             {
@@ -108,7 +108,7 @@ int split(const char *const str, char matrix_split[][N], int *const count_lexem)
         }
         else
         {
-            if (!punctions(str[i + 1]))
+            if (!punctuation(str[i + 1]))
             {
                 if (k != 0)
                 {
@@ -121,7 +121,7 @@ int split(const char *const str, char matrix_split[][N], int *const count_lexem)
         ++i;
     }
 
-    if (!punctions(str[i]))
+    if (!punctuation(str[i]))
     {
         matrix_split[*count_lexem][k] = str[i];
         matrix_split[*count_lexem][++k] = '\0';

@@ -46,7 +46,7 @@ int read_string(char *array)
     return ok;
 }
 
-int punctions(const char symbol)
+int punctuation(const char symbol)
 {
     char separators[8] = { ' ', ',', ';', ':', '.', '-', '!', '?' };
     for (int i = 0; i < 8; i++)
@@ -66,7 +66,7 @@ int split(const char *const string, char matrix[][N], int *const count)
 
     while (string[i + 1])
     {
-        if (!punctions(string[i]))
+        if (!punctuation(string[i]))
         {
             if (k >= MAX_WORD_LEN)
             {
@@ -77,7 +77,7 @@ int split(const char *const string, char matrix[][N], int *const count)
         }
         else
         {
-            if (!punctions(string[i + 1]))
+            if (!punctuation(string[i + 1]))
             {
                 if (k != 0)
                 {
@@ -89,7 +89,7 @@ int split(const char *const string, char matrix[][N], int *const count)
         }
         ++i;
     }
-    if (!punctions(string[i]))
+    if (!punctuation(string[i]))
     {
         matrix[*count][k] = string[i];
         matrix[*count][++k] = '\0';

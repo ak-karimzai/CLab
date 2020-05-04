@@ -1,5 +1,5 @@
 rm -f *.exe *.gcov *.gcda *.gcno
-gcc main.c -o main.exe -std=c99 -pedantic -Wall -Wvla -Werror -Wfloat-equal -Wfloat-conversion -O0 --coverage
+gcc main.c my_functions.c -o main.exe -std=c99 -pedantic -Wall -Wvla -Werror -Wfloat-equal -Wfloat-conversion -O0 --coverage
 
 # tests counters
 declare -i total=$(ls -1q in_*.txt | wc -l)
@@ -25,7 +25,10 @@ echo
 echo "Gathering code coverage info..."
 
 percentage=`gcov main.c | grep -E -o "[0-9]+\.[0-9]+"`
+percentage=`gcov my_functions.c | grep -E -o "[0-9]+\.[0-9]+"`
 echo "Code executed: ${percentage}%"
+echo "Code executed: ${percentage}%"
+
 
 # clean up everything
 rm -f *.exe *gcov *.gcno *.gcda
