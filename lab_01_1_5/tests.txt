@@ -1,8 +1,0 @@
-input -10 20
-output Logic error
-
-input -2qwe 20
-output Input error
-
-input 10 20
-output 0 10
