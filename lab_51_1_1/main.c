@@ -10,7 +10,7 @@ void find_two_max(int max)
         if (max_1 > max)
             max = max_1;
     }
-    printf("%d %d", max_2, max_1);
+    printf("%d\n%d", max_2, max_1);
 }
 int main()
 {
