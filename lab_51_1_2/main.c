@@ -18,7 +18,7 @@ int find_num(FILE *f)
     }
     avg = (max + min) / 2;
     
-    if (count > 1)
+    if (count < 2)
     {
         return -1;
     }
