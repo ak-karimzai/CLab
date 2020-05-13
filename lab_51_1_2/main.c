@@ -14,7 +14,6 @@ void find_num(FILE *f)
             min = num;
     }
     avg = (max + min) / 2;
-    printf("%d avg ", avg);
     
     rewind(f);
     
