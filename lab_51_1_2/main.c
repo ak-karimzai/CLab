@@ -1,39 +1,6 @@
 #include <stdio.h>
-#include <limits.h>
+#include "function.h"
 
-int find_num(FILE *f)
-{
-    int num, avg;
-    int max = INT_MIN, min = INT_MAX, count = 0;
-
-    rewind(f);
-    while (fscanf(f, "%d", &num) != EOF)
-    {
-        if (num > max)
-            max = num;
-
-        if (num < min)
-            min = num;
-        count++;
-    }
-    avg = (max + min) / 2;
-    
-    if (count < 2)
-    {
-        return -1;
-    }
-
-    rewind(f);
-    count = 0;
-    while (fscanf(f, "%d", &num) != EOF)
-    {
-        if (num > avg)
-            count++;
-    }   
-    
-    printf("%d", count);
-    return 0;
-}
 int main(int argc, char **argv)
 {
     FILE *f;
@@ -44,8 +11,8 @@ int main(int argc, char **argv)
         return -1;
 
     if (find_num(f))
-        return -1;
+        return error;
 
     fclose(f);
-    return 0;
+    return ok;
 }
