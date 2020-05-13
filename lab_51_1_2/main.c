@@ -28,9 +28,10 @@ void find_num(FILE *f)
 int main(int argc, char **argv)
 {
     FILE *f;
+    int x;
 
     f = fopen(argv[1], "r");
-    if (f == NULL || feof(f))
+    if (f == NULL || feof(f) || fscanf(f, "%d", &x) != 1)
         return -1;
 
     find_num(f);
