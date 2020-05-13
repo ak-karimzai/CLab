@@ -5,6 +5,8 @@ void find_num(FILE *f)
 {
     int num, avg;
     int max = INT_MIN, min = INT_MAX, count = 0;
+
+    rewind(f);
     while (fscanf(f, "%d", &num) != EOF)
     {
         if (num > max)
@@ -31,7 +33,7 @@ int main(int argc, char **argv)
     int x;
 
     f = fopen(argv[1], "r");
-    if (f == NULL || feof(f) || fscanf(f, "%d", &x) != 1)
+    if (f == NULL || feof(f) || fscanf(f, "%d", &x) == 0)
         return -1;
 
     find_num(f);
