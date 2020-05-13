@@ -33,7 +33,7 @@ int main(int argc, char **argv)
     int x;
 
     f = fopen(argv[1], "r");
-    if (f == NULL || feof(f) || fscanf(f, "%d", &x) == 0)
+    if (f == NULL || fscanf(f, "%d", &x) == 0)
         return -1;
 
     find_num(f);
