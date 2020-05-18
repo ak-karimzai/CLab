@@ -1,21 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #define N 100
 
 typedef struct array
 {
-    int a[100];
+    int a[N];
     int n;
 } arr;
 
 void add_to_array(arr *a)
 {
-    int x;
-    scanf("%d", &a->n);
     for (int i = 0; i < a->n; i++)
     {
-        scanf("%d", &x);
-        a->a[i] = x;
+        a->a[i] = rand();
     }
 }
 
@@ -42,8 +40,14 @@ int main(int argc, char **argv)
 {
     arr in_arr, out_arr;
     FILE *in, *out;
-    
-    in = fopen(argv[1], "wb");
+    in_arr.n = atoi(argv[2]);
+
+    if (in_arr.n == 0 || in_arr.n > 100)
+    {
+        return 1;
+    }
+
+    in = fopen("p_file.bin", "wb");
     
     if (in == NULL)
     {
@@ -51,46 +55,50 @@ int main(int argc, char **argv)
     }
     
     add_to_array(&in_arr);
-    
     size_t element = fwrite(&in_arr, sizeof(arr), 1, in);
     
     fclose(in);
-    
+
     if (element == 0)
     {
         return 2;
     }
-    
-    out = fopen(argv[1], "rb");
-
-    element = fread(&out_arr, sizeof(arr), 1, out);
-    
-    fclose(out);
-    
-    if (element == 0)
+    if (argv[1][0] == 'p')
     {
-        return 3;
+        out = fopen("p_file.bin", "rb");
+
+        element = fread(&out_arr, sizeof(arr), 1, out);
+        
+        fclose(out);
+        
+        if (element == 0)
+        {
+            return 3;
+        }
+        
+        for (int i = 0; i < out_arr.n; i++)
+        {
+            printf("%d ", out_arr.a[i]);
+        }
     }
     
-    for (int i = 0; i < out_arr.n; i++)
+    else if (argv[1][0] == 's')
     {
-        printf("%d ", out_arr.a[i]);
-    }
-    
-    sort_arr(&out_arr);
+        sort_arr(&out_arr);
 
-    in = fopen(argv[2], "wb");
-    
-    if (in == NULL)
-        return 1;
-    
-    element = fwrite(&out_arr, sizeof(arr), 1, in);
-    
-    fclose(in);
-    
-    if (element == 0)
-    {
-        return 3;
+        in = fopen(argv[1], "wb");
+        
+        if (in == NULL)
+            return 1;
+        
+        element = fwrite(&out_arr, sizeof(arr), 1, in);
+        
+        fclose(in);
+        
+        if (element == 0)
+        {
+            return 3;
+        }
     }
 
     return 0;
