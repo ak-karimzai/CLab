@@ -68,7 +68,7 @@ int copy_file(FILE *const f1, FILE *const f2)
     product_t product;
     int size = size_count(f1);
 
-    for (int i = 0; i <= size; i++)
+    for (int i = 1; i <= size; i++)
     {
         if (get_by_pos(f1, i, &product) != ok)
             return get_err;
@@ -247,7 +247,7 @@ int check_size(FILE *const f)
     return ok;
 }
 
-int main(int argc, char **argv)
+int main(const int argc, const char *const argv[])
 {
     FILE *f;
 
@@ -279,7 +279,7 @@ int main(int argc, char **argv)
             return empty_file;
         }
 
-        int code_err = enter_structure(f);
+        int code_err = copy_file(f, f1);
         if (code_err != ok)
         {
             fclose(f);
