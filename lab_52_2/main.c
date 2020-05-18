@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include <stdint.h>
 #include <string.h>
+#include <stdint.h>
 
 #define NAME_SIZE 31
 #define MANUF_SIZE 16
@@ -12,28 +12,31 @@
 #define N 100
 #define M 4
 
-#define ERROR_ARGS 53
-#define FILE_ERR 1
-#define ERR_INPUT 2
-#define GET_ERR 3
-#define PUT_ERR 4
-#define EMPTY_FILE 5
-#define NO_SUBSTR 6
-#define OK 0
-
 #define TRUE 1
 #define FALSE 0
+
+enum type_error
+{
+    ok,
+    error_args,
+    file_err,
+    input_err,
+    get_err,
+    put_err,
+    empty_file,
+    no_substr
+};
 
 typedef struct
 {
     char name[NAME_SIZE];
-    char manafacturer[MANUF_SIZE];
+    char manafaturer[MANUF_SIZE];
     uint32_t price;
     uint32_t count;
 } product_t;
 
-int size_counter(FILE *const f)
-{    
+int size_count(FILE *const f)
+{
     fseek(f, 0, SEEK_END);
     int size = ftell(f) / sizeof(product_t);
     fseek(f, 0, SEEK_SET);
@@ -41,133 +44,115 @@ int size_counter(FILE *const f)
     return size;
 }
 
-int get_by_pos(FILE *const f, const int pos, product_t *const product_list)
+int get_by_pos(FILE *const f, const int pos, product_t *const produnct_list)
 {
-    fseek(f, pos * sizeof((*product_list)) - sizeof((*product_list)), SEEK_SET);
-    if (fread(product_list, sizeof((*product_list)), COUNT_READED, f) != COUNT_READED)
-    {
-        return GET_ERR;
-    }
-    return OK;
+    fseek(f, pos * sizeof((*produnct_list)) - sizeof((*produnct_list)), SEEK_SET);
+    
+    if (fread(produnct_list, sizeof((*produnct_list)), COUNT_READED, f) != COUNT_READED)
+        return get_err;
+    return ok;
 }
 
 int put_by_pos(FILE *const f, const int pos, const product_t product_list)
 {
     fseek(f, pos * sizeof(product_list) - sizeof(product_list), SEEK_SET);
+
     if (fwrite(&product_list, sizeof(product_list), COUNT_WRITE, f) != COUNT_WRITE)
-    {
-        return PUT_ERR;
-    }
-    return OK;
+        return put_err;
+
+    return ok;
 }
 
 int copy_file(FILE *const f1, FILE *const f2)
 {
     product_t product;
-    int size = size_counter(f1);
+    int size = size_count(f1);
 
-    for (int i = 1; i <= size; i++)
+    for (int i = 0; i <= size; i++)
     {
-        if (get_by_pos(f1, i, &product) != OK)
-        {
-            return GET_ERR;
-        }
-        if (put_by_pos(f2, i, product) != OK)
-        {
-            return PUT_ERR;
-        }
+        if (get_by_pos(f1, i, &product) != ok)
+            return get_err;
+        
+        if (put_by_pos(f2, i, product) != ok)
+            return put_err;
     }
 
-    return OK;
+    return ok;
 }
 
 int sort_file(FILE *const f)
 {
     product_t pr1, pr2, temp;
-    const int size = size_counter(f);
+    const int size = size_count(f);
 
     for (int i = 1; i < size; i++)
     {
-        int min_ind = i;
+        int mid_ind = i;
         for (int j = i + 1; j <= size; j++)
         {
-            if (get_by_pos(f, j, &pr1) != OK)
-            {
-                return GET_ERR;
-            }
-            if (get_by_pos(f, min_ind, &pr2) != OK)
-            {
-                return GET_ERR;
-            }
+            if (get_by_pos(f, j, &pr1) != ok)
+                return get_err;
+
+            if (get_by_pos(f, mid_ind, &pr2) != ok)
+                return get_err;
 
             if (pr1.price > pr2.price)
-            {
-                min_ind = j;
-            }
+                mid_ind = j;
+            
             if (pr1.price == pr2.price)
             {
                 if (pr1.count > pr2.count)
                 {
-                    min_ind = j;
+                    mid_ind = j;
                 }
             }
         }
-        if (get_by_pos(f, i, &temp) != OK)
-        {
-            return GET_ERR;
-        }
-        if (get_by_pos(f, min_ind, &pr1) != OK)
-        {
-            return GET_ERR;
-        }
-
-        if (put_by_pos(f, i, pr1) != OK)
-        {
-            return PUT_ERR;
-        }
-        if (put_by_pos(f, min_ind, temp) != OK)
-        {
-            return PUT_ERR;
-        }
+        if (get_by_pos(f, i, &temp) != ok)
+            return get_err;
+        
+        if (get_by_pos(f, mid_ind, &pr1) != ok)
+            return get_err;
+        
+        if (put_by_pos(f, i, pr1) != ok)
+            return put_err;
+        
+        if (put_by_pos(f, mid_ind, temp) != ok)
+            return put_err;
     }
-
-    return OK;
+    return ok;
 }
 
 int check_substr(const char *const name, const char *const substr)
 {
     int len_name = strlen(name) - 1;
     int len_substr = strlen(substr) - 1;
-    
+
     while (len_substr >= 0)
     {
         if (name[len_name] != substr[len_substr])
-        {
             return FALSE;
-        }
         --len_substr;
         --len_name;
     }
-
     return TRUE;
 }
 
-
-void printstruct(const product_t product)
+void display_struct(const product_t product)
 {
     printf("%s\n", product.name);
-    printf("%s\n", product.manafacturer);
+    printf("%s\n", product.manafaturer);
     printf("%u\n", product.price);
     printf("%u\n", product.count);
 }
 
-void print_file(FILE *const f)
+void display_file(FILE *const f)
 {
     product_t temp_struct;
     fseek(f, 0, SEEK_SET);
+    
     while (fread(&temp_struct, sizeof(temp_struct), 1, f))
     {
-        printstruct(temp_struct);
+        display_struct(temp_struct);
     }
 }
 
@@ -175,68 +160,54 @@ int info_items(FILE *const f, const char *const substr)
 {
     product_t product;
     int count = 0;
-    const int size = size_counter(f);
+    const int size = size_count(f);
 
-    for (int i = 1; i <= size; i++) 
+    for (int i = 1; i <= size; i++)
     {
-        if (get_by_pos(f, i, &product) != OK)
-        {
-            return GET_ERR;
-        }
+        if (get_by_pos(f, i, &product) != ok)
+            return get_err;
 
         if (check_substr(product.name, substr))
         {
             ++count;
-            printstruct(product);
+            display_struct(product);
         }
     }
+    if (count == 0)
+        return no_substr;
 
-    if (0 == count)
-    {
-        return NO_SUBSTR;
-    }
-
-    return OK;
+    return ok;
 }
 
 int add_info(FILE *const f, const product_t temp)
 {
     product_t prod;
-    const int size = size_counter(f);
+    const int size = size_count(f);
     int pos = 1;
 
     for (int i = 1; i <= size; i++)
     {
-        if (get_by_pos(f, i, &prod) != OK)
-        {
-            return GET_ERR;
-        }
-
+        if (get_by_pos(f, i, &prod) != ok)
+            return get_err;
+        
         if ((temp.price == prod.price && temp.count > prod.count) || (temp.price > prod.price))
-        {
             break;
-        }
         ++pos;
     }
-    
+
     for (int i = size; i >= pos; i--)
     {
-        if (get_by_pos(f, i, &prod) != OK)
-        {
-            return GET_ERR;
-        }
-        if (put_by_pos(f, (i + 1), prod) != OK)
-        {
-            return PUT_ERR;
-        }
+        if (get_by_pos(f, i, &prod) != ok)
+            return get_err;
+        
+        if (put_by_pos(f, (i + 1), prod) != ok)
+            return put_err;
     }
 
-    if (put_by_pos(f, pos, temp) != OK)
-    {
-        return PUT_ERR;
-    }
+    if (put_by_pos(f, pos, temp) != ok)
+        return put_err;
     
-   return OK;
+    return ok;
 }
 
 int enter_structure(FILE *const f)
@@ -245,153 +216,82 @@ int enter_structure(FILE *const f)
     memset(&temp_struct, 0, sizeof(product_t));
     puts("Enter name: ");
     if (scanf("%s", temp_struct.name) != COUNT_READED)
-    {
-        return ERR_INPUT;
-    }
+        return input_err;
+    
     puts("Enter manafacturer: ");
-    if (scanf("%s", temp_struct.manafacturer) != COUNT_READED)
-    {
-        return ERR_INPUT;
-    }
+    if (scanf("%s", temp_struct.manafaturer) != COUNT_READED)
+        return input_err;
+    
     puts("Enter price: ");
     if (scanf("%u", &temp_struct.price) != COUNT_READED)
-    {
-        return ERR_INPUT;
-    }
+        return input_err;
+
     puts("Enter count: ");
     if (scanf("%u", &temp_struct.count) != COUNT_READED)
-    {
-        return ERR_INPUT;
-    }
-
+        return input_err;
+    
     int code_err = add_info(f, temp_struct);
-    if (code_err != OK)
-    {
+    if (code_err != ok)
         return code_err;
-    }
-
-    return OK;
+    
+    return ok;
 }
 
 int check_size(FILE *const f)
 {
-    const int size = size_counter(f);
-    if (0 == size)
+    const int size = size_count(f);
+    
+    if (size == 0)
     {
-        puts("File is empty");
-        return EMPTY_FILE;
+        puts("file is empty");
+        return empty_file;
     }
-    return OK;
+    return ok;
 }
 
-int main(const int argc, const char *const argv[])
+int main(int argc, char **argv)
 {
     setbuf(stdout, NULL);
-    FILE *f; 
+    FILE *f;
 
     if (argc < MIN_ARGS)
     {
-        puts("Invalid args!");
-        return ERROR_ARGS;
+        puts("invalid args!\n");
+        return error_args;
     }
 
     if (!strcmp(argv[KEY_ARGS], "sb"))
     {
         FILE *f1;
+
         if (argc < MIN_ARGS + 1 || argv[FILE_NAME + 1] == NULL)
         {
-            puts("Invalid args!");
-            return ERROR_ARGS;
+            puts("invalid args");
+            return error_args;
         }
+
         if ((f1 = fopen(argv[FILE_NAME + 1], "w+b")) == NULL || (f = fopen(argv[FILE_NAME], "rb")) == NULL)
         {
-            puts("Cant open file");
-            return FILE_ERR;
-        }
-        if (check_size(f))
-        {
-            fclose(f);
-            return EMPTY_FILE;
-        }
-
-        int code_err = copy_file(f, f1);
-        if (code_err != OK)
-        {
-            fclose(f);
-            fclose(f1);
-            return code_err;
-        }
-        code_err = sort_file(f1);
-        if (code_err != OK)
-        {
-            fclose(f);
-            fclose(f1);
-            return code_err;
-        }
-
-        print_file(f1);
-        fclose(f);
-        fclose(f1);
-
-        return OK;
-    }
-
-    if (!strcmp(argv[KEY_ARGS], "fb"))
-    {
-        if (argc < MIN_ARGS + 1 || argv[FILE_NAME + 1] == NULL)
-        {
-            puts("Invalid args!");
-            return ERROR_ARGS;
-        }
-
-        if ((f = fopen(argv[FILE_NAME], "rb")) == NULL)
-        {
-            puts("Cant open file");
-            return FILE_ERR;
+            puts("programm's cant open file");
+            return file_err;
         }
 
         if (check_size(f))
         {
             fclose(f);
-            return EMPTY_FILE;
-        }
-
-        const int code_err = info_items(f, argv[FILE_NAME + 1]);
-        if (code_err != OK)
-        {
-            fclose(f);
-            return code_err;
-        }
-        fclose(f);
-
-        return OK; 
-    }
-
-    if (!strcmp(argv[KEY_ARGS], "ab"))
-    {
-        if ((f = fopen(argv[FILE_NAME], "r+b")) == NULL)
-        {
-            puts("Cant open file");
-            return FILE_ERR;
-        }
-        
-        if (check_size(f))
-        {
-            fclose(f);
-            return EMPTY_FILE;
+            return empty_file;
         }
 
         const int code_err = enter_structure(f);
-        if (code_err != OK)
+        if (code_err != ok)
         {
             fclose(f);
             return code_err;
         }
-        puts("Info was added");
+        puts("info was added");
         fclose(f);
 
-        return OK;
+        return ok;
     }
-
-    return ERROR_ARGS;    
+    return error_args;
 }
