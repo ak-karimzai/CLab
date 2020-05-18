@@ -11,6 +11,7 @@
 #define KEY_ARGS 1
 #define N 100
 #define M 4
+#define ARGS_ERR 53
 
 #define TRUE 1
 #define FALSE 0
@@ -18,7 +19,6 @@
 enum type_error
 {
     ok,
-    error_args = 53,
     file_err,
     input_err,
     get_err,
@@ -257,7 +257,7 @@ int main(int argc, char **argv)
     if (argc < MIN_ARGS)
     {
         puts("invalid args!\n");
-        return error_args;
+        return ARGS_ERR;
     }
 
     if (!strcmp(argv[KEY_ARGS], "sb"))
@@ -267,7 +267,7 @@ int main(int argc, char **argv)
         if (argc < MIN_ARGS + 1 || argv[FILE_NAME + 1] == NULL)
         {
             puts("invalid args");
-            return error_args;
+            return ARGS_ERR;
         }
 
         if ((f1 = fopen(argv[FILE_NAME + 1], "w+b")) == NULL || (f = fopen(argv[FILE_NAME], "rb")) == NULL)
@@ -293,5 +293,5 @@ int main(int argc, char **argv)
 
         return ok;
     }
-    return error_args;
+    return ARGS_ERR;
 }
