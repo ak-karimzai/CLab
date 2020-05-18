@@ -18,7 +18,7 @@
 enum type_error
 {
     ok,
-    error_args,
+    error_args = 53,
     file_err,
     input_err,
     get_err,
