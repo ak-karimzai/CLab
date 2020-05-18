@@ -102,9 +102,7 @@ int sort_file(FILE *const f)
             if (pr1.price == pr2.price)
             {
                 if (pr1.count > pr2.count)
-                {
                     mid_ind = j;
-                }
             }
         }
         if (get_by_pos(f, i, &temp) != ok)
@@ -251,7 +249,6 @@ int check_size(FILE *const f)
 
 int main(int argc, char **argv)
 {
-    setbuf(stdout, NULL);
     FILE *f;
 
     if (argc < MIN_ARGS)
@@ -273,6 +270,71 @@ int main(int argc, char **argv)
         if ((f1 = fopen(argv[FILE_NAME + 1], "w+b")) == NULL || (f = fopen(argv[FILE_NAME], "rb")) == NULL)
         {
             puts("programm's cant open file");
+            return file_err;
+        }
+
+        if (check_size(f))
+        {
+            fclose(f);
+            return empty_file;
+        }
+
+        int code_err = enter_structure(f);
+        if (code_err != ok)
+        {
+            fclose(f);
+            fclose(f1);
+            return code_err;
+        }
+        code_err = sort_file(f1);
+        if (code_err != ok)
+        {
+            fclose(f);
+            fclose(f1);
+            return code_err;
+        }
+
+        display_file(f1);
+        fclose(f);
+        fclose(f1);
+
+        return ok;
+    }
+    if (!strcmp(argv[KEY_ARGS], "fb"))
+    {
+        if (argc < MIN_ARGS + 1 || argv[FILE_NAME + 1] == NULL)
+        {
+            puts("invalid args!");
+            return ARGS_ERR;
+        }
+
+        if ((f = fopen(argv[FILE_NAME], "rb")) == NULL)
+        {
+            puts("cant open file");
+            return file_err;
+        }
+
+        if (check_size(f))
+        {
+            fclose(f);
+            return empty_file;
+        }
+        const int code_err = info_items(f, argv[FILE_NAME + 1]);
+        if (code_err != ok)
+        {
+            fclose(f);
+            return code_err;
+        }
+        fclose(f);
+
+        return ok;
+    }
+
+    if (!strcmp(argv[KEY_ARGS], "ab"))
+    {
+        if ((f = fopen(argv[FILE_NAME], "rb")) == NULL)
+        {
+            puts("cant open file");
             return file_err;
         }
 
