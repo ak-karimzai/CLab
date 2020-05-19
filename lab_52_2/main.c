@@ -239,7 +239,7 @@ int add_info(FILE *const f, const product_t temp)
         return put_err;
     }
     
-   return ok;
+    return ok;
 }
 
 int enter_structure(FILE *const f)
