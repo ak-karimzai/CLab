@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define N 100
 
-typedef struct array
+typedef struct
 {
     int a[N];
     int n;
@@ -11,6 +12,7 @@ typedef struct array
 
 void add_to_array(arr *a)
 {
+    //printf("%d", a->n);
     for (int i = 0; i < a->n; i++)
     {
         a->a[i] = rand();
@@ -36,70 +38,60 @@ void sort_arr(arr *a)
     }
 }
 
+void display(arr array)
+{
+    for (int i = 0; i < array.n; i++)
+    {
+        printf("%d ", array.a[i]);
+    }
+}
+
 int main(int argc, char **argv)
 {
     arr in_arr, out_arr;
-    FILE *in, *out;
-    in_arr.n = atoi(argv[2]);
-
-    if (in_arr.n == 0 || in_arr.n > 100)
+    FILE *in;
+    if (argc < 2) return -1;
+    if (strcmp(argv[1], "c") == 0)
     {
-        return 1;
-    }
-
-    in = fopen("p_file.bin", "wb");
-    
-    if (in == NULL)
-    {
-        return 1;
-    }
-    
-    add_to_array(&in_arr);
-    size_t element = fwrite(&in_arr, sizeof(arr), 1, in);
-    
-    fclose(in);
-
-    if (element == 0)
-    {
-        return 2;
-    }
-    if (argv[1][0] == 'p')
-    {
-        out = fopen("p_file.bin", "rb");
-
-        element = fread(&out_arr, sizeof(arr), 1, out);
-        
-        fclose(out);
-        
-        if (element == 0)
-        {
-            return 3;
-        }
-        
-        for (int i = 0; i < out_arr.n; i++)
-        {
-            printf("%d ", out_arr.a[i]);
-        }
-    }
-    
-    else if (argv[1][0] == 's')
-    {
-        sort_arr(&out_arr);
-
-        in = fopen(argv[1], "wb");
-        
+        in_arr.n = atoi(argv[2]);
+        //printf("%d", in_arr.n);
+        in = fopen(argv[3], "wb");
         if (in == NULL)
-            return 1;
-        
-        element = fwrite(&out_arr, sizeof(arr), 1, in);
-        
-        fclose(in);
-        
+            return -1;
+        add_to_array(&in_arr);
+        size_t element = fwrite(&in_arr, sizeof(arr), 1, in);
         if (element == 0)
-        {
-            return 3;
-        }
+            return 1;
+        //display(in_arr);
+        fclose(in);
+        return 0;
     }
-
-    return 0;
+    if (strcmp(argv[1], "p") == 0)
+    {
+        in = fopen(argv[2], "rb");
+        fseek(in, 0, SEEK_SET);
+        size_t element = fread(&out_arr, sizeof(arr), 1, in);
+        if (element == 0) 
+            return -1;
+        display(out_arr);
+        fclose(in);
+        return 0;
+    }
+    if (strcmp(argv[1], "s") == 0)
+    {
+        in = fopen(argv[2], "rb+");
+        fseek(in, 0, SEEK_SET);
+        if (fread(&out_arr, sizeof(arr), 1, in) == 0)
+            return -1;
+        //display(out_arr);
+        sort_arr(&out_arr);
+        fseek(in, 0, SEEK_SET);
+        if (fwrite(&out_arr, sizeof(arr), 1, in) == 0)
+            return -1;
+        //display(out_arr);
+        //fseek(in, 0, SEEK_SET);
+        //fread(&out_arr, sizeof(arr), 1, in);
+        //display(out_arr);
+        return 0;
+    }
 }
