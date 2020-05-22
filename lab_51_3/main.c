@@ -4,19 +4,40 @@
 
 #define N 100
 
-typedef struct
+void add_to_array(FILE *f, int n)
 {
-    int a[N];
-    int n;
-} arr;
-
-void add_to_array(arr *a)
-{
-    //printf("%d", a->n);
-    for (int i = 0; i < a->n; i++)
+    fseek(f, 0, SEEK_SET);
+    while (n > 0)
     {
-        a->a[i] = rand();
+        int x = rand();
+        fwrite(&x, sizeof(int), 1, f);
+        n--;
     }
+}
+
+int file_size(FILE *f)
+{
+    fseek(f, 0, SEEK_END);
+    int size = ftell(f) / sizeof(int);
+    fseek(f, 0, SEEK_SET);
+
+    return size;
+}
+
+int get_by_pos(FILE *f, int pos, int *x)
+{
+    fseek(f, pos * sizeof(int) - sizeof(int), SEEK_SET);
+    if (fread(x, sizeof(int), 1, f) == 0)
+        return -1;
+    return 0;
+}
+
+int put_by_pos(FILE *f, int pos, int x)
+{
+    fseek(f, pos * sizeof(int) - sizeof(int), SEEK_SET);
+    if (fwrite(&x, sizeof(int), 1, f) == 0)
+        return -1;
+    return 0;
 }
 
 void swap(int *x, int *y)
@@ -26,72 +47,95 @@ void swap(int *x, int *y)
     *y = temp;
 }
 
-void sort_arr(arr *a)
+void sort_array(int *arr, int n)
 {
-    for (int i = 0; i < a->n; i++)
+    for (int i = 0; i < n - 1; i++)
     {
-        for (int j = i; j < a->n - 1; j++)
+        for (int j = 0; j < n - i - 1; j++)
         {
-            if (a->a[j] > a->a[j + 1])
-                swap(&a->a[j], &a->a[j + 1]);
+            if (arr[j] > arr[j + 1])
+                swap(&arr[j], &arr[j + 1]);
         }
     }
 }
 
-void display(arr array)
+int sort_arr(FILE *f, int n)
 {
-    for (int i = 0; i < array.n; i++)
+    int x;
+    int arr[N];
+    for (int i = 0; i < n; i++)
     {
-        printf("%d ", array.a[i]);
+        if (get_by_pos(f, i + 1, &x))
+            return -1;
+
+        arr[i] = x; 
+    }
+    sort_array(arr, n);
+    for (int i = 0; i < n; i++)
+    {
+        if (put_by_pos(f, i + 1, arr[i]))
+            return -1;
+    }
+    return 0;
+}
+
+void display(FILE *f, int n)
+{
+    int i = 0;
+    while (i < n)
+    {
+        int x;
+        get_by_pos(f, i + 1, &x);
+        printf("%d ", x);
+        i++;
     }
 }
 
 int main(int argc, char **argv)
 {
-    arr in_arr, out_arr;
     FILE *in;
-    if (argc < 2) return -1;
+
+    if (argc < 2) 
+        return -1;
+    
     if (strcmp(argv[1], "c") == 0)
     {
-        in_arr.n = atoi(argv[2]);
-        //printf("%d", in_arr.n);
+        int n = atoi(argv[2]);
+        
         in = fopen(argv[3], "wb");
+        
         if (in == NULL)
             return -1;
-        add_to_array(&in_arr);
-        size_t element = fwrite(&in_arr, sizeof(arr), 1, in);
-        if (element == 0)
-            return 1;
-        //display(in_arr);
+
+        add_to_array(in, n);
+
         fclose(in);
         return 0;
     }
+
     if (strcmp(argv[1], "p") == 0)
     {
         in = fopen(argv[2], "rb");
-        fseek(in, 0, SEEK_SET);
-        size_t element = fread(&out_arr, sizeof(arr), 1, in);
-        if (element == 0) 
+        
+        if (in == NULL)
             return -1;
-        display(out_arr);
+
+        int n = file_size(in);
+
+        display(in, n);
         fclose(in);
         return 0;
     }
+    
     if (strcmp(argv[1], "s") == 0)
     {
         in = fopen(argv[2], "rb+");
-        fseek(in, 0, SEEK_SET);
-        if (fread(&out_arr, sizeof(arr), 1, in) == 0)
+        
+        int n = file_size(in);
+        
+        if (sort_arr(in, n))
             return -1;
-        //display(out_arr);
-        sort_arr(&out_arr);
-        fseek(in, 0, SEEK_SET);
-        if (fwrite(&out_arr, sizeof(arr), 1, in) == 0)
-            return -1;
-        //display(out_arr);
-        //fseek(in, 0, SEEK_SET);
-        //fread(&out_arr, sizeof(arr), 1, in);
-        //display(out_arr);
+
         return 0;
     }
 }
