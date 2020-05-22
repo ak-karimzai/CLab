@@ -141,11 +141,11 @@ int fill_new_info(product *new_info)
             new_info->manufacturer[j] = '\0';
             break;
         }
-    const int rc = scanf("%d\n%d", &(new_info->price), &(new_info->quantity));
+    
+    int rc = scanf("%d\n%d", &(new_info->price), &(new_info->quantity));
+    
     if (rc != 2)
-    {
         return fill_err;
-    }
 
     return ok;
 }
@@ -205,7 +205,7 @@ int main(int argc, char **argv)
             fclose(f);
             return fill_err;
         }
-        FILE *f_out = fopen(argv[2], "w");
+        FILE *f_out = fopen(argv[3], "w");
         if (!f_out)
         {
             fclose(f);
@@ -284,8 +284,7 @@ int main(int argc, char **argv)
         if (fill_new_info(&new_info) != ok)
             return info_err;
         
-        arr[len] = new_info;
-        len++;
+        arr[len++] = new_info;
         f = fopen(argv[2], "w");
         add_struct(arr, len);
         write_file(f, arr, len);
