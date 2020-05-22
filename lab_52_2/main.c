@@ -70,7 +70,7 @@ void write_file(FILE *f, product arr[MAX_QUANTITY_PROD], int len)
 
     for (int j = 1; j < len; j++)
     {
-        fprintf(f, "%s\n%s\n%d\n%d", arr[j].name, arr[j].manufacturer, arr[j].price, arr[j].quantity);
+        fprintf(f, "\n%s\n%s\n%d\n%d", arr[j].name, arr[j].manufacturer, arr[j].price, arr[j].quantity);
     }
 }
 
@@ -200,7 +200,7 @@ int main(int argc, char **argv)
         product arr[MAX_QUANTITY_PROD];
         int len = fill(f, arr);
 
-        if (len < 0)
+        if (len <= 0)
         {
             fclose(f);
             return fill_err;
