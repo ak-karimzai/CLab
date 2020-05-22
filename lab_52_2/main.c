@@ -36,7 +36,7 @@ int my_strstr(char const *const str, char const *const str_sub, int len_sub)
         len_str++;
     if (len_str < len_sub)
         return FALSE;
-    for (int i = len_sub - 1, j = len_str - 1; i >=0; i--, j--)
+    for (int i = len_sub - 1, j = len_str - 1; i >= 0; i--, j--)
     {
         if (str[j] != str_sub[i])
             return FALSE;
@@ -146,7 +146,7 @@ int fill_new_info(product *new_info)
     {
         return fill_err;
     }
-    
+
     return ok;
 }
 
