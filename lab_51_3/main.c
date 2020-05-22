@@ -95,12 +95,14 @@ int main(int argc, char **argv)
 {
     FILE *in;
 
-    if (argc < 2) 
+    if (argc < 3) 
         return -1;
     
     if (strcmp(argv[1], "c") == 0)
     {
         int n = atoi(argv[2]);
+        if (n == 0)
+            return -1;
         
         in = fopen(argv[3], "wb");
         
@@ -121,9 +123,14 @@ int main(int argc, char **argv)
             return -1;
 
         int n = file_size(in);
+        
+        if (n == 0)
+            return -1;
 
         display(in, n);
+
         fclose(in);
+        
         return 0;
     }
     
@@ -132,6 +139,9 @@ int main(int argc, char **argv)
         in = fopen(argv[2], "rb+");
         
         int n = file_size(in);
+
+        if (n == 0)
+            return -1;
         
         if (sort_arr(in, n))
             return -1;
