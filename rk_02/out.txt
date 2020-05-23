@@ -1,0 +1,7 @@
+Name of five city Max Population:
+
+city № 1: Angarsk
+city № 2: Abakan
+city № 3: Al'met'evsk
+city № 4: Azov
+city № 5: Aleksin
