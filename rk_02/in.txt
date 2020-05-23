@@ -1,6 +1,6 @@
 Velikiy Novgorod
-800
 218724
+800
 Abaza
 17111
 1867
@@ -91,3 +91,9 @@ Angarsk
 Andreapol'
 8265
 1907
+Moscow
+15000000
+1243
+kaluga
+1400000
+1000

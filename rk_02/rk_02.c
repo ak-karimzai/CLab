@@ -6,8 +6,14 @@ typedef struct
 {
     char city[101];
     int year;
-    int pop;
+    long long pop;
 } city_r;
+
+enum type_error
+{
+    ok,
+    error
+};
 
 void swap_struct(city_r *x, city_r *y)
 {
@@ -32,17 +38,20 @@ void process(FILE *in, FILE *out)
     {
         if (feof(in))
             break;
+
         fgets(arr[n].city, 101, in);
+        
         for (int i = 0; i < 101; i++)
         {
             if (arr[n].city[i] == '\n')
                 arr[n].city[i] = '\0';
         }
-        fscanf(in, "%d %d\n", &arr[n].pop, &arr[n].year);
+        
+        fscanf(in, "%I64d %d\n", &arr[n].pop, &arr[n].year);
         n++;
     }
     sort_struct(arr, n);
-    fprintf(out, "Name of five city Max Population:\n\n");
+    fprintf(out, "Name of five city with Max Population:\n\n");
     for (int i = 0; i < 5; i++)
     {
         fprintf(out, "city № %d: %s\n", i + 1, arr[i].city);
@@ -54,15 +63,15 @@ int main()
     FILE *in, *out;
     in = fopen("in.txt", "r");
     if (!in)
-        return -1;
+        return error;
 
     if (feof(in))
-        return -1;
+        return error;
 
     out = fopen("out.txt", "w");
     
     if (!out)
-        return -1;
+        return error;
     
     process(in, out);
 
@@ -70,5 +79,5 @@ int main()
     
     fclose(out);
     
-    return 0;    
+    return ok;    
 }
