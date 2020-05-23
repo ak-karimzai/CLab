@@ -64,6 +64,7 @@ void display(int *a, int n)
     }
 }
 
+
 void delete(int *a, int *n, int j)
 {
     for (; j < *n - 1; j++)
