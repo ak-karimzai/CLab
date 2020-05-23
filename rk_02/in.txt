@@ -1,8 +1,8 @@
 Velikiy Novgorod
 
-218724
-
 800
+
+218724
 
 Abaza
 
@@ -57,12 +57,6 @@ Azov
 82882
 
 1067
-
-kaluga
-
-1400000
-
-1000
 
 Ak-Dovurak
 
@@ -178,26 +172,14 @@ Anapa
 
 1781
 
-Angarsk
+Abakan
 
 233765
 
 1948
-
-Voronezh
-
-111111111
-
-1000
 
 Andreapol'
 
 8265
 
 1907
-
-Moscow
-
-15000000
-
-1243
