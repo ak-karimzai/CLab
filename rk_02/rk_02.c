@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <string.h>
+
 #define N 1300
+#define MAX_CITY_NAME 101
 
 typedef struct 
 {
-    char city[101];
+    char city[MAX_CITY_NAME];
     int year;
     long long pop;
 } city_r;
@@ -30,10 +32,12 @@ void sort_struct(city_r *arr, int n)
            if (arr[j].pop < arr[j+1].pop) 
               swap_struct(&arr[j], &arr[j+1]);
 }
-void process(FILE *in, FILE *out)
+
+int process(FILE *in, FILE *out)
 {
     city_r arr[N];
     int n = 0;
+    
     while (1)
     {
         if (feof(in))
@@ -57,6 +61,7 @@ void process(FILE *in, FILE *out)
         fprintf(out, "%s\n", arr[i].city);
     }
     //printf("%d", n);
+    return n;
 }
 
 int main()
@@ -74,7 +79,10 @@ int main()
     if (!out)
         return error;
     
-    process(in, out);
+    int len = process(in, out);
+
+    if (len == 0)
+        return error;
 
     fclose(in);
     
