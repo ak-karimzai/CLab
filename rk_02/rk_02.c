@@ -47,15 +47,16 @@ void process(FILE *in, FILE *out)
                 arr[n].city[i] = '\0';
         }
         
-        fscanf(in, "%I64d %d\n", &arr[n].pop, &arr[n].year);
+        fscanf(in, "\n%I64d \n%d\n", &arr[n].pop, &arr[n].year);
         n++;
     }
     sort_struct(arr, n);
-    fprintf(out, "Name of five city with Max Population:\n\n");
+    //fprintf(out, "Name of five city with Max Population:\n\n");
     for (int i = 0; i < 5; i++)
     {
-        fprintf(out, "city № %d: %s\n", i + 1, arr[i].city);
+        fprintf(out, "%s\n", arr[i].city);
     }
+    //printf("%d", n);
 }
 
 int main()
