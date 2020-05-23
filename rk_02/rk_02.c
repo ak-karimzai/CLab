@@ -43,9 +43,9 @@ int process(FILE *in, FILE *out)
         if (feof(in))
             break;
 
-        fgets(arr[n].city, 101, in);
+        fgets(arr[n].city, MAX_CITY_NAME, in);
         
-        for (int i = 0; i < 101; i++)
+        for (int i = 0; i < MAX_CITY_NAME; i++)
         {
             if (arr[n].city[i] == '\n')
                 arr[n].city[i] = '\0';
