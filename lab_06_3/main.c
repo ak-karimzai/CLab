@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "readstructures.c"
 
 #define ARRAY_SIZE 15
 #define PRODUCT_NAME_MAX_SIZE 25
