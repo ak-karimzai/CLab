@@ -13,33 +13,31 @@ enum error_code
 
 typedef struct
 {
-    char product_name[NAME_MAX_SIZE];
+    char product_name[NAME_MAX_SIZE + 1];
     int price;
 } product;
 
 int read_from_file(FILE *f, product *pro, int *n)
 {
+    int rc = ok;
     for (int i = 0; i < *n; i++)
     {
-        fgets(pro[i].product_name, NAME_MAX_SIZE, f);
-        int flag;
-        for (int j = 0; j < NAME_MAX_SIZE; j++)
+        fgets(pro[i].product_name, NAME_MAX_SIZE + 1, f);
+        for (int j = 0; j < NAME_MAX_SIZE + 1; j++)
         {
-            flag = 0;
             if (pro[i].product_name[j] == '\n')
             {
                 pro[i].product_name[j] = '\0';
-                flag = 1;
                 break;
             }
+            if (j == NAME_MAX_SIZE)
+                rc = read_err;
         }
-        if (!flag)
-            return read_err;
 
         if (fscanf(f, "%d\n", &pro[i].price) != 1)
-            return read_err;    
+            rc = read_err;    
     }
-    return 0;
+    return rc;
 }
 
 void print_to_screen(const product *pro, const int *n, const int *p)
