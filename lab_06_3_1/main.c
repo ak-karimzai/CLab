@@ -30,8 +30,8 @@ int main(int argc, char **argv)
         return read_err;
     }
 
-    // if (read_from_file(input_file, pro, num_of_products))
-    //     return read_err;
+    if (read_from_file(input_file, pro, num_of_products))
+        return read_err;
 
     // puts("Enter your price:");
     // int user_price;
