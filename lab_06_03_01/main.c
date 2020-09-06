@@ -13,7 +13,7 @@ enum error_code
 
 typedef struct
 {
-    char product_name[NAME_MAX_SIZE + 1];
+    char product_name[NAME_MAX_SIZE];
     int price;
 } product;
 
@@ -22,16 +22,14 @@ int read_from_file(FILE *f, product *pro, int *n)
     int rc = ok;
     for (int i = 0; i < *n; i++)
     {
-        fgets(pro[i].product_name, NAME_MAX_SIZE + 1, f);
-        for (int j = 0; j < NAME_MAX_SIZE + 1; j++)
+        fgets(pro[i].product_name, NAME_MAX_SIZE, f);
+        for (int j = 0; j < NAME_MAX_SIZE; j++)
         {
             if (pro[i].product_name[j] == '\n')
             {
                 pro[i].product_name[j] = '\0';
                 break;
             }
-            if (j == NAME_MAX_SIZE)
-                rc = read_err;
         }
 
         if (fscanf(f, "%d\n", &pro[i].price) != 1)
@@ -59,6 +57,8 @@ int main(int argc, char **argv)
 
     FILE *input_file;
     product pro[ARRAY_MAX_SIZE];
+    int p;
+    scanf("%d", &p);
 
     input_file = fopen(argv[1], "r");
     if (!input_file || feof(input_file))
@@ -77,11 +77,10 @@ int main(int argc, char **argv)
 
     if (read_from_file(input_file, pro, &num_of_products)) 
     {
+        // fprintf(stderr, "Problem in reading\n");
         return read_err;
     }
 
-    int p;
-    scanf("%d", &p);
     print_to_screen(pro, &num_of_products, &p);
     return ok;
 }
