@@ -30,17 +30,17 @@ int main(int argc, char **argv)
         return read_err;
     }
 
-    if (read_from_file(input_file, pro, num_of_products))
-        return read_err;
+    // if (read_from_file(input_file, pro, num_of_products))
+    //     return read_err;
 
-    puts("Enter your price:");
-    int user_price;
-    if (scanf("%d", &user_price) != 1)
-    {
-        fprintf(stderr, "Uncorrect Input\n");
-        return read_err;
-    }
+    // puts("Enter your price:");
+    // int user_price;
+    // if (scanf("%d", &user_price) != 1)
+    // {
+    //     fprintf(stderr, "Uncorrect Input\n");
+    //     return read_err;
+    // }
 
-    print_to_screen(pro, num_of_products, user_price);
+    // print_to_screen(pro, num_of_products, user_price);
     return 0;
 }
