@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NAME_MAX_SIZE 27
+#define NAME_MAX_SIZE 26
 #define ARRAY_MAX_SIZE 15
 #define FILE_NAME 1
 #define PRICE 2
@@ -43,11 +43,17 @@ int read_from_file(FILE *f, product *pro, int *n)
 
 void print_to_screen(const product *pro, const int *n, const int *p)
 {
+    int flag = 1;
     for (int i = 0; i < *n; i++)
     {
         if (pro[i].price < *p)
+        {
             fprintf(stdout, "%s\n%d\n", pro[i].product_name, pro[i].price);
+            flag = 0;
+        }
     }
+    if (flag)
+        puts("Not found");
 }
 
 int main(int argc, char **argv)
