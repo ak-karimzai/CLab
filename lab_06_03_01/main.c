@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <stdio.h>
+#include <stdlib.h>
 
 #define NAME_MAX_SIZE 26
 #define ARRAY_MAX_SIZE 15
@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 {
     if (argc != 3)
     {
-        fprintf(stderr, "Usage: app.exe FILE\n");
+        fprintf(stderr, "Usage: app.exe FILE price\n");
         return arg_err;
     }
 
