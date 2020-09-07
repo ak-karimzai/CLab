@@ -52,6 +52,7 @@ void print_to_screen(const product *pro, const int *n, const int *p)
 
 int main(int argc, char **argv)
 {
+    // printf("%d", argc);
     if (argc != 3)
     {
         fprintf(stderr, "Usage: app.exe FILE price\n");
@@ -63,7 +64,7 @@ int main(int argc, char **argv)
     int p = atoi(argv[PRICE]);
     if (!p)
         return read_err;
-    //printf("%d\n", p);
+    // printf("%d\n", p);
 
     input_file = fopen(argv[FILE_NAME], "r");
     if (!input_file || feof(input_file))
