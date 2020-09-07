@@ -58,9 +58,8 @@ int main(int argc, char **argv)
 
     FILE *input_file;
     product pro[ARRAY_MAX_SIZE];
-    int p = 0;
-    p = atoi(argv[2]);
-    if (!p)
+    int p = atoi(argv[2]);
+    if (p == 0)
         return read_err;
     //printf("%d\n", p);
 
