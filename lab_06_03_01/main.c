@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdio.h>
 
 #define NAME_MAX_SIZE 26
 #define ARRAY_MAX_SIZE 15
@@ -49,7 +50,7 @@ void print_to_screen(const product *pro, const int *n, const int *p)
 
 int main(int argc, char **argv)
 {
-    if (argc != 2)
+    if (argc != 3)
     {
         fprintf(stderr, "Usage: app.exe FILE\n");
         return arg_err;
@@ -57,8 +58,11 @@ int main(int argc, char **argv)
 
     FILE *input_file;
     product pro[ARRAY_MAX_SIZE];
-    int p;
-    scanf("%d", &p);
+    int p = 0;
+    p = atoi(argv[2]);
+    if (!p)
+        return read_err;
+    //printf("%d\n", p);
 
     input_file = fopen(argv[1], "r");
     if (!input_file || feof(input_file))
