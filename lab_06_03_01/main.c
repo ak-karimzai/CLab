@@ -41,13 +41,18 @@ int read_from_file(FILE *f, product *pro, int *n)
     return rc;
 }
 
-void print_to_screen(const product *pro, const int *n, const int *p)
+int print_to_screen(const product *pro, const int *n, const int *p)
 {
+    int flag = 1;
     for (int i = 0; i < *n; i++)
     {
         if (pro[i].price < *p)
+        {
             fprintf(stdout, "%s\n%d\n", pro[i].product_name, pro[i].price);
+            flag = 0;
+        }
     }
+    return flag;
 }
 
 int main(int argc, char **argv)
@@ -87,6 +92,7 @@ int main(int argc, char **argv)
         return read_err;
     }
     fclose(input_file);
-    print_to_screen(pro, &num_of_products, &p);
+    if (print_to_screen(pro, &num_of_products, &p))
+        return read_err;
     return ok;
 }
