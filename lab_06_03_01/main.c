@@ -52,7 +52,7 @@ int main(int argc, char **argv)
 {
     if (argc != 3)
     {
-        fprintf(stderr, "Usage: app.exe FILE price\n");
+        // fprintf(stderr, "Usage: app.exe FILE price\n");
         return arg_err;
     }
 
