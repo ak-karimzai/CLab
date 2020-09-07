@@ -58,10 +58,9 @@ int main(int argc, char **argv)
 
     FILE *input_file;
     product pro[ARRAY_MAX_SIZE];
-    int p = 0;
-    p = atoi(argv[2]);
-    if (!p)
-        return read_err;
+    int p = atoi(argv[2]);
+    // if (!p)
+    //     return read_err;
     //printf("%d\n", p);
 
     input_file = fopen(argv[1], "r");
@@ -84,7 +83,7 @@ int main(int argc, char **argv)
         // fprintf(stderr, "Problem in reading\n");
         return read_err;
     }
-
+    fclose(input_file);
     print_to_screen(pro, &num_of_products, &p);
     return ok;
 }
