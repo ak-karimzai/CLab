@@ -59,14 +59,14 @@ int main(int argc, char **argv)
     FILE *input_file;
     product pro[ARRAY_MAX_SIZE];
     int p = atoi(argv[2]);
-    // if (!p)
-    //     return read_err;
+    if (!p)
+        return read_err;
     //printf("%d\n", p);
 
     input_file = fopen(argv[1], "r");
     if (!input_file || feof(input_file))
     {
-        fprintf(stderr, "I/O error\n");
+        // fprintf(stderr, "I/O error\n");
         return file_err;
     }
 
@@ -74,7 +74,7 @@ int main(int argc, char **argv)
     fscanf(input_file, "%d\n", &num_of_products);
     if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
     {
-        fprintf(stderr, "Incorrect input\n");
+        // fprintf(stderr, "Incorrect input\n");
         return read_err;
     }
 
