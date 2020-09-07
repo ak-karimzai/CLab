@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NAME_MAX_SIZE 26
+#define NAME_MAX_SIZE 27
 #define ARRAY_MAX_SIZE 15
+#define FILE_NAME 1
+#define PRICE 2
 
 enum error_code
 {
@@ -52,18 +54,18 @@ int main(int argc, char **argv)
 {
     if (argc != 3)
     {
-        // fprintf(stderr, "Usage: app.exe FILE price\n");
+        fprintf(stderr, "Usage: app.exe FILE price\n");
         return arg_err;
     }
 
     FILE *input_file;
     product pro[ARRAY_MAX_SIZE];
-    int p = atoi(argv[2]);
+    int p = atoi(argv[PRICE]);
     if (!p)
         return read_err;
     //printf("%d\n", p);
 
-    input_file = fopen(argv[1], "r");
+    input_file = fopen(argv[FILE_NAME], "r");
     if (!input_file || feof(input_file))
     {
         // fprintf(stderr, "I/O error\n");
