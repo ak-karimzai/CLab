@@ -78,7 +78,8 @@ int main(int argc, char **argv)
     rewind(input_file);
 
     int num_of_products;
-    fscanf(input_file, "%d\n", &num_of_products);
+    if (fscanf(input_file, "%d\n", &num_of_products) != 1)
+        return read_err;
     if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
     {
         // fprintf(stderr, "Incorrect input\n");
