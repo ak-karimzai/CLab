@@ -73,6 +73,9 @@ int main(int argc, char **argv)
         return file_err;
     }
 
+    if (fgetc() == EOF)
+        return read_err;
+
     int num_of_products;
     fscanf(input_file, "%d\n", &num_of_products);
     if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
