@@ -20,7 +20,7 @@ typedef struct
     int price;
 } product;
 
-int read_from_file(FILE *f, product *pro, int *n)
+int read_from_file(FILE *f, product *pro, const int *n)
 {
     int rc = ok;
     for (int i = 0; i < *n; i++)
