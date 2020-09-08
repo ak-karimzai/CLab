@@ -73,7 +73,7 @@ int main(int argc, char **argv)
         return file_err;
     }
 
-    if (fgetc() == EOF)
+    if (fgetc(input_file) == EOF)
         return read_err;
 
     int num_of_products;
