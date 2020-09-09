@@ -94,7 +94,7 @@ int main(int argc, char **argv)
     if (read_from_file(input_file, pro, &num_of_products)) 
     {
         // fprintf(stderr, "Problem in reading\n");
-        return read_err;
+        return file_err;
     }
     fclose(input_file);
     print_to_screen(pro, &num_of_products, &p);
