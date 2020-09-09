@@ -87,7 +87,10 @@ int main(int argc, char **argv)
         }
     }
     else
+    {
+        fprintf(stderr, "Incorrect file\n");
         return file_err;
+    }
 
     if (read_from_file(input_file, pro, &num_of_products)) 
     {
