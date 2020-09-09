@@ -55,7 +55,7 @@ int main(int argc, char **argv)
     // printf("%d", argc);
     if (argc != 3)
     {
-        fprintf(stderr, "Usage: app.exe FILE price\n");
+        // fprintf(stderr, "Usage: app.exe FILE price\n");
         return arg_err;
     }
 
@@ -88,7 +88,6 @@ int main(int argc, char **argv)
     }
     else
     {
-        fprintf(stderr, "Incorrect file\n");
         return file_err;
     }
 
