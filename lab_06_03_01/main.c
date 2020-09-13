@@ -83,11 +83,11 @@ int main(int argc, char **argv)
     fscanf(input_file, "%d\n", &num_of_products);
     //  == 1)
     // {
-    if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
+    /*if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
     {
         // fprintf(stderr, "Incorrect input\n");
         return read_err;
-    }
+    }*/
     /*}
     else
     {
