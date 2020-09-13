@@ -75,31 +75,30 @@ int main(int argc, char **argv)
 
     if (fgetc(input_file) == EOF)
         return read_err;
-    rewind(input_file);
+    else
+        rewind(input_file);
 
-    
     int num_of_products;
-    // if (
-    fscanf(input_file, "%d\n", &num_of_products);
-    //  == 1)
-    // {
-    /*if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
+    if (fscanf(input_file, "%d\n", &num_of_products) == 1)
     {
-        // fprintf(stderr, "Incorrect input\n");
-        return read_err;
-    }*/
-    /*}
+        if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
+        {
+            // fprintf(stderr, "Incorrect input\n");
+            return read_err;
+        }
+    }
     else
     {
         return file_err;
-    }*/
+    }
 
     if (read_from_file(input_file, pro, &num_of_products)) 
     {
         // fprintf(stderr, "Problem in reading\n");
         return file_err;
     }
+ 
     fclose(input_file);
     print_to_screen(pro, &num_of_products, &p);
-    return ok;
+    return -1;
 }
