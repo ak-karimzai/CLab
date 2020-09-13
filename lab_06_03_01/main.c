@@ -100,5 +100,5 @@ int main(int argc, char **argv)
  
     fclose(input_file);
     print_to_screen(pro, &num_of_products, &p);
-    return -1;
+    return ok;
 }
