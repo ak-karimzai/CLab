@@ -56,14 +56,14 @@ int main(int argc, char **argv)
     if (argc != 3)
     {
         // fprintf(stderr, "Usage: app.exe FILE price\n");
-        return file_err;
+        return arg_err;
     }
 
     FILE *input_file;
     product pro[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
     if (!p)
-        return file_err;
+        return arg_err;
     // printf("%d\n", p);
 
     input_file = fopen(argv[FILE_NAME], "r");
@@ -74,23 +74,25 @@ int main(int argc, char **argv)
     }
 
     if (fgetc(input_file) == EOF)
-        return file_err;
+        return read_err;
     rewind(input_file);
 
     
     int num_of_products;
-    if (fscanf(input_file, "%d\n", &num_of_products) == 1)
+    // if (
+    fscanf(input_file, "%d\n", &num_of_products);
+    //  == 1)
+    // {
+    if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
     {
-        if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
-        {
-            // fprintf(stderr, "Incorrect input\n");
-            return file_err;
-        }
+        // fprintf(stderr, "Incorrect input\n");
+        return read_err;
     }
+    /*}
     else
     {
         return file_err;
-    }
+    }*/
 
     if (read_from_file(input_file, pro, &num_of_products)) 
     {
