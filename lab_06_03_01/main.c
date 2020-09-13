@@ -74,7 +74,7 @@ int main(int argc, char **argv)
     }
 
     if (fgetc(input_file) == EOF)
-        return read_err;
+        return file_err;
     rewind(input_file);
 
     
@@ -84,7 +84,7 @@ int main(int argc, char **argv)
         if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
         {
             // fprintf(stderr, "Incorrect input\n");
-            return read_err;
+            return file_err;
         }
     }
     else
