@@ -61,17 +61,17 @@ int main(int argc, char **argv)
 
     FILE *input_file;
     product pro[ARRAY_MAX_SIZE];
-    int p = atoi(argv[PRICE]);
-    if (!p)
-        return arg_err;
     // printf("%d\n", p);
-
     input_file = fopen(argv[FILE_NAME], "r");
     if (!input_file || feof(input_file))
     {
         // fprintf(stderr, "I/O error\n");
         return file_err;
     }
+
+    int p = atoi(argv[PRICE]);
+    if (!p)
+        return arg_err;
 
     if (fgetc(input_file) == EOF)
         return read_err;
