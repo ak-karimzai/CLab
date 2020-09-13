@@ -36,6 +36,7 @@ int read_from_file(FILE *input, product *products, int *num_of_products)
             if (products[i].product_name[j] == '\n')
             {
                 products[i].product_name[j] = '\0';
+                break;
             }
         }
         if (fscanf(input, "%d\n", &products[i].price) != 1)
@@ -63,7 +64,7 @@ int main(int argc, char **argv)
     }
     else if (feof(input_file))
     {
-            return error;
+        return error;
     }
     else if (fgetc(input_file) == EOF)
     {
