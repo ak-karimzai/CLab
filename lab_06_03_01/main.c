@@ -9,7 +9,7 @@
 enum error_code
 {
     ok,
-    file_err,
+    file_err = -3,
     read_err,
     arg_err
 };
@@ -77,6 +77,7 @@ int main(int argc, char **argv)
         return read_err;
     rewind(input_file);
 
+    
     int num_of_products;
     if (fscanf(input_file, "%d\n", &num_of_products) == 1)
     {
