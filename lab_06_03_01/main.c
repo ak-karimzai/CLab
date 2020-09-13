@@ -69,14 +69,14 @@ int main(int argc, char **argv)
         return file_err;
     }
 
-    int p = atoi(argv[PRICE]);
-    if (!p)
-        return arg_err;
-
     if (fgetc(input_file) == EOF)
         return read_err;
     else
         rewind(input_file);
+
+    int p = atoi(argv[PRICE]);
+    if (!p)
+        return arg_err;
 
     int num_of_products;
     if (fscanf(input_file, "%d\n", &num_of_products) == 1)
