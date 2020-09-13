@@ -11,7 +11,7 @@ enum error_code
     ok,
     file_err = -3,
     read_err,
-    arg_err
+    arg_err = 53
 };
 
 typedef struct
@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     product pro[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
     if (!p)
-        return read_err;
+        return arg_err;
     // printf("%d\n", p);
 
     input_file = fopen(argv[FILE_NAME], "r");
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
     }
     else
     {
-        return ok;
+        return file_err;
     }
 
     if (read_from_file(input_file, pro, &num_of_products)) 
