@@ -56,14 +56,14 @@ int main(int argc, char **argv)
     if (argc != 3)
     {
         // fprintf(stderr, "Usage: app.exe FILE price\n");
-        return arg_err;
+        return file_err;
     }
 
     FILE *input_file;
     product pro[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
     if (!p)
-        return arg_err;
+        return file_err;
     // printf("%d\n", p);
 
     input_file = fopen(argv[FILE_NAME], "r");
