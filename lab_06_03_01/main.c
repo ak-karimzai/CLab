@@ -9,9 +9,7 @@
 enum error_code
 {
     ok,
-    file_err = -3,
-    read_err,
-    arg_err = 53
+    error
 };
 
 typedef struct
@@ -20,85 +18,72 @@ typedef struct
     int price;
 } product;
 
-int read_from_file(FILE *f, product *pro, const int *n)
+int read_from_file(FILE *input, product *products, int *num_of_products)
 {
-    int rc = ok;
-    for (int i = 0; i < *n; i++)
+    if (fscanf(input, "%d\n", num_of_products) == 1)
     {
-        fgets(pro[i].product_name, NAME_MAX_SIZE, f);
+        if (*num_of_products > ARRAY_MAX_SIZE || *num_of_products <= 0)
+            return error;
+    }
+    else
+        return error;
+    
+    for (int i = 0; i < *num_of_products; i++)
+    {
+        fgets(products[i].product_name, NAME_MAX_SIZE, input);
         for (int j = 0; j < NAME_MAX_SIZE; j++)
         {
-            if (pro[i].product_name[j] == '\n')
+            if (products[i].product_name[j] == '\n')
             {
-                pro[i].product_name[j] = '\0';
-                break;
+                products[i].product_name[j] = '\0';
             }
         }
-
-        if (fscanf(f, "%d\n", &pro[i].price) != 1)
-            rc = read_err;    
+        if (fscanf(input, "%d\n", &products[i].price) != 1)
+            return error;
     }
-    return rc;
+    return ok;
 }
 
-void print_to_screen(const product *pro, const int *n, const int *p)
+void display_to_screen(product *products, const int num_of_prod, const int price)
 {
-    for (int i = 0; i < *n; i++)
-    {
-        if (pro[i].price < *p)
-            fprintf(stdout, "%s\n%d\n", pro[i].product_name, pro[i].price);
-    }
+    for (int i = 0; i < num_of_prod; i++)
+        if (products[i].price < price)
+            fprintf(stdout, "%s\n%d\n", products[i].product_name, products[i].price);
 }
 
 int main(int argc, char **argv)
 {
-    // printf("%d", argc);
     if (argc != 3)
+        return error;
+    
+    FILE *input_file = fopen(argv[FILE_NAME], "r");
+    if (!input_file)
     {
-        // fprintf(stderr, "Usage: app.exe FILE price\n");
-        return arg_err;
+        return error;
     }
-
-    FILE *input_file;
-    product pro[ARRAY_MAX_SIZE];
-    // printf("%d\n", p);
-    input_file = fopen(argv[FILE_NAME], "r");
-    if (!input_file || feof(input_file))
+    else if (feof(input_file))
     {
-        // fprintf(stderr, "I/O error\n");
-        return file_err;
+            return error;
     }
-
-    if (fgetc(input_file) == EOF)
-        return read_err;
+    else if (fgetc(input_file) == EOF)
+    {
+        return error;
+    }
     else
+    {
         rewind(input_file);
-
+    }
+    
+    product products[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
     if (!p)
-        return arg_err;
-
+        return error;
+    
     int num_of_products;
-    if (fscanf(input_file, "%d\n", &num_of_products) == 1)
-    {
-        if (num_of_products > ARRAY_MAX_SIZE || num_of_products <= 0)
-        {
-            // fprintf(stderr, "Incorrect input\n");
-            return read_err;
-        }
-    }
-    else
-    {
-        return file_err;
-    }
-
-    if (read_from_file(input_file, pro, &num_of_products)) 
-    {
-        // fprintf(stderr, "Problem in reading\n");
-        return file_err;
-    }
- 
+    if (read_from_file(input_file, products, &num_of_products))
+        return error;
+    
+    display_to_screen(products, num_of_products, p);
     fclose(input_file);
-    print_to_screen(pro, &num_of_products, &p);
     return ok;
 }
