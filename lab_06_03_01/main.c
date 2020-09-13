@@ -79,6 +79,10 @@ int main(int argc, char **argv)
     int p = atoi(argv[PRICE]);
     if (!p)
         return error;
+    else if (p < 0)
+    {
+        return error;
+    }
     
     int num_of_products;
     if (read_from_file(input_file, products, &num_of_products))
