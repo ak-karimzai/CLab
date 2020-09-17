@@ -76,9 +76,13 @@ int main(int argc, char **argv)
         rewind(input_file);
     }
     
+    for (size_t i = 0; i < strlen(argv[PRICE]); i++)
+        if (!(argv[PRICE][i] >= '0' && argv[PRICE][i] <= '9'))
+            return error;
+
     product products[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
-    if (!p || strlen(argv[PRICE]) != 0)
+    if (!p)
         return error;
     
     int num_of_products;
