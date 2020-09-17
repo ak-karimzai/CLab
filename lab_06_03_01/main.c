@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define NAME_MAX_SIZE 26
 #define ARRAY_MAX_SIZE 15
@@ -77,12 +78,8 @@ int main(int argc, char **argv)
     
     product products[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
-    if (!p)
+    if (!p || strlen(argv[PRICE]))
         return error;
-    else if (p < 0)
-    {
-        return error;
-    }
     
     int num_of_products;
     if (read_from_file(input_file, products, &num_of_products))
