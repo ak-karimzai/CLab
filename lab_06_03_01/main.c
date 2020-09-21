@@ -58,7 +58,7 @@ int check(const char *str)
     int flag = ok;
     while (str[i])
     {
-        if (str[i] <= '0' || str[i] > '9')
+        if (str[i] < '0' || str[i] > '9')
         {
             flag = error;
             break;
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
     {
         return error;
     }
-        
+
     int num_of_products;
     if (read_from_file(input_file, products, &num_of_products))
         return error;
