@@ -101,7 +101,7 @@ int main(int argc, char **argv)
     {
         return error;
     }
-    
+        
     int num_of_products;
     if (read_from_file(input_file, products, &num_of_products))
         return error;
