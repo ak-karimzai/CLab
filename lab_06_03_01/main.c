@@ -52,6 +52,22 @@ void display_to_screen(product *products, const int num_of_prod, const int price
             fprintf(stdout, "%s\n%d\n", products[i].product_name, products[i].price);
 }
 
+int check(const char *str)
+{
+    int i = 0;
+    int flag = ok;
+    while (str[i])
+    {
+        if (str[i] <= '0' || str[i] > '9')
+        {
+            flag = error;
+            break;
+        }        
+        i++;
+    }
+    return flag;
+}
+
 int main(int argc, char **argv)
 {
     if (argc != 3)
@@ -77,6 +93,8 @@ int main(int argc, char **argv)
     
     product products[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
+    if (check(argv[PRICE]) != ok)
+        return error;
     if (!p)
         return error;
     else if (p < 0)
