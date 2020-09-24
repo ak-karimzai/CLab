@@ -41,6 +41,8 @@ int read_from_file(FILE *input, product *products, int *num_of_products)
         }
         if (fscanf(input, "%d\n", &products[i].price) != 1)
             return error;
+        if (products[i].price <= 0)
+            return error;
     }
     return ok;
 }
@@ -93,10 +95,6 @@ int main(int argc, char **argv)
     
     product products[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
-    if (check(argv[PRICE]) != ok)
-        return error;
-    if (!p || p <= 0)
-        return error;
 
     int num_of_products;
     if (read_from_file(input_file, products, &num_of_products))
