@@ -1,5 +1,77 @@
+<<<<<<< HEAD
 #include "main.h"
 #include "functions.h"
+=======
+#include <stdio.h>
+#include <stdlib.h>
+
+#define NAME_MAX_SIZE 26
+#define ARRAY_MAX_SIZE 15
+#define FILE_NAME 1
+#define PRICE 2
+
+enum error_code
+{
+    ok,
+    error
+};
+
+typedef struct
+{
+    char product_name[NAME_MAX_SIZE];
+    int price;
+} product;
+
+int read_from_file(FILE *input, product *products, int *num_of_products)
+{
+    if (fscanf(input, "%d\n", num_of_products) == 1)
+    {
+        if (*num_of_products > ARRAY_MAX_SIZE || *num_of_products <= 0)
+            return error;
+    }
+    else
+        return error;
+    
+    for (int i = 0; i < *num_of_products; i++)
+    {
+        fgets(products[i].product_name, NAME_MAX_SIZE, input);
+        for (int j = 0; j < NAME_MAX_SIZE; j++)
+        {
+            if (products[i].product_name[j] == '\n')
+            {
+                products[i].product_name[j] = '\0';
+                break;
+            }
+        }
+        if (fscanf(input, "%d\n", &products[i].price) != 1 || products[i].price <= 0)
+            return error;
+    }
+    return ok;
+}
+
+void display_to_screen(product *products, const int num_of_prod, const int price)
+{
+    for (int i = 0; i < num_of_prod; i++)
+        if (products[i].price < price)
+            fprintf(stdout, "%s\n%d\n", products[i].product_name, products[i].price);
+}
+
+int check(const char *str)
+{
+    int i = 0;
+    int flag = ok;
+    while (str[i])
+    {
+        if (str[i] < '0' || str[i] > '9')
+        {
+            flag = error;
+            break;
+        }
+        i++;
+    }
+    return flag;
+}
+>>>>>>> 59fff9e5c862b0edc6aad7d7d86dfb06361b575c
 
 int main(int argc, char **argv)
 {
@@ -26,7 +98,11 @@ int main(int argc, char **argv)
     
     product products[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
+<<<<<<< HEAD
     if (!p || p <= 0)
+=======
+    if (!p || p < 0)
+>>>>>>> 59fff9e5c862b0edc6aad7d7d86dfb06361b575c
         return error;
 
     int num_of_products;

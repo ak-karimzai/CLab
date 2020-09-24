@@ -21,7 +21,7 @@ int read_from_file(FILE *input, product *products, int *num_of_products)
                 break;
             }
         }
-        if (fscanf(input, "%d\n", &products[i].price) != 1)
+        if (fscanf(input, "%d\n", &products[i].price) != 1 || products[i].price <= 0)
             return error;
     }
     return ok;
