@@ -1,6 +1,9 @@
 cc := gcc
 cflags := -std=c99 -Wall -Werror -pedantic
 
+run: main.exe
+	./main.exe
+
 main.exe: sort.o main.o
 	$(cc) $^ -o $@
 
