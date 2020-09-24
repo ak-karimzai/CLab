@@ -39,9 +39,7 @@ int read_from_file(FILE *input, product *products, int *num_of_products)
                 break;
             }
         }
-        if (fscanf(input, "%d\n", &products[i].price) != 1)
-            return error;
-        if (products[i].price <= 0)
+        if (fscanf(input, "%d\n", &products[i].price) != 1 || products[i].price <= 0)
             return error;
     }
     return ok;
@@ -64,7 +62,7 @@ int check(const char *str)
         {
             flag = error;
             break;
-        }        
+        }
         i++;
     }
     return flag;
@@ -95,6 +93,8 @@ int main(int argc, char **argv)
     
     product products[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
+    if (!p || p < 0)
+        return error;
 
     int num_of_products;
     if (read_from_file(input_file, products, &num_of_products))
