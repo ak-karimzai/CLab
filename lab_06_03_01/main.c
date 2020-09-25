@@ -26,7 +26,7 @@ int main(int argc, char **argv)
     
     product products[ARRAY_MAX_SIZE];
     int p = atoi(argv[PRICE]);
-    if (!p || p <= 0)
+    if (p <= 0)
         return error;
 
     int num_of_products;
