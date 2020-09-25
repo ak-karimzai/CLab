@@ -63,6 +63,7 @@ int main(int argc, char **argv)
                         {
                             mysort(arr_lhs, (arr_rhs - arr_lhs) / sizeof(int), sizeof(arr[0]), compare_int);
                             write_objs_in_file(output_file, arr_lhs, arr_rhs);
+                            free(arr_lhs);
                         }
                         else
                             rc = error;

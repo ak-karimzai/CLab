@@ -17,11 +17,6 @@ int compare_int(void *lhs, void *rhs)
     return *(int *)(lhs) < *(int *)(rhs);
 }
 
-int compare_char(void *lhs, void *rhs)
-{
-    return *(char *)(lhs) < *(char *)(rhs);
-}
-
 char *charof(void *pointer, const int iteration, const size_t size)
 {
     return (char *)(pointer) + iteration * size;
