@@ -25,7 +25,7 @@ int main(int argc, char **argv)
                 arr = read_objs_from_file(input_file, num_of_objs);
                 if (arr)
                 {
-                    mysort(arr, arr + num_of_objs, sizeof(arr[0]), compare_int);
+                    mysort(arr, num_of_objs, sizeof(arr[0]), compare_int);
                     write_objs_in_file(output_file, arr, arr + num_of_objs);
                 }
                 else
@@ -61,7 +61,7 @@ int main(int argc, char **argv)
                         // printf("\n%d\n", 3344);
                         if (key(arr, arr + num_of_objs, &arr_lhs, &arr_rhs) == ok)
                         {
-                            mysort(arr, arr + num_of_objs, sizeof(arr[0]), compare_int);
+                            mysort(arr_lhs, (arr_rhs - arr_lhs) / sizeof(int), sizeof(arr[0]), compare_int);
                             write_objs_in_file(output_file, arr_lhs, arr_rhs);
                         }
                         else
