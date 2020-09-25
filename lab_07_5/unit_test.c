@@ -33,13 +33,6 @@ void test_sort()
     }
 }
 
-void test_key(void)
-{
-    {
-    int arr[] = {19
-    }
-}
-
 int main()
 {
     test_sort();
