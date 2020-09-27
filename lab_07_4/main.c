@@ -5,14 +5,14 @@ int main(int argc, char **argv)
 {
     int rc = error;
     FILE *input_file, *output_file;
-    int *arr;
+    int *arr = NULL;
     int num_of_objs;
     if (argc == 3)
     {
         // puts(argv[INPUT_FILE]);
         input_file = fopen(argv[INPUT_FILE], "r");
         output_file = fopen(argv[OUTPUT_FILE], "w");
-        if (!input_file || !output_file)
+        if (input_file == NULL || output_file == NULL)
         {
             // puts("error");
             rc = error;
@@ -33,10 +33,10 @@ int main(int argc, char **argv)
             }
             else
                 rc = error;
+            fclose(output_file);
+            fclose(input_file);
+            free(arr);
         }
-        fclose(output_file);
-        fclose(input_file);
-        free(arr);
     }
     else if (argc == 4)
     {
@@ -44,7 +44,7 @@ int main(int argc, char **argv)
         {
             input_file = fopen(argv[INPUT_FILE], "r");
             output_file = fopen(argv[OUTPUT_FILE], "w");
-            if (!input_file || !output_file)
+            if (input_file == NULL || output_file == NULL)
             {
                 // puts("error");
                 rc = error;
@@ -57,26 +57,30 @@ int main(int argc, char **argv)
                     arr = read_objs_from_file(input_file, num_of_objs);
                     if (arr)
                     {
-                        int *arr_lhs, *arr_rhs;
+                        int *arr_lhs = NULL, *arr_rhs = NULL;
                         // printf("\n%d\n", 3344);
-                        if (key(arr, arr + num_of_objs, &arr_lhs, &arr_rhs) == ok)
+                        // printf("%d sdad\n", key(arr, arr + num_of_objs, &arr_lhs, &arr_rhs));
+                        if (key(arr, arr + num_of_objs, &arr_lhs, &arr_rhs) != ok)
                         {
-                            mysort(arr_lhs, (arr_rhs - arr_lhs) / sizeof(int), sizeof(arr[0]), compare_int);
-                            write_objs_in_file(output_file, arr_lhs, arr_rhs);
-                            free(arr_lhs);
+                            // puts("Hey i'm here");
+                            rc = error;
                         }
                         else
-                            rc = error;
+                        {
+                            mysort(arr_lhs, (arr_rhs - arr_lhs), sizeof(arr_rhs[0]), compare_int);
+                            write_objs_in_file(output_file, arr_lhs, arr_rhs);
+                        }
+                        free(arr_lhs);
+                        free(arr);
                     }
                     else
                         rc = error;
                 }
                 else
                     rc = error;
+                fclose(output_file);
+                fclose(input_file);
             }
-            fclose(output_file);
-            fclose(input_file);
-            free(arr);
         }
         else
             rc = error; 

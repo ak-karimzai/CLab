@@ -4,7 +4,7 @@ cflags := -std=c99 -Wall -Werror -pedantic
 run: app.exe
 	./app.exe
 
-unit_tests.exe: unit_test.o sort.o
+unit_tests.exe: unit_test.o sort.o function.o
 	$(cc) $^ -o $@
 
 app.exe: sort.o main.o function.o

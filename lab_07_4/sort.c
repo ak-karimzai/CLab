@@ -3,7 +3,7 @@
 
 typedef int (*compare)(void *lhs, void *rhs);
 
-void swap_all_types(void *lhs, void *rhs, const size_t size)
+void swap(void *lhs, void *rhs, const size_t size)
 {
     void *tmp = malloc(size);
     memcpy(tmp, lhs, size);
@@ -33,6 +33,6 @@ void mysort(void *arr_lhs, size_t num_of_elements, const size_t size, compare co
             if (comp(charof(arr_lhs, j, size), charof(arr_lhs, k, size)))
                 k = j;
         }
-        swap_all_types(charof(arr_lhs, i, size), charof(arr_lhs, k, size), size);
+        swap(charof(arr_lhs, i, size), charof(arr_lhs, k, size), size);
     }
 }
