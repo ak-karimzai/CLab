@@ -1,30 +1,34 @@
 cc := gcc
 cflags := -std=c99 -Wall -Werror -pedantic
+head = ./inc/
+src = ./src/
+unit.test = ./unit_test/
+obj = ./obj/
 
-run: app.exe
-	./app.exe
+run: app.exe 
+	./app.exe ./functional_tests/pos_in_1.txt .out
 
 unit_tests.exe: unit_test.o sort.o function.o
 	$(cc) $^ -o $@
 
-app.exe: sort.o main.o function.o
+app.exe: $(obj)sort.o $(obj)main.o $(obj)function.o
 	$(cc) $^ -o $@
 
-sort.o: sort.c
-	$(cc) $(cflags) -c $<
+$(obj)sort.o: $(src)sort.c
+	$(cc) $(cflags) -c $< -o $@
 
-function.o: function.c function.h main.h
-	$(cc) $(cflags) -c $<
+$(obj)function.o: $(src)function.c $(head)function.h $(head)main.h
+	$(cc) -I$(head) $(cflags) -c $< -o $@
 
-unit_test.o: unit_test.c function.h main.h
-	$(cc) $(cflags) -c $<
+$(obj)unit_test.o: $(unit.test)unit_test.c $(head)unit_function.h $(head)main.h
+	$(cc) -I$(head) $(cflags) -c $< -o $@
 
-main.o: main.c main.h
-	$(cc) $(cflags) -c $<
+$(obj)main.o: main.c $(head)main.h
+	$(cc) -I$(head) $(cflags) -c $< -o $@
 
 del: clean
 
 .PHONY: clean
 
 clean:
-	rm -rf *.exe *.o
+	rm -rf *.exe $(obj)*.o .out
