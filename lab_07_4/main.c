@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv)
 {
-    int rc = error;
+    int rc = ok;
     FILE *input_file, *output_file;
     int *arr = NULL;
     int num_of_objs;
