@@ -39,42 +39,51 @@ int *read_objs_from_file(FILE *file, const int num_of_objs)
     return rc == ok ? arr : NULL;
 }
 
-int get_num_of_elements(const int *arr_lhs, const int *arr_rhs, int *avg)
+int get_num_of_elements(const int *arr_lhs, const int *arr_rhs, int *sum)
 {
-    int count, i;
-    *avg = count = i = 0;
-    for (; arr_lhs + i != arr_rhs; i++)
-        *avg += *(arr_lhs + i);
-    *avg /= i; 
-    // printf("%d", *avg);
-    if (*avg == 0)
-        return error;
+    // printf("%d", *(arr_rhs - 1));
+    int count = 0;
+    *sum =  0;
+    for (const int *p = arr_lhs; p != arr_rhs; p++)
+    {
+        *sum += *p;
+    }
 
-    for (i = 0; arr_lhs + i != arr_rhs; i++)
-        if (*(arr_lhs + i) > *avg)
+    if (*sum == 0)
+        return count;
+
+    int tmp_sum = *sum;
+    for (const int *p = arr_lhs; p != arr_rhs - 1; p++)
+    {
+        tmp_sum -= *p;
+        if (*p > tmp_sum)
             count++;
+    }
     return count;
 }
 
-void add_elements_to_array(int *dst_arr, const int *src_arr_lhs, const int *src_arr_rhs, const int avg)
+void add_elements_to_array(int *dst_arr, const int *src_arr_lhs, const int *src_arr_rhs, int sum)
 {
     int i = 0;
-    for (; src_arr_lhs != src_arr_rhs; src_arr_lhs++)
-        if (*(src_arr_lhs) > avg)
+    for (; src_arr_lhs != src_arr_rhs - 1; src_arr_lhs++)
+    {
+        sum -= *src_arr_lhs;
+        if (*(src_arr_lhs) > sum)
             *(dst_arr + i++) = *src_arr_lhs;
+    }
 }
 
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 {
     // int rc = ok;
-    int count = 0, avg;
-    if (!pb_src)
+    int count = 0, sum;
+    if (!pb_src || pe_src - pb_src <= 0)
     {
         *pb_dst = *pe_dst = NULL;
         return error;
     }
     
-    count = get_num_of_elements(pb_src, pe_src, &avg);
+    count = get_num_of_elements(pb_src, pe_src, &sum);
     // printf("%d\n", count);
     if (count == 0)
         return error;
@@ -86,9 +95,10 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
         return error;
     }
     
-    add_elements_to_array(*pb_dst, pb_src, pe_src, avg);
+    add_elements_to_array(*pb_dst, pb_src, pe_src, sum);
     // printf("%d\n", count);
     *pe_dst = *pb_dst + count;
+    
     return ok;
 }
 

@@ -62,7 +62,6 @@ int main(int argc, char **argv)
                         // printf("%d sdad\n", key(arr, arr + num_of_objs, &arr_lhs, &arr_rhs));
                         if (key(arr, arr + num_of_objs, &arr_lhs, &arr_rhs) != ok)
                         {
-                            // puts("Hey i'm here");
                             rc = error;
                         }
                         else
@@ -70,8 +69,8 @@ int main(int argc, char **argv)
                             mysort(arr_lhs, (arr_rhs - arr_lhs), sizeof(arr_rhs[0]), compare_int);
                             write_objs_in_file(output_file, arr_lhs, arr_rhs);
                         }
-                        free(arr_lhs);
                         free(arr);
+                        free(arr_lhs);
                     }
                     else
                         rc = error;
