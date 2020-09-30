@@ -1,18 +1,18 @@
 #include <string.h>
-// #include <stdlib.h>
+#include <stdlib.h>
 
 typedef int (*compare)(void *lhs, void *rhs);
 
-void swap(void *lhs, void *rhs)
+void swap(void *lhs, void *rhs, size_t size)
 {
-    // void *tmp = calloc(size, sizeof(char));
-    // memcpy(tmp, lhs, size);
-    // memcpy(lhs, rhs, size);
-    // memcpy(rhs, tmp, size);
-    // free(tmp);
-    int temp = *(int *)(lhs);
-    *(int *)(lhs) = *(int *)(rhs);
-    *(int *)(rhs) = temp;
+    void *tmp = calloc(size, sizeof(char));
+    memcpy(tmp, lhs, size);
+    memcpy(lhs, rhs, size);
+    memcpy(rhs, tmp, size);
+    free(tmp);
+    // int temp = *(int *)(lhs);
+    // *(int *)(lhs) = *(int *)(rhs);
+    // *(int *)(rhs) = temp;
 }
 
 int compare_int(void *lhs, void *rhs)
@@ -36,6 +36,6 @@ void mysort(void *arr_lhs, const size_t num_of_elements, const size_t size, comp
             if (comp(charof(arr_lhs, j, size), charof(arr_lhs, k, size)))
                 k = j;
         }
-        swap(charof(arr_lhs, i, size), charof(arr_lhs, k, size));
+        swap(charof(arr_lhs, i, size), charof(arr_lhs, k, size), size);
     }
 }
