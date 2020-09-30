@@ -41,7 +41,6 @@ int *read_objs_from_file(FILE *file, const int num_of_objs)
 
 int get_num_of_elements(const int *arr_lhs, const int *arr_rhs, int *sum)
 {
-    // printf("%d", *(arr_rhs - 1));
     int count = 0;
     *sum =  0;
     for (const int *p = arr_lhs; p != arr_rhs; p++)

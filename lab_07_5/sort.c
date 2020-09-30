@@ -17,7 +17,7 @@ void swap(void *lhs, void *rhs, size_t size)
 
 int compare_int(void *lhs, void *rhs)
 {
-    return *(int *)(lhs) < *(int *)(rhs);
+    return *(int *)(lhs) - *(int *)(rhs) < 0 ? -1 : 1;
 }
 
 char *charof(void *pointer, const int iteration, const size_t size)
