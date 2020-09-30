@@ -17,7 +17,7 @@ void swap(void *lhs, void *rhs, size_t size)
 
 int compare_int(void *lhs, void *rhs)
 {
-    return *(int *)(lhs) - *(int *)(rhs) < 0 ? -1 : 1;
+    return *(int *)(lhs) - *(int *)(rhs);
 }
 
 char *charof(void *pointer, const int iteration, const size_t size)
@@ -33,7 +33,7 @@ void mysort(void *arr_lhs, const size_t num_of_elements, const size_t size, comp
         k = i;
         for (int j = i + 1; j < num_of_elements; j++)
         {
-            if (comp(charof(arr_lhs, j, size), charof(arr_lhs, k, size)) == 1)
+            if (comp(charof(arr_lhs, j, size), charof(arr_lhs, k, size)) > 0)
                 k = j;
         }
         swap(charof(arr_lhs, i, size), charof(arr_lhs, k, size), size);
