@@ -8,10 +8,10 @@ obj = ./obj/
 #run: app.exe 
 #	./app.exe ./functional_tests/pos_in_1.txt .out
 
-unit_tests.exe: $(obj)unit_test.o $(obj)sort.o $(obj)function.o
+app.exe: $(obj)sort.o $(obj)main.o $(obj)output.o $(obj)input.o $(obj)key.o
 	$(cc) $^ -o $@
 
-app.exe: $(obj)sort.o $(obj)main.o $(obj)output.o $(obj)input.o $(obj)key.o
+unit_tests.exe: $(obj)unit_test.o $(obj)sort.o $(obj)output.o $(obj)input.o $(obj)key.o
 	$(cc) $^ -o $@
 
 $(obj)sort.o: $(src)sort.c $(head)sort_header.h
