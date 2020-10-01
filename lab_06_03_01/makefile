@@ -12,3 +12,8 @@ io.o: io.c io.h
 
 sort.o: sort.c sort.h
 	$(cc) $(cflags) -c $<
+
+.PHONY: clean
+
+clean:
+	rm -rf *.o *.exe
