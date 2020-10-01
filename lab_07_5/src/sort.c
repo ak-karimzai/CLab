@@ -1,7 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
-
-typedef int (*compare)(void *lhs, void *rhs);
+#include "../inc/sort_header.h"
 
 void swap(void *lhs, void *rhs, size_t size)
 {

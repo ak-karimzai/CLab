@@ -1,93 +1,69 @@
-#include "main.h"
-#include "function.h"
+#include "../inc/main.h"
+#include "../inc/function.h"
 
 int main(int argc, char **argv)
 {
     int rc = ok;
     FILE *input_file, *output_file;
     int *arr = NULL;
-    int num_of_objs;
+    int num_of_objs = 0;
+
     if (argc == 3)
     {
         // puts(argv[INPUT_FILE]);
         input_file = fopen(argv[INPUT_FILE], "r");
         output_file = fopen(argv[OUTPUT_FILE], "w");
         if (input_file == NULL || output_file == NULL)
-        {
-            // puts("error");
             rc = error;
-        }
         else
         {
-            num_of_objs = file_count_objs(input_file);
-            if (num_of_objs)
+            arr = procees_data_from_file(input_file, &num_of_objs);
+            if (arr)
             {
-                arr = read_objs_from_file(input_file, num_of_objs);
-                if (arr)
-                {
-                    mysort(arr, num_of_objs, sizeof(arr[0]), compare_int);
-                    write_objs_in_file(output_file, arr, arr + num_of_objs);
-                }
-                else
-                    rc = error;
+                mysort(arr, num_of_objs, sizeof(arr[0]), compare_int);
+                write_objs_in_file(output_file, arr, arr + num_of_objs);
             }
             else
                 rc = error;
+
             fclose(output_file);
             fclose(input_file);
             free(arr);
         }
     }
-    else if (argc == 4)
+    else if (argc == 4 && strcmp(argv[KEY], "f") == ok)
     {
-        if (strcmp(argv[KEY], "f") == ok)
+        input_file = fopen(argv[INPUT_FILE], "r");
+        output_file = fopen(argv[OUTPUT_FILE], "w");
+        if (input_file == NULL || output_file == NULL)
+            rc = error;
+        else
         {
-            input_file = fopen(argv[INPUT_FILE], "r");
-            output_file = fopen(argv[OUTPUT_FILE], "w");
-            if (input_file == NULL || output_file == NULL)
+            arr = procees_data_from_file(input_file, &num_of_objs);
+            if (arr)
             {
-                // puts("error");
-                rc = error;
-            }
-            else
-            {
-                num_of_objs = file_count_objs(input_file);
-                if (num_of_objs)
+                int *arr_lhs = NULL, *arr_rhs = NULL;
+                if (key(arr, arr + num_of_objs, &arr_lhs, &arr_rhs) != ok)
                 {
-                    arr = read_objs_from_file(input_file, num_of_objs);
-                    if (arr)
-                    {
-                        int *arr_lhs = NULL, *arr_rhs = NULL;
-                        // printf("\n%d\n", 3344);
-                        // printf("%d sdad\n", key(arr, arr + num_of_objs, &arr_lhs, &arr_rhs));
-                        if (key(arr, arr + num_of_objs, &arr_lhs, &arr_rhs) != ok)
-                        {
-                            rc = error;
-                        }
-                        else
-                        {
-                            mysort(arr_lhs, (arr_rhs - arr_lhs), sizeof(arr_rhs[0]), compare_int);
-                            write_objs_in_file(output_file, arr_lhs, arr_rhs);
-                        }
-                        free(arr);
-                        free(arr_lhs);
-                    }
-                    else
-                        rc = error;
+                    rc = error;
                 }
                 else
-                    rc = error;
-                fclose(output_file);
-                fclose(input_file);
+                {
+                    mysort(arr_lhs, (arr_rhs - arr_lhs), sizeof(arr_rhs[0]), compare_int);
+                    write_objs_in_file(output_file, arr_lhs, arr_rhs);
+                    free(arr_lhs);
+                }
             }
+            else
+                rc = error;
+
+            fclose(output_file);
+            fclose(input_file);
+            free(arr);
         }
-        else
-            rc = error; 
     }
     else
-    {
         rc = error;
-    }
     
     return rc;
 }

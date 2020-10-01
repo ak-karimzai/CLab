@@ -1,3 +1,6 @@
+#ifndef UNIT_FUNCTION_H
+#define UNIT_FUNCTION_H
+
 int file_count_objs(FILE *file);
 int *read_objs_from_file(FILE *file, const int num_of_objs);
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst);
@@ -7,3 +10,5 @@ void free_array(int *arr);
 int get_num_of_elements(const int *arr_lhs, const int *arr_rhs, int *avg);
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst);
 void add_elements_to_array(int *dst_arr, const int *src_arr_lhs, const int *src_arr_rhs, const int avg);
+
+#endif // UNIT_FUNCTION_H
