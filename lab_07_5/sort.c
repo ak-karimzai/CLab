@@ -27,7 +27,7 @@ char *charof(void *pointer, const int iteration, const size_t size)
 
 void mysort(void *arr_lhs, const size_t num_of_elements, const size_t size, compare comp)
 {
-    if (num_of_elements)
+    if (num_of_elements != 0)
     {
         int k;
         for (int i = 0; i < num_of_elements - 1; i++)
