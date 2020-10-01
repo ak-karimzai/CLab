@@ -1,5 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef MAIN_H
+#define MAIN_H
 
 #define NAME_MAX_SIZE 26
 #define ARRAY_MAX_SIZE 15
@@ -17,3 +17,5 @@ typedef struct
     char product_name[NAME_MAX_SIZE];
     int price;
 } product;
+
+#endif //MAIN_H
