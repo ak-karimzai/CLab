@@ -27,15 +27,18 @@ char *charof(void *pointer, const int iteration, const size_t size)
 
 void mysort(void *arr_lhs, const size_t num_of_elements, const size_t size, compare comp)
 {
-    int k;
-    for (int i = 0; i < num_of_elements - 1; i++)
+    if (arr_lhs)
     {
-        k = i;
-        for (int j = i + 1; j < num_of_elements; j++)
+        int k;
+        for (int i = 0; i < num_of_elements - 1; i++)
         {
-            if (comp(charof(arr_lhs, j, size), charof(arr_lhs, k, size)) <= -1)
-                k = j;
+            k = i;
+            for (int j = i + 1; j < num_of_elements; j++)
+            {
+                if (comp(charof(arr_lhs, j, size), charof(arr_lhs, k, size)) <= -1)
+                    k = j;
+            }
+            swap(charof(arr_lhs, i, size), charof(arr_lhs, k, size), size);
         }
-        swap(charof(arr_lhs, i, size), charof(arr_lhs, k, size), size);
     }
 }
