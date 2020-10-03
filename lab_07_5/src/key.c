@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include "../inc/key.h"
 
-int get_num_of_bigger_than_next_sum(const int *arr_lhs, const int *arr_rhs, int *sum)
+int get_num_of_elements(const int *arr_lhs, const int *arr_rhs, int *sum)
 {
     int count = 0;
     *sum = 0;
@@ -44,7 +44,7 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
         return error;
     }
     
-    count = get_num_of_bigger_than_next_sum(pb_src, pe_src, &sum);
+    count = get_num_of_elements(pb_src, pe_src, &sum);
     if (count == 0)
         return error;
     
