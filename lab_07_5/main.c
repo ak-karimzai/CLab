@@ -15,7 +15,7 @@ int main(int argc, char **argv)
         if (input_file == NULL || output_file == NULL)
             rc = error;
     }
-    else if (argc == 3 || rc == ok)
+    else if (argc == 3 && rc == ok)
     {
         arr = procees_data_from_file(input_file, &num_of_objs);
         if (arr)
