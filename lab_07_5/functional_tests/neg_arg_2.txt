@@ -1,0 +1,1 @@
+./app.exe ./functional_tests/pos_in_1.txt .out d
