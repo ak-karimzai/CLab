@@ -12,6 +12,7 @@ START_TEST(check_key_works_correctly)
     ck_assert_int_eq(function_res, ok);
     for (int *p = arr_lhs, i = 0; p != arr_rhs; p++)
         ck_assert_int_eq(*p, res_arr[i++]);
+    free(arr_lhs);
 }
 END_TEST
 
