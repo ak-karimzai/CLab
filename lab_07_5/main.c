@@ -48,7 +48,6 @@ int main(int argc, char **argv)
                     rc = error;
                 else
                 {
-                    printf("%d\n", *(arr + --num_of_objs));
                     mysort(arr_lhs, (arr_rhs - arr_lhs), sizeof(arr_rhs[0]), compare_int);
                     write_objs_in_file(output_file, arr_lhs, arr_rhs);
                     // printf("%d\n", *(arr_lhs +   1));
