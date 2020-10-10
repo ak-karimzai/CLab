@@ -6,5 +6,6 @@ int main()
     int rc = 0;
     rc += key_unit_tests();
     rc += mysort_sort_tests();
-    return rc == 2 ? EXIT_SUCCESS : EXIT_FAILURE;
+
+    return rc == EXIT_SUCCESS ? EXIT_SUCCESS : EXIT_FAILURE;
 }
