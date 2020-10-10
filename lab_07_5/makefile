@@ -1,8 +1,8 @@
 cc := gcc
 cflags := -std=c99 -Wall -Werror -pedantic
 
-uni_flags := -lcheck # windows
-#uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
+#uni_flags := -lcheck # windows
+uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
 
 
 head = ./inc/
