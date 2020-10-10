@@ -20,7 +20,7 @@ start_test(check_key_works_correctly)
 
     for (int *p = arr_lhs, i = 0; p != arr_rhs; p++)
         ck_assert_int_eq(*p, res_arr[i++]);
-        
+
     free(arr_lhs);
 }
 end_test
@@ -38,7 +38,7 @@ start_test(when_key_function_not_find_any_element)
 }
 end_test
 
-start_test(check_when_function_accepts_unvalid_data_as_a_parameter)
+start_test(check_function_accepts_unvalid_data)
 {
     int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     int *arr_lhs = NULL, *arr_rhs = NULL;
@@ -50,7 +50,7 @@ start_test(check_when_function_accepts_unvalid_data_as_a_parameter)
 }
 end_test
 
-start_test(check_when_function_accepts_null_ptr_as_a_paramenter)
+start_test(check_function_accepts_null_ptr)
 {
     int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     int *arr_lhs = NULL, *arr_rhs = NULL;
@@ -75,8 +75,8 @@ suite *check_key_fun(void)
     
     tc_neg = tcase_create("negative");
     tcase_add_test(tc_neg, when_key_function_not_find_any_element);
-    tcase_add_test(tc_neg, check_when_function_accepts_unvalid_data_as_a_parameter);
-    tcase_add_test(tc_neg, check_when_function_accepts_null_ptr_as_a_paramenter);
+    tcase_add_test(tc_neg, check_function_accepts_unvalid_data);
+    tcase_add_test(tc_neg, check_function_accepts_null_ptr);
 
     suite_add_tcase(s, tc_pos);
     suite_add_tcase(s, tc_neg);
