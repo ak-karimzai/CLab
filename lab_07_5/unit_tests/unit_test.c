@@ -7,12 +7,13 @@
 #define SUITE Suite
 #define SRUNNER SRunner
 #define TCASE TCase
+#define CKVER CK_VERBOSE
 
 START(check_key_works_crctly)
 {
     int arr[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
     int *arr_lhs = NULL, *arr_rhs = NULL;
-    int res_arr[] = {2};
+    int res_arr[] = { 2 };
 
     int function_res = key(arr, arr + 10, &arr_lhs, &arr_rhs);
     
@@ -101,7 +102,7 @@ int main(void)
     s = check_key_fun();
     runner = srunner_create(s);
 
-    srunner_run_all(runner, CK_VERBOSE);
+    srunner_run_all(runner, CKVER);
 
     no_failed = srunner_ntests_failed(runner);
 
