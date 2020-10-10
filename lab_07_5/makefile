@@ -20,7 +20,10 @@ app.exe: $(obj)sort.o $(obj)main.o $(obj)output.o $(obj)input.o $(obj)key.o
 
 #unit_tests.exe: $(unit.test)unit_test_temp.c
 #	$(cc) $(cflags) -o $@ $^
-unit_tests.exe: $(obj)unit_test.o $(obj)sort.o $(obj)key.o $(obj)key_unit_test.o $(obj)my_sort_tests.o
+#unit_tests.exe: $(obj)unit_test.o $(obj)sort.o $(obj)key.o $(obj)key_unit_test.o $(obj)my_sort_tests.o
+#	$(cc) $^ -o $@ $(uni_flags)
+
+unit_tests.exe: $(obj)unit_test.o $(obj)key.o
 	$(cc) $^ -o $@ $(uni_flags)
 
 $(obj)sort.o: $(src)sort.c $(head)sort_header.h
