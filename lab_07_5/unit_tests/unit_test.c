@@ -2,15 +2,15 @@
 #include <stdlib.h>
 #include "../inc/key_unit_test.h"
 
-#define start_test START_TEST
-#define end_test END_TEST
-#define suite Suite
-#define srunner SRunner
-#define tcase TCase
+#define START START_TEST
+#define END END_TEST
+#define SUITE Suite
+#define SRUNNER SRunner
+#define TCASE TCase
 
-start_test(check_key_works_correctly)
+START(check_key_works_crctly)
 {
-    int arr[] = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    int arr[] = { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
     int *arr_lhs = NULL, *arr_rhs = NULL;
     int res_arr[] = {2};
 
@@ -23,12 +23,11 @@ start_test(check_key_works_correctly)
 
     free(arr_lhs);
 }
-end_test
+END
 
-
-start_test(when_key_function_not_find_any_element)
+START(key_fun_not_find_ele)
 {
-    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     int *arr_lhs = NULL, *arr_rhs = NULL;
 
     int function_res = key(arr, arr + 10, &arr_lhs, &arr_rhs);
@@ -39,11 +38,11 @@ start_test(when_key_function_not_find_any_element)
     
     ck_assert_ptr_eq(arr_rhs, NULL);
 }
-end_test
+END
 
-start_test(check_function_accepts_unvalid_data)
+START(check_fun_acpt_invalid_data)
 {
-    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     int *arr_lhs = NULL, *arr_rhs = NULL;
 
     int function_res = key(arr + 10, arr, &arr_lhs, &arr_rhs);
@@ -54,11 +53,11 @@ start_test(check_function_accepts_unvalid_data)
     
     ck_assert_ptr_eq(arr_rhs, NULL);
 }
-end_test
+END
 
-start_test(check_function_accepts_null_ptr)
+START(check_fun_accepts_null_ptr)
 {
-    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
     int *arr_lhs = NULL, *arr_rhs = NULL;
 
     int function_res = key(NULL, arr + 10, &arr_lhs, &arr_rhs);
@@ -69,35 +68,35 @@ start_test(check_function_accepts_null_ptr)
     
     ck_assert_ptr_eq(arr_rhs, NULL);
 }
-end_test
+END
 
-suite *check_key_fun(void)
+SUITE *check_key_fun(void)
 {
-    suite *s;
-    tcase *tc_neg;
-    tcase *tc_pos;
+    SUITE *s;
+    TCASE *tc_neg;
+    TCASE *tc_pos;
 
     s = suite_create("key function");
     
     tc_pos = tcase_create("positive");
-    tcase_add_test(tc_pos, check_key_works_correctly);
+    tcase_add_test(tc_pos, check_key_works_crctly);
     
     tc_neg = tcase_create("negative");
-    tcase_add_test(tc_neg, when_key_function_not_find_any_element);
-    tcase_add_test(tc_neg, check_function_accepts_unvalid_data);
-    tcase_add_test(tc_neg, check_function_accepts_null_ptr);
+    tcase_add_test(tc_neg, key_fun_not_find_ele);
+    tcase_add_test(tc_neg, check_fun_acpt_invalid_data);
+    tcase_add_test(tc_neg, check_fun_accepts_null_ptr);
 
     suite_add_tcase(s, tc_pos);
     suite_add_tcase(s, tc_neg);
-    
+
     return s;
 }
 
 int main(void)
 {
     int no_failed = 0;
-    suite *s;
-    srunner *runner;
+    SUITE *s;
+    SRUNNER *runner;
 
     s = check_key_fun();
     runner = srunner_create(s);
