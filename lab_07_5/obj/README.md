@@ -1,0 +1,1 @@
+# This folder is for .o format file which will be created during compilation of program

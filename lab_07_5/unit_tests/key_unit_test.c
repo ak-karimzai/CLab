@@ -1,6 +1,6 @@
 #include <check.h>
 #include <stdlib.h>
-#include "../inc/key_unit_test.h"
+#include "../inc/unit_test_headers/key_unit_test.h"
 
 #define START START_TEST
 #define END END_TEST

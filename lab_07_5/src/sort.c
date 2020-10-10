@@ -14,7 +14,7 @@ void swap(void *lhs, void *rhs, size_t size)
     // *(int *)(rhs) = temp;
 }
 
-int compare_int(void *lhs, void *rhs)
+int compare_int(const void *lhs, const void *rhs)
 {
     return *(int *)(lhs) - *(int *)(rhs);
 }

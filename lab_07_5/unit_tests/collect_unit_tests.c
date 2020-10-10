@@ -1,6 +1,6 @@
 #include <check.h>
 #include <stdlib.h>
-#include "../inc/collect_unit_tests.h"
+#include "../inc/unit_test_headers/collect_unit_tests.h"
 
 
 int mysort_sort_tests(void)
