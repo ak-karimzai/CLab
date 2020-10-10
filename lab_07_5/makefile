@@ -1,12 +1,9 @@
 cc := gcc
 cflags := -std=c99 -Wall -Werror -pedantic
 
-uni_flags := -lcheck
-# ifeq ($(OS),Windows_NT)
-# 	uni_flags := -lcheck
-# else 
-# 	uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit
-# 	endif
+#uni_flags := -lcheck # windows
+uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
+
 
 head = ./inc/
 src = ./src/

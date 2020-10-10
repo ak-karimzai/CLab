@@ -32,8 +32,11 @@ start_test(when_key_function_not_find_any_element)
     int *arr_lhs = NULL, *arr_rhs = NULL;
 
     int function_res = key(arr, arr + 10, &arr_lhs, &arr_rhs);
+    
     ck_assert_int_eq(function_res, error);
+    
     ck_assert_ptr_eq(arr_lhs, NULL);
+    
     ck_assert_ptr_eq(arr_rhs, NULL);
 }
 end_test
@@ -44,8 +47,11 @@ start_test(check_function_accepts_unvalid_data)
     int *arr_lhs = NULL, *arr_rhs = NULL;
 
     int function_res = key(arr + 10, arr, &arr_lhs, &arr_rhs);
+    
     ck_assert_int_eq(function_res, error);
+    
     ck_assert_ptr_eq(arr_lhs, NULL);
+    
     ck_assert_ptr_eq(arr_rhs, NULL);
 }
 end_test
@@ -56,8 +62,11 @@ start_test(check_function_accepts_null_ptr)
     int *arr_lhs = NULL, *arr_rhs = NULL;
 
     int function_res = key(NULL, arr + 10, &arr_lhs, &arr_rhs);
+    
     ck_assert_int_eq(function_res, error);
+    
     ck_assert_ptr_eq(arr_lhs, NULL);
+    
     ck_assert_ptr_eq(arr_rhs, NULL);
 }
 end_test
@@ -80,6 +89,7 @@ suite *check_key_fun(void)
 
     suite_add_tcase(s, tc_pos);
     suite_add_tcase(s, tc_neg);
+    
     return s;
 }
 
