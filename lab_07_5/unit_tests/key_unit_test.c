@@ -5,7 +5,6 @@
 #define START START_TEST
 #define END END_TEST
 #define SUITE Suite
-#define SRUNNER SRunner
 #define TCASE TCase
 #define CKVER CK_VERBOSE
 
@@ -91,22 +90,4 @@ SUITE *check_key_fun(void)
     suite_add_tcase(s, tc_neg);
 
     return s;
-}
-
-int key_unit_tests(void)
-{
-    int no_failed = 0;
-    SUITE *s;
-    SRUNNER *runner;
-
-    s = check_key_fun();
-    runner = srunner_create(s);
-
-    srunner_run_all(runner, CKVER);
-
-    no_failed = srunner_ntests_failed(runner);
-
-    srunner_free(runner);
-
-    return no_failed == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }

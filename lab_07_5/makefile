@@ -1,8 +1,8 @@
 cc := gcc
 cflags := -std=c99 -Wall -Werror -pedantic
 
-uni_flags := -lcheck # windows
-#uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
+#uni_flags := -lcheck # windows
+uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
 
 
 head = ./inc/
@@ -16,7 +16,7 @@ obj = ./obj/
 app.exe: $(obj)sort.o $(obj)main.o $(obj)output.o $(obj)input.o $(obj)key.o
 	$(cc) $^ -o $@
 
-unit_tests.exe: $(obj)unit_test.o $(obj)sort.o $(obj)key.o $(obj)key_unit_test.o #$(obj)my_sort_tests.o
+unit_tests.exe: $(obj)unit_test.o $(obj)sort.o $(obj)key.o $(obj)key_unit_test.o $(obj)my_sort_tests.o $(obj)collect_unit_tests.o
 	$(cc) $^ -o $@ $(uni_flags)
 
 #unit_tests.exe: $(obj)unit_test.o $(obj)key.o
@@ -26,6 +26,9 @@ $(obj)sort.o: $(src)sort.c $(head)sort_header.h
 	$(cc) $(cflags) -c $< -o $@
 
 $(obj)key_unit_test.o: $(unit.test)key_unit_test.c $(head)key_unit_test.h
+	$(cc) $(cflags) -c $< -o $@ $(uni_flags)
+
+$(obj)collect_unit_tests.o: $(unit.test)collect_unit_tests.c $(head)collect_unit_tests.h
 	$(cc) $(cflags) -c $< -o $@ $(uni_flags)
 
 $(obj)my_sort_tests.o: $(unit.test)my_sort_tests.c $(head)mysort_unit_test.h
