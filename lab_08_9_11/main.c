@@ -122,7 +122,7 @@ int init_matrix(FILE *input_file, matrix *mat)
     return rc;
 }
 
-void fill_matrix_with_coordinate_data(matrix *mat, coordinate_data *data, int non_zero)
+void fill_mat_with_coord_data(matrix *mat, coordinate_data *data, int non_zero)
 {
     init_zero_mat(mat);
     for (int i = 0; i < non_zero; i++)
@@ -197,7 +197,7 @@ void fill_matrix_with_coordinate_data(matrix *mat, coordinate_data *data, int no
 //             if (read_coordinate_data(data, input_file, mat, non_zero_elems) != ok)
 //                 rc = error;
 //             else
-//                 fill_matrix_with_coordinate_data(mat, data, non_zero_elems);
+//                 fill_mat_with_coord_data(mat, data, non_zero_elems);
 //             free(data);
 //         }
 //         else
@@ -416,6 +416,7 @@ int gauss_solution(matrix *mat)
 
 void add_solution_to_file(const matrix *mat, FILE *output)
 {
+    fprintf(output, "%d 1\n", mat->row);
     for (int i = 0; i < mat->row; i++)
         fprintf(output, "%lf\n", mat->mat[i][mat->row]);
 }
@@ -477,6 +478,7 @@ int main(int argc, char **argv)
             matrix *mat = get_matrix_from_file(matrix_data);;
             if (mat)
             {
+                // puts("im here");
                 if (gauss_solution(mat) != ok)
                     rc = error;
                 else
