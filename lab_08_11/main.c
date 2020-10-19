@@ -10,7 +10,7 @@ enum error_code
     error
 };
 
-enum equation_condition
+enum logic_condition
 {
     false,
     true
@@ -18,7 +18,7 @@ enum equation_condition
 
 enum matrix_type
 {
-    sparse,
+    coordinate,
     dimension_mat,
     nothing
 };
@@ -28,7 +28,7 @@ typedef struct
     int row;
     int col;
     double val;
-} sparse_data;
+} coordinate_data;
 
 typedef struct 
 {
@@ -50,31 +50,31 @@ double **get_matrix(const int row, const int col)
     return rc == ok ? mat : NULL;
 }
 
-int get_matrix_type(FILE *input_file)
-{
-    int rc = nothing;
-    char *line = NULL;
-    size_t len = 0;
-    ssize_t read = getline(&line, &len, input_file);
-    if (read > 0)
-    {
-        char *temp = strtok(line, " ");
-        int count = 0;
-        while (temp != NULL)
-        {
-            if (atoi(temp))
-                count++;
-            temp = strtok(NULL, " ");
-        }
-        if (count == 2)
-            rc = dimension_mat;
-        if (count == 3)
-            rc = sparse;
-    }
-    free(line);
-    rewind(input_file);
-    return rc;
-}
+// int get_matrix_type(FILE *input_file)
+// {
+//     int rc = nothing;
+//     char *line = NULL;
+//     size_t len = 0;
+//     ssize_t read = getline(&line, &len, input_file);
+//     if (read > 0)
+//     {
+//         char *temp = strtok(line, " ");
+//         int count = 0;
+//         while (temp != NULL)
+//         {
+//             if (atoi(temp))
+//                 count++;
+//             temp = strtok(NULL, " ");
+//         }
+//         if (count == 2)
+//             rc = dimension_mat;
+//         if (count == 3)
+//             rc = coordinate;
+//     }
+//     free(line);
+//     rewind(input_file);
+//     return rc;
+// }
 
 void init_zero_mat(matrix *mat)
 {
@@ -122,128 +122,128 @@ int init_matrix(FILE *input_file, matrix *mat)
     return rc;
 }
 
-void init_matrix_with_sparse_data(matrix *mat, sparse_data *data, int non_zero)
+void fill_matrix_with_coordinate_data(matrix *mat, coordinate_data *data, int non_zero)
 {
     init_zero_mat(mat);
     for (int i = 0; i < non_zero; i++)
         memmove(&mat->mat[data[i].row][data[i].col], &data[i].val, sizeof(double));
 }
 
-int init_sparse_data(sparse_data *data, FILE *input_file, matrix *mat, const int non_zero_elems)
-{
-    int rc = ok;
-    for (int i = 0; i < non_zero_elems; i++)
-    {
-        if (fscanf(input_file, "%d", &data[i].row) == 1)
-        {
-            data[i].row--;
-            if (data[i].row < 0 || data[i].row >= mat->row)
-            {
-                rc = error;
-                break;
-            }
-        }
-        else
-        {
-            rc = error;
-            break;
-        }
-    }
-    if (rc == ok)
-    {
-        for (int i = 0; i < non_zero_elems; i++)
-        {
-            if (fscanf(input_file, "%d", &data[i].col) == 1)
-            {
-                data[i].col--;
-                if (data[i].col < 0 || data[i].col >= mat->col)
-                {
-                    rc = error;
-                    break;
-                }
-            }
-            else
-            {
-                rc = error;
-                break;
-            }
-        }
-    }
-    if (rc == ok)
-    {
-        for (int i = 0; i < non_zero_elems; i++)
-        {
-            if (fscanf(input_file, "%lf ", &data[i].val) != 1 || data[i].val == 0)
-            {
-                rc = error;
-                break;
-            }
-        }
-    }
-    return rc;
-}
+// int read_coordinate_data(coordinate_data *data, FILE *input_file, matrix *mat, const int non_zero_elems)
+// {
+//     int rc = ok;
+//     for (int i = 0; i < non_zero_elems; i++)
+//     {
+//         if (fscanf(input_file, "%d", &data[i].row) == 1)
+//         {
+//             data[i].row--;
+//             if (data[i].row < 0 || data[i].row >= mat->row)
+//             {
+//                 rc = error;
+//                 break;
+//             }
+//         }
+//         else
+//         {
+//             rc = error;
+//             break;
+//         }
+//     }
+//     if (rc == ok)
+//     {
+//         for (int i = 0; i < non_zero_elems; i++)
+//         {
+//             if (fscanf(input_file, "%d", &data[i].col) == 1)
+//             {
+//                 data[i].col--;
+//                 if (data[i].col < 0 || data[i].col >= mat->col)
+//                 {
+//                     rc = error;
+//                     break;
+//                 }
+//             }
+//             else
+//             {
+//                 rc = error;
+//                 break;
+//             }
+//         }
+//     }
+//     if (rc == ok)
+//     {
+//         for (int i = 0; i < non_zero_elems; i++)
+//         {
+//             if (fscanf(input_file, "%lf ", &data[i].val) != 1 || data[i].val == 0)
+//             {
+//                 rc = error;
+//                 break;
+//             }
+//         }
+//     }
+//     return rc;
+// }
 
-int init_sparse_matrix(FILE *input_file, matrix *mat)
-{
-    int rc = ok;
-    int non_zero_elems;
-    if (fscanf(input_file, "%d %d %d", &mat->row, &mat->col, &non_zero_elems) == 3 \
-                        && mat->row > 0 && mat->col > 0 && non_zero_elems > 0)
-    {
-        sparse_data *data = malloc(non_zero_elems * sizeof(sparse_data));
-        mat->mat = get_matrix(mat->row, mat->col);
-        if (data && mat)
-        {
-            if (init_sparse_data(data, input_file, mat, non_zero_elems) != ok)
-                rc = error;
-            else
-                init_matrix_with_sparse_data(mat, data, non_zero_elems);
-            free(data);
-        }
-        else
-            rc = error;
-    }
-    else
-        rc = error;
-    return rc;
-}
+// int init_coordinate_matrix(FILE *input_file, matrix *mat)
+// {
+//     int rc = ok;
+//     int non_zero_elems;
+//     if (fscanf(input_file, "%d %d %d", &mat->row, &mat->col, &non_zero_elems) == 3 
+//                         && mat->row > 0 && mat->col > 0 && non_zero_elems > 0)
+//     {
+//         coordinate_data *data = malloc(non_zero_elems * sizeof(coordinate_data));
+//         mat->mat = get_matrix(mat->row, mat->col);
+//         if (data && mat)
+//         {
+//             if (read_coordinate_data(data, input_file, mat, non_zero_elems) != ok)
+//                 rc = error;
+//             else
+//                 fill_matrix_with_coordinate_data(mat, data, non_zero_elems);
+//             free(data);
+//         }
+//         else
+//             rc = error;
+//     }
+//     else
+//         rc = error;
+//     return rc;
+// }
 
 matrix *get_matrix_from_file(FILE *input_file)
 {
     int rc = ok;
     matrix *mat = NULL;
    
-    int mat_type = get_matrix_type(input_file); 
-    if (mat_type == sparse)
-    {
-        mat = malloc(sizeof(matrix));
-        if (mat == NULL)
-            rc = error;
-        else
-        {
-            if (init_sparse_matrix(input_file, mat) != ok)
-            {
-                free(mat);
-                rc = error;
-            }
-        }
-    }
-    else if (mat_type == dimension_mat)
-    {
-        mat = malloc(sizeof(matrix));
-        if (mat == NULL)
-            rc = error;
-        else
-        {
-            if (init_matrix(input_file, mat) != ok)
-            {
-                free(mat);
-                rc = error;
-            }
-        }
-    }
-    else
+    // int mat_type = get_matrix_type(input_file); 
+    // if (mat_type == coordinate)
+    // {
+    // mat = malloc(sizeof(matrix));
+    // if (mat == NULL)
+    //     rc = error;
+    // else
+    // {
+    //     if (init_coordinate_matrix(input_file, mat) != ok)
+    //     {
+    //         free(mat);
+    //         rc = error;
+    //     }
+    // }
+    // }
+    // else if (mat_type == dimension_mat)
+    // {
+    mat = malloc(sizeof(matrix));
+    if (mat == NULL)
         rc = error;
+    else
+    {
+        if (init_matrix(input_file, mat) != ok)
+        {
+            free(mat);
+            rc = error;
+        }
+    }
+    // }
+    // else
+    //     rc = error;
     return rc == ok ? mat : NULL;
 }
 
@@ -314,6 +314,7 @@ matrix *multiplication(const matrix *lhs, const matrix *rhs)
 
 void add_mat_to_file(const matrix *mat, FILE *output_file)
 {
+    fprintf(output_file, "%d %d\n", mat->row, mat->col);
     for (int i = 0; i < mat->row; i++)
     {
         for (int j = 0; j < mat->col; j++)
@@ -474,14 +475,10 @@ int main(int argc, char **argv)
             matrix *mat = get_matrix_from_file(matrix_data);;
             if (mat)
             {
-                // display(mat);
                 if (gauss_solution(mat) != ok)
                     rc = error;
                 else
-                {
-                    // display(mat);
                     add_solution_to_file(mat, output);
-                }
                 free_mat(mat);
             }
             else
@@ -494,5 +491,6 @@ int main(int argc, char **argv)
     }
     else
         rc = error;
+    printf("%d\n", rc);
     return rc;
 }
