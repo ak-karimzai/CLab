@@ -459,6 +459,8 @@ int main(int argc, char **argv)
                 free_mat(lhs_mat);
                 free_mat(rhs_mat);
             }
+            else
+                rc = error;
             fclose(left_mat);
             fclose(right_mat);
             fclose(output);
@@ -491,6 +493,6 @@ int main(int argc, char **argv)
     }
     else
         rc = error;
-    printf("%d\n", rc);
+    // printf("%d\n", rc);
     return rc;
 }
