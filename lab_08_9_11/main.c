@@ -8,11 +8,12 @@ int main(int argc, char **argv)
 {
     int rc = ok;
 
-    if (argc == 5 && (strcmp(argv[1], "a") == ok || strcmp(argv[1], "m") == ok))
+    if (argc == 5 && (strcmp(argv[ACTION], ADDITION) == ok \
+                   || strcmp(argv[ACTION], MULTIPLICATION) == ok))
     {
-        FILE *left_mat = fopen(argv[2], "r");
-        FILE *right_mat = fopen(argv[3], "r");
-        FILE *output = fopen(argv[4], "w");
+        FILE *left_mat = fopen(argv[LHS_MAT], READ);
+        FILE *right_mat = fopen(argv[RHS_MAT], READ);
+        FILE *output = fopen(argv[RESULT], WRITE);
         if (left_mat && right_mat && output)
         {
             matrix *lhs_mat = get_matrix_from_file(left_mat);
@@ -20,7 +21,7 @@ int main(int argc, char **argv)
             matrix *res = NULL;
             if (lhs_mat && rhs_mat)
             {
-                if (strcmp(argv[1], "a") == ok)
+                if (strcmp(argv[1], ADDITION) == ok)
                 {
                     res = addition(lhs_mat, rhs_mat);
                     if (res)
@@ -28,7 +29,7 @@ int main(int argc, char **argv)
                     else
                         rc = error;
                 }
-                else if (strcmp(argv[1], "m") == ok)
+                else if (strcmp(argv[1], MULTIPLICATION) == ok)
                 {
                     res = multiplication(lhs_mat, rhs_mat);
                     if (res)
@@ -38,13 +39,16 @@ int main(int argc, char **argv)
                 }
                 else
                     rc = error;
-                if (res)
-                    free_mat(res);
+                free_mat_if_not_null(res);
                 free_mat(lhs_mat);
                 free_mat(rhs_mat);
             }
             else
+            {
+                free_mat_if_not_null(lhs_mat);
+                free_mat_if_not_null(rhs_mat);
                 rc = error;
+            }
             fclose(left_mat);
             fclose(right_mat);
             fclose(output);
@@ -57,10 +61,10 @@ int main(int argc, char **argv)
             rc = error;
         }
     }
-    else if (argc == 4 && strcmp(argv[1], "o") == ok)
+    else if (argc == 4 && strcmp(argv[ACTION], GAUSS) == ok)
     {
-        FILE *matrix_data = fopen(argv[2], "r");
-        FILE *output = fopen(argv[3], "w");
+        FILE *matrix_data = fopen(argv[MATRIX], READ);
+        FILE *output = fopen(argv[SOULUTION], WRITE);
         if (matrix_data && output)
         {
             matrix *mat = get_matrix_from_file(matrix_data);;

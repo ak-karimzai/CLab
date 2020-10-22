@@ -5,10 +5,8 @@
 void fill_zero_mat(matrix *mat)
 {
     for (int i = 0; i < mat->row; i++)
-    {
         for (int j = 0; j < mat->col; j++)
             mat->mat[i][j] = 0.0;
-    }
 }
 
 double **get_matrix(const int row, const int col)
@@ -18,7 +16,7 @@ double **get_matrix(const int row, const int col)
     if (mat)
     {
         for (int i = 0; i < row; i++)
-            mat[i] = (double *)((char *) mat + row * sizeof(double *) + row * i * sizeof(double));
+            mat[i] = (double *)((char *) mat + row * sizeof(double *) + col * i * sizeof(double));
         rc = ok;
     }
     return rc == ok ? mat : NULL;
@@ -37,6 +35,8 @@ int init_matrix(FILE *input_file, matrix *mat)
                     if (fscanf(input_file, "%lf ", &mat->mat[i][j]) != 1)
                         return error;
         }
+        else
+            rc = error;
     }
     else
         rc = error;
