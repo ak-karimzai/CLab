@@ -32,7 +32,7 @@ unit_tests.exe: $(obj)unit.o
 	$(cc) $(flags) $^ -o $@
 
 $(obj)unit.o: unit.c
-	$(cc) $(flags) -c $^
+	$(cc) $(flags) -c $^ -o$@
 
 clear:
 	rm -rf $(obj)*.o *.exe

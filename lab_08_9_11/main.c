@@ -78,7 +78,11 @@ int main(int argc, char **argv)
             fclose(output);
         }
         else
+        {
+            close_if_opened_file(matrix_data);
+            close_if_opened_file(output);
             rc = error;
+        }
     }
     else
         rc = error;
