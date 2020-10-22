@@ -10,7 +10,7 @@
 #define SOULUTION 3
 
 #define ADDITION "a"
-#define MULTIPLICATION "m"
+#define MULTI "m"
 #define GAUSS "o"
 #define READ "r"
 #define WRITE "w"

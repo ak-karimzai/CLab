@@ -8,8 +8,7 @@ int main(int argc, char **argv)
 {
     int rc = ok;
 
-    if (argc == 5 && (strcmp(argv[ACTION], ADDITION) == ok \
-                   || strcmp(argv[ACTION], MULTIPLICATION) == ok))
+    if (argc == 5 && (strcmp(argv[ACTION], ADDITION) == ok || strcmp(argv[ACTION], MULTI) == ok))
     {
         FILE *left_mat = fopen(argv[LHS_MAT], READ);
         FILE *right_mat = fopen(argv[RHS_MAT], READ);
@@ -29,7 +28,7 @@ int main(int argc, char **argv)
                     else
                         rc = error;
                 }
-                else if (strcmp(argv[1], MULTIPLICATION) == ok)
+                else if (strcmp(argv[1], MULTI) == ok)
                 {
                     res = multiplication(lhs_mat, rhs_mat);
                     if (res)

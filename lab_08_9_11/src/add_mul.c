@@ -26,6 +26,8 @@ matrix *addition(const matrix *lhs, const matrix *rhs)
                 rc = error;
             }
         }
+        else
+            rc = error;
     }
     else
         rc = error;
