@@ -45,13 +45,17 @@ product *read_from_file(FILE *input, int *num_of_products)
             {
                 ssize_t read;
                 size_t len;
-                if (!((read = getline(&products[i].product_name, &len, input)) != -1 && \
-                    fscanf(input, "%d\n", &products[i].price) == 1 && products[i].price >= 0))
+                if ((read = getline(&products[i].product_name, &len, input)) != -1 && \
+                    fscanf(input, "%d\n", &products[i].price) == 1 && products[i].price >= 0)
+                {
+                    if (products[i].product_name[read - 1] == '\n')
+                        products[i].product_name[read - 1] = '\0';
+                }
+                else
                 {
                     rc = error;
                     break;
                 }
-                // printf("%s\n%d\n", products[i].product_name, products[i].price);
             }
         }
     }
@@ -67,5 +71,5 @@ void display_to_screen(product *products, const int num_of_elem)
 {
     // printf("\n\n%d\n\n", num_of_elem);
     for (int i = 0; i < num_of_elem; i++)
-        fprintf(stdout, "%s%d\n", products[i].product_name, products[i].price);
+        fprintf(stdout, "%s\n%d\n", products[i].product_name, products[i].price);
 }
