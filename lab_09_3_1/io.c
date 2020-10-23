@@ -65,7 +65,7 @@ product *read_from_file(FILE *input, int *num_of_products)
 
 void display_to_screen(product *products, const int num_of_elem)
 {
-    printf("\n\n%d\n\n", num_of_elem);
+    // printf("\n\n%d\n\n", num_of_elem);
     for (int i = 0; i < num_of_elem; i++)
         fprintf(stdout, "%s%d\n", products[i].product_name, products[i].price);
 }
