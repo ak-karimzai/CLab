@@ -38,6 +38,7 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 {
     int rc = ok;
     int count = 0, sum;
+    *pb_dst = *pe_dst = NULL;
     if (!pb_src || pe_src - pb_src <= 0)
         rc = error;
     else
@@ -57,7 +58,5 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
             }
         }
     }
-    if (rc != ok)
-        *pb_dst = *pe_dst = NULL;
     return rc;
 }
