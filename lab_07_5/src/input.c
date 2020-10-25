@@ -28,6 +28,7 @@ int *read_objs_from_file(FILE *file, const int num_of_objs)
             if (fscanf(file, "%d", (arr + i)) != 1)
             {
                 rc = error;
+                break;
             }
         }
     }
@@ -41,8 +42,6 @@ int *procees_data_from_file(FILE *input_file, int *num_of_objs)
     int *arr = NULL;
     *num_of_objs = file_count_objs(input_file);
     if (*num_of_objs)
-    {
         arr = read_objs_from_file(input_file, *num_of_objs);
-    }
     return arr;
 }

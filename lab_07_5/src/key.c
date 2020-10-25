@@ -1,24 +1,30 @@
 #include <stdlib.h>
 #include "../inc/key.h"
 
+int arr_sum(const int *arr_lhs, const int *arr_rhs)
+{
+    int sum = 0;
+    for (; arr_lhs != arr_rhs; arr_lhs++)
+    {
+        sum += *arr_lhs;
+    }
+    return sum;
+}
+
 int get_num_of_elements(const int *arr_lhs, const int *arr_rhs, int *sum)
 {
     int count = 0;
-    *sum = 0;
-    for (const int *p = arr_lhs; p != arr_rhs; p++)
-    {
-        *sum += *p;
-    }
+    *sum = arr_sum(arr_lhs, arr_rhs);
 
-    if (*sum == 0)
-        return count;
-
-    int tmp_sum = *sum;
-    for (const int *p = arr_lhs; p != arr_rhs - 1; p++)
+    if (*sum != 0)
     {
-        tmp_sum -= *p;
-        if (*p > tmp_sum)
-            count++;
+        int tmp_sum = *sum;
+        for (const int *p = arr_lhs; p != arr_rhs - 1; p++)
+        {
+            tmp_sum -= *p;
+            if (*p > tmp_sum)
+                count++;
+        }
     }
     return count;
 }
