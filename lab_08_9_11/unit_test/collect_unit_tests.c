@@ -3,13 +3,13 @@
 #include "../inc/unit_test_headers/collect_unit_tests.h"
 
 
-int mysort_sort_tests(void)
+int addition_tests(void)
 {
     int no_failed = 0;
     SUITE *s;
     SRUNNER *runner;
 
-    s = mysort_unit_tests_suite();
+    s = addition_unit_tests_suite();
 
     runner = srunner_create(s);
 
@@ -21,13 +21,13 @@ int mysort_sort_tests(void)
     return no_failed == 0 ? EXIT_SUCCESS : EXIT_FAILURE;
 }
 
-int key_unit_tests(void)
+int multipli_unit_tests(void)
 {
     int no_failed = 0;
     SUITE *s;
     SRUNNER *runner;
 
-    s = check_key_fun();
+    s = multiplication_unit_tests_suite();
     runner = srunner_create(s);
 
     srunner_run_all(runner, CKVER);
