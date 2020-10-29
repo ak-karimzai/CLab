@@ -33,7 +33,10 @@ int init_matrix(FILE *input_file, matrix *mat)
             for (int i = 0; i < mat->row; i++)
                 for (int j = 0; j < mat->col; j++)
                     if (fscanf(input_file, "%lf ", &mat->mat[i][j]) != 1)
+                    {
+                        free(mat->mat);
                         return error;
+                    }
         }
         else
             rc = error;

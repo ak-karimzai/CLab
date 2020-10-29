@@ -20,7 +20,7 @@ int main(int argc, char **argv)
             matrix *res = NULL;
             if (lhs_mat && rhs_mat)
             {
-                if (strcmp(argv[1], ADDITION) == ok)
+                if (strcmp(argv[ACTION], ADDITION) == ok)
                 {
                     res = addition(lhs_mat, rhs_mat);
                     if (res)
@@ -28,7 +28,7 @@ int main(int argc, char **argv)
                     else
                         rc = error;
                 }
-                else if (strcmp(argv[1], MULTI) == ok)
+                else if (strcmp(argv[ACTION], MULTI) == ok)
                 {
                     res = multiplication(lhs_mat, rhs_mat);
                     if (res)
@@ -69,10 +69,10 @@ int main(int argc, char **argv)
             matrix *mat = get_matrix_from_file(matrix_data);;
             if (mat)
             {
-                if (gauss_solution(mat) != ok)
-                    rc = error;
-                else
+                if (gauss_solution(mat) == ok)
                     add_solution_to_file(mat, output);
+                else
+                    rc = error;
                 free_mat(mat);
             }
             else

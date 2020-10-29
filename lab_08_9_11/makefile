@@ -9,7 +9,7 @@ unit.src := ./unit_test/
 unit.inc := $(inc)unit_test_headers/
 
 objs := $(obj)output.o $(obj)free.o $(obj)gauss.o $(obj)add_mul.o $(obj)create_matrix.o $(obj)main.o
-unit.objs := $(obj)output.o $(obj)free.o  $(obj)add_mul.o $(obj)create_matrix.o $(obj)addition_unit_test.o $(obj)multiplication_unit_test.o $(obj)unit_test.o $(obj)collect_unit_test.o  #$(obj)gauss.o
+unit.objs := $(obj)unit.o#$(obj)output.o $(obj)free.o  $(obj)add_mul.o $(obj)create_matrix.o $(obj)addition_unit_test.o $(obj)multiplication_unit_test.o $(obj)unit_test.o $(obj)collect_unit_test.o  #$(obj)gauss.o
 
 app.exe: $(objs)
 	$(cc) $(flags) $^ -o $@
@@ -48,7 +48,7 @@ $(obj)collect_unit_test.o : $(unit.src)collect_unit_tests.c $(unit.inc)collect_u
 	$(cc) $(flags) -c $< -o $@
 
 $(obj)unit.o: unit.c 
-	$(cc) $(flags) -c $^ -o$@
+	$(cc) $(flags) -c $< -o$@
 
 clear:
 	rm -rf $(obj)*.o *.exe
