@@ -12,7 +12,7 @@ int main(int argc, char **argv)
         FILE *input_file = fopen(argv[FILE_NAME], "r");
         if (input_file)
         {
-            int p = atoi(argv[PRICE]);
+            float p = atof(argv[PRICE]);
             if (p <= 0)
                 rc = error;
             else

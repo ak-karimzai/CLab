@@ -26,4 +26,4 @@ $(obj)unit.o : unit.c
 .PHONY: clean
 
 clean:
-	rm -rf *.o *.exe
+	rm -rf $(obj)*.o *.exe
