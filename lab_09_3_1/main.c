@@ -17,13 +17,13 @@ int main(int argc, char **argv)
                 rc = error;
             else
             {
-                int num_of_products;
+                unsigned int num_of_products;
                 products = read_from_file(input_file, &num_of_products);
                 if (products == NULL)
                     rc = error;
                 else
                 {
-                    int printable_elements = sort_by_price(products, num_of_products, p);
+                    unsigned int printable_elements = sort_by_price(products, num_of_products, p);
                     display_to_screen(products, printable_elements);
                     free_product_arr(products, num_of_products);
                 }

@@ -8,10 +8,10 @@ void swap(product *lhs, product *rhs)
     *rhs = temp;
 }
 
-int sort_by_price(product *products, const int num_of_elements, const float given_price)
+unsigned int sort_by_price(product *products, const int num_of_elements, const float given_price)
 {
-    int k = 0, count = 0;
-    for (int i = 0; i < num_of_elements; i++)
+    unsigned int k = 0, count = 0;
+    for (size_t i = 0; i < num_of_elements; i++)
     {
         if (products[i].price < given_price)
         {
