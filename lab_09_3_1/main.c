@@ -8,9 +8,7 @@ int main(int argc, char **argv)
     int rc = ok;
     product *products = NULL;
 
-    if (argc != 3)
-        rc = error;
-    else
+    if (argc == 3)
     {
         FILE *input_file = fopen(argv[FILE_NAME], "r");
         if (!input_file)
@@ -32,9 +30,13 @@ int main(int argc, char **argv)
                     display_to_screen(products, printable_elements);
                     free_product_arr(products, num_of_products);
                 }
+                // printf("%d\n", rc);
             }
             fclose(input_file);
         }
     }
+    else
+        rc = error;
+    // printf("%d\n", rc);
     return rc;
 }
