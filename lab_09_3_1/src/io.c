@@ -13,7 +13,7 @@ void free_product_arr(product *products, const int num_of_objs)
 int num_of_objs(FILE *input_file)
 {
     int x;
-    if (fscanf(input_file, "%d", &x) == 1 && x >= 0)
+    if (fscanf(input_file, "%d\n", &x) == 1 && x >= 0)
         return x;
     return 0;
 }
