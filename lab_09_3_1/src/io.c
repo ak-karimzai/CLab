@@ -6,9 +6,27 @@
 void free_product_arr(product *products, const int num_of_objs)
 {
     for (int i = 0; i < num_of_objs; i++)
-        if (products[i].product_name)
-            free(products[i].product_name);
+        free(products[i].product_name);
     free(products);
+}
+
+int num_of_objs(FILE *input_file)
+{
+    char *line = NULL;
+    ssize_t read;
+    size_t len;
+    int x, count = 0;
+    while ((read = getline(&line, &len, input_file)) != -1 && \
+                       fscanf(input_file, "%d\n", &x) == 1 && x > 0)
+        count++;
+    
+    free(line);
+    
+    if (!(feof(input_file) || fgetc(input_file) == EOF))
+        return 0;
+
+    rewind(input_file);
+    return count;
 }
 
 void init_produnct_node(FILE *input_file, product *pro)
@@ -20,28 +38,15 @@ void init_produnct_node(FILE *input_file, product *pro)
 
 product *read_from_file(FILE *input_file, int *num_of_products)
 {
+    *num_of_products = num_of_objs(input_file);
     product *products = NULL;
-    if (fscanf(input_file, "%d\n", num_of_products) == 1 && *num_of_products > 0)
+
+    if (*num_of_products)
     {
-        if (*num_of_products)
-        {
-            products = malloc(*num_of_products * sizeof(product));
-            if (products)
-            {
-                for (int i = 0; i < *num_of_products; i++)
-                {
-                    init_produnct_node(input_file, &products[i]);
-                    if (products[i].price <= 0)
-                    {
-                        free_product_arr(products, *num_of_products);
-                        return NULL;
-                    }
-                }
-            }
-        }
+        products = malloc(*num_of_products * sizeof(product));
+        for (int i = 0; i < *num_of_products; i++)
+            init_produnct_node(input_file, &products[i]);
     }
-    else
-        return NULL;
     return products;
 }
 
