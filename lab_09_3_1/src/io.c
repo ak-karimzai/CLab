@@ -12,21 +12,10 @@ void free_product_arr(product *products, const int num_of_objs)
 
 int num_of_objs(FILE *input_file)
 {
-    char *line = NULL;
-    ssize_t read;
-    size_t len;
-    int x, count = 0;
-    while ((read = getline(&line, &len, input_file)) != -1 && \
-                       fscanf(input_file, "%d\n", &x) == 1 && x > 0)
-        count++;
-    
-    free(line);
-    
-    if (!(feof(input_file) || fgetc(input_file) == EOF))
-        return 0;
-
-    rewind(input_file);
-    return count;
+    int x;
+    if (fscanf(input_file, "%d", &x) == 1 && x >= 0)
+        return x;
+    return 0;
 }
 
 void init_produnct_node(FILE *input_file, product *pro)
