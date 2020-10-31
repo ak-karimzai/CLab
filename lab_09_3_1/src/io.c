@@ -44,7 +44,7 @@ product *read_from_file(FILE *input_file, unsigned int *num_of_products)
         {
             products[i].product_name = get_line(input_file);
             products[i].price = read_unsigned_int(input_file);
-            if (products[i].product_name == NULL || products[i].price == 0)
+            if (products[i].price == 0)
             {
                 free_product_arr(products, *num_of_products);
                 return NULL;
