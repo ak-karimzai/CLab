@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "sort.h"
+#include "../inc/sort.h"
 
 void swap(product *lhs, product *rhs)
 {

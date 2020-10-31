@@ -1,23 +1,27 @@
 cc := gcc
 cflags := -Wall -Werror -pedantic -std=c99
 
-app.exe : main.o io.o sort.o
+obj := ./obj/
+src := ./src/
+inc := ./inc/
+
+app.exe : $(obj)main.o $(obj)io.o $(obj)sort.o
 	$(cc) $^ -o $@
 
-main.o : main.c main.h functions.h
-	$(cc) $(cflags) -c $<
+$(obj)main.o : main.c $(inc)main.h
+	$(cc) $(cflags) -c $< -o $@
 
-io.o : io.c io.h
-	$(cc) $(cflags) -c $<
+$(obj)io.o : $(src)io.c $(inc)io.h
+	$(cc) $(cflags) -c $< -o $@
 
-sort.o : sort.c sort.h
-	$(cc) $(cflags) -c $<
+$(obj)sort.o : $(src)sort.c $(inc)sort.h
+	$(cc) $(cflags) -c $< -o $@
 
 unit_tests.exe : unit.o
-	$(cc) $< -o $@
+	$(cc) $< -o $@ -o $@
 
-unit.o : unit.c
-	$(cc) $(cflags) -c $<
+$(obj)unit.o : unit.c
+	$(cc) $(cflags) -c $< -o $@
 
 .PHONY: clean
 

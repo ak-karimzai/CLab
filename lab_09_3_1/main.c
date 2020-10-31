@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "main.h"
-#include "functions.h"
+#include "./inc/main.h"
 
 int main(int argc, char **argv)
 {
@@ -11,9 +10,7 @@ int main(int argc, char **argv)
     if (argc == 3)
     {
         FILE *input_file = fopen(argv[FILE_NAME], "r");
-        if (!input_file)
-            rc = error;
-        else
+        if (input_file)
         {
             int p = atoi(argv[PRICE]);
             if (p <= 0)
@@ -34,6 +31,8 @@ int main(int argc, char **argv)
             }
             fclose(input_file);
         }
+        else
+            rc = error;
     }
     else
         rc = error;

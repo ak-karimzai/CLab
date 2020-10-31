@@ -1,8 +1,5 @@
-#ifndef IO_H
-#define IO_H
-
-#define FILE_NAME 1
-#define PRICE 2
+#ifndef _DATA_STRUCT_H_
+#define _DATA_STRUCT_H_
 
 enum error_code
 {
@@ -16,4 +13,4 @@ typedef struct
     int price;
 } product;
 
-#endif // IO_H
+#endif //_DATA_STRUCT_H_
