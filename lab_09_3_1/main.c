@@ -5,16 +5,21 @@
 int main(int argc, char **argv)
 {
     int rc = ok;
-    product *products = NULL;
+    product *products;
 
-    if (argc == 3)
+    if (argc != 3)
+        rc = error;
+    else
     {
         FILE *input_file = fopen(argv[FILE_NAME], "r");
-        if (input_file)
+        if (!input_file || feof(input_file) || fgetc(input_file) == EOF)
+            rc = error;
+        else
         {
+            rewind(input_file);
             int p = atoi(argv[PRICE]);
             if (p <= 0)
-                rc = error;
+                return error;
             else
             {
                 int num_of_products;
@@ -26,16 +31,11 @@ int main(int argc, char **argv)
                     int printable_elements = sort_by_price(products, num_of_products, p);
                     display_to_screen(products, printable_elements);
                     free_product_arr(products, num_of_products);
+                    // printf("%d", printable_elements);
                 }
-                // printf("%d\n", rc);
             }
             fclose(input_file);
         }
-        else
-            rc = error;
     }
-    else
-        rc = error;
-    // printf("%d\n", rc);
     return rc;
 }

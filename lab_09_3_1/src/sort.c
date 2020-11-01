@@ -8,7 +8,7 @@ void swap(product *lhs, product *rhs)
     *rhs = temp;
 }
 
-int sort_by_price(product *products, const int num_of_elements, const float given_price)
+int sort_by_price(product *products, const int num_of_elements, const int given_price)
 {
     int k = 0, count = 0;
     for (int i = 0; i < num_of_elements; i++)
@@ -19,5 +19,6 @@ int sort_by_price(product *products, const int num_of_elements, const float give
             count++;
         }
     }
+    // printf("%d", count);
     return count;
 }
