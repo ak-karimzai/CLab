@@ -5,10 +5,13 @@
 
 void free_product_arr(product *products, const int num_of_products)
 {
-    for (int i = 0; i < num_of_products; i++)
-        if (products[i].product_name)
-            free(products[i].product_name);
-    free(products);
+    if (products)
+    {
+        for (int i = 0; i < num_of_products; i++)
+            if (products[i].product_name)
+                free(products[i].product_name);
+        free(products);
+    }
 }
 
 product *read_from_file(FILE *input, int *num_of_products)
@@ -28,15 +31,18 @@ product *read_from_file(FILE *input, int *num_of_products)
                 getline(&products[i].product_name, &len, input);
                 if (fscanf(input, "%d\n", &products[i].price) != 1 || products[i].price <= 0)
                 {
-                    free_product_arr(products, *num_of_products);
                     rc = error;
                     break;
                 }
             }
+            if (!(feof(input) || fgetc(input) == EOF))
+                rc = error;
         }
         else
             rc = error;
     }
+    if (rc == error)
+        free_product_arr(products, *num_of_products);
     return rc == ok ? products : NULL;
 }
 

@@ -5,36 +5,29 @@
 int main(int argc, char **argv)
 {
     int rc = ok;
-    product *products;
-
-    if (argc != 3)
-        rc = error;
-    else
+    if (argc == 3)
     {
         FILE *input_file = fopen(argv[FILE_NAME], "r");
-        if (!input_file || feof(input_file) || fgetc(input_file) == EOF)
-            rc = error;
+        int p = atoi(argv[PRICE]);
+        if (input_file && p > 0)
+        {
+            int num_of_products;
+            product *products = read_from_file(input_file, &num_of_products);
+            if (products)
+            {
+                int printable_eles = sort_by_price(products, num_of_products, p);
+                display_to_screen(products, printable_eles);
+                free_product_arr(products, num_of_products);
+            }
+            else
+                rc = error;
+            fclose(input_file);
+        }
         else
         {
-            rewind(input_file);
-            int p = atoi(argv[PRICE]);
-            if (p <= 0)
-                return error;
-            else
-            {
-                int num_of_products;
-                products = read_from_file(input_file, &num_of_products);
-                if (products == NULL)
-                    rc = error;
-                else
-                {
-                    int printable_elements = sort_by_price(products, num_of_products, p);
-                    display_to_screen(products, printable_elements);
-                    free_product_arr(products, num_of_products);
-                    // printf("%d", printable_elements);
-                }
-            }
-            fclose(input_file);
+            if (input_file)
+                fclose(input_file);
+            rc = error;
         }
     }
     return rc;
