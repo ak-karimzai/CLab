@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "../inc/io.h"
 
 void free_product_arr(product *products, const int num_of_products)
@@ -50,5 +51,10 @@ product *read_from_file(FILE *input, int *num_of_products)
 void display_to_screen(product *products, const int num_of_elem)
 {
     for (int i = 0; i < num_of_elem; i++)
-        fprintf(stdout, "%s%d\n", products[i].product_name, products[i].price);
+    {
+        if (products[i].product_name[strlen(products[i].product_name) - 1] == '\n')
+            fprintf(stdout, "%s%d\n", products[i].product_name, products[i].price);
+        else
+            fprintf(stdout, "%s\n%d\n", products[i].product_name, products[i].price);
+    }
 }

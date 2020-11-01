@@ -9,6 +9,7 @@ int main(int argc, char **argv)
     {
         FILE *input_file = fopen(argv[FILE_NAME], "r");
         int p = atoi(argv[PRICE]);
+        // printf("%d\n", p);
         if (input_file && p > 0)
         {
             int num_of_products;
@@ -32,5 +33,6 @@ int main(int argc, char **argv)
     }
     else
         rc = error;
+    // printf("%d\n", rc);
     return rc;
 }
