@@ -18,6 +18,7 @@ product *read_from_file(FILE *input, int *num_of_products)
 {
     int rc = ok;
     size_t len;
+    ssize_t read;
     product *products = NULL;
     if (fscanf(input, "%d\n", num_of_products) != 1 || *num_of_products <= 0)
         rc = error;
@@ -28,8 +29,8 @@ product *read_from_file(FILE *input, int *num_of_products)
         {
             for (int i = 0; i < *num_of_products; i++)
             {
-                getline(&products[i].product_name, &len, input);
-                if (fscanf(input, "%d\n", &products[i].price) != 1 || products[i].price <= 0)
+                read = getline(&products[i].product_name, &len, input);
+                if (read == -1 || fscanf(input, "%d\n", &products[i].price) != 1 || products[i].price <= 0)
                 {
                     rc = error;
                     break;

@@ -30,5 +30,7 @@ int main(int argc, char **argv)
             rc = error;
         }
     }
+    else
+        rc = error;
     return rc;
 }
