@@ -107,9 +107,7 @@ void display_to_screen(product *products, const int num_of_elem)
 {
     for (int i = 0; i < num_of_elem; i++)
     {
-        if (products[i].product_name[strlen(products[i].product_name) - 1] == '\n')
-            fprintf(stdout, "%s%d\n", products[i].product_name, products[i].price);
-        else
-            fprintf(stdout, "%s\n%d\n", products[i].product_name, products[i].price);
+        // if (products[i].product_name[strlen(products[i].product_name) - 1] == '\n')
+        fprintf(stdout, "%s%d\n", products[i].product_name, products[i].price);
     }
 }
