@@ -1,4 +1,6 @@
-#define _GNU_SOURCE
+// #define _GNU_SOURCE
+#define _POSIX_C_SOURCE 200809L
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,7 +9,7 @@
 int product_init(product *pro, const char *name, int price)
 {
     char *tmp = strdup(name);
-
+    
     if (tmp)
     {
         free(pro->product_name);
