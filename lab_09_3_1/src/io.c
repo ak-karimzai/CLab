@@ -1,5 +1,4 @@
-// #define _GNU_SOURCE
-#define _POSIX_C_SOURCE 200809L
+#define _GNU_SOURCE
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -76,13 +75,14 @@ int read_from_file(FILE *f, product **prods, int *num_of_products)
 {
     product *ptmp;
     int n;
-    int rc;
+    int rc = ok;
 
     *prods = NULL;
     *num_of_products = 0;
 
     if (fscanf(f, "%d\n", &n) == 1 && n > 0)
     {
+        // printf("%d", rc);
         ptmp = calloc(n, sizeof(product));
         if (ptmp)
         {   

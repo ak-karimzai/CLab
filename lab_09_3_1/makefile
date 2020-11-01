@@ -20,7 +20,7 @@ $(obj)sort.o : $(src)sort.c $(inc)sort.h
 	$(cc) $(cflags) -c $< -o $@
 
 unit_tests.exe : $(obj)unit.o $(obj)collect_unit_tests.o $(obj)read_unit_test.o $(obj)io.o
-	$(cc) $^ -o $@
+	$(cc) $^ -o $@ -lcheck
 
 $(obj)unit.o : $(uni.src)unit_test.c $(uni.inc)unit_test.h
 	$(cc) $(cflags) -c $< -o $@
