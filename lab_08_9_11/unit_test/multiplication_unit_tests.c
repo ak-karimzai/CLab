@@ -112,7 +112,7 @@ START(vector_on_matrix)
 }
 END
 
-SUITE *multiplication_unit_tests_suite(void)
+SUITE *multi_unit_tests_suite(void)
 {
     SUITE *s;
     TCASE *tc_pos;

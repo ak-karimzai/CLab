@@ -27,7 +27,7 @@ int multipli_unit_tests(void)
     SUITE *s;
     SRUNNER *runner;
 
-    s = multiplication_unit_tests_suite();
+    s = multi_unit_tests_suite();
     runner = srunner_create(s);
 
     srunner_run_all(runner, CKVER);
