@@ -10,18 +10,18 @@ void ck_assert_mat_sum_eq(matrix *lhs, matrix *rhs, matrix *res)
             ck_assert_float_eq(res->mat[i][j], lhs->mat[i][j] + rhs->mat[i][j]);
 }
 
-START(when_dimension_are_not_eq)
+START(dimension_are_not_eq)
 {
-    FILE *first = fopen("../func_tests/mat_1.txt", "r");
-    FILE *second = fopen("../func_tests/mat_2.txt", "r");
-    ck_assert_ptr_ne(first, NULL);    
-    ck_assert_ptr_ne(second, NULL);
+    FILE *first = fopen("./func_tests/mat_1.txt", "r");
+    FILE *second = fopen("./func_tests/mat_2.txt", "r");
+    ck_assert_ptr_nonnull(first);
+    ck_assert_ptr_nonnull(second);
 
     matrix *lhs_mat = get_matrix_from_file(first);    
     matrix *rhs_mat = get_matrix_from_file(second);
 
-    ck_assert_ptr_ne(lhs_mat, NULL);
-    ck_assert_ptr_ne(rhs_mat, NULL);
+    ck_assert_ptr_nonnull(rhs_mat);
+    ck_assert_ptr_nonnull(lhs_mat);
 
     matrix *res = addition(lhs_mat, rhs_mat);
     ck_assert_ptr_eq(res, NULL);
@@ -35,10 +35,10 @@ START(when_dimension_are_not_eq)
 }
 END
 
-START(when_dimension_are_equal)
+START(dimension_are_equal)
 {
-    FILE *first = fopen("../func_tests/mat_1.txt", "r");
-    FILE *second = fopen("../func_tests/mat_3.txt", "r");
+    FILE *first = fopen("./func_tests/mat_1.txt", "r");
+    FILE *second = fopen("./func_tests/mat_3.txt", "r");
 
     ck_assert_ptr_ne(first, NULL);    
     ck_assert_ptr_ne(second, NULL);
@@ -72,11 +72,12 @@ SUITE *addition_unit_tests_suite(void)
     s = suite_create("Addition");
 
     tc_pos = tcase_create("positives");
-    tcase_add_test(tc_pos, when_dimension_are_equal);
+    tcase_add_test(tc_pos, dimension_are_equal);
 
-    tc_pos = tcase_create("negatives");
-    tcase_add_test(tc_neg, when_dimension_are_not_eq);
+    tc_neg = tcase_create("negatives");
+    tcase_add_test(tc_neg, dimension_are_not_eq);
 
     suite_add_tcase(s, tc_pos);
+    suite_add_tcase(s, tc_neg);
     return s;
 }
