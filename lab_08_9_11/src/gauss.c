@@ -38,11 +38,12 @@ int find_solution(matrix *mat)
 
 void reverse_motion(matrix *mat)
 {
+    double divisor;
     for (int k = mat->row - 1; k >= 0; k--)
     {
         for (int i = 0; i < k; i++)
         {
-            double divisor = mat->mat[i][k];
+            divisor = mat->mat[i][k];
             for (int j = k; j < mat->col; j++)
                 mat->mat[i][j] = (mat->mat[i][j] - divisor * mat->mat[k][j]);
         }
