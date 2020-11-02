@@ -7,8 +7,7 @@
 void ck_assert_mat_eq(matrix *res, matrix *file_res)
 {
     for (int i = 0; i < res->row; i++)
-        ck_assert_int_eq(memcmp(&res->mat[i][res->col - 1],\
-                 &file_res->mat[i][file_res->col - 1], sizeof(double)), 1);
+        ck_assert_int_eq(memcmp(&res->mat[i][res->col - 1], &file_res->mat[i][file_res->col - 1], sizeof(double)), 1);
 }
 
 START(program_solved_equations)
