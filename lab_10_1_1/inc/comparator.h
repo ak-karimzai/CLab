@@ -3,4 +3,7 @@
 
 #include "data_struct.h"
 
+#define BIGGER 1
+#define LESS_THAN -1
+
 #endif //_COMPARATOR_H_

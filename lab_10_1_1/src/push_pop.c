@@ -14,7 +14,7 @@ node_t *find(node_t *head, const void *data, comparator cmp)
     return temp;
 }
 
-void* pop_front(node_t **head)
+void *pop_front(node_t **head)
 {
     void *data = NULL;
     node_t *temp;
@@ -28,7 +28,7 @@ void* pop_front(node_t **head)
     return data;
 }
 
-void* pop_back(node_t **head)
+void *pop_back(node_t **head)
 {
     node_t *current = *head;
     node_t *before_end = NULL;

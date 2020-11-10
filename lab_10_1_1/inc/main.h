@@ -5,13 +5,13 @@
 #include <stdlib.h>
 #include "data_struct.h"
 
-node_t* sort(node_t *head, comparator cmp);
+node_t *sort(node_t *head, comparator cmp);
 
 void sorted_insert(node_t **head, node_t *element, comparator cmp);
 
 int copy(node_t *head, node_t **new_head);
 
-node_t* find(node_t *head, const void *data, comparator cmp);
+node_t *find(node_t *head, const void *data, comparator cmp);
 
 void insert(node_t **head, node_t *elem, node_t *before);
 

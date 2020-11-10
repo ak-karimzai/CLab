@@ -63,42 +63,35 @@ void swap_node(node_t *lhs, node_t *rhs)
     rhs->data = temp;
 }
 
-node_t* sort(node_t *head, comparator cmp)
-{
-    node_t *current = head, *temp;
-    node_t *k;
-    while (current)
-    {
-        k = current;
-        temp = current->next;
-        while (temp)
-        {
-            if (cmp(k->data, temp->data) == 1)
-                k = temp;
-            temp = temp->next;
-        }
-        swap_node(current, k);
-        current = current->next;
-    }
-    return head;
-}
-
 void sorted_insert(node_t **head, node_t *element, comparator cmp)
 {
     int cmp_res;
     node_t *current = *head;
     
-    *head = sort(*head, cmp);
-    if (*head == NULL || cmp((*head)->data, element->data) >= 1)
+    if (*head == NULL || cmp((*head)->data, element->data) >= EQUAL)
     {
         element->next = *head;
         *head = element;
     }
     else
     {
-        while (current->next && cmp(current->next->data, element->data) < 0)
+        while (current->next && cmp(current->next->data, element->data) < EQUAL)
             current = current->next;
         element->next = current->next;
         current->next = element;
     }
+}
+
+node_t *sort(node_t *head, comparator cmp)
+{
+    node_t *new_head = NULL;
+    node_t *temp = NULL;
+    while (head)
+    {
+        temp = head;
+        head = head->next;
+        temp->next = NULL;
+        sorted_insert(&new_head, temp, cmp);
+    }
+    return new_head;
 }

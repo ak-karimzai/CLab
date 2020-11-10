@@ -23,4 +23,6 @@ enum error_code
 
 typedef int (*comparator)(const void*, const void*);
 
+#define EQUAL 0
+
 #endif //_DATA_STRUCT_H_
