@@ -46,11 +46,7 @@ product *read_product(FILE *f)
                 else
                     rc = error;
             }
-            else
-                rc = error;
         }
-        else
-            rc = error;
         free(buf);
     }
     else

@@ -28,38 +28,6 @@ node_t *get_node(void *data)
     return temp;
 }
 
-int copy(node_t *head, node_t **new_head)
-{
-    int rc = ok;
-    node_t *temp;
-    node_t *current;
-    temp = current = *new_head = NULL;
-    
-    while (head != NULL)
-    {
-        temp = get_node(head->data);
-
-        if (temp == NULL)
-        {
-            rc = error;
-            break;
-        }
-
-        if (*new_head == NULL)
-            current = *new_head = temp;
-        else
-        {
-            current->next = temp;
-            current = temp;
-        }
-        head = head->next;
-    }
-
-    if (rc == error)
-        free_list(*new_head);
-    return rc;
-}
-
 void remove_duplicates(node_t **head, comparator cmp)
 {
     node_t *first = *head;
@@ -124,12 +92,12 @@ void sorted_insert(node_t **head, node_t *element, comparator cmp)
     {
         *head = sort(*head, cmp);
         cmp_res = cmp(current->data, element->data);
-        if (cmp_res == 1 || cmp_res == 0)
+        if (cmp_res > 0 || cmp_res == 0)
         {
             element->next = *head;
             *head = element;
         }
-        else if (cmp_res == -1)
+        else if (cmp_res < 0)
         {
             current = current->next;
             while (current && cmp(current->data, element->data) == -1)

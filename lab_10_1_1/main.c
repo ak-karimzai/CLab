@@ -43,7 +43,6 @@ int main(void)
         }
         node_t *finded = find(head, head->next->next->next->next->data, compare_by_price);
         print_elements(finded);
-        // print_elements(head);s
         free_elements(&head);
         fclose(input_file);
     }
