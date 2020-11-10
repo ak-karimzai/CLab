@@ -14,66 +14,70 @@ node_t *find(node_t *head, const void *data, comparator cmp)
     return temp;
 }
 
-void *pop_front(node_t **head)
-{
-    void *data = NULL;
-    node_t *temp;
-    if (*head)
-    {
-        data = ((void *)(*head)->data);
-        temp = *head;
-        (*head) = (*head)->next;
-        free(temp);
-    }
-    return data;
-}
+// void *pop_front(node_t **head)
+// {
+//     void *data = NULL;
+//     node_t *temp;
+//     if (*head)
+//     {
+//         data = ((void *)(*head)->data);
+//         temp = *head;
+//         (*head) = (*head)->next;
+//         free(temp);
+//     }
+//     return data;
+// }
 
-void *pop_back(node_t **head)
-{
-    node_t *current = *head;
-    node_t *before_end = NULL;
-    void *data = NULL;
+// void *pop_back(node_t **head)
+// {
+//     node_t *current = *head;
+//     node_t *before_end = NULL;
+//     void *data = NULL;
 
-    if (*head)
-    {
-        if ((*head)->next == NULL)
-        {
-            data = (void *)(*head)->data;
-            free(*head);
-            *head = NULL;
-        }
-        else
-        {
-            while (current->next)
-            {
-                before_end = current;
-                current = current->next;
-            }
-            data = (void *) current->data;
-            before_end->next = NULL;
-            free(current);
-        }
-    }
-    return data;
-}
+//     if (*head)
+//     {
+//         if ((*head)->next == NULL)
+//         {
+//             data = (void *)(*head)->data;
+//             free(*head);
+//             *head = NULL;
+//         }
+//         else
+//         {
+//             while (current->next)
+//             {
+//                 before_end = current;
+//                 current = current->next;
+//             }
+//             data = (void *) current->data;
+//             before_end->next = NULL;
+//             free(current);
+//         }
+//     }
+//     return data;
+// }
 
 void insert(node_t **head, node_t *elem, node_t *before)
 {
     node_t *current = *head;
 
-    if (elem && !(*head) && !before)
-        *head = elem;
-    else if (*head == before)
+    if ((*head) == before)
     {
-        elem->next = (*head)->next;
-        (*head)->next = elem;
+        elem->next = (*head);
+        *head = elem;
     }
     else
     {
-        while (current->next != before)
+        while (current && current->next)
+        {
+            if (current->next == before)
+            {
+                elem->next = current->next;
+                current->next = elem;
+                break;
+            }
             current = current->next;
-        elem->next = current->next;
-        current->next = elem;
+        }
     }
 }
 
