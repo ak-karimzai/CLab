@@ -1,6 +1,6 @@
 #include "../inc/push_pop.h"
 
-node_t* find(node_t *head, const void *data, comparator cmp)
+node_t *find(node_t *head, const void *data, comparator cmp)
 {
     node_t *temp = NULL;
     node_t *current = head;
