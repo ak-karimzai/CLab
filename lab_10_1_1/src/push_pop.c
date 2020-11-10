@@ -8,54 +8,10 @@ node_t *find(node_t *head, const void *data, comparator cmp)
     {
         while (current && cmp(current->data, data) != ok)
             current = current->next;
-        if (current)
-            temp = current;
+        temp = current;
     }
     return temp;
 }
-
-// void *pop_front(node_t **head)
-// {
-//     void *data = NULL;
-//     node_t *temp;
-//     if (*head)
-//     {
-//         data = ((void *)(*head)->data);
-//         temp = *head;
-//         (*head) = (*head)->next;
-//         free(temp);
-//     }
-//     return data;
-// }
-
-// void *pop_back(node_t **head)
-// {
-//     node_t *current = *head;
-//     node_t *before_end = NULL;
-//     void *data = NULL;
-
-//     if (*head)
-//     {
-//         if ((*head)->next == NULL)
-//         {
-//             data = (void *)(*head)->data;
-//             free(*head);
-//             *head = NULL;
-//         }
-//         else
-//         {
-//             while (current->next)
-//             {
-//                 before_end = current;
-//                 current = current->next;
-//             }
-//             data = (void *) current->data;
-//             before_end->next = NULL;
-//             free(current);
-//         }
-//     }
-//     return data;
-// }
 
 void insert(node_t **head, node_t *elem, node_t *before)
 {

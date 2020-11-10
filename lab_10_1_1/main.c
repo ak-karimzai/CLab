@@ -41,7 +41,6 @@ int main(void)
             push_back(&head, temp);
             temp = create_node(input_file);
         }
-        // node_t *finded = find(head, head->next->next->next->next->data, compare_by_price);
         head = sort(head, compare_by_price);
         print_elements(head);
         free_elements(&head);
