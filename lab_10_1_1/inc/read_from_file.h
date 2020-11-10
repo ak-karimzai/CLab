@@ -7,4 +7,6 @@
 #include <string.h>
 #include "data_struct.h"
 
+void free_prod(product *prod);
+
 #endif //_READ_FROM_FILE_H_

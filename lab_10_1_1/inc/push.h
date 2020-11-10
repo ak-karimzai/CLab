@@ -1,9 +1,8 @@
-#ifndef _PUSH_POP_H_
-#define _PUSH_POP_H_
+#ifndef _PHSH_H_
+#define _PHSH_H_
 
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "data_struct.h"
 
-#endif //_PUSH_POP_H_
+#endif //_PHSH_H_

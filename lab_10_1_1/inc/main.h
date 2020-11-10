@@ -27,4 +27,8 @@ int compare_by_price(const void *first, const void *second);
 
 void remove_duplicates(node_t **head, comparator cmp);
 
+void free_elements(node_t **head);
+
+void free_node(node_t *node);
+
 #endif //

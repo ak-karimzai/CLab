@@ -1,15 +1,5 @@
 #include "../inc/read_from_file.h"
 
-void free_prod(product *prod)
-{
-    if (prod)
-    {
-        if (prod->product_name)
-            free(prod->product_name);
-        free(prod);
-    }
-}
-
 int product_init(product *pro, const char *name, int price)
 {
     char *tmp = strdup(name);
@@ -24,6 +14,17 @@ int product_init(product *pro, const char *name, int price)
         return ok;
     }
     return error;
+}
+
+node_t *get_node(void *data)
+{
+    node_t *temp = malloc(sizeof(node_t));
+    if (temp)
+    {
+        temp->data = data;
+        temp->next = NULL;
+    }
+    return temp;
 }
 
 product *read_product(FILE *f)

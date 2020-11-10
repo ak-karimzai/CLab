@@ -1,11 +1,5 @@
 #include "inc/main.h"
 
-void free_node(node_t *node)
-{
-    free_prod(node->data);
-    free(node);
-}
-
 void print_elements(node_t *head)
 {
     while (head)
@@ -15,22 +9,9 @@ void print_elements(node_t *head)
     }
 }
 
-void free_elements(node_t **head)
-{
-    node_t *temp = NULL;
-    node_t *current = *head;
-    while (current)
-    {
-        temp = current;
-        current = current->next;
-        free_node(temp);
-    }
-    *head = NULL;
-}
-
 int main(void)
 {
-    FILE *input_file = fopen("data.txt", "r");
+    FILE *input_file = fopen("tests/data.txt", "r");
     int rc = ok;
     if (input_file)
     {
