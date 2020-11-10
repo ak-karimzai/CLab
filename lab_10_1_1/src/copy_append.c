@@ -69,11 +69,11 @@ node_t* sort(node_t *head, comparator cmp)
     node_t *k;
     while (current)
     {
-        temp = current->next;
         k = current;
+        temp = current->next;
         while (temp)
         {
-            if (cmp(current->data, temp->data) == 1)
+            if (cmp(k->data, temp->data) == 1)
                 k = temp;
             temp = temp->next;
         }
@@ -87,29 +87,18 @@ void sorted_insert(node_t **head, node_t *element, comparator cmp)
 {
     int cmp_res;
     node_t *current = *head;
-    node_t *before_point = NULL;
-    if (*head)
+    
+    *head = sort(*head, cmp);
+    if (*head == NULL || cmp((*head)->data, element->data) >= 1)
     {
-        *head = sort(*head, cmp);
-        cmp_res = cmp(current->data, element->data);
-        if (cmp_res > 0 || cmp_res == 0)
-        {
-            element->next = *head;
-            *head = element;
-        }
-        else if (cmp_res < 0)
-        {
+        element->next = *head;
+        *head = element;
+    }
+    else
+    {
+        while (current->next && cmp(current->next->data, element->data) < 0)
             current = current->next;
-            while (current && cmp(current->data, element->data) == -1)
-            {
-                before_point = current;
-                current = current->next;
-            }
-            if (before_point)
-            {
-                element->next = before_point->next;
-                before_point->next = element;
-            }
-        }
+        element->next = current->next;
+        current->next = element;
     }
 }

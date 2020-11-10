@@ -59,26 +59,21 @@ void* pop_back(node_t **head)
 
 void insert(node_t **head, node_t *elem, node_t *before)
 {
-    node_t *to_before = NULL;
     node_t *current = *head;
 
-    if (*head == before)
+    if (elem && !(*head) && !before)
+        *head = elem;
+    else if (*head == before)
     {
         elem->next = (*head)->next;
         (*head)->next = elem;
     }
     else
     {
-        while (current != before)
-        {
-            to_before = current;
+        while (current->next != before)
             current = current->next;
-        }
-        if (to_before)
-        {
-            elem->next = to_before->next;
-            to_before->next = elem;
-        }
+        elem->next = current->next;
+        current->next = elem;
     }
 }
 
