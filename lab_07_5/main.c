@@ -37,8 +37,6 @@ int main(int argc, char **argv)
                     free(arr_lhs);
                 }
             }
-            else
-                rc = error;
             fclose(output_file);
             fclose(input_file);
             free(arr);
