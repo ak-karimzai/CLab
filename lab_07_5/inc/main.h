@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "sort.h"
+#include "function.h"
 
 #define INPUT_FILE 1
 #define OUTPUT_FILE 2

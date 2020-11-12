@@ -1,5 +1,4 @@
 #include "../inc/main.h"
-#include "../inc/function.h"
 
 int main(int argc, char **argv)
 {
