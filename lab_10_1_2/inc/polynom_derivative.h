@@ -8,6 +8,8 @@
 #include "create.h"
 #include "free.h"
 
-int polynom_derivative(void);
+void print_list(poly_node *list);
+
+void dirvative_of_poly(poly_node *list);
 
 #endif //_POLYNOM_DERIVATIVE_H_

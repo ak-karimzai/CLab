@@ -8,6 +8,10 @@
 #include "create.h"
 #include "free.h"
 
-int polynom_sum(void);
+int create_linked_list(string_t *first_poly, string_t *second_poly, poly_node *lhs, poly_node *rhs);
+
+void print_sum_of_polys(poly_node *list);
+
+poly_node *sum_of_polys(poly_node *lhs, poly_node *rhs);
 
 #endif //_POLYNOM_SUM_H_

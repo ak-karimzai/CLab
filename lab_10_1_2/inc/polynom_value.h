@@ -9,6 +9,6 @@
 #include "create.h"
 #include "free.h"
 
-int polynom_value(void);
+long int get_polynom_val(poly_node *list, int val);
 
 #endif //_POLYNOM_VALUE_H_

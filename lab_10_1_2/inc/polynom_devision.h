@@ -8,6 +8,8 @@
 #include "free.h"
 #include "create.h"
 
-int polynom_devision(void);
+void print_nodes(poly_node *list);
+
+void create_even_odd_nodes(poly_node *main, poly_node *odd, poly_node *even);
 
 #endif //_POLYNOM_DEVISION_H_
