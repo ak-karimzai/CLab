@@ -12,6 +12,9 @@ main_obj := $(patsubst %.c, %.o, $(wildcard main.c))
 
 unit_obj := $(patsubst %.c, %.o, $(wildcard unit.c))
 
+run : app.exe
+	./app.exe
+
 app.exe : $(main_obj) $(objs)
 	$(cc) $(c_flags) -o $@ $^ -lm
 
