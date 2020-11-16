@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include "../inc/output.h"
 
 void write_objs_in_file(FILE *file, const int *arr_lhs, const int *arr_rhs)
 {

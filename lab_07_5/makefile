@@ -23,7 +23,7 @@ unit_tests.exe: $(obj)unit_test.o $(obj)sort.o $(obj)key.o $(obj)key_unit_test.o
 #unit_tests.exe: $(obj)unit_test.o $(obj)key.o
 #	$(cc) $^ -o $@ $(uni_flags)
 
-$(obj)sort.o: $(src)sort.c $(head)sort_header.h
+$(obj)sort.o: $(src)sort.c $(head)sort.h
 	$(cc) $(cflags) -c $< -o $@
 
 $(obj)key_unit_test.o: $(unit.test)key_unit_test.c $(unit.test.header)key_unit_test.h

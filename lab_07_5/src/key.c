@@ -1,4 +1,3 @@
-#include <stdlib.h>
 #include "../inc/key.h"
 
 int arr_sum(const int *arr_lhs, const int *arr_rhs)

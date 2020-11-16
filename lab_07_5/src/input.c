@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "../inc/input.h"
 
 int file_count_objs(FILE *file)

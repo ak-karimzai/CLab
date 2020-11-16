@@ -1,5 +1,3 @@
-#include <check.h>
-#include <stdlib.h>
 #include "../inc/unit_test_headers/key_unit_test.h"
 
 #define START START_TEST

@@ -1,19 +1,17 @@
-#include <check.h>
-#include <stdlib.h>
 #include "../inc/unit_test_headers/collect_unit_tests.h"
 
 
 int mysort_sort_tests(void)
 {
     int no_failed = 0;
-    SUITE *s;
-    SRUNNER *runner;
+    Suite *s;
+    SRunner *runner;
 
-    s = mysort_unit_tests_suite();
+    s = mysort_suite();
 
     runner = srunner_create(s);
 
-    srunner_run_all(runner, CKVER);
+    srunner_run_all(runner, CK_VERBOSE);
 
     no_failed = srunner_ntests_failed(runner);
 
@@ -24,13 +22,13 @@ int mysort_sort_tests(void)
 int key_unit_tests(void)
 {
     int no_failed = 0;
-    SUITE *s;
-    SRUNNER *runner;
+    Suite *s;
+    SRunner *runner;
 
     s = check_key_fun();
     runner = srunner_create(s);
 
-    srunner_run_all(runner, CKVER);
+    srunner_run_all(runner, CK_VERBOSE);
 
     no_failed = srunner_ntests_failed(runner);
 

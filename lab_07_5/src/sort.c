@@ -1,6 +1,4 @@
-#include <string.h>
-#include <stdlib.h>
-#include "../inc/sort_header.h"
+#include "../inc/sort.h"
 
 void swap(void *lhs, void *rhs, size_t size)
 {

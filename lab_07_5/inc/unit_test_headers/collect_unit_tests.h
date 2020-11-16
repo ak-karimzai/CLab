@@ -1,11 +1,10 @@
 #ifndef _COLLECT_TEST_H_
 #define _COLLECT_TEST_H_
 
-#define SUITE Suite
-#define CKVER CK_VERBOSE
-#define SRUNNER SRunner
+#include <check.h>
+#include <stdlib.h>
 
-SUITE *mysort_unit_tests_suite(void);
-SUITE *check_key_fun(void);
+#include "mysort_unit_test.h"
+#include "key_unit_test.h"
 
 #endif //_COLLECT_TEST_H_

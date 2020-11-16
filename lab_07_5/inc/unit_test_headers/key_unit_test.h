@@ -1,11 +1,12 @@
 #ifndef KEY_UNIT_TEST_H
 #define KEY_UNIT_TEST_H
 
-enum error_code
-{
-    ok,
-    error
-};
-int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst);
+#include <check.h>
+#include <stdlib.h>
+
+#include "../error_code.h"
+#include "../key.h"
+
+int key_unit_tests(void);
 
 #endif // KEY_UNIT_TEST_H
