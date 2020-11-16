@@ -7,7 +7,7 @@ int mysort_sort_tests(void)
     Suite *s;
     SRunner *runner;
 
-    s = mysort_suite();
+    s = mysort_unit_tests_suite();
 
     runner = srunner_create(s);
 

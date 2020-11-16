@@ -6,8 +6,12 @@
 
 #include "../sort.h"
 #define EPS 1e-6
+#define SUITE Suite
+#define TCASE TCase
+#define CKVER CK_VERBOSE
 
-Suite* mysort_suite(void);
+SUITE *mysort_unit_tests_suite(void);
 int mysort_sort_tests(void);
+
 
 #endif //
