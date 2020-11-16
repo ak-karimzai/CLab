@@ -17,7 +17,7 @@ int main(int argc, char **argv)
             {
                 int printable_eles = sort_by_price(products, num_of_products, p);
                 display_to_screen(products, printable_eles);
-                free_prod_arr(products, num_of_products);
+                free_product_arr(products, num_of_products);
             }
             else
                 rc = error;
