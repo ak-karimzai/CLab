@@ -1,8 +1,3 @@
-#define _GNU_SOURCE
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "../inc/io.h"
 
 int product_init(product *pro, const char *name, int price)
@@ -56,7 +51,7 @@ int product_read(FILE *f, product *prod, int n)
     return rc;
 }
 
-void free_product_arr(product *products, const int num_of_products)
+void free_product_arr(product *products, const size_t num_of_products)
 {
     if (products)
     {
@@ -98,7 +93,7 @@ int read_from_file(FILE *f, product **prods, int *num_of_products)
     return rc;
 }
 
-void display_to_screen(product *products, const int num_of_elem)
+void display_to_screen(product *products, const size_t num_of_elem)
 {
     for (size_t i = 0; i < num_of_elem; i++)
         fprintf(stdout, "%s%d\n", products[i].product_name, products[i].price);
