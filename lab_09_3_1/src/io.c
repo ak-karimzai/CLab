@@ -1,8 +1,3 @@
-#define _GNU_SOURCE
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "../inc/io.h"
 
 int product_init(product *pro, const char *name, int price)
@@ -54,17 +49,17 @@ int product_read(FILE *f, product *prod, int n)
 {
     int rc = ok;
     
-    for (int i = 0; rc == ok && i < n; i++)
+    for (size_t i = 0; rc == ok && i < n; i++)
         rc = read_product(f, prod + i);
 
     return rc;
 }
 
-void free_product_arr(product *products, const int num_of_products)
+void free_product_arr(product *products, const size_t num_of_products)
 {
     if (products)
     {
-        for (int i = 0; i < num_of_products; i++)
+        for (size_t i = 0; i < num_of_products; i++)
             if (products[i].product_name)
                 free(products[i].product_name);
         free(products);
@@ -82,7 +77,6 @@ int read_from_file(FILE *f, product **prods, int *num_of_products)
 
     if (fscanf(f, "%d\n", &n) == 1 && n > 0)
     {
-        // printf("%d", rc);
         ptmp = calloc(n, sizeof(product));
         if (ptmp)
         {   
@@ -105,11 +99,8 @@ int read_from_file(FILE *f, product **prods, int *num_of_products)
     return rc;
 }
 
-void display_to_screen(product *products, const int num_of_elem)
+void display_to_screen(product *products, const size_t num_of_elem)
 {
-    for (int i = 0; i < num_of_elem; i++)
-    {
-        // if (products[i].product_name[strlen(products[i].product_name) - 1] == '\n')
+    for (size_t i = 0; i < num_of_elem; i++)
         fprintf(stdout, "%s%d\n", products[i].product_name, products[i].price);
-    }
 }
