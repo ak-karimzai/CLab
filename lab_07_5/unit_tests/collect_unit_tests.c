@@ -11,7 +11,7 @@ int mysort_sort_tests(void)
 
     runner = srunner_create(s);
 
-    srunner_run_all(runner, CK_VERBOSE);
+    srunner_run_all(runner, CKVER);
 
     no_failed = srunner_ntests_failed(runner);
 
@@ -28,7 +28,7 @@ int key_unit_tests(void)
     s = check_key_fun();
     runner = srunner_create(s);
 
-    srunner_run_all(runner, CK_VERBOSE);
+    srunner_run_all(runner, CKVER);
 
     no_failed = srunner_ntests_failed(runner);
 
