@@ -4,8 +4,8 @@
 int mysort_sort_tests(void)
 {
     int no_failed = 0;
-    Suite *s;
-    SRunner *runner;
+    SUITE *s;
+    SRUNNER *runner;
 
     s = mysort_unit_tests_suite();
 
@@ -22,8 +22,8 @@ int mysort_sort_tests(void)
 int key_unit_tests(void)
 {
     int no_failed = 0;
-    Suite *s;
-    SRunner *runner;
+    SUITE *s;
+    SRUNNER *runner;
 
     s = check_key_fun();
     runner = srunner_create(s);
