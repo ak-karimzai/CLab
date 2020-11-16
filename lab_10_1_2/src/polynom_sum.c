@@ -36,7 +36,7 @@ poly_node *sum_of_polys(poly_node *lhs, poly_node *rhs)
         }
         if (lhs->head)
             sum->end->next = lhs->head;
-        if (rhs->head)
+        else if (rhs->head)
             sum->end->next = rhs->head;
     }
     return sum;

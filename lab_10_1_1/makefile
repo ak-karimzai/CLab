@@ -7,6 +7,7 @@ src_dir := ./src/*.c
 src_obj := ./src/*.o
 
 objs := $(patsubst %.c, %.o, $(wildcard $(src_dir)))
+
 main_obj := $(patsubst %.c, %.o, $(wildcard main.c))
 
 unit_obj := $(patsubst %.c, %.o, $(wildcard unit.c))

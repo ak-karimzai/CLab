@@ -22,18 +22,16 @@ int main()
                     if (rc == ok)
                     {
                         if (fscanf(stdin, "%d", &val) == 1)
+                        {
                             printf("%ld\n", get_polynom_val(list, val));
+                            free_list(list);
+                        }
                         else
                             rc = error;
                     }
                     free_string(polynom_coeffs);
                 }
-                else
-                    rc = error;
-                free_list(list);
             }
-            else 
-                rc = error;
         }
         else if (strcmp(choice->string, POLYNOM_DERIVATIVE) == ok)
         {
