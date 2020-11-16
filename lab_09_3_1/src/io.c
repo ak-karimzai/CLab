@@ -55,7 +55,7 @@ int product_read(FILE *f, product *prod, int n)
     return rc;
 }
 
-void free_product_arr(product *products, const size_t num_of_products)
+void free_prod_arr(product *products, const size_t num_of_products)
 {
     if (products)
     {
@@ -66,14 +66,14 @@ void free_product_arr(product *products, const size_t num_of_products)
     }
 }
 
-int read_from_file(FILE *f, product **prods, int *num_of_products)
+int read_from_file(FILE *f, product **prods, int *num_of_prods)
 {
     product *ptmp;
     int n;
     int rc = ok;
 
     *prods = NULL;
-    *num_of_products = 0;
+    *num_of_prods = 0;
 
     if (fscanf(f, "%d\n", &n) == 1 && n > 0)
     {
@@ -83,11 +83,13 @@ int read_from_file(FILE *f, product **prods, int *num_of_products)
             rc = product_read(f, ptmp, n);
             if (rc == ok)
             {
-               (*prods) = ptmp;
-               (*num_of_products) = n;
+               *prods = ptmp;
+               *num_of_prods = n;
             }
             else
-               free_product_arr(ptmp, n);
+            {
+               free_prod_arr(ptmp, n);
+            }
         }
         else
             rc = error;
