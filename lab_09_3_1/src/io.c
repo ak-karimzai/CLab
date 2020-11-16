@@ -18,7 +18,7 @@ int product_init(product *pro, const char *name, int price)
 
         return ok;
     }
-
+    // 
     return error;
 }
 
