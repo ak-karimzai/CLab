@@ -11,7 +11,7 @@
 #define TCASE TCase
 #define CKVER CK_VERBOSE
 
-int key_unit_tests(void);
 SUITE *check_key_fun(void);
+int key_unit_tests(void);
 
 #endif // KEY_UNIT_TEST_H
