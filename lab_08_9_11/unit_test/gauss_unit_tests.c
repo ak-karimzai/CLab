@@ -1,7 +1,3 @@
-#include <check.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "../inc/unit_test_headers/gauss_unit_tests.h"
 
 int doub_cmp(const double x, const double y)

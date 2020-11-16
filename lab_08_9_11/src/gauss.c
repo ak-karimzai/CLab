@@ -1,6 +1,4 @@
 #include "../inc/gauss.h"
-#include <math.h>
-#include <stdio.h>
 
 void swap(double *lhs, double *rhs)
 {
@@ -79,17 +77,19 @@ int get_max_and_its_idx(matrix *mat, double *max, int iter)
 
 int gauss_solution(matrix *mat)
 {
+    double max, divisor;
+    int idx_of_max_row;
     if (mat->col == mat->row + 1)
     {
         for (int k = 0; k < mat->row; k++)
         {
-            double max = 0.0;
-            int idx_of_max_row = get_max_and_its_idx(mat, &max, k);
+            max = 0.0;
+            idx_of_max_row = get_max_and_its_idx(mat, &max, k);
             if (idx_of_max_row != k)
                 for (int i = k; i < mat->col; i++)
                     swap(&mat->mat[idx_of_max_row][i], &mat->mat[k][i]);
 
-            double divisor = mat->mat[k][k];
+            divisor = mat->mat[k][k];
             if (divisor != 0)
                 divide_and_subtract(mat, k, divisor);
         }

@@ -1,6 +1,4 @@
-#include <stdlib.h>
 #include "../inc/add_mul.h"
-
 
 matrix *addition(const matrix *lhs, const matrix *rhs)
 {

@@ -1,5 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "../inc/free.h"
 
 void free_mat(matrix *mat)

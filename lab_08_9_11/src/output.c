@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "../inc/output.h"
 
 void add_mat_to_file(const matrix *mat, FILE *output_file)
