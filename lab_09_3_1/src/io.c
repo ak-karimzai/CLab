@@ -81,11 +81,10 @@ int read_from_file(FILE *f, product **prods, int *num_of_products)
         if (ptmp)
         {   
             rc = product_read(f, ptmp, n);
-
             if (rc == ok)
             {
-               *prods = ptmp;
-               *num_of_products = n;
+               (*prods) = ptmp;
+               (*num_of_products) = n;
             }
             else
                free_product_arr(ptmp, n);
