@@ -7,9 +7,6 @@ void swap(void *lhs, void *rhs, size_t size)
     memcpy(lhs, rhs, size);
     memcpy(rhs, tmp, size);
     free(tmp);
-    // int temp = *(int *)(lhs);
-    // *(int *)(lhs) = *(int *)(rhs);
-    // *(int *)(rhs) = temp;
 }
 
 int compare_int(const void *lhs, const void *rhs)
