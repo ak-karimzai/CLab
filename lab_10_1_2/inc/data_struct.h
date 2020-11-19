@@ -27,4 +27,9 @@ typedef struct
     node_t *end;
 } ll_polynome_t;
 
+#define POLYNOM_VALUE "val"
+#define POLYNOM_DERIVATIVE "ddx"
+#define POLYNOM_ADDITION "sum"
+#define POLYNOM_DIVISION "dvd"
+
 #endif  //_DATA_STRUCT_H_
