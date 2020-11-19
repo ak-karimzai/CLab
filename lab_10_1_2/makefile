@@ -1,7 +1,7 @@
 .PHONY : clear
 
 cc := gcc
-c_flags := -Wall -Werror -std=c99 -pedantic
+c_flags := -Wall -Werror -Wextra -std=c99 -pedantic
 
 src_dir := ./src/*.c
 src_obj := ./src/*.o
@@ -20,6 +20,9 @@ app.exe : $(main_obj) $(objs)
 
 unit_tests.exe : $(unit_obj)
 	$(cc) -o $@ $^ 
+
+memcheck : app.exe
+	valgrind --leak-check=full ./app.exe
 
 clear :
 	rm -rf $(src_obj) *.exe *.o *.out
