@@ -31,7 +31,7 @@ int myatoi(char *s, int *x)
     int rc = ok;
     size_t len = strlen(s);
     for (size_t i = 0; i < len; i++)
-        if (s[i] < '0' && s[i] > '9')
+        if (s[i] < '0' || s[i] > '9')
             rc = error;
     *x = rc == ok ? atoi(s) : 0;
     return rc; 
@@ -95,8 +95,6 @@ int create_list_from_line(char *str, ll_polynome_t *polynome)
         }
         num = strtok(NULL, " ");
     }
-    if (rc == error)
-        free_list(polynome);
     return rc;
 }
 
@@ -232,11 +230,10 @@ int main()
     int rc = ok;
     if (choice)
     {
-        if (strcmp(choice, "val") == ok || strcmp(choice, "ddx") == ok || strcmp(choice, "dvd") == ok)
+        if (strcmp(choice, "val") == ok || strcmp(choice, "ddx") == ok || strcmp(choice, "dvd") == ok || strcmp(choice, "sum") == ok)
         {
             ll_polynome_t *polynome;
             char *poly_coeff_pow = get_string();
-            int x_value;
             if (poly_coeff_pow && create_ll_node(&polynome) == ok)
             {
                 if (create_list_from_line(poly_coeff_pow, polynome) == error)
@@ -245,6 +242,7 @@ int main()
                 {
                     if (strcmp(choice, "val") == ok)
                     {
+                        int x_value;
                         if (fscanf(stdin, "%d", &x_value) == 1)
                             printf("%ld\n", polynome_val(polynome, x_value));
                         else
@@ -271,6 +269,26 @@ int main()
                                 free_list(even_nodes);
                         }
                     }
+                    else if (strcmp(choice, "sum") == ok)
+                    {
+                        char *sec_poly_coeff_pow = get_string();
+                        ll_polynome_t *second_polynome;
+                        if (sec_poly_coeff_pow && create_ll_node(&second_polynome) == ok)
+                        {
+                            if (create_list_from_line(sec_poly_coeff_pow, second_polynome) == error)
+                                rc = error;
+                            else
+                            {
+                                ll_polynome_t *sum = polynome_addition(polynome, second_polynome);
+                                print_list(sum, sum_print);
+                                free_list(sum);
+                            }
+                            free_list(second_polynome);
+                            free(sec_poly_coeff_pow);
+                        }
+                        else
+                            free(sec_poly_coeff_pow);
+                    }
                     else
                     {
                         derivative_if_polynome(polynome);
@@ -286,37 +304,8 @@ int main()
                 rc = error;
             }
         }
-        else if (strcmp(choice, "sum") == ok)
-        {
-            char *lhs_coeff_and_pow = get_string();
-            char *rhs_coeff_and_pow = get_string();
-            ll_polynome_t *lhs_polynome, *rhs_polynome;
-            if (lhs_coeff_and_pow && rhs_coeff_and_pow && create_ll_node(&lhs_polynome) == ok && create_ll_node(&rhs_polynome) == ok)
-            {
-                if (create_list_from_line(lhs_coeff_and_pow, lhs_polynome) == error || create_list_from_line(rhs_coeff_and_pow, rhs_polynome) == error)
-                    rc = error;
-                else
-                {
-                    ll_polynome_t *sum = polynome_addition(lhs_polynome, rhs_polynome);
-                    print_list(sum, sum_print);
-                    free_list(sum);
-                }
-                free_list(lhs_polynome);
-                free_list(rhs_polynome);
-                free(lhs_coeff_and_pow);
-                free(rhs_coeff_and_pow);
-            }
-            else
-            {
-                rc = error;
-                if (lhs_coeff_and_pow)
-                    free(lhs_coeff_and_pow);
-                if (rhs_coeff_and_pow)
-                    free(rhs_coeff_and_pow);
-                free_list(lhs_polynome);
-                free_list(rhs_polynome);
-            }
-        }
+        else
+            rc = error;
         free(choice);
     }
     return rc;
