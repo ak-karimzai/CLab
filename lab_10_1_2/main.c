@@ -30,9 +30,21 @@ int myatoi(char *s, int *x)
 {
     int rc = ok;
     size_t len = strlen(s);
-    for (size_t i = 0; i < len; i++)
-        if (s[i] < '0' || s[i] > '9')
-            rc = error;
+    if (len > 0)
+    {
+        if (s[0] == '+' || s[0] == '-')
+        {
+            for (size_t i = 1; i < len; i++)
+                if (s[i] < '0' || s[i] > '9')
+                    rc = error;
+        }
+        else
+        {
+            for (size_t i = 0; i < len; i++)
+                if (s[i] < '0' || s[i] > '9')
+                    rc = error;
+        }
+    }
     *x = rc == ok ? atoi(s) : 0;
     return rc; 
 }
@@ -259,14 +271,14 @@ int main()
                                 print_list(even_nodes, just_print);
                             if (odd_nodes->head)
                                 print_list(odd_nodes, just_print);
+                            free_list(odd_nodes);
+                            free_list(even_nodes);
                         }
                         else
                         {
                             rc = error;
-                            if (odd_nodes)
-                                free_list(odd_nodes);
-                            if (even_nodes)
-                                free_list(even_nodes);
+                            free_list(odd_nodes);
+                            free_list(even_nodes);
                         }
                     }
                     else if (strcmp(choice, "sum") == ok)
