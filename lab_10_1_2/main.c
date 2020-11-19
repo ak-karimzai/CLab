@@ -110,13 +110,13 @@ int create_list_from_line(char *str, ll_polynome_t *polynome)
     return rc;
 }
 
-int create_ll_node(ll_polynome_t **_restrict)
+int create_ll_node(ll_polynome_t **res_trict)
 {
     int rc = error;
-    *_restrict = malloc(sizeof(ll_polynome_t));
-    if (*_restrict)
+    *res_trict = malloc(sizeof(ll_polynome_t));
+    if (*res_trict)
     {
-        (*_restrict)->head = (*_restrict)->end = NULL;
+        (*res_trict)->head = (*res_trict)->end = NULL;
         rc = ok;
     }
     return rc;
