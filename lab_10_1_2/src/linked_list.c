@@ -46,7 +46,7 @@ int myatoi(char *s, int *x)
             if (s[i] < '0' || s[i] > '9')
                 rc = error;
     }
-    *x = rc == ok ? atoi(s) : 0;
+    *x = atoi(s);
     return rc; 
 }
 
