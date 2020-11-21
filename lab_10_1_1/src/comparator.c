@@ -3,10 +3,10 @@
 int compare_by_price(const void *first, const void *second)
 {
     product *lhs = (product *) first, *rhs = (product *) second;
-    if (lhs->price == rhs->price)
-        return EQUAL;
-    else if (lhs->price > rhs->price)
-        return BIGGER;
+    int res = EQUAL;
+    if (lhs->price > rhs->price)
+        res = BIGGER;
     else if (lhs->price < rhs->price)
-        return LESS_THAN;
+        res = LESS_THAN;
+    return res;
 }

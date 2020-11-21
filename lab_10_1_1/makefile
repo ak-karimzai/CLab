@@ -13,7 +13,7 @@ main_obj := $(patsubst %.c, %.o, $(wildcard main.c))
 unit_obj := $(patsubst %.c, %.o, $(wildcard unit.c))
 
 app.exe : $(main_obj) $(objs)
-	$(cc) $(c_flags) -o $@ $^
+	$(cc) -o $@ $^
 
 unit_tests.exe : $(unit_obj)
 	$(cc) -o $@ $^ 
