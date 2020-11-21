@@ -41,18 +41,10 @@ int myatoi(char *s, int *x)
     size_t len = strlen(s);
     if (len > 0)
     {
-        if (s[0] == '+' || s[0] == '-')
-        {
-            for (size_t i = 1; i < len; i++)
-                if (s[i] < '0' || s[i] > '9')
-                    rc = error;
-        }
-        else
-        {
-            for (size_t i = 0; i < len; i++)
-                if (s[i] < '0' || s[i] > '9')
-                    rc = error;
-        }
+        size_t i = (s[0] == '+' || s[0] == '-') ? 1 : 0;
+        for (; i < len; i++)
+            if (s[i] < '0' || s[i] > '9')
+                rc = error;
     }
     *x = rc == ok ? atoi(s) : 0;
     return rc; 
