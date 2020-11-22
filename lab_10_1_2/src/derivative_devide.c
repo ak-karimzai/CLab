@@ -1,6 +1,6 @@
 #include "../inc/derivative_devide.h"
 
-void derivative_if_polynome(ll_polynome_t *polynome)
+void derivative_of_polynome(ll_polynome_t *polynome)
 {
     node_t *temp = polynome->head;
     while (temp)

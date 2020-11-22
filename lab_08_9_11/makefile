@@ -8,14 +8,18 @@ src := ./src/
 unit.src := ./unit_test/
 unit.inc := $(inc)unit_test_headers/
 
+uni_flags := -lcheck # windows
+# uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
+
 objs := $(obj)output.o $(obj)free.o $(obj)gauss.o $(obj)add_mul.o $(obj)create_matrix.o $(obj)main.o
-unit.objs := $(obj)output.o $(obj)free.o  $(obj)add_mul.o $(obj)create_matrix.o $(obj)addition_unit_test.o $(obj)multiplication_unit_test.o $(obj)unit_test.o $(obj)collect_unit_test.o  $(obj)gauss.o $(obj)gauss_unit_tests.o
+unit.objs := $(obj)output.o $(obj)free.o  $(obj)add_mul.o $(obj)create_matrix.o $(obj)addition_unit_test.o $(obj)multiplication_unit_test.o $(obj)unit_test.o\
+		 $(obj)collect_unit_test.o  $(obj)gauss.o $(obj)gauss_unit_tests.o
 
 app.exe: $(objs)
 	$(cc) $(flags) $^ -o $@
 
 unit_tests.exe: $(unit.objs)
-	$(cc) $(flags) $^ -o $@ -lcheck
+	$(cc) $(flags) $^ -o $@ $(uni_flags)
 
 $(obj)main.o : main.c $(inc)main.h
 	$(cc) $(flags) -c $< -o $@

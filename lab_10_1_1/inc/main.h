@@ -11,5 +11,6 @@
 #include "read_from_file.h"
 #include "sort.h"
 #include "comparator.h"
+#include "output.h"
 
 #endif //

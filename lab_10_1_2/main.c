@@ -65,7 +65,7 @@ int main()
                 }
                 else
                 {
-                    derivative_if_polynome(polynome);
+                    derivative_of_polynome(polynome);
                     print_list(polynome, derivative);
                 }
             }
