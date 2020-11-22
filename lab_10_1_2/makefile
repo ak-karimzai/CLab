@@ -8,8 +8,8 @@ src_obj := ./src/*.o
 
 unit_dir := ./tests/unit_tests/*.c
 
-# uni_flags := -lcheck # windows
-uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
+uni_flags := -lcheck # windows
+# uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
 
 
 objs := $(patsubst %.c, %.o, $(wildcard $(src_dir)))
