@@ -7,6 +7,7 @@ src_dir := ./src/*.c
 src_obj := ./src/*.o
 
 unit_dir := ./tests/unit_tests/*.c
+unit_obj := ./tests/unit_tests/*.c
 
 uni_flags := -lcheck # windows
 # uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
@@ -25,4 +26,4 @@ unit_tests.exe : $(unit_obj) $(objs)
 	$(cc) $^ -o $@ -lm $(uni_flags)
 
 clear :
-	rm -rf *.exe $(src_obj) *.o
+	rm -rf *.exe $(src_obj) $(unit_obj) *.o
