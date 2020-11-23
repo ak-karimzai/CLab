@@ -7,9 +7,9 @@ int main()
 
 int collect_all_tests(void)
 {
-    int no_failed = 0;
-    Suite *s;
-    SRunner *runner;
+    int no_failed = 0, all_faileds = 0;
+    SUITE *s;
+    SRUNNER *runner;
 
     s = addtion_function_tests();
 
@@ -20,8 +20,7 @@ int collect_all_tests(void)
 
     srunner_free(runner);
 
-    if (no_failed != 0)
-        return error;
+    all_faileds += no_failed;
 
     s = devide_function_tests();
     
@@ -32,8 +31,7 @@ int collect_all_tests(void)
 
     srunner_free(runner);
 
-    if (no_failed != 0)
-        return error;
+    all_faileds += no_failed;
     
     s = derivative_function_tests();
     
@@ -44,8 +42,7 @@ int collect_all_tests(void)
 
     srunner_free(runner);
 
-    if (no_failed != 0)
-        return error;
+    all_faileds += no_failed;
 
     s = value_function_tests();
     
@@ -56,7 +53,7 @@ int collect_all_tests(void)
 
     srunner_free(runner);
 
-    if (no_failed != 0)
-        return error;
-    return ok;
+    all_faileds += no_failed;
+
+    return all_faileds ? error : ok;
 }

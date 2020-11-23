@@ -6,7 +6,8 @@
 #include "../polynome_value.h"
 #include "../linked_list.h"
 #include "../create_free.h"
+#include "macros_for_test_sys.h"
 
-Suite *value_function_tests(void);
+SUITE *value_function_tests(void);
 
 #endif //_VAL_TESTS_H_

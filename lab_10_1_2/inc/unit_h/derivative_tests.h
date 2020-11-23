@@ -6,7 +6,8 @@
 #include "../derivative_devide.h"
 #include "../linked_list.h"
 #include "../create_free.h"
+#include "macros_for_test_sys.h"
 
-Suite *derivative_function_tests(void);
+SUITE *derivative_function_tests(void);
 
 #endif //_SUM_TESTS_H_

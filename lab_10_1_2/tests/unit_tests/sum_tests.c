@@ -1,6 +1,6 @@
 #include "../../inc/unit_h/sum_tests.h"
 
-START_TEST(check_addition_fun)
+START(check_addition_fun)
 {
     ll_polynome_t *polynome;
     ll_polynome_t *sec_polynome;
@@ -40,9 +40,9 @@ START_TEST(check_addition_fun)
     free_list(sec_polynome);
     free_list(res);
 }
-END_TEST
+END
 
-START_TEST(check_addition_fun_2)
+START(check_addition_fun_2)
 {
     ll_polynome_t *polynome;
     ll_polynome_t *sec_polynome;
@@ -81,9 +81,9 @@ START_TEST(check_addition_fun_2)
     free_list(sec_polynome);
     free_list(res);
 }
-END_TEST
+END
 
-START_TEST(check_addition_fun_3)
+START(check_addition_fun_3)
 {
     ll_polynome_t *polynome;
     ll_polynome_t *sec_polynome;
@@ -128,13 +128,13 @@ START_TEST(check_addition_fun_3)
     free_list(sec_polynome);
     free_list(res);
 }
-END_TEST
+END
 
 
-Suite *addtion_function_tests(void)
+SUITE *addtion_function_tests(void)
 {
-    Suite *s;
-    TCase *pos_tes;
+    SUITE *s;
+    TCASE *pos_tes;
 
     s = suite_create("Sum function");
 

@@ -1,6 +1,6 @@
 #include "../../inc/unit_h/val_tests.h"
 
-START_TEST(check_value_function)
+START(check_value_function)
 {
     ll_polynome_t *polynome;
     const int x_value = 7, res = 1373;
@@ -10,9 +10,9 @@ START_TEST(check_value_function)
     ck_assert_int_eq(polynome_val(polynome, x_value), res);
     free_list(polynome);
 }
-END_TEST
+END
 
-START_TEST(check_value_function_2)
+START(check_value_function_2)
 {
     ll_polynome_t *polynome;
     const int x_value = 34, res = 6917581;
@@ -24,12 +24,12 @@ START_TEST(check_value_function_2)
     ck_assert_int_eq(polynome_val(polynome, x_value), res);
     free_list(polynome);
 }
-END_TEST
+END
 
-Suite *value_function_tests(void)
+SUITE *value_function_tests(void)
 {
-    Suite *s;
-    TCase *pos_tes;
+    SUITE *s;
+    TCASE *pos_tes;
 
     s = suite_create("Value function");
 

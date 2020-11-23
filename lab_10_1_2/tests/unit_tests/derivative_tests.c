@@ -1,6 +1,6 @@
 #include "../../inc/unit_h/derivative_tests.h"
 
-START_TEST(check_derivative_fun)
+START(check_derivative_fun)
 {
     ll_polynome_t *polynome;
    
@@ -19,9 +19,9 @@ START_TEST(check_derivative_fun)
 
     free_list(polynome);
 }
-END_TEST
+END
 
-START_TEST(check_derivative_fun_2)
+START(check_derivative_fun_2)
 {
     ll_polynome_t *polynome;
    
@@ -60,12 +60,12 @@ START_TEST(check_derivative_fun_2)
 
     free_list(polynome);
 }
-END_TEST
+END
 
-Suite *derivative_function_tests(void)
+SUITE *derivative_function_tests(void)
 {
-    Suite *s;
-    TCase *pos_tes;
+    SUITE *s;
+    TCASE *pos_tes;
 
     s = suite_create("derivative function");
 

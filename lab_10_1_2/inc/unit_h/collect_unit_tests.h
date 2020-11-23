@@ -6,6 +6,7 @@
 #include "derivative_tests.h"
 #include "devide_tests.h"
 #include "val_tests.h"
+#include "macros_for_test_sys.h"
 
 int collect_all_tests(void);
 

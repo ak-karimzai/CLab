@@ -1,6 +1,6 @@
 #include "../../inc/unit_h/devide_tests.h"
 
-START_TEST(check_devide_fun)
+START(check_devide_fun)
 {
     ll_polynome_t *polynome;
     ll_polynome_t *odd, *even;
@@ -48,12 +48,12 @@ START_TEST(check_devide_fun)
     free_list(odd);
     free_list(even);
 }
-END_TEST
+END
 
-Suite *devide_function_tests(void)
+SUITE *devide_function_tests(void)
 {
-    Suite *s;
-    TCase *pos_tes;
+    SUITE *s;
+    TCASE *pos_tes;
 
     s = suite_create("devide function");
 
