@@ -14,7 +14,7 @@ int collect_all_tests(void)
     s = addtion_function_tests();
 
     runner = srunner_create(s);
-    srunner_run_all(runner, CK_VERBOSE);
+    srunner_run_all(runner, CKVER);
 
     no_failed = srunner_ntests_failed(runner);
 
@@ -25,7 +25,7 @@ int collect_all_tests(void)
     s = devide_function_tests();
     
     runner = srunner_create(s);
-    srunner_run_all(runner, CK_VERBOSE);
+    srunner_run_all(runner, CKVER);
 
     no_failed = srunner_ntests_failed(runner);
 
@@ -36,7 +36,7 @@ int collect_all_tests(void)
     s = derivative_function_tests();
     
     runner = srunner_create(s);
-    srunner_run_all(runner, CK_VERBOSE);
+    srunner_run_all(runner, CKVER);
 
     no_failed = srunner_ntests_failed(runner);
 
@@ -47,7 +47,7 @@ int collect_all_tests(void)
     s = value_function_tests();
     
     runner = srunner_create(s);
-    srunner_run_all(runner, CK_VERBOSE);
+    srunner_run_all(runner, CKVER);
 
     no_failed = srunner_ntests_failed(runner);
 

@@ -8,6 +8,6 @@
 #include "../create_free.h"
 #include "macros_for_test_sys.h"
 
-Suite *addtion_function_tests(void);
+SUITE *addtion_function_tests(void);
 
 #endif //_SUM_TESTS_H_
