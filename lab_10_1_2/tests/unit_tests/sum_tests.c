@@ -65,7 +65,7 @@ START(check_addition_fun_2)
     ck_assert_int_eq(res->head->coeff, 12);
     ck_assert_int_eq(res->head->pow, 10);
 
-     ck_assert_ptr_nonnull(res->head->next);
+    ck_assert_ptr_nonnull(res->head->next);
     ck_assert_int_eq(res->head->next->coeff, 4);
     ck_assert_int_eq(res->head->next->pow, 2);
 
