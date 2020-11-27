@@ -61,7 +61,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                 while (*s)
                 {
                     if (str_s && n && str_index < n)
-                        str_s[str_index++] = *s;
+                        *(str_s + str_index++) = *s;
                     s++;
                 }
             }
@@ -74,7 +74,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                 while (*p)
                 {
                     if (str_s && n && str_index < n)
-                        str_s[str_index++] = *p;
+                        *(str_s + str_index++) = *p;
                     p++;
                 }
             }
@@ -82,7 +82,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             {
                 char temp_char = va_arg(args, int);
                 if (str_s && n && str_index < n)
-                    str_s[k++] = temp_char;
+                    *(str_s + str_index++) = temp_char;
             }
             str_format++;
         }
@@ -97,7 +97,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
     if (str_index < n)
         *(str_s + str_index) = '\0';
     else
-        *(str_s + (n - 1)) = '\0'
+        *(str_s + (n - 1)) = '\0';
     va_end(args);
     return str_index;
 }
