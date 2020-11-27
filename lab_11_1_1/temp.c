@@ -24,7 +24,7 @@ void reverse_string(char *s)
             swap((s + i), (s + j));
 }
 
-char *int_to_char(int num)
+char *int_to_char(long int num)
 {
     char *str = malloc(256);
     size_t len = 0;
@@ -66,19 +66,28 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                     s++;
                 }
             }
-            else if (*(str_format + 1) == 'd')
+            else if (*(str_format + 1) == 'l')
             {
-                int temp_num = va_arg(args, int);
-                char *num_in_str = int_to_char(temp_num);
-                char *p = num_in_str;
-                while (*p)
+                if (*(str_format + 2) == 'd')
+                {
+                    char *num_in_str = int_to_char(va_arg(args, long int));
+                    char *p = num_in_str;
+                    while (*p)
+                    {
+                        if (str_s && n && str_index < n)
+                            *(str_s + str_index) = *p;
+                        str_index++;
+                        p++;
+                    }
+                    free(num_in_str);
+                    str_format++;
+                }
+                else
                 {
                     if (str_s && n && str_index < n)
-                        *(str_s + str_index) = *p;
+                        *(str_s + str_index) = *str_format++;
                     str_index++;
-                    p++;
                 }
-                free(num_in_str);
             }
             else if (*(str_format + 1) == 'c')
             {
@@ -111,8 +120,12 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
 
 int main()
 {
+    long int test[] = {-1000000000, -100000000, -10000000, -1000000, -100000, -1000, -100, -10, -1};
     char arr[20];
-    printf("%d\n", my_snprintf(arr, sizeof(arr), "%s%s%d", "A", "H", -1000000));
-    puts(arr);
+    for (int i = 0; i < sizeof(test) / sizeof(test[0]); i++)
+    {
+        printf("%d\n", my_snprintf(arr, sizeof(arr), "%ld", test[i]));
+        puts(arr);
+    }
     return 0;
 }
