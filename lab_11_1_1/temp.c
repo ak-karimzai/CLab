@@ -24,20 +24,27 @@ void reverse_string(char *s)
             swap((s + i), (s + j));
 }
 
-char *int_to_char(char *str, int num)
+char *int_to_char(int num)
 {
-    int last_digit;
+    char *str = malloc(256);
     size_t len = 0;
-    if (num < 0)
+    int last_digit;
+   
+    if (num == 0)
+        *(str + len++) = '0';
+    else 
     {
-        *(str + len++) = '-';
-        num *= -1;
-    }
-    while (num)
-    {
-        last_digit = num % 10;
-        num /= 10;
-        *(str + len++) = last_digit + '0';
+        if (num < 0)
+        {
+            *(str + len++) = '-';
+            num *= -1;
+        }
+        while (num)
+        {
+            last_digit = num % 10;
+            num /= 10;
+            *(str + len++) = last_digit + '0';
+        }
     }
     str[len] = '\0';
     reverse_string(str);
@@ -69,9 +76,8 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             else if (*str_format == 'd')
             {
                 int temp_num = va_arg(args, int);
-                char num_in_string[256];
-                int_to_char(num_in_string, temp_num);
-                char *p = num_in_string;
+                char *num_in_str = int_to_char(temp_num);
+                char *p = num_in_str;
                 while (*p)
                 {
                     if (str_s && n && str_index < n)
@@ -79,6 +85,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                     str_index++;
                     p++;
                 }
+                free(num_in_str);
             }
             else if (*str_format == 'c')
             {
