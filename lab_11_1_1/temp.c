@@ -28,7 +28,6 @@ char *int_to_char(int num)
 {
     char *str = malloc(256);
     size_t len = 0;
-    int last_digit;
    
     if (num == 0)
         *(str + len++) = '0';
@@ -41,9 +40,8 @@ char *int_to_char(int num)
         }
         while (num)
         {
-            last_digit = num % 10;
+            *(str + len++) = num % 10 + '0';
             num /= 10;
-            *(str + len++) = last_digit + '0';
         }
     }
     str[len] = '\0';
