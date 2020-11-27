@@ -61,10 +61,10 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
     {
         if (*str_format == '%')
         {
-            str_format++;
-            if (*str_format == 's')
+            if (*(str_format + 1) == 's')
             {
                 const char *s = va_arg(args, char *);
+
                 while (*s)
                 {
                     if (str_s && n && str_index < n)
@@ -73,7 +73,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                     s++;
                 }
             }
-            else if (*str_format == 'd')
+            else if (*(str_format + 1) == 'd')
             {
                 int temp_num = va_arg(args, int);
                 char *num_in_str = int_to_char(temp_num);
@@ -87,14 +87,14 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                 }
                 free(num_in_str);
             }
-            else if (*str_format == 'c')
+            else if (*(str_format + 1) == 'c')
             {
                 char temp_char = va_arg(args, int);
                 if (str_s && n && str_index < n)
                     *(str_s + str_index) = temp_char;
                 str_index++;
             }
-            str_format++;
+            str_format = str_format + 2;
         }
         else
         {
@@ -105,10 +105,13 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             str_index++;
         }
     }
-    if (str_index < n)
-        *(str_s + str_index) = '\0';
-    else
-        *(str_s + (n - 1)) = '\0';
+    if (str_s != NULL && n != 0)
+    {
+        if (str_index < n)
+            *(str_s + str_index) = '\0';
+        else
+            *(str_s + (n - 1)) = '\0';
+    }
     va_end(args);
     return str_index;
 }
