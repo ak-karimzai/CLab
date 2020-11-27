@@ -44,26 +44,28 @@ char *int_to_char(char *str, int num)
     return str;
 }
 
-int my_snprintf(char *restrict_s, size_t n, const char *restrict_format, ...)
+int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
 {
-    size_t len = my_strlen(restrict_format), k = 0, i = 0;
     va_list args;
-    va_start(args, restrict_format);
-    for (; i < len - 1 && k <= n - 1; i++)
+    va_start(args, str_format);
+    size_t str_index = 0;
+
+    while (*str_format)
     {
-        if (restrict_format[i] == '%')
+        if (*str_format == '%')
         {
-            i++;
-            if (restrict_format[i] == 's')
+            str_format++;
+            if (*str_format == 's')
             {
                 const char *s = va_arg(args, char *);
                 while (*s)
                 {
-                    restrict_s[k++] = *s;
+                    if (str_s && n && str_index < n)
+                        str_s[str_index++] = *s;
                     s++;
                 }
             }
-            else if (restrict_format[i] == 'd')
+            else if (*str_format == 'd')
             {
                 int temp_num = va_arg(args, int);
                 char num_in_string[256];
@@ -71,36 +73,33 @@ int my_snprintf(char *restrict_s, size_t n, const char *restrict_format, ...)
                 char *p = num_in_string;
                 while (*p)
                 {
-                    restrict_s[k++] = *p;
+                    if (str_s && n && str_index < n)
+                        str_s[str_index++] = *p;
                     p++;
                 }
             }
-            else if (restrict_format[i] == 'c')
+            else if (*str_format == 'c')
             {
                 char temp_char = va_arg(args, int);
-                restrict_s[k++] = temp_char;
+                if (str_s && n && str_index < n)
+                    str_s[k++] = temp_char;
             }
-            // else if (restrict_format[i] == 'l' && restrict_format[i + 1] == d)
-            // {
-            //     long int temp_int = va_arg(args, long int);
-            //     char num_in_string[256];
-            //     int_to_char(num_in_string, temp_int);
-            //     char *p = num_in_string;
-            //     while (*p)
-            //     {
-            //         restrict_s[k++] = *p;
-            //         p++;
-            //     }
-            // }
+            str_format++;
         }
         else
-            restrict_s[k++] = restrict_format[i];
+        {
+            if (str_s && n && str_index < n)
+                str_s[str_index++] = *str_format++;
+            else
+                str_format++;
+        }
     }
-    if (len && k < len - 1)
-        restrict_s[k++] = restrict_format[i];
-    restrict_s[k] = '\0';
+    if (str_index < n)
+        *(str_s + str_index) = '\0';
+    else
+        *(str_s + (n - 1)) = '\0'
     va_end(args);
-    return k;
+    return str_index;
 }
 
 int main()
