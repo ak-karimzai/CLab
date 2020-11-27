@@ -61,7 +61,8 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                 while (*s)
                 {
                     if (str_s && n && str_index < n)
-                        *(str_s + str_index++) = *s;
+                        *(str_s + str_index) = *s;
+                    str_index++;
                     s++;
                 }
             }
@@ -74,7 +75,8 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                 while (*p)
                 {
                     if (str_s && n && str_index < n)
-                        *(str_s + str_index++) = *p;
+                        *(str_s + str_index) = *p;
+                    str_index++;
                     p++;
                 }
             }
@@ -82,16 +84,18 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             {
                 char temp_char = va_arg(args, int);
                 if (str_s && n && str_index < n)
-                    *(str_s + str_index++) = temp_char;
+                    *(str_s + str_index) = temp_char;
+                str_index++;
             }
             str_format++;
         }
         else
         {
             if (str_s && n && str_index < n)
-                str_s[str_index++] = *str_format++;
+                *(str_s + str_index) = *str_format++;
             else
                 str_format++;
+            str_index++;
         }
     }
     if (str_index < n)
@@ -105,7 +109,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
 int main()
 {
     char arr[20];
-    printf("%d\n", my_snprintf(arr, sizeof(arr), "%c", 'A'));
-    // puts(arr);
+    printf("%d\n", my_snprintf(arr, sizeof(arr), "%s%s%d", "A", "H", 990819));
+    puts(arr);
     return 0;
 }
