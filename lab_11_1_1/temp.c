@@ -28,22 +28,17 @@ char *int_to_char(int num)
 {
     char *str = malloc(256);
     size_t len = 0;
-   
-    if (num == 0)
-        *(str + len++) = '0';
-    else 
+
+    if (num < 0)
     {
-        if (num < 0)
-        {
-            *(str + len++) = '-';
-            num = -num;
-        }
-        while (num)
-        {
-            *(str + len++) = num % 10 + '0';
-            num /= 10;
-        }
+        *(str + len++) = '-';
+        num = -num;
     }
+    do
+    {
+        *(str + len++) = num % 10 + '0';
+    } while ((num /= 10));
+    
     str[len] = '\0';
     reverse_string(str);
     return str;
@@ -117,7 +112,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
 int main()
 {
     char arr[20];
-    printf("%d\n", my_snprintf(arr, sizeof(arr), "%s%s%d", "A", "H", +9));
+    printf("%d\n", my_snprintf(arr, sizeof(arr), "%s%s%d", "A", "H", -1000000));
     puts(arr);
     return 0;
 }
