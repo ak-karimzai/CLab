@@ -37,7 +37,7 @@ char *int_to_char(int num)
         if (num < 0)
         {
             *(str + len++) = '-';
-            num *= -1;
+            num = -num;
         }
         while (num)
         {
@@ -116,7 +116,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
 int main()
 {
     char arr[20];
-    printf("%d\n", my_snprintf(arr, sizeof(arr), "%s%s%d", "A", "H", 990819));
+    printf("%d\n", my_snprintf(arr, sizeof(arr), "%s%s%d", "A", "H", +9));
     puts(arr);
     return 0;
 }
