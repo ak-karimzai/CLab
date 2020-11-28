@@ -16,7 +16,12 @@ int decimal_to_octal(int decimal)
     return res;
 }
 
+int print_a_int(long int x)
+{
+    printf("%ld", x);
+}
+
 int main()
 {
-    printf("%c", 9 + '0');
+    
 }

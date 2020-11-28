@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <inttypes.h>
 #include <stdarg.h>
 #include <string.h>
 #include <stdbool.h>
@@ -25,7 +26,27 @@ void reverse_string(char *s)
             swap((s + i), (s + j));
 }
 
-char *int_to_char(long num)
+char *int_to_char(int32_t num)
+{
+    char *str = calloc(256, sizeof(char));
+    size_t len = 0;
+
+    if (num < 0)
+    {
+        *(str + len++) = '-';
+        num = -num;
+    }
+    do
+    {
+        *(str + len++) = num % 10 + '0';
+    } while (num /= 10);
+    
+    str[len] = '\0';
+    reverse_string(str);
+    return str;
+}
+
+char *int64_to_char(int64_t num)
 {
     char *str = calloc(256, sizeof(char));
     size_t len = 0;
@@ -69,7 +90,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, long));
+                char *num_in_str = int_to_char(va_arg(args, int32_t));
                 int j = 0;
                 while (*(num_in_str + j))
                 {
@@ -79,6 +100,20 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                     j++;
                 }
                 free(num_in_str);
+            }
+            else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'd')
+            {
+                char *num_in_str = int64_to_char(va_arg(args, int64_t));
+                int j = 0;
+                while (*(num_in_str + j))
+                {
+                    if (str_s && n && str_index < n)
+                        *(str_s + str_index) = *(num_in_str + j);
+                    str_index++;
+                    j++;
+                }
+                free(num_in_str);
+                str_format++;
             }
             else if (*(str_format + 1) == 'c')
             {
@@ -137,7 +172,10 @@ bool check_fun(const char *fmt, int num)
 
 int main()
 {
-    check_fun("%d", 0);
-    check_fun("%d", 0);
+    // check_fun("%d", 0);
+    // check_fun("%d", 0);
+    char arr[20];
+    my_snprintf(arr, 20, "%ld", 10000000000000);
+    puts(arr);
     return 0;
 }
