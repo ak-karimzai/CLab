@@ -85,7 +85,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, long));
+                char *num_in_str = int_to_char(va_arg(args, int64_t));
                 int j = 0;
                 while (*(num_in_str + j))
                 {
@@ -99,7 +99,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'l' && *(str_format + 3) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, long long int));
+                char *num_in_str = int_to_char(va_arg(args, int64_t));
                 int j = 0;
                 while (*(num_in_str + j))
                 {
