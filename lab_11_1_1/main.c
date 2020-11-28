@@ -36,7 +36,7 @@ int main()
     // check_fun("%d", 0);
     // check_fun("%d", 0);
     char arr[20];
-    my_snprintf(arr, 20, "%ld", 10000000000000);
+    my_snprintf(arr, 20, "%d", 123213);
     puts(arr);
     printf("%lu\n", sizeof(long));
     printf("%lu\n", sizeof(int));
