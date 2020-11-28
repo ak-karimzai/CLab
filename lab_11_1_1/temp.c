@@ -22,8 +22,10 @@ void swap(char *lhs, char *rhs)
 void reverse_string(char *s)
 {
     if (my_strlen(s))
+    {
         for (size_t i = s[0] == '-' ? 1 : 0, j = my_strlen(s) - 1; i < j; i++, j--)
             swap((s + i), (s + j));
+    }
 }
 
 char *int_to_char(int32_t num)
@@ -115,6 +117,20 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                 free(num_in_str);
                 str_format++;
             }
+            else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'l' && *(str_format + 3) == 'd')
+            {
+                char *num_in_str = int64_to_char(va_arg(args, int64_t));
+                int j = 0;
+                while (*(num_in_str + j))
+                {
+                    if (str_s && n && str_index < n)
+                        *(str_s + str_index) = *(num_in_str + j);
+                    str_index++;
+                    j++;
+                }
+                free(num_in_str);
+                str_format++;
+            }
             else if (*(str_format + 1) == 'c')
             {
                 char temp_char = va_arg(args, int);
@@ -170,12 +186,12 @@ bool check_fun(const char *fmt, int num)
     return result;
 }
 
-int main()
-{
-    // check_fun("%d", 0);
-    // check_fun("%d", 0);
-    char arr[20];
-    my_snprintf(arr, 20, "%ld", 10000000000000);
-    puts(arr);
-    return 0;
-}
+// int main()
+// {
+//     // check_fun("%d", 0);
+//     // check_fun("%d", 0);
+//     char arr[20];
+//     my_snprintf(arr, 20, "%ld", 10000000000000);
+//     puts(arr);
+//     return 0;
+// }
