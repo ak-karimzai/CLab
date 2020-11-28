@@ -5,7 +5,7 @@
 #include <inttypes.h>
 
 int my_snprintf(char *str_s, size_t n, const char *str_format, ...);
-bool check_fun(const char *fmt, long int num)
+bool check_fun(const char *fmt, long num)
 {
     bool result = true;
     int size = snprintf(NULL, 0, fmt, num) + 2;
@@ -33,8 +33,8 @@ bool check_fun(const char *fmt, long int num)
 
 int main()
 {
-    check_fun("%ld", 12321);
-    check_fun("%ld", 12321);
+    check_fun("%d", 12321);
+    check_fun("%d", 12321);
     printf("%d\n", sizeof(long) == sizeof(int64_t));
     // char arr[20];
     printf("%d\n", sizeof(int) == sizeof(int32_t));
