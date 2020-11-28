@@ -109,7 +109,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                     j++;
                 }
                 free(num_in_str);
-                str_format++;
+                str_format += 2;
             }
             else if (*(str_format + 1) == 'c')
             {
