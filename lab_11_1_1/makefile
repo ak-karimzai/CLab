@@ -4,8 +4,11 @@ c_flag := -Wall -Werror -pedantic -std=c99
 run : app.exe
 	./app.exe
 
-app.exe : temp.c
+app.exe : temp.o
 	$(cc) $(c_flag) -o $@ $^
+
+temp.o : temp.c
+	$(cc) $(c_flag) -c $^
 
 unit_tests.exe : unit.c
 	$(cc) $(c_flag) -o $@ $^

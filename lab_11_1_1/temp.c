@@ -24,7 +24,7 @@ void reverse_string(char *s)
     if (my_strlen(s))
     {
         for (size_t i = s[0] == '-' ? 1 : 0, j = my_strlen(s) - 1; i < j; i++, j--)
-            swap((s + i), (s + j));
+            swap(s + i, s + j);
     }
 }
 
@@ -92,7 +92,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, int32_t));
+                char *num_in_str = int_to_char(va_arg(args, int));
                 int j = 0;
                 while (*(num_in_str + j))
                 {
