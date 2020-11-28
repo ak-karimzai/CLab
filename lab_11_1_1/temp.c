@@ -25,7 +25,7 @@ void reverse_string(char *s)
             swap((s + i), (s + j));
 }
 
-char *int_to_char(int num)
+char *int_to_char(long num)
 {
     char *str = calloc(256, sizeof(char));
     size_t len = 0;
@@ -69,7 +69,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, int));
+                char *num_in_str = int_to_char(va_arg(args, long));
                 int j = 0;
                 while (*(num_in_str + j))
                 {
@@ -119,7 +119,7 @@ bool check_fun(const char *fmt, int num)
     for (int i = 0; i < size; i++)
     {
         int write = snprintf(buffer, i, fmt, num);
-        int my_write = snprintf(my_buf, i, fmt, num);
+        int my_write = my_snprintf(my_buf, i, fmt, num);
         if (write != my_write || strcmp(buffer, my_buf) != 0)
         {
             printf("   snprintf(bif, %d, \"%s\", %d) = %d, buf = \"%s\"\n", i, fmt, num, write, buffer);
@@ -137,7 +137,7 @@ bool check_fun(const char *fmt, int num)
 
 int main()
 {
-    check_fun("с%dс", -242824743);
-    check_fun("с%dс", 0);
+    check_fun("%d", 0);
+    check_fun("%d", 0);
     return 0;
 }
