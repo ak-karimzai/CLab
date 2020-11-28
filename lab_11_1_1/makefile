@@ -1,6 +1,9 @@
 cc := gcc
 c_flag := -Wall -Werror -pedantic -std=c99
 
+run : app.exe
+	./app.exe
+
 app.exe : temp.c
 	$(cc) $(c_flag) -o $@ $^
 

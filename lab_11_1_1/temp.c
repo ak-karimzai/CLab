@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
-
+#include <string.h>
+#include <stdbool.h>
 size_t my_strlen(const char *str)
 {
     size_t len = 0;
@@ -26,7 +27,7 @@ void reverse_string(char *s)
 
 char *int_to_char(int num)
 {
-    char *str = malloc(256);
+    char *str = calloc(256, sizeof(char));
     size_t len = 0;
 
     if (num < 0)
@@ -37,7 +38,7 @@ char *int_to_char(int num)
     do
     {
         *(str + len++) = num % 10 + '0';
-    } while ((num /= 10));
+    } while (num /= 10);
     
     str[len] = '\0';
     reverse_string(str);
@@ -69,13 +70,13 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             else if (*(str_format + 1) == 'd')
             {
                 char *num_in_str = int_to_char(va_arg(args, int));
-                char *p = num_in_str;
-                while (*p)
+                int j = 0;
+                while (*(num_in_str + j))
                 {
                     if (str_s && n && str_index < n)
-                        *(str_s + str_index) = *p;
+                        *(str_s + str_index) = *(num_in_str + j);
                     str_index++;
-                    p++;
+                    j++;
                 }
                 free(num_in_str);
             }
@@ -108,11 +109,35 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
     return str_index;
 }
 
+bool check_fun(const char *fmt, int num)
+{
+    bool result = true;
+    int size = snprintf(NULL, 0, fmt, num) + 2;
+    char *buffer = calloc(size, sizeof(char));
+    char *my_buf = calloc(size, sizeof(char));
+
+    for (int i = 0; i < size; i++)
+    {
+        int write = snprintf(buffer, i, fmt, num);
+        int my_write = snprintf(my_buf, i, fmt, num);
+        if (write != my_write || strcmp(buffer, my_buf) != 0)
+        {
+            printf("   snprintf(bif, %d, \"%s\", %d) = %d, buf = \"%s\"\n", i, fmt, num, write, buffer);
+            printf("my_snprintf(bif, %d, \"%s\", %d) = %d, buf = \"%s\"\n", i, fmt, num, my_write, my_buf);
+            result = false;
+        }
+    }
+    if (result == true)
+        printf("passed for all %d \n", size);
+    
+    free(buffer);
+    free(my_buf);
+    return result;
+}
+
 int main()
 {
-    // long int test[] = { -1000000000, -100000000, -10000000, -1000000, -100000, -1000, -100, -10, -1 };
-    char arr[100];
-    my_snprintf(arr, sizeof(arr), "a%db%dc%dd%de%d", 10203, 233023, 24921, 24323, 0000);
-    puts(arr);
+    check_fun("с%dс", -242824743);
+    check_fun("с%dс", 0);
     return 0;
 }
