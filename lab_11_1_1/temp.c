@@ -28,7 +28,7 @@ void reverse_string(char *s)
     }
 }
 
-char *int_to_char(int64_t num)
+char *int_to_char(long num)
 {
     char *str = calloc(256, sizeof(char));
     size_t len = 0;
@@ -83,23 +83,23 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                 }
                 free(num_in_str);
             }
-            // else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'd')
-            // {
-            //     char *num_in_str = int_to_char(va_arg(args, int32_t));
-            //     int j = 0;
-            //     while (*(num_in_str + j))
-            //     {
-            //         if (str_s && n && str_index < n)
-            //             *(str_s + str_index) = *(num_in_str + j);
-            //         str_index++;
-            //         j++;
-            //     }
-            //     free(num_in_str);
-            //     str_format++;
-            // }
+            else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'd')
+            {
+                char *num_in_str = int_to_char(va_arg(args, long int));
+                int j = 0;
+                while (*(num_in_str + j))
+                {
+                    if (str_s && n && str_index < n)
+                        *(str_s + str_index) = *(num_in_str + j);
+                    str_index++;
+                    j++;
+                }
+                free(num_in_str);
+                str_format++;
+            }
             else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'l' && *(str_format + 3) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, int64_t));
+                char *num_in_str = int_to_char(va_arg(args, long int));
                 int j = 0;
                 while (*(num_in_str + j))
                 {
