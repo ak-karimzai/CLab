@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
+#include <inttypes.h>
 
 int my_snprintf(char *str_s, size_t n, const char *str_format, ...);
 bool check_fun(const char *fmt, int num)
@@ -37,5 +38,7 @@ int main()
     char arr[20];
     my_snprintf(arr, 20, "%ld", 10000000000000);
     puts(arr);
+    // printf("%lu\n", sizeof(int32_t));
+    // printf("%lu\n", sizeof(int));
     return 0;
 }

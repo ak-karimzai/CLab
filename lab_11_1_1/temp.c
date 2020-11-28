@@ -92,7 +92,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, int));
+                char *num_in_str = int_to_char(va_arg(args, int32_t));
                 int j = 0;
                 while (*(num_in_str + j))
                 {
