@@ -28,27 +28,7 @@ void reverse_string(char *s)
     }
 }
 
-char *int_to_char(int32_t num)
-{
-    char *str = calloc(256, sizeof(char));
-    size_t len = 0;
-
-    if (num < 0)
-    {
-        *(str + len++) = '-';
-        num = -num;
-    }
-    do
-    {
-        *(str + len++) = num % 10 + '0';
-    } while (num /= 10);
-    
-    str[len] = '\0';
-    reverse_string(str);
-    return str;
-}
-
-char *int64_to_char(int64_t num)
+char *int_to_char(long num)
 {
     char *str = calloc(256, sizeof(char));
     size_t len = 0;
@@ -92,7 +72,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, int32_t));
+                char *num_in_str = int_to_char(va_arg(args, int));
                 int j = 0;
                 while (*(num_in_str + j))
                 {
@@ -105,7 +85,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'd')
             {
-                char *num_in_str = int64_to_char(va_arg(args, int64_t));
+                char *num_in_str = int_to_char(va_arg(args, long));
                 int j = 0;
                 while (*(num_in_str + j))
                 {
@@ -119,7 +99,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'l' && *(str_format + 3) == 'd')
             {
-                char *num_in_str = int64_to_char(va_arg(args, int64_t));
+                char *num_in_str = int_to_char(va_arg(args, long long int));
                 int j = 0;
                 while (*(num_in_str + j))
                 {

@@ -38,7 +38,7 @@ int main()
     char arr[20];
     my_snprintf(arr, 20, "%ld", 10000000000000);
     puts(arr);
-    // printf("%lu\n", sizeof(int32_t));
-    // printf("%lu\n", sizeof(int));
+    printf("%lu\n", sizeof(long));
+    printf("%lu\n", sizeof(int));
     return 0;
 }
