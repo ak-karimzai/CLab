@@ -4,5 +4,5 @@ int main()
 {
     printf("%lu\n", sizeof(long));
     printf("%lu\n", sizeof(int));
-    return sizeof(int) == sizeof(int16_t);
+    return sizeof(long int) == sizeof(int32_t);
 }
