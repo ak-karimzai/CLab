@@ -1,4 +1,5 @@
 #include "./inc/main.h"
+#include <limits.h>
 
 bool check_fun(const char *fmt, long num)
 {
