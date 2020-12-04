@@ -24,7 +24,7 @@ void reverse_string(char *s)
     }
 }
 
-char *int_to_char(int num)
+char *int_to_char(long num)
 {
     char *str = calloc(256, sizeof(char));
     size_t len = 0;
