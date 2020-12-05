@@ -7,7 +7,7 @@
 #include "../snprintf.h"
 #include "defines.h"
 #include "check_char.h"
-#include "check_int.h"
+#include "check_oct.h"
 #include "check_str.h"
 
 int collect_all_tests(void);

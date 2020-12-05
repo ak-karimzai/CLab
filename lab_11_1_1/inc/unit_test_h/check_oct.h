@@ -1,5 +1,5 @@
-#ifndef _CHECK_INT_H_
-#define _CHECK_INT_H_
+#ifndef _CHECK_OCT_H_
+#define _CHECK_OCT_H_
 
 #include <stdio.h>
 #include <check.h>
@@ -8,4 +8,4 @@
 
 SUITE *oct_tests(void);
 
-#endif //_CHECK_INT_H_
+#endif //_CHECK_OCT_H_

@@ -11,7 +11,7 @@ int collect_all_tests(void)
     SUITE *s;
     SRUNNER *runner;
 
-    s = int_tests();
+    s = oct_tests();
     
     runner = srunner_create(s);
     srunner_run_all(runner, CKVER);

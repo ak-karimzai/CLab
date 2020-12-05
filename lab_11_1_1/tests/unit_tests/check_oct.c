@@ -24,13 +24,13 @@ START(zero)
 }
 END
 
-SUITE *int_tests(void)
+SUITE *oct_tests(void)
 {
     SUITE *s;
     TCASE *pos_tests;
 
 
-    s = suite_create("Int tests");
+    s = suite_create("Oct tests");
 
     pos_tests = tcase_create("Positives");
 
