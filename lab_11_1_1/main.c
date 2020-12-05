@@ -1,5 +1,5 @@
 #include "./inc/main.h"
-#include <limits.h>
+#include <assert.h>
 
 bool check_fun(const char *fmt, long num)
 {
@@ -14,6 +14,8 @@ bool check_fun(const char *fmt, long num)
         int my_write = my_snprintf(my_buf, i, fmt, num);
         if (write != my_write || strcmp(buffer, my_buf) != 0)
         {
+            puts("Fayaz");
+            printf("%d    dsfdfsdf  %d \n", write != my_write,  strcmp(buffer, my_buf) != 0);
             printf("   snprintf(bif, %d, \"%s\", %ld) = %d, buf = \"%s\"\n", i, fmt, num, write, buffer);
             printf("my_snprintf(bif, %d, \"%s\", %ld) = %d, buf = \"%s\"\n", i, fmt, num, my_write, my_buf);
             result = false;
@@ -81,11 +83,12 @@ bool check_fun_str(const char *fmt, char *num)
 
 int main()
 {
-    check_fun("%d", -2000000000);
-    check_fun("%d", 123456789);
-    check_fun("%d", 0);
-    check_fun("%d", 2000000000);
-    check_fun("%d", -123456789);
+    check_fun("%o", -2000000000);
+    check_fun("%o", 123456789);
+    check_fun("%o", 0);
+    check_fun("%o", 2000000000);
+    check_fun("%o", -123456789);
+    // check_fun("%ld", 9223372036854775807);
 
     check_fun_char("%c", 'c');
     check_fun_char("%c", 'A');
@@ -95,5 +98,8 @@ int main()
     check_fun_str("%s", "Just for testing");
     check_fun_str("%s", "??????????????");
 
+    char str[20];
+    my_snprintf(str, 1, "%d", 1);
+    // assert(!strcmp(buff1, buff2));
     return 0;
 }

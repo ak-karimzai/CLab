@@ -1,25 +1,25 @@
-#include "../../inc/unit_test_h/check_int.h"
+#include "../../inc/unit_test_h/check_oct.h"
 
 START(last_positive_int)
 {
     char str[40];
-    my_snprintf(str, sizeof(str), "%d", 2147483647);
-    ck_assert_int_eq(strcmp(str, "2147483647"), 0);
+    my_snprintf(str, sizeof(str), "%o", 2147483647);
+    ck_assert_int_eq(strcmp(str, "17777777777"), 0);
 }
 END
 
-START(last_negative_int)
+START(last_unsigned_int)
 {
     char str[40];
-    my_snprintf(str, sizeof(str), "%d", -2147483648);
-    ck_assert_int_eq(strcmp(str, "-2147483648"), 0);
+    my_snprintf(str, sizeof(str), "%o", 4294967295);
+    ck_assert_int_eq(strcmp(str, "37777777777"), 0);
 }
 END
 
 START(zero)
 {
     char str[40];
-    my_snprintf(str, sizeof(str), "%d", 0);
+    my_snprintf(str, sizeof(str), "%o", 0);
     ck_assert_int_eq(strcmp(str, "0"), 0);
 }
 END
@@ -34,7 +34,7 @@ SUITE *int_tests(void)
 
     pos_tests = tcase_create("Positives");
 
-    tcase_add_test(pos_tests, last_negative_int);
+    tcase_add_test(pos_tests, last_unsigned_int);
     tcase_add_test(pos_tests, last_positive_int);
     tcase_add_test(pos_tests, zero);
 

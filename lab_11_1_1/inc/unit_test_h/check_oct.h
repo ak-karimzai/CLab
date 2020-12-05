@@ -6,6 +6,6 @@
 #include "../snprintf.h"
 #include "defines.h"
 
-SUITE *int_tests(void);
+SUITE *oct_tests(void);
 
 #endif //_CHECK_INT_H_
