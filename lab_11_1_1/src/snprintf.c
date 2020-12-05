@@ -67,7 +67,20 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                     s++;
                 }
             }
-            else if (*(str_format + 1) == 'o' || *(str_format + 1) == 'h' && *(str_format + 2) == 'o')
+            else if (*(str_format + 1) == 'o')
+            {
+                num_in_str = int_to_char(va_arg(args, unsigned), 8);
+                int j = 0;
+                while (*(num_in_str + j))
+                {
+                    if (str_s && n && str_index < n)
+                        *(str_s + str_index) = *(num_in_str + j);
+                    str_index++;
+                    j++;
+                }
+                free(num_in_str); 
+            }
+            else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'o')
             {
                 num_in_str = int_to_char(va_arg(args, unsigned), 8);
                 int j = 0;
@@ -79,8 +92,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                     j++;
                 }
                 free(num_in_str);
-                if (*(str_format + 1) == 'h')
-                    str_format++; 
+                str_format++;
             }
             else if (*(str_format + 1) == 'c')
             {
