@@ -14,6 +14,8 @@ bool check_fun(const char *fmt, long num)
         int my_write = my_snprintf(my_buf, i, fmt, num);
         if (write != my_write || strcmp(buffer, my_buf) != 0)
         {
+            puts("Fayaz");
+            printf("%d    dsfdfsdf  %d \n", write != my_write,  strcmp(buffer, my_buf) != 0);
             printf("   snprintf(bif, %d, \"%s\", %ld) = %d, buf = \"%s\"\n", i, fmt, num, write, buffer);
             printf("my_snprintf(bif, %d, \"%s\", %ld) = %d, buf = \"%s\"\n", i, fmt, num, my_write, my_buf);
             result = false;
