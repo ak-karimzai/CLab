@@ -88,7 +88,6 @@ int main()
     check_fun("%o", 0);
     check_fun("%o", 2000000000);
     check_fun("%o", -123456789);
-    // check_fun("%ld", 9223372036854775807);
 
     check_fun_char("%c", 'c');
     check_fun_char("%c", 'A');
@@ -97,9 +96,5 @@ int main()
     check_fun_str("%s", "Ahmad Khalid Karimzai");
     check_fun_str("%s", "Just for testing");
     check_fun_str("%s", "??????????????");
-
-    char str[20];
-    my_snprintf(str, 1, "%d", 1);
-    // assert(!strcmp(buff1, buff2));
     return 0;
 }
