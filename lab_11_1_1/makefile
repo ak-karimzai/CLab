@@ -18,7 +18,7 @@ run : app.exe
 	./app.exe
 
 app.exe : $(main_obj) $(objs)
-	$(cc) $(c_flag) -o $@ $^
+	$(cc) -o $@ $^
 
 unit_tests.exe : $(tests_objs) $(objs)
 	$(cc) -o $@ $^ $(uni_flags)
