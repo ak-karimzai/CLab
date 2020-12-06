@@ -9,6 +9,7 @@
 #include "check_char.h"
 #include "check_oct.h"
 #include "check_str.h"
+#include "check_int.h"
 
 int collect_all_tests(void);
 
