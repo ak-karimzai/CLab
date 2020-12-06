@@ -8,11 +8,11 @@ START(last_positive_int)
 }
 END
 
-START(last_unsigned_int)
+START(continuos_num)
 {
     char str[40];
-    my_snprintf(str, sizeof(str), "%o", 4294967295);
-    ck_assert_int_eq(strcmp(str, "37777777777"), 0);
+    my_snprintf(str, sizeof(str), "%o", 1111111111);
+    ck_assert_int_eq(strcmp(str, "10216432707"), 0);
 }
 END
 
@@ -34,7 +34,7 @@ SUITE *oct_tests(void)
 
     pos_tests = tcase_create("Positives");
 
-    tcase_add_test(pos_tests, last_unsigned_int);
+    tcase_add_test(pos_tests, continuos_num);
     tcase_add_test(pos_tests, last_positive_int);
     tcase_add_test(pos_tests, zero);
 
