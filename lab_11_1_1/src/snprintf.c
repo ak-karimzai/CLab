@@ -1,7 +1,5 @@
 #include "../inc/snprintf.h"
 
-#define DIGIT_COPY(number, base) digit_copy(str_s, str_index, n, number, base) 
-
 static void swap(char *lhs, char *rhs)
 {
     char temp = *lhs;
@@ -76,17 +74,17 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                 }
             }
             else if (*(str_format + 1) == 'o')
-                str_index = DIGIT_COPY(va_arg(args, unsigned), 8);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), 8);
             else if (*(str_format + 1) == 'd')
-                str_index = DIGIT_COPY(va_arg(args, int), 10);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, int), 10);
             else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'o')
             {
-                str_index = DIGIT_COPY(va_arg(args, unsigned), 8);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), 10);
                 str_format++;
             }
             else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'd')
             {
-                str_index = DIGIT_COPY(va_arg(args, int), 10);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), 10);
                 str_format++;
             }
             else if (*(str_format + 1) == 'c')
