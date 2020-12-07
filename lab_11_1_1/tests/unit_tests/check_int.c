@@ -11,8 +11,8 @@ END
 START(last_negative_int)
 {
     char str[40];
-    my_snprintf(str, sizeof(str), "%d", -2147483648);
-    ck_assert_int_eq(strcmp(str, "-2147483648"), 0);
+    my_snprintf(str, sizeof(str), "%d", -2147483647);
+    ck_assert_int_eq(strcmp(str, "-2147483647"), 0);
 }
 END
 
