@@ -1,8 +1,8 @@
 cc := gcc
 c_flag := -Wall -Werror -pedantic -std=c99
 
-# uni_flags := -lcheck # windows
-uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
+uni_flags := -lcheck # windows
+# uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
 
 
 src := ./src/*.c
