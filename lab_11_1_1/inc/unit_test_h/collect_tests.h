@@ -10,6 +10,7 @@
 #include "check_oct.h"
 #include "check_str.h"
 #include "check_int.h"
+#include "check_long.h"
 
 int collect_all_tests(void);
 

@@ -5,13 +5,13 @@ int main()
     return collect_all_tests();
 }
 
-int collect_all_tests(void)
+int test_runner(SUITE *(*suite)(void))
 {
-    int no_failed = 0, all_faileds = 0;
+    int no_failed = 0;
     SUITE *s;
     SRUNNER *runner;
 
-    s = oct_tests();
+    s = suite();
     
     runner = srunner_create(s);
     srunner_run_all(runner, CKVER);
@@ -19,41 +19,19 @@ int collect_all_tests(void)
     no_failed = srunner_ntests_failed(runner);
 
     srunner_free(runner);
+    return no_failed;
+}
 
-    all_faileds += no_failed;
-
-    s = int_tests();
+int collect_all_tests(void)
+{
+    int all_faileds = 0;
     
-    runner = srunner_create(s);
-    srunner_run_all(runner, CKVER);
 
-    no_failed = srunner_ntests_failed(runner);
-
-    srunner_free(runner);
-
-    all_faileds += no_failed;
-
-    s = char_tests();
-    
-    runner = srunner_create(s);
-    srunner_run_all(runner, CKVER);
-
-    no_failed = srunner_ntests_failed(runner);
-
-    srunner_free(runner);
-
-    all_faileds += no_failed;
-
-    s = str_tests();
-    
-    runner = srunner_create(s);
-    srunner_run_all(runner, CKVER);
-
-    no_failed = srunner_ntests_failed(runner);
-
-    srunner_free(runner);
-
-    all_faileds += no_failed;
+    all_faileds += test_runner(oct_tests);
+    all_faileds += test_runner(long_tests);
+    all_faileds += test_runner(int_tests);
+    all_faileds += test_runner(char_tests);
+    all_faileds += test_runner(str_tests);
 
     return all_faileds;
 }

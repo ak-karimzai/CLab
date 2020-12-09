@@ -1,5 +1,5 @@
-#ifndef _CHECK_INT_H_
-#define _CHECK_INT_H_
+#ifndef _CHECK_LONG_H_
+#define _CHECK_LONG_H_
 
 #include <stdio.h>
 #include <check.h>
@@ -7,6 +7,6 @@
 #include "../snprintf.h"
 #include "defines.h"
 
-SUITE *int_tests(void);
+SUITE *long_tests(void);
 
-#endif //_CHECK_INT_H_
+#endif //_CHECK_LONG_H_

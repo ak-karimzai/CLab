@@ -85,7 +85,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'd')
             {
-                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), 10);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, int), 10);
             }
             else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'o')
             {
@@ -104,7 +104,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'd')
             {
-                str_index = digit_copy(str_s, str_index, n, va_arg(args, long), 10);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, int), 10);
                 str_format++;
             }
             else if (*(str_format + 1) == 'c')
