@@ -1,4 +1,6 @@
 #include "../inc/snprintf.h"
+#include <stdio.h>
+#define NUMBER_OF_DIGITS 32
 
 static void swap(char *lhs, char *rhs)
 {
@@ -16,29 +18,44 @@ static void reverse_num(char *s, size_t len)
     }
 }
 
-static char *int_to_char(long num, int base)
+static void unsigned_long_to_str(unsigned long num, int base, char *str)
 {
-    char *str = calloc(256, sizeof(char));
-    size_t len = 0;
-
-    if (num < 0)
-    {
-        *(str + len++) = '-';
-        num = -num;
-    }
+    unsigned char index;
+    char buff[NUMBER_OF_DIGITS];
+    index = NUMBER_OF_DIGITS;
     do
     {
-        *(str + len++) = (num % base) + '0';
-    } while (num /= base);
-    
-    str[len] = '\0';
-    reverse_num(str, len);
+        buff[--index] = '0' + (num % base);
+        num /= base;
+    } while (num);
+
+    do
+    {
+        *str++ = buff[index++];
+    } while (index < NUMBER_OF_DIGITS);
+
+    *str = '\0';
+}
+
+static char *long_to_str(long num, int base)
+{
+    char *str = calloc(NUMBER_OF_DIGITS, sizeof(char));
+    size_t len = 0;
+
+    if (num < 0 && base == 10)
+    {
+        len++;
+        *str = '-';
+        unsigned_long_to_str(-num, base, str + 1);
+    }
+    else
+        unsigned_long_to_str(num, base, str);
     return str;
 }
 
 static int digit_copy(char *str, int str_index, size_t size, long number, int base)
 {
-    char *num_in_str = int_to_char(number, base);
+    char *num_in_str = long_to_str(number, base);
     int j = 0;
     while (*(num_in_str + j))
     {
@@ -75,7 +92,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'o')
             {
-                char *num_in_str = int_to_char(va_arg(args, unsigned), 8);
+                char *num_in_str = long_to_str(va_arg(args, unsigned), 8);
                 int j = 0;
                 while (*(num_in_str + j))
                 {
@@ -88,7 +105,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, int), 10);
+                char *num_in_str = long_to_str(va_arg(args, int), 10);
                 int j = 0;
                 while (*(num_in_str + j))
                 {
@@ -101,7 +118,21 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'o')
             {
-                char *num_in_str = int_to_char(va_arg(args, unsigned), 8);
+                char *num_in_str = long_to_str(va_arg(args, unsigned), 8);
+                int j = 0;
+                while (*(num_in_str + j))
+                {
+                    if (str_s && n && str_index < n)
+                        *(str_s + str_index) = *(num_in_str + j);
+                    str_index++;
+                    j++;
+                }
+                free(num_in_str);
+                str_format++;
+            }
+            else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'd')
+            {
+                char *num_in_str = long_to_str(va_arg(args, long), 10);
                 int j = 0;
                 while (*(num_in_str + j))
                 {
@@ -115,7 +146,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'd')
             {
-                char *num_in_str = int_to_char(va_arg(args, int), 10);
+                char *num_in_str = long_to_str(va_arg(args, int), 10);
                 int j = 0;
                 while (*(num_in_str + j))
                 {

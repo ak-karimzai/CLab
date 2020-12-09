@@ -1,5 +1,6 @@
 #include "./inc/main.h"
 #include <assert.h>
+#include <limits.h>
 
 bool check_fun(const char *fmt, long num)
 {
@@ -94,5 +95,6 @@ int main()
     check_fun_str("%s", "Ahmad Khalid Karimzai");
     check_fun_str("%s", "Just for testing");
     check_fun_str("%s", "??????????????");
+    check_fun("%ld", LONG_MIN);
     return 0;
 }
