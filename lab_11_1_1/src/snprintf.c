@@ -1,21 +1,10 @@
 #include "../inc/snprintf.h"
-#include <stdio.h>
-#define NUMBER_OF_DIGITS 32
 
 static void swap(char *lhs, char *rhs)
 {
     char temp = *lhs;
     *lhs = *rhs;
     *rhs = temp;
-}
-
-static void reverse_num(char *s, size_t len)
-{
-    if (len)
-    {
-        for (size_t i = s[0] == '-' ? 1 : 0, j = len - 1; i < j; i++, j--)
-            swap(s + i, s + j);
-    }
 }
 
 static void unsigned_long_to_str(unsigned long num, int base, char *str)
@@ -92,70 +81,30 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
             }
             else if (*(str_format + 1) == 'o')
             {
-                char *num_in_str = long_to_str(va_arg(args, unsigned), 8);
-                int j = 0;
-                while (*(num_in_str + j))
-                {
-                    if (str_s && n && str_index < n)
-                        *(str_s + str_index) = *(num_in_str + j);
-                    str_index++;
-                    j++;
-                }
-                free(num_in_str);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), 8);
             }
             else if (*(str_format + 1) == 'd')
             {
-                char *num_in_str = long_to_str(va_arg(args, int), 10);
-                int j = 0;
-                while (*(num_in_str + j))
-                {
-                    if (str_s && n && str_index < n)
-                        *(str_s + str_index) = *(num_in_str + j);
-                    str_index++;
-                    j++;
-                }
-                free(num_in_str);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), 10);
             }
             else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'o')
             {
-                char *num_in_str = long_to_str(va_arg(args, unsigned), 8);
-                int j = 0;
-                while (*(num_in_str + j))
-                {
-                    if (str_s && n && str_index < n)
-                        *(str_s + str_index) = *(num_in_str + j);
-                    str_index++;
-                    j++;
-                }
-                free(num_in_str);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), 8);
                 str_format++;
             }
             else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'd')
             {
-                char *num_in_str = long_to_str(va_arg(args, long), 10);
-                int j = 0;
-                while (*(num_in_str + j))
-                {
-                    if (str_s && n && str_index < n)
-                        *(str_s + str_index) = *(num_in_str + j);
-                    str_index++;
-                    j++;
-                }
-                free(num_in_str);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, long), 10);
                 str_format++;
+            }
+            else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'l' && *(str_format + 3) == 'd')
+            {
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, long), 10);
+                str_format = str_format + 2;
             }
             else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'd')
             {
-                char *num_in_str = long_to_str(va_arg(args, int), 10);
-                int j = 0;
-                while (*(num_in_str + j))
-                {
-                    if (str_s && n && str_index < n)
-                        *(str_s + str_index) = *(num_in_str + j);
-                    str_index++;
-                    j++;
-                }
-                free(num_in_str);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, long), 10);
                 str_format++;
             }
             else if (*(str_format + 1) == 'c')
