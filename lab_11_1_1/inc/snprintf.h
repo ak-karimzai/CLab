@@ -2,7 +2,6 @@
 #define _SN_PRINTF_H_
 
 #include <stdlib.h>
-#include <inttypes.h>
 #include <stdarg.h>
 
 #define NUMBER_OF_DIGITS 32

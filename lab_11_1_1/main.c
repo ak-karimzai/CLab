@@ -1,6 +1,4 @@
 #include "./inc/main.h"
-#include <assert.h>
-#include <limits.h>
 
 bool check_fun(const char *fmt, long num)
 {
