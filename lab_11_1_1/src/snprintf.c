@@ -1,12 +1,5 @@
 #include "../inc/snprintf.h"
 
-static void swap(char *lhs, char *rhs)
-{
-    char temp = *lhs;
-    *lhs = *rhs;
-    *rhs = temp;
-}
-
 static void unsigned_long_to_str(unsigned long num, int base, char *str)
 {
     unsigned char index;
@@ -62,7 +55,6 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
     va_list args;
     va_start(args, str_format);
     size_t str_index = 0;
-    char *num_in_str = NULL;
 
     while (*str_format)
     {
