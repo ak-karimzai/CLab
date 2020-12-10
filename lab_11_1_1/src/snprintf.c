@@ -60,7 +60,7 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
     {
         if (*str_format == '%')
         {
-            if (*(str_format + 1) == 's')
+            if (*(str_format + 1) == STRING_SYM)
             {
                 const char *s = va_arg(args, char *);
                 while (*s)
@@ -71,35 +71,35 @@ int my_snprintf(char *str_s, size_t n, const char *str_format, ...)
                     s++;
                 }
             }
-            else if (*(str_format + 1) == 'o')
+            else if (*(str_format + 1) == OCTAL_SYM)
             {
-                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), 8);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), OCTAL);
             }
-            else if (*(str_format + 1) == 'd')
+            else if (*(str_format + 1) == DECIMAL_SYM)
             {
-                str_index = digit_copy(str_s, str_index, n, va_arg(args, int), 10);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, int), DECIMAL);
             }
-            else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'o')
+            else if (*(str_format + 1) == SHORT_SYM && *(str_format + 2) == OCTAL_SYM)
             {
-                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), 8);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, unsigned), OCTAL);
                 str_format++;
             }
-            else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'd')
+            else if (*(str_format + 1) == LONG_SYM && *(str_format + 2) == DECIMAL_SYM)
             {
-                str_index = digit_copy(str_s, str_index, n, va_arg(args, long), 10);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, long), DECIMAL);
                 str_format++;
             }
-            else if (*(str_format + 1) == 'l' && *(str_format + 2) == 'l' && *(str_format + 3) == 'd')
+            else if (*(str_format + 1) == LONG_SYM && *(str_format + 2) == LONG_SYM && *(str_format + 3) == DECIMAL_SYM)
             {
-                str_index = digit_copy(str_s, str_index, n, va_arg(args, long), 10);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, long), DECIMAL);
                 str_format = str_format + 2;
             }
-            else if (*(str_format + 1) == 'h' && *(str_format + 2) == 'd')
+            else if (*(str_format + 1) == SHORT_SYM && *(str_format + 2) == DECIMAL_SYM)
             {
-                str_index = digit_copy(str_s, str_index, n, va_arg(args, int), 10);
+                str_index = digit_copy(str_s, str_index, n, va_arg(args, int), DECIMAL);
                 str_format++;
             }
-            else if (*(str_format + 1) == 'c')
+            else if (*(str_format + 1) == CHAR_SYM)
             {
                 char temp_char = va_arg(args, int);
                 if (str_s && n && str_index < n)
