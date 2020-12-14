@@ -26,7 +26,7 @@ def left_rotation(arr, n):
     res = _left_rotation(c_arr, arr_len, pos)
     return res, list(c_arr)
 
-def get_fill_sq_nums(arr):
+def get_full_sq_nums(arr):
     c_arr = (c_int * len(arr))(*arr)
     arr_size = c_int(len(arr))
     arr_res = None
