@@ -1,9 +1,9 @@
 #include "../inc/arr_operation.h"
-
+#include <stdio.h>
 int left_rotation(int *arr, int size, int pos)
 {
     int rc = ok;
-    if (size > 0)
+    if (size > 0 && arr)
     {
         int temp, i, j;
         i = j = 0;
@@ -23,18 +23,18 @@ int left_rotation(int *arr, int size, int pos)
 
 static int perf_num(int x)
 {
-    int rc = error;
-    double y = (double)(x);
-    if (sqrt(y) - y < 1e-6)
-        rc = ok;
-    return rc;
+    double res = sqrt(x);
+    int dec_part = (int)res;
+    if (res - dec_part < 1e-6)
+        return ok;
+    return error;
 }
 
 static int count_perf_nums(int *arr, int size)
 {
     int count = 0;
     for (int i = 0; i < size; i++)
-        if (perf_num(*(arr + 1)) == ok)
+        if (perf_num(*(arr + i)) == ok)
             count++;
     return count;
 }
@@ -43,11 +43,11 @@ int copy_perf_nums(int *arr, int arr_size, int *arr_dst, int dst_size)
 {
     int count = count_perf_nums(arr, arr_size);
     int rc = ok;
-    if (dst_size != count)
+    if (dst_size == count && arr_dst)
     {
         for (int i = 0, j = 0; i < arr_size; i++)
             if (perf_num(*(arr + i)) == ok)
-                *(arr_dst + j++);
+                *(arr_dst + j++) = *(arr + i);
     }
     else
         rc = count;

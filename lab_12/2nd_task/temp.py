@@ -1,7 +1,11 @@
 from tkinter import*
 from tkinter import messagebox
 from tkinter import ttk
-from src.operations import *
+from operations import *
+
+def remove_split(string):
+    string = string.replace(', ', ' ').replace(',', ' ').replace(' ,', ' ')
+    return string
 
 def left_shift_arr():
     try:
@@ -25,9 +29,9 @@ def left_shift_arr():
 
 def Filter_inputed():
     try:
-        arr = list(map(int, nonoutput.get().split(',')))
+        arr = list(map(int, nonoutput.get().split(' ')))
         try:
-            arr_2 = str(get_full_sq_nums(arr)[1])[1:-1]
+            arr_2 = str(get_per_nums(arr)[1])[1:-1]
             output.delete(0, END)
             output.insert(END, arr_2)
         except:
@@ -57,7 +61,7 @@ result = ttk.Label(root, text = 'Result')
 result.place(x = 10, y = 130)
 
 app_use = ttk.Label(root, text = 'This Program generates a new array by pushing button.\n'\
-                                'Filter: Generated Array must contain full square numbers, otherwise (Empty Array).\n'\
+                                'Filter: Generated Array contain full square numbers.\n'\
                                 'Left Shift: in this case you must enter the number of positions also, otherwise u can try ;)')
 app_use.place(x = 10, y = 180)
 
