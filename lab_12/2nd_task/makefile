@@ -16,4 +16,4 @@ arr_operation.o : $(src)arr_operation.c
 	$(cc) $(c_flags) $(position_i_code) -c $^ -o $@
 
 clean :
-	rm -rf $(src)*.o __pycache__ *.o *.so
+	rm -rf $(src)*.o $(src)__pycache__ *.o *.so __pycache__
