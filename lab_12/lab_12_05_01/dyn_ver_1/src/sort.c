@@ -9,7 +9,7 @@ void swap(void *lhs, void *rhs, size_t size)
     free(tmp);
 }
 
-int compare_int(const void *lhs, const void *rhs)
+LIB_DLL int DLL_DECL compare_int(const void *lhs, const void *rhs)
 {
     return *(int *)(lhs) - *(int *)(rhs);
 }
@@ -19,7 +19,7 @@ char *charof(void *pointer, const int iteration, const size_t size)
     return (char *)(pointer) + iteration * size;
 }
 
-void mysort(void *arr_lhs, const size_t num_of_elements, const size_t size, compare comp)
+LIB_DLL void DLL_DECL mysort(void *arr_lhs, const size_t num_of_elements, const size_t size, compare comp)
 {
     if (num_of_elements != 0)
     {

@@ -1,6 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#define IMPORT
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

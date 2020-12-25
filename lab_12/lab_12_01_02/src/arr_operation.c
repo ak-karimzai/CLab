@@ -1,5 +1,5 @@
 #include "../inc/arr_operation.h"
-#include <stdio.h>
+
 int left_rotation(int *arr, int size, int pos)
 {
     int rc = ok;

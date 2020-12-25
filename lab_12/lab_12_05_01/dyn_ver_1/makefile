@@ -7,7 +7,7 @@ dyn_lib_run := -L. -l_arr
 # uni_flags := -lcheck # windows
 uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
 
-dyn_lib := lib_arr.so
+dyn_lib := lib_arr.dll
 
 head = ./inc/
 src = ./src/
@@ -16,7 +16,7 @@ unit.test = ./unit_tests/
 unit.test.header = ./inc/unit_test_headers/
 
 
-all : Export 
+all : Export app.exe
 
 app.exe: $(obj)main.o $(obj)output.o $(obj)input.o
 	$(cc)  $^ -o $@ $(dyn_lib_run)
@@ -28,10 +28,10 @@ Export : $(dyn_lib)
 	export LD_LIBRARY_PATH=LD_LIBRARY_PATH:.
 
 $(dyn_lib) : $(obj)sort.o $(obj)key.o
-	$(cc) $(position_independent_code) -shared -o $@ $^
+	$(cc) -shared -Wl,--subsystem,windows -o $@ $^
 
 $(obj)sort.o: $(src)sort.c $(head)sort.h
-	$(cc) $(cflags) $(position_independent_code) -c $< -o $@
+	$(cc) $(cflags) -c $< -o $@
 
 $(obj)key_unit_test.o: $(unit.test)key_unit_test.c $(unit.test.header)key_unit_test.h
 	$(cc) $(cflags) -c $< -o $@
@@ -43,7 +43,7 @@ $(obj)my_sort_tests.o: $(unit.test)my_sort_tests.c $(unit.test.header)mysort_uni
 	$(cc) $(cflags) -c $< -o $@
 
 $(obj)key.o: $(src)key.c $(head)key.h
-	$(cc) $(cflags) $(position_independent_code) -c $< -o $@
+	$(cc) $(cflags) -c $< -o $@
 
 $(obj)input.o: $(src)input.c $(head)input.h
 	$(cc) -I$(head) $(cflags) -c $< -o $@
@@ -62,4 +62,4 @@ del: clean
 .PHONY: clean
 
 clean:
-	rm -rf *.exe $(obj)*.o .out *.so *.o
+	rm -rf *.exe $(obj)*.o .out *.dll *.o

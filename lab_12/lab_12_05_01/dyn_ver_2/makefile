@@ -16,7 +16,7 @@ unit.test = ./unit_tests/
 unit.test.header = ./inc/unit_test_headers/
 
 
-all : Export 
+all : Export app.exe
 
 app.exe: $(obj)main.o $(obj)output.o $(obj)input.o
 	$(cc)  $^ -o $@ -ldl
