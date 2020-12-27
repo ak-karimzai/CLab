@@ -2,7 +2,6 @@
 
 int main()
 {
-    printf("%ud\n", run_all_tests());
     return run_all_tests();
 }
 
