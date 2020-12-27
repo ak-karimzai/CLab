@@ -2,7 +2,6 @@
 
 void sorted_insert(node_t **head, node_t *element, comparator cmp)
 {
-    int cmp_res;
     node_t *current = *head;
     
     if (*head == NULL || cmp((*head)->data, element->data) >= EQUAL)

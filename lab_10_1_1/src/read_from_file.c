@@ -29,7 +29,7 @@ node_t *get_node(void *data)
 
 product *read_product(FILE *f)
 {
-    product *prod = malloc(sizeof(product));
+    product *prod = calloc(1, sizeof(product));
     char *buf = NULL;
     size_t len = 0;
     ssize_t read;

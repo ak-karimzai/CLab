@@ -19,6 +19,8 @@ int main(void)
         fclose(input_file);
     }
     else
+    {
         rc = error;
+    }
     return rc;
 }
