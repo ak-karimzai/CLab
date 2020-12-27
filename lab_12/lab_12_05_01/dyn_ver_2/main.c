@@ -6,10 +6,9 @@ int main(int argc, char **argv)
     FILE *input_file, *output_file;
     int *arr = NULL;
     int num_of_objs = 0;
-    void *lib = dlopen("lib_arr.so", RTLD_NOW);
+    void *lib = dlopen("./lib_arr.so", RTLD_NOW);
     sort_p my_sort;
     key_p key;
-
     if (lib && (argc == 3 || (argc == 4 && strcmp(argv[KEY], "f") == ok)))
     {
         my_sort = (sort_p) dlsym(lib, "mysort");
@@ -66,6 +65,7 @@ int main(int argc, char **argv)
             puts("Error when loadinf library!");
             rc = error;
         }
+        dlclose(lib);
     }
     else
     {
