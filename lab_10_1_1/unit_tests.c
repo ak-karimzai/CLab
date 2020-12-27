@@ -5,16 +5,16 @@ int main()
     return run_all_tests();
 }
 
-int run_test(Suite *(*test)(void))
+int run_test(SUITE *(*test)(void))
 {
     int no_failed = 0;
-    Suite *s;
-    SRunner *runner;
+    SUITE *s;
+    SRUNNER *runner;
 
     s = test();
     runner = srunner_create(s);
     
-    srunner_run_all(runner, CK_VERBOSE);
+    srunner_run_all(runner, CKVER);
 
     no_failed = srunner_ntests_failed(runner);
     

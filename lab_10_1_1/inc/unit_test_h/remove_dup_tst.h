@@ -2,6 +2,7 @@
 #define _REMOVE_DUPL_TST_H_
 
 #include <check.h>
+#include "macros_for_test_sys.h"
 #include "../data_struct.h"
 #include "../free.h"
 #include "../insert_remove.h"
@@ -12,6 +13,6 @@
 #include "../output.h"
 
 
-Suite *remove_dupli_tests(void);
+SUITE *remove_dupli_tests(void);
 
 #endif // _REMOVE_DUPL_TST_H_

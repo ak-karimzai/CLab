@@ -79,10 +79,10 @@ START_TEST(push_to_list_with_head_pu)
 }
 END_TEST
 
-Suite *push_tests(void)
+SUITE *push_tests(void)
 {
-    Suite *s;
-    TCase *tests;
+    SUITE *s;
+    TCASE *tests;
 
     s = suite_create("push tests");
 

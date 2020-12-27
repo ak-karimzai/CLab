@@ -45,10 +45,10 @@ START_TEST(insert_after_head)
 }
 END_TEST
 
-Suite *insert_tests(void)
+SUITE *insert_tests(void)
 {
-    Suite *s;
-    TCase *tests;
+    SUITE *s;
+    TCASE *tests;
 
     s = suite_create("insert tests");
 

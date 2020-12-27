@@ -3,6 +3,7 @@
 
 #define _GNU_SOURCE
 #include <check.h>
+#include "macros_for_test_sys.h"
 #include "../data_struct.h"
 #include "../free.h"
 #include "../insert_remove.h"
@@ -13,6 +14,6 @@
 #include "../output.h"
 
 
-Suite *find_tests(void);
+SUITE *find_tests(void);
 
 #endif // _FIND_TST_H_

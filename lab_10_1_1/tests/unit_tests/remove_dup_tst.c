@@ -30,10 +30,10 @@ START_TEST(remove_duplicates_tst)
 }
 END_TEST
 
-Suite *remove_dupli_tests(void)
+SUITE *remove_dupli_tests(void)
 {
-    Suite *s;
-    TCase *tests;
+    SUITE *s;
+    TCASE *tests;
 
     s = suite_create("Remove dupli tests");
 

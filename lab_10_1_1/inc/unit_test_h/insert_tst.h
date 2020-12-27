@@ -2,6 +2,7 @@
 #define _INSERT_TST_H_
 
 #include <check.h>
+#include "macros_for_test_sys.h"
 #include "../data_struct.h"
 #include "../free.h"
 #include "../insert_remove.h"
@@ -12,6 +13,6 @@
 #include "../output.h"
 
 
-Suite *insert_tests(void);
+SUITE *insert_tests(void);
 
 #endif // _INSERT_TST_H_

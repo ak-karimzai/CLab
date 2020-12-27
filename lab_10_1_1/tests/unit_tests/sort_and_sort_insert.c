@@ -64,10 +64,10 @@ START_TEST(sorted_insert_test)
 }
 END_TEST
 
-Suite *sort_tests(void)
+SUITE *sort_tests(void)
 {
-    Suite *s;
-    TCase *tests;
+    SUITE *s;
+    TCASE *tests;
 
     s = suite_create("sort and sorted insert tests");
 

@@ -2,6 +2,7 @@
 #define _PUSH_TST_H_
 
 #include <check.h>
+#include "macros_for_test_sys.h"
 #include "../data_struct.h"
 #include "../free.h"
 #include "../insert_remove.h"
@@ -11,6 +12,6 @@
 #include "../comparator.h"
 #include "../output.h"
 
-Suite *push_tests(void);
+SUITE *push_tests(void);
 
 #endif // _PUSH_TST_H_

@@ -55,10 +55,10 @@ START_TEST(find_last_elem)
 }
 END_TEST
 
-Suite *find_tests(void)
+SUITE *find_tests(void)
 {
-    Suite *s;
-    TCase *tests;
+    SUITE *s;
+    TCASE *tests;
     s = suite_create("find tests");
 
     tests = tcase_create("Find Tests");

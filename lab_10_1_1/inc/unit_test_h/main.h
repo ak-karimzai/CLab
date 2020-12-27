@@ -1,6 +1,7 @@
 #ifndef _MAIN_H_
 #define _MAIN_H_
 
+#include "macros_for_test_sys.h"
 #include "find_tests.h"
 #include "sort_and_sort_insert.h"
 #include "remove_dup_tst.h"
