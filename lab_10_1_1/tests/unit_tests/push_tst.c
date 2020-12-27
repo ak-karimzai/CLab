@@ -1,6 +1,6 @@
 #include "../../inc/unit_test_h/push_tst.h"
 
-START_TEST(push_to_null_list_pb)
+START(push_to_null_list_pb)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -15,9 +15,9 @@ START_TEST(push_to_null_list_pb)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
-START_TEST(push_to_list_with_head_pb)
+START(push_to_list_with_head_pb)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -38,9 +38,9 @@ START_TEST(push_to_list_with_head_pb)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
-START_TEST(push_to_null_list_pu)
+START(push_to_null_list_pu)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -55,9 +55,9 @@ START_TEST(push_to_null_list_pu)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
-START_TEST(push_to_list_with_head_pu)
+START(push_to_list_with_head_pu)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -77,7 +77,7 @@ START_TEST(push_to_list_with_head_pu)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
 SUITE *push_tests(void)
 {

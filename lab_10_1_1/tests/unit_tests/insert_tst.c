@@ -1,6 +1,6 @@
 #include "../../inc/unit_test_h/find_tests.h"
 
-START_TEST(insert_before_head)
+START(insert_before_head)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -21,9 +21,9 @@ START_TEST(insert_before_head)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
-START_TEST(insert_after_head)
+START(insert_after_head)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -43,7 +43,7 @@ START_TEST(insert_after_head)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
 SUITE *insert_tests(void)
 {

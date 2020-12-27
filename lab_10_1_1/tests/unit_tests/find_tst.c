@@ -8,7 +8,7 @@ static node_t *ptr_to_last(node_t *head)
     return temp;
 }
 
-START_TEST(find_head_elem)
+START(find_head_elem)
 {
     FILE *input_file = fopen("tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -31,9 +31,9 @@ START_TEST(find_head_elem)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
-START_TEST(find_last_elem)
+START(find_last_elem)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -53,7 +53,7 @@ START_TEST(find_last_elem)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
 SUITE *find_tests(void)
 {

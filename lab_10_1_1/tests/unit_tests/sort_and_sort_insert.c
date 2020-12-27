@@ -1,6 +1,6 @@
 #include "../../inc/unit_test_h/remove_dup_tst.h"
 
-START_TEST(sort_tst)
+START(sort_tst)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -22,9 +22,9 @@ START_TEST(sort_tst)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
-START_TEST(sort_when_one_node)
+START(sort_when_one_node)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -40,9 +40,9 @@ START_TEST(sort_when_one_node)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
-START_TEST(sorted_insert_test)
+START(sorted_insert_test)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -62,7 +62,7 @@ START_TEST(sorted_insert_test)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
 SUITE *sort_tests(void)
 {

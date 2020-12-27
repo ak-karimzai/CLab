@@ -1,6 +1,6 @@
 #include "../../inc/unit_test_h/remove_dup_tst.h"
 
-START_TEST(remove_duplicates_tst)
+START(remove_duplicates_tst)
 {
     FILE *input_file = fopen("./tests/data.txt", "r");
     ck_assert_ptr_nonnull(input_file);
@@ -28,7 +28,7 @@ START_TEST(remove_duplicates_tst)
     free_elements(&head);
     fclose(input_file);
 }
-END_TEST
+END
 
 SUITE *remove_dupli_tests(void)
 {
