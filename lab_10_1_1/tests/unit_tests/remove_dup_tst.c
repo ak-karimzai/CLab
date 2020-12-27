@@ -13,9 +13,15 @@ START_TEST(remove_duplicates_tst)
     remove_duplicates(&head, compare_by_price);
     
     temp = head;
+    node_t *sec_temp;
     while (temp && temp->next)
     {
-        ck_assert_int_eq(compare_by_price(temp->data, temp->next->data), 0);
+        sec_temp = temp->next;
+        while (sec_temp)
+        {
+            ck_assert_int_ne(compare_by_price(temp->data, sec_temp->data), 0);
+            sec_temp = sec_temp->next;
+        }
         temp = temp->next;
     }
 

@@ -3,8 +3,8 @@
 cc := gcc 
 c_flags := -Wall -Werror -std=c99 -pedantic
 
-# uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
-uni_flags := -lcheck # windows
+uni_flags := -pthread -lcheck_pic -pthread -lrt -lm -lsubunit # linux
+# uni_flags := -lcheck # windows
 
 src_dir := ./src/*.c
 src_obj := ./src/*.o
