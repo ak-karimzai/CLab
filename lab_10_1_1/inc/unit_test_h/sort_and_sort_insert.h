@@ -4,6 +4,6 @@
 #include <check.h>
 #include "../main.h"
 
-Suite *sort_tests(void);
+SUITE *sort_tests(void);
 
 #endif // _SORT_AND_SORT_INSERT_H_
